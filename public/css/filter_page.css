@@ -1,0 +1,128 @@
+.filter_page .filter_header{
+    background-image: url("/assets/filter/header.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 300px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.filter_page .filter_header .seach_bar_holder {
+    max-width: 600px;
+    flex: 1;
+}
+
+.filter_page .filter_header .seach_bar_holder .search_bar{
+    font-size: 30px;
+}
+
+ 
+
+.filter_page .content {
+    padding: 25px 0;
+
+}
+.filter_page .content .pagination{
+    display: flex;
+    margin-top: 23px;
+    justify-content: center;
+
+}
+.filter_page .content .pagination .page-link{
+    color: var(--fx-primary-color);
+    font-size: 18px;
+}
+
+.filter_page .content .pagination .active .page-link {
+    background: var(--fx-primary-color);
+    color: #fff;
+
+}
+.filter_page .filter_side_bar{
+    border-right: 1px solid var(--fx-secondary-btn-bg);
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    top: 100px;
+    padding: 15px;
+    border-right: 1px solid var(--fx-primary-color);
+}
+.filter_page .filter_side_bar h3{
+    color: var(--fx-primary-color);
+    padding: 15px;
+}
+.filter_page .filter_side_bar ul {
+    list-style: none;
+  
+}
+
+.filter_page .filter_side_bar .categories{
+
+   
+ 
+
+}
+.filter_page .filter_side_bar .categories > li {
+    margin-bottom: 25px;
+}
+.filter_page .filter_side_bar .categories .cat_title{
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+}
+
+.filter_page .filter_side_bar .categories .souCategory{
+
+}
+
+.filter_page .filter_side_bar .categories .souCategory .subCat_title {
+    font-size: 20px;
+    color: var(--fx-main-text-color);
+}
+.filter_page .filter_side_bar .categories .souCategory .subCat_title:hover ,.filter_page .filter_side_bar .categories .cat_title:hover{
+    color: var(--fx-primary-color);
+}
+
+
+.filter_page .top_filter {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-bottom: 1px solid var(--fx-primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+}
+.filter_page .top_filter .sort_by label{
+    color: var(--fx-main-text-color);
+}
+.filter_page .top_filter .sort_by select{
+    font-size: 18px;
+}
+
+.filter_page .top_filter .display_mode{
+    display: flex;
+    gap: 15px;
+}
+
+.filter_page .top_filter .display_mode .single{
+    height: 44px;
+    width: 44px;
+    display: flex;
+    align-items: center; 
+        color:var(--fx-primary-color);
+    border-radius: 50%;
+    font-size:20px;
+
+    justify-content: center;
+
+}
+.filter_page .top_filter .display_mode .single.selected {
+
+    background: var(--fx-primary-color);
+    color: #fff;
+
+}
