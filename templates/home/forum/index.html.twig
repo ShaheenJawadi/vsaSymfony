@@ -130,7 +130,13 @@
 							</div>
 
 
-							<div class="pub_list" id="pub_list"></div>
+							<div class="pub_list"  >
+								{% for i in 1..8 %}
+							 
+										{% include 'home/components/forum/forumGrid.html.twig' %}
+								 
+								{% endfor %}
+							</div>
 						</div>
 					</div>
 				</div>
