@@ -15,4 +15,11 @@ class CoursController extends AbstractController
             'controller_name' => 'CoursController',
         ]);
     }
+
+    public function coursLessonsPage(): Response
+    {
+        return $this->render('cours/lessons/index.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
