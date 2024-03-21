@@ -11,14 +11,14 @@ class CoursController extends AbstractController
     
     public function coursPage(): Response
     {
-        return $this->render('cours/single/index.html.twig', [
+        return $this->render('home/cours/single/index.html.twig', [
             'controller_name' => 'CoursController',
         ]);
     }
 
     public function coursLessonsPage(): Response
     {
-        return $this->render('cours/lessons/index.html.twig', [
+        return $this->render('home/cours/lessons/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

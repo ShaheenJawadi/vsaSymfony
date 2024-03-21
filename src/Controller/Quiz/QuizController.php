@@ -11,7 +11,7 @@ class QuizController extends AbstractController
     
     public function index(): Response
     {
-        return $this->render('quiz/index.html.twig', [
+        return $this->render('home/quiz/index.html.twig', [
             'controller_name' => 'QuizController',
         ]);
     }

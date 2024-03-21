@@ -11,7 +11,7 @@ class FilterController extends AbstractController
     
     public function index(): Response
     {
-        return $this->render('cours/filter/index.html.twig', [
+        return $this->render('home/cours/filter/index.html.twig', [
             'controller_name' => 'FilterController',
         ]);
     }

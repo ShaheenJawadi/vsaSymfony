@@ -1,4 +1,4 @@
-{% extends 'homeLayout.html.twig' %}
+{% extends 'home/homeLayout.html.twig' %}
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -118,7 +118,7 @@
 							<div class="row">
 								{% for i in 1..9 %}
 									<div class="col-md-4">
-										{% include 'components/cours/coursGrid.html.twig' %}
+										{% include 'home/components/cours/coursGrid.html.twig' %}
 									</div>
 								{% endfor %}
 
