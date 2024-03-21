@@ -16,5 +16,14 @@ class ForumController extends AbstractController
         ]);
     }
 
+
+
+    public function chatBotIndex(): Response
+    {
+        return $this->render('home/forum/chatbot.html.twig', [
+            'controller_name' => 'ForumController',
+        ]);
+    }
+
    
 }
