@@ -4,3 +4,7 @@
 index:
   path: /
   controller: App\Controller\HomeController::index
+
+cours_filter_index:
+  path: /cours
+  controller: App\Controller\Cours\FilterController::index
