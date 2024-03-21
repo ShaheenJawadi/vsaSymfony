@@ -8,9 +8,10 @@
 
 <script>
   
-    
-        $(".modal-content").load('../components/auth/login.html')  
-  
+     $(document).ready(function() {
+   $.get('/load/popup/login', function(response) {
+            $('.modal-content').html(response);
+        });
       
- 
+ });
 </script>

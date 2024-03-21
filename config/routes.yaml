@@ -38,3 +38,15 @@ forum_index:
 chatbot_index:
   path: /forum/chatbot
   controller: App\Controller\Forum\ForumController::chatBotIndex
+
+
+
+
+
+
+
+
+
+load_login_popup:
+  path: /load/popup/login
+  controller: App\Controller\Auth\AuthController::loadLoginPopup
