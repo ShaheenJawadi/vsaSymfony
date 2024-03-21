@@ -6,63 +6,128 @@
 {% endblock %}
 
 
-
-
 {% block body %}
 
 
-<div class="filter_page">
+	<div class="filter_page">
 
 
-	<div class="filter_header">
-		<div class="seach_bar_holder">
-			<input type="text" class="form-control search_bar">
+		<div class="filter_header" style="background-image: url({{ asset('images/filter/header.png')}})">
+			<div class="seach_bar_holder">
+				<input type="text" class="form-control search_bar">
+			</div>
 		</div>
-	</div>
 
-	<div class="content">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3" id="side_bar_palce" style="padding-right: 0;"></div>
-				<div class="col-md-9" style="padding-left: 0;">
-					<div id="topBar"></div>
+		<div class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3" style="padding-right: 0;">
 
 
-					<div class="container-fluid">
-						<div class="row" id="cours_list"></div>
+						<div class="filter_side_bar">
+							<h3>Categories</h3>
+							<ul class="categories">
 
-					</div>
-
-					<div class="pagination">
-
-
-						<nav>
-							<ul class="pagination justify-content-center">
-								<li class="page-item disabled">
-									<a class="page-link">Précédent</a>
+								<li>
+									<div>
+										<span class="cat_title">
+											<a href="#">cat 1</a>
+										</span>
+									</div>
+									<ul class="souCategory">
+										<li class="subCat_title">
+											<a href="#">1 subcat 1</a>
+										</li>
+										<li class="subCat_title">
+											<a href="#">1 subcat 2</a>
+										</li>
+										<li class="subCat_title">
+											<a href="#">1 subcat 3</a>
+										</li>
+									</ul>
 								</li>
-								<li class="page-item active">
-									<a class="page-link" href="#">1</a>
+
+								<li>
+									<div>
+										<span class="cat_title">
+											<a href="#">cat 2</a>
+										</span>
+									</div>
+									<ul class="souCategory">
+										<li class="subCat_title">
+											<a href="#">2 subcat 1</a>
+										</li>
+										<li class="subCat_title">
+											<a href="#">2 subcat 2</a>
+										</li>
+
+									</ul>
 								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">2</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">3</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">Suivant</a>
+
+								<li>
+									<div>
+										<span class="cat_title">
+											<a href="#">cat 3</a>
+										</span>
+									</div>
+									<ul class="souCategory">
+										<li class="subCat_title">
+											<a href="#">3 subcat 1</a>
+										</li>
+										<li class="subCat_title">
+											<a href="#">3 subcat 2</a>
+										</li>
+										<li class="subCat_title">
+											<a href="#">3 subcat 3</a>
+										</li>
+										<li class="subCat_title">
+											<a href="#">3 subcat 4</a>
+										</li>
+									</ul>
 								</li>
 							</ul>
-						</nav>
+
+						</div>
 					</div>
+					<div class="col-md-9" style="padding-left: 0;">
+						<div id="topBar"></div>
+
+
+						<div class="container-fluid">
+							<div class="row" id="cours_list"></div>
+
+						</div>
+
+						<div class="pagination">
+
+
+							<nav>
+								<ul class="pagination justify-content-center">
+									<li class="page-item disabled">
+										<a class="page-link">Précédent</a>
+									</li>
+									<li class="page-item active">
+										<a class="page-link" href="#">1</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">2</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">3</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">Suivant</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+
 				</div>
 
 			</div>
 
+
 		</div>
-
-
 	</div>
-</div>
 {% endblock %}
