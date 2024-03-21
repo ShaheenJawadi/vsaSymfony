@@ -1,17 +1,15 @@
-<div class="modal fade" id="authModel"   tabindex="-1"  >
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
- 
-      </div>
-    </div>
+<div class="modal fade" id="authModel" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content"></div>
+	</div>
 </div>
 
 <script>
-  
-     $(document).ready(function() {
-   $.get('/load/popup/login', function(response) {
-            $('.modal-content').html(response);
-        });
-      
- });
+
+	$(document).ready(function () {
+$.get('/load/popup/login', function (response) {
+$('.modal-content').html(response);
+});
+
+});
 </script>

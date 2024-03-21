@@ -13,12 +13,9 @@ cours_page_index:
   path: /cours/single
   controller: App\Controller\Cours\CoursController::coursPage
 
-
 cours_lessons_index:
   path: /cours/single/lessons
   controller: App\Controller\Cours\CoursController::coursLessonsPage
-
-
 
 cours_quiz_index:
   path: /cours/single/quiz
@@ -28,35 +25,22 @@ cours_quiz_note:
   path: /cours/single/quiz/note
   controller: App\Controller\Quiz\QuizController::note
 
-
-
 forum_index:
   path: /forum
   controller: App\Controller\Forum\ForumController::index
-
 
 chatbot_index:
   path: /forum/chatbot
   controller: App\Controller\Forum\ForumController::chatBotIndex
 
-
-
-
-
-
-
-
-
 load_login_popup:
   path: /load/popup/login
   controller: App\Controller\Auth\AuthController::loadLoginPopup
-
 
 load_register_popup:
   path: /load/popup/register
   controller: App\Controller\Auth\AuthController::loadRegisterPopup
 
-
-load_register_popup:
+load_restPws_popup:
   path: /load/popup/reset_pws
   controller: App\Controller\Auth\AuthController::loadResetPwsPopup

@@ -1,57 +1,67 @@
-<div class="auth_holder" >
- 
-    <div class="auth_title">Se connecter avec</div>
-    <div  class="social_btns">
-        <button class="fb"><i class="fa-brands fa-facebook-f"></i> <span>Facebook</span></button>
-        <button class="google"><i class="fa-brands fa-google"></i> <span>Google</span></button>
+<div class="auth_holder">
+
+	<div class="auth_title">Se connecter avec</div>
+	<div class="social_btns">
+		<button class="fb">
+			<i class="fa-brands fa-facebook-f"></i>
+			<span>Facebook</span>
+		</button>
+		<button class="google">
+			<i class="fa-brands fa-google"></i>
+			<span>Google</span>
+		</button>
 
 
-    </div>
-    <div class="separator">
-        <div class="line"></div>
-        <span>Ou</span>
-        <div class="line"></div>
+	</div>
+	<div class="separator">
+		<div class="line"></div>
+		<span>Ou</span>
+		<div class="line"></div>
 
-    </div>
+	</div>
 
-    <div class="input_holder">
+	<div class="input_holder">
 
-    
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text"  ><i class="fa-solid fa-user"></i></span>
-            <input type="text" class="form-control" placeholder="Username"  >
-        </div>
 
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text"  ><i class="fa-solid fa-lock"></i></span>
-            <input type="password" class="form-control" placeholder="Mot de passe"  >
-        </div>
-    </div>
-    <div class="ind" id="openForgetPws"> Mot de passe oublié ? </div>
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text">
+				<i class="fa-solid fa-user"></i>
+			</span>
+			<input type="text" class="form-control" placeholder="Username">
+		</div>
 
-    <button class="btn_main">Login</button>
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text">
+				<i class="fa-solid fa-lock"></i>
+			</span>
+			<input type="password" class="form-control" placeholder="Mot de passe">
+		</div>
+	</div>
+	<div class="ind" id="openForgetPws">
+		Mot de passe oublié ?
+	</div>
 
-   
-    <div class="ind"  id="openRegister"> Je n'ai pas de compte !</div>
+	<button class="btn_main">Login</button>
 
+
+	<div class="ind" id="openRegister">
+		Je n'ai pas de compte !</div>
 
 
 </div>
 
 
 <script>
-  
-    
- 
-    $("#openForgetPws").on( "click", function() {
-        $.get('/load/popup/reset_pws', function(response) {
-            $('.modal-content').html(response);
-        });
-       } );
-       $("#openRegister").on( "click", function() {
-       $.get('/load/popup/register', function(response) {
-            $('.modal-content').html(response);
-        });
-       } );
 
+
+	$("#openForgetPws").on("click", function () {
+$.get('/load/popup/reset_pws', function (response) {
+$('.modal-content').html(response);
+});
+});
+$("#openRegister").on("click", function () {
+$.get('/load/popup/register', function (response) {
+$('.modal-content').html(response);
+});
+});
 </script>
