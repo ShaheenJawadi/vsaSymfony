@@ -1,0 +1,37 @@
+<div class="auth_holder" >
+ 
+    <div class="auth_title">Réinitialiser le mot de passe</div>
+ 
+     
+
+    <div class="input_holder">
+
+    
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text"  ><i class="fa-solid fa-at"></i></span>
+            <input type="email" class="form-control" placeholder="Email"  >
+        </div>
+
+       
+    </div>
+ 
+
+    <button class="btn_main">Réinitialiser</button>
+
+   
+    <div class="ind" id="openLoginPopup">Retour à la page de connexion!</div>
+
+
+
+</div>
+
+<script>
+  
+    
+ 
+     $("#openLoginPopup").on( "click", function() {
+        $(".modal-content").load('../components/auth/login.html')
+        } );
+ 
+
+</script>
