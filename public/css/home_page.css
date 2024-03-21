@@ -1,20 +1,23 @@
 .banner img {
     /* max-width: 99vw; */
-        width: -webkit-fill-available;
+    width: -webkit-fill-available;
 }
+
 .intro_section {
     margin: 25px 0;
 }
-.intro_section .left_images{
+
+.intro_section .left_images {
     display: flex;
     gap: 15px;
     position: relative;
 }
-.intro_section .left_images img{
+
+.intro_section .left_images img {
     z-index: 2;
 }
 
-.intro_section .left_images .left_element{
+.intro_section .left_images .left_element {
     position: absolute;
     width: 30px;
     height: 90%;
@@ -25,10 +28,9 @@
     left: -22px;
     z-index: -1;
     border-radius: 5px;
-
 }
 
-.intro_section .text_holder{
+.intro_section .text_holder {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,30 +38,32 @@
     justify-content: center;
     gap: 15px;
 }
+
 .intro_section p {
     color: var(--fx-main-text-color);
     font-size: 20px;
 }
-.intro_section ul li{
+
+.intro_section ul li {
     color: var(--fx-main-text-color);
     font-size: 22px;
 }
-.intro_section ul li::marker{
+
+.intro_section ul li::marker {
     color: var(--fx-primary-color);
     font-size: 22px;
-
 }
-.intro_section button{
+
+.intro_section button {
     width: fit-content;
 }
 
+
 /* asdqs */
 
-
-.intro_section2{
+.intro_section2 {
     min-height: 350px;
     color: aliceblue;
-    background-image: url("/assets/intro2_bg.png");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -69,93 +73,103 @@
 }
 
 
-
 /* why us */
-.why_us{
+
+.why_us {
     margin: 25px 0;
 }
-.why_us{
+
+.why_us {
     position: relative;
 }
-.why_us .why_us_img{
+
+.why_us .why_us_img {
     position: absolute;
     right: 0;
     top: 0;
-
 }
 
 .why_us .why_us_img img {
     max-width: 815px;
 }
 
+
 /* newsletter */
 
-.newsletter{
+.newsletter {
     color: #fff;
     padding: 80px 0;
     background-color: var(--fx-primary-color);
-
 }
 
 
 /* our categories */
-.our_categories_section .our_categories{
+
+.our_categories_section .our_categories {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.our_categories_section .our_categories h2{
-    text-align: center;
 
+.our_categories_section .our_categories h2 {
+    text-align: center;
 }
 
-.our_categories_section .our_categories .item{
+.our_categories_section .our_categories .item {
     display: flex;
     flex-direction: column;
     border-radius: 15px;
     background: #fff;
-        align-items: center;
+    align-items: center;
 }
 
-.our_categories_section .our_categories .item .img_holder{
+.our_categories_section .our_categories .item .img_holder {
     display: flex;
     flex-direction: column;
 }
-.our_categories_section .our_categories .item .img_holder img{
+
+.our_categories_section .our_categories .item .img_holder img {
     width: min-content;
     height: 250px;
 }
-.our_categories_section .our_categories .item span{
+
+.our_categories_section .our_categories .item span {
     display: block;
     text-align: center;
     color: var(--fx-main-text-color);
     font-size: 22px;
     padding: 10px 0;
-    
     width: 100%;
 }
 
-.our_categories_section .our_categories .item:hover{
+.our_categories_section .our_categories .item:hover {
     box-shadow: 1px 1px 4px 1px #7b7b7b;
 }
 
-.our_categories_section .our_categories .item:hover span{
+.our_categories_section .our_categories .item:hover span {
     background: var(--fx-primary-color);
     color: #fff;
-        border-radius: 0 0 15px 15px;
+    border-radius: 0 0 15px 15px;
 }
+
+
 /************************ explore cours ***********************/
-.explor_cours_section{
+
+.explor_cours_section {
     margin: 25px 0;
 }
-.explor_cours_section h2{
+
+.explor_cours_section h2 {
     text-align: center;
 }
 
+
 /* **************Aventages************* */
-.nos_aventages_section{
+
+.nos_aventages_section {
     margin: 30px 0;
 }
+
 .nos_aventages_section .aventage_holder {
     position: relative;
     padding: 30px 0;
@@ -164,7 +178,7 @@
     gap: 25px;
 }
 
-.nos_aventages_section .aventage_holder .aventage_bg{
+.nos_aventages_section .aventage_holder .aventage_bg {
     background: var(--fx-primary-color);
     position: absolute;
     right: 0;
@@ -172,13 +186,11 @@
     height: 65%;
     z-index: -1;
     top: 0;
-
-
 }
-.nos_aventages_section .aventage_holder h2{
+
+.nos_aventages_section .aventage_holder h2 {
     text-align: center;
     color: #fff;
-
 }
 
 .nos_aventages_section .aventage_holder .single {
@@ -186,13 +198,14 @@
     height: 100%;
     border-radius: 8px;
     padding: 15px;
-
 }
-.nos_aventages_section .aventage_holder .single .top_head{
+
+.nos_aventages_section .aventage_holder .single .top_head {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .nos_aventages_section .aventage_holder .single .top_head .icon {
     color: var(--fx-main-text-color);
     font-size: 25px;
@@ -203,7 +216,8 @@
     font-size: 18px;
     font-weight: 600;
 }
-.nos_aventages_section .aventage_holder .single p{
+
+.nos_aventages_section .aventage_holder .single p {
     padding: 5px;
     font-size: 18px;
 }
