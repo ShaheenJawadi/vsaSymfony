@@ -27,3 +27,9 @@ cours_quiz_index:
 cours_quiz_note:
   path: /cours/single/quiz/note
   controller: App\Controller\Quiz\QuizController::note
+
+
+
+forum_index:
+  path: /forum
+  controller: App\Controller\Forum\ForumController::index
