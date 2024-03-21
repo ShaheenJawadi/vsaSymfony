@@ -50,3 +50,8 @@ chatbot_index:
 load_login_popup:
   path: /load/popup/login
   controller: App\Controller\Auth\AuthController::loadLoginPopup
+
+
+load_register_popup:
+  path: /load/popup/register
+  controller: App\Controller\Auth\AuthController::loadRegisterPopup

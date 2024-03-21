@@ -17,4 +17,14 @@ class AuthController extends AbstractController
         return new Response($content);
         
     }
+
+
+    public function loadRegisterPopup(): Response
+    {
+
+        $content = $this->renderView('home/auth/popup/register.html.twig'); 
+
+        return new Response($content);
+        
+    }
 }
