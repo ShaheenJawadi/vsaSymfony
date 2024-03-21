@@ -1,0 +1,101 @@
+{% extends 'home/homeLayout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/forum.css') }}">
+{% endblock %}
+
+
+{% block body %}
+   <div class="chatbot_page">
+ 
+            <div class="container-sm">
+                    <div class="holder">
+                            <div>
+
+                          
+                                <div class="indicators" >
+                                    <div class="single_in">
+                                        <img src="{{ asset('images/forum/how.png') }}"  alt="">
+                                        <div class="txt">
+                                            How 
+                                        </div>
+                                    </div>
+                                    <div class="single_in">
+                                        <img   src="{{ asset('images/forum/may i.png') }}" alt="">
+                                        <div class="txt">
+                                            may i 
+                                        </div>
+                                    </div>
+                                    <div class="single_in">
+                                        <img src="{{ asset('images/forum/help.png') }}" alt="">
+                                        <div class="txt">
+                                            help you ?
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="list" >
+                                    <div class="single " >
+                                        <div class="avatar" >
+                                            <img src="{{ asset('images/cours/person.jpg') }}" alt="">
+
+                                        </div>
+                                        <div class="text" >
+                                            eorioeipegjkefngfdn;,dnfg dfgjkldf odauzoeuoazueoazeiaeoziuaze ,a dza d,nsbqhsdjqsdq sdzidpoipoazidpaizpodaozdlzahkjd ekzoaze65aze65 4a6e 6az6e546aze4 65az6e5 6a5ze65aze65a65 
+
+                                        </div>
+
+                                    </div>
+                                    <div class="single bot" >
+                                        <div class="avatar" >
+                                            <img src="{{ asset('images/forum/chat.jpg') }}" alt="">
+
+                                        </div>
+                                        <div class="text" >
+                                            qlsdlqsdk
+                                            zpipdiazpo eipaozipeipaoziepizapoeipazpoeiazepoaizipeazbqsdqs dqhsdjhqsgdgjqdsjhqs diuqyiduyquisydiqysidiqsudazda az65e 4az4e654 aze6az6e46az4e46az
+                                        </div>
+
+                                    </div>
+                                    <div class="single " >
+                                        <div class="avatar" >
+                                            <img src="{{ asset('images/cours/person.jpg') }}" alt="">
+
+                                        </div>
+                                        <div class="text" >
+                                            qlsdlqsdk  oqiizpod eiazeipazeipaziepzapeip aizoeaziejaz,nba,ndsq54d5qsdqs454 q5sd54sq45d45s4qd45 q45s4d54s5qd54qs45d 45sq45d45q4 5s45d45qs5d 45qs4d5454
+
+                                        </div>
+
+                                    </div>
+                                    <div class="single bot" >
+                                        <div class="avatar" >
+                                            <img src="{{ asset('images/forum/chat.jpg') }}" alt="">
+
+                                        </div>
+                                        <div class="text" >
+                                            qlsdlqsdk
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="send_box"  >
+                                <input type="text" class="form-control"   placeholder="Message ">
+                                <button>Envoyer</button>
+
+                            </div>
+                    </div>
+                 
+
+            </div>
+ 
+    </div>
+
+
+{% endblock %}

@@ -35,6 +35,6 @@ forum_index:
   controller: App\Controller\Forum\ForumController::index
 
 
-forum_index:
+chatbot_index:
   path: /forum/chatbot
   controller: App\Controller\Forum\ForumController::chatBotIndex
