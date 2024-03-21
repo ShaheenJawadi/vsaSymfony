@@ -15,5 +15,5 @@ cours_page_index:
 
 
 cours_lessons_index:
-  path: /cours/single
+  path: /cours/single/lessons
   controller: App\Controller\Cours\CoursController::coursLessonsPage
