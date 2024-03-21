@@ -23,3 +23,7 @@ cours_lessons_index:
 cours_quiz_index:
   path: /cours/single/quiz
   controller: App\Controller\Quiz\QuizController::index
+
+cours_quiz_note:
+  path: /cours/single/quiz/note
+  controller: App\Controller\Quiz\QuizController::note

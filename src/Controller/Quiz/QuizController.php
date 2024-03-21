@@ -15,4 +15,11 @@ class QuizController extends AbstractController
             'controller_name' => 'QuizController',
         ]);
     }
+
+    public function note(): Response
+    {
+        return $this->render('home/quiz/note.html.twig', [
+            'controller_name' => 'QuizController',
+        ]);
+    }
 }
