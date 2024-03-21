@@ -1,0 +1,85 @@
+{% extends 'home/homeLayout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/quizz.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+	 
+
+  <div class="cours_quizz">
+
+
+
+        <div class="content">
+            <div class="container">
+                    <div class="quizz_header" >
+                            <div class="timer" >01:00:00</div>
+                            <div class="steps">5/15</div>
+
+                    </div>
+
+                    <div class="quizz_core" >
+
+                        <div class="question" >Question question question ?</div>
+                        <div class="img_holder">
+                            <img src="{{ asset('images/cours/coursThumb.png') }}" alt="">
+                        </div>
+
+
+                        <div class="rep_holder" >
+                            <div class="row" >
+                                <div  class="col-md-6">
+                                    
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" checked>
+                                        <label class="form-check-label" >
+                                          rep1
+                                        </label>
+                                      </div>
+                                </div>
+                                <div  class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" checked>
+                                        <label class="form-check-label" >
+                                          rep2
+                                        </label>
+                                      </div>
+                                </div>
+                                <div  class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" checked>
+                                        <label class="form-check-label" >
+                                          rep3
+                                        </label>
+                                      </div>
+                                </div>
+                                <div  class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" checked>
+                                        <label class="form-check-label" >
+                                          rep4
+                                        </label>
+                                      </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                 
+                        <div class="n_btn_holder">
+                            <button class="btn_main" >soumettre</button>
+                        </div>
+                    </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+{% endblock %}
