@@ -17,3 +17,9 @@ cours_page_index:
 cours_lessons_index:
   path: /cours/single/lessons
   controller: App\Controller\Cours\CoursController::coursLessonsPage
+
+
+
+cours_quiz_index:
+  path: /cours/single/quiz
+  controller: App\Controller\Quiz\QuizController::index
