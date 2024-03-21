@@ -84,53 +84,12 @@
     </div>
 
     <div class="list_comments" >
-        <div class="single_comment" >
-            <div class="avatar">
-                <img src="{{ asset('images/cours/person.jpg') }}" alt="">
-            </div>
-            <div class="content" >
-                <div class="top">
-                    <div class="username">Shaheenj</div>
-                    <div class="date">Il y'a 10 jours</div>
-                     
-                </div>
-                <p class="comment">
-                    lsdfjlkdsjflkdjfljdlfj flkjldsfjldjfljdlfj sfjldksjfdfsdfsdf seres resrsfdfdf
-                </p>
-            </div>
-             
-        </div>
-        <div class="single_comment" >
-            <div class="avatar">
-                <img src="{{ asset('images/cours/person.jpg') }}" alt="">
-            </div>
-            <div class="content" >
-                <div class="top">
-                    <div class="username">Shaheenj</div>
-                    <div class="date">Il y'a 10 jours</div>
-                     
-                </div>
-                <p class="comment">
-                    lsdfjlkdsjflkdjfljdlfj flkjldsfjldjfljdlfj sfjldksjfdfsdfsdf seres resrsfdfdf
-                </p>
-            </div>
-
-            <div class="options" >
-            
-            
-                <div class="dropdown dropstart">
-                    <div class="drop_btn" data-bs-toggle="dropdown">
-                        <i class="fa-solid fa-ellipsis-h"></i>
-                    </div>
-                  
-                    <ul class="dropdown-menu"  >
-                      <li><a class="dropdown-item" href="#">Modifier</a></li>
-                      <li><a class="dropdown-item" href="#">Supprimer</a></li>
-                    </ul>
-                  </div>
-            </div>
-             
-        </div>
+      {% for i in 1..3 %}
+							 
+										{% include 'home/components/forum/singleComment.html.twig' %}
+								 
+								{% endfor %}
+        
 
     </div>
 </div>
