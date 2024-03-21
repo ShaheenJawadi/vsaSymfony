@@ -115,7 +115,14 @@
 
 
 						<div class="container-fluid">
-							<div class="row" id="cours_list"></div>
+							<div class="row" >
+                            {% for i in 1..9 %}
+                                <div class="col-md-4">
+                                    {% include 'components/cours/coursGrid.html.twig' %}
+                                </div>
+                            {% endfor %}
+                            
+                            </div>
 
 						</div>
 
