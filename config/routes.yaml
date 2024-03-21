@@ -12,3 +12,8 @@ cours_filter_index:
 cours_page_index:
   path: /cours/single
   controller: App\Controller\Cours\CoursController::coursPage
+
+
+cours_lessons_index:
+  path: /cours/single
+  controller: App\Controller\Cours\CoursController::coursLessonsPage
