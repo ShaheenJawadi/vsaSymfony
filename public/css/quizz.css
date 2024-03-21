@@ -1,9 +1,8 @@
-.cours_quizz{
+.cours_quizz {
     margin: 15px 0;
 }
 
-.cours_quizz .quizz_header{
-     
+.cours_quizz .quizz_header {
     display: flex;
     justify-content: space-between;
     background: #fff;
@@ -11,7 +10,7 @@
     align-items: center;
 }
 
-.cours_quizz .quizz_header  .timer {
+.cours_quizz .quizz_header .timer {
     color: var( --fx-primary-color);
     font-size: 23px;
     font-weight: 600;
@@ -19,10 +18,9 @@
     padding: 22px;
 }
 
-
-.cours_quizz .quizz_header  .steps {
+.cours_quizz .quizz_header .steps {
     color: #fff;
-    font-size: 22px ;
+    font-size: 22px;
     font-weight: 600;
     flex: 1;
     background: var(--fx-primary-color);
@@ -31,7 +29,7 @@
     border-radius: 0 5px 5px 0;
 }
 
-.cours_quizz .quizz_core{
+.cours_quizz .quizz_core {
     background: #fff;
     margin-top: 15px;
     padding: 25px;
@@ -40,31 +38,33 @@
     gap: 40px;
 }
 
-.cours_quizz .quizz_core .question{
+.cours_quizz .quizz_core .question {
     font-size: 23px;
     color: black;
 }
 
-.cours_quizz .quizz_core .rep_holder .form-check{
+.cours_quizz .quizz_core .rep_holder .form-check {
     font-size: 20px;
     color: var(--fx-main-text-color);
     margin-bottom: 15px;
 }
 
-.cours_quizz .quizz_core  .n_btn_holder{
+.cours_quizz .quizz_core .n_btn_holder {
     display: flex;
     align-self: center;
 }
-.cours_quizz .quizz_core  .img_holder  {
+
+.cours_quizz .quizz_core .img_holder {
     margin: 5px;
     display: flex;
     align-self: center;
 }
-.cours_quizz .quizz_core  .img_holder img {
+
+.cours_quizz .quizz_core .img_holder img {
     max-height: 250px;
 }
 
-.quizz_note_page{
+.quizz_note_page {
     background: #fff;
     padding: 25px;
     display: flex;
@@ -78,10 +78,9 @@
 .quizz_note_page .txt {
     color: #000;
     font-size: 25px;
-    
 }
 
-.quizz_note_page .note{
+.quizz_note_page .note {
     color: var(--fx-primary-color);
     font-size: 30px;
     font-weight: 700;

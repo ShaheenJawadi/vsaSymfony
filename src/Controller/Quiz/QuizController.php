@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuizController extends AbstractController
 {
-    
+
     public function index(): Response
     {
         return $this->render('home/quiz/index.html.twig', [
