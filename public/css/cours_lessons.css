@@ -1,0 +1,75 @@
+.cours_lessons{
+    margin:  25px 0;
+
+}
+
+.cours_lessons .side_bar{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    padding: 25px;
+}
+
+.cours_lessons .side_bar .single {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--fx-border-color);
+    padding-bottom: 25px;
+    gap: 5px;
+
+}
+
+.cours_lessons .side_bar .single .circle {
+    height: 35px ;
+    width: 35px ;
+    background: var(--fx-primary-color);
+    border-radius: 50%;
+
+}
+
+.cours_lessons .side_bar .single .title {
+    font-size: 18px;
+    color: var(--fx-main-text-color);
+    font-weight: 700;
+    
+}
+
+.cours_lessons .side_bar .single.quizz{
+    border-bottom: unset;
+}
+
+.cours_lessons .side_bar .single.quizz .circle{
+    background: #dedb0a;
+}
+
+.cours_lessons .side_bar .single.done .circle {
+background: var(--fx-secondary-color);
+}
+.cours_lessons .side_bar .single.current .title {
+    color: var(--fx-primary-color);
+}
+.cours_lessons .core  {}
+.cours_lessons .core  .content_holder{
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.cours_lessons .core  .content_holder .thumb{
+    background: #ddd;
+    height: 450px;
+    width: 100%;
+}
+
+.cours_lessons .core  .content_holder .content {
+    padding: 20px;
+
+}
+
+.cours_lessons .core   .btn_main {
+    margin: 15px;
+    display: flex;
+    margin-left: auto;
+    margin-right: 0;
+}
