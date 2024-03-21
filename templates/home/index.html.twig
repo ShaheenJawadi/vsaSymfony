@@ -1,17 +1,58 @@
 {% extends 'homeLayout.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/home_page.css') }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/home_page.css') }}">
 {% endblock %}
- 
 
- {% block body %}
 
-  <div class="banner " >
-    <div>
-        <img src="{{ asset('images/banner.png') }}" alt="">
-    </div>
-  </div>
-    
- {% endblock %}
+{% block body %}
+
+	<div class="banner ">
+		<div>
+			<img src="{{ asset('images/banner.png') }}" alt="">
+		</div>
+	</div>
+
+
+	<div class="intro_section1 intro_section">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="left_images">
+
+						<div class="img_holder"><img src="{{ asset('images/intro-1.png') }}" alt=""></div>
+						<div class="img_holder"><img src="{{ asset('images/intro-2.png') }}" alt=""></div>
+						<div class="left_element"></div>
+					</div>
+
+				</div>
+				<div class="col-md-6">
+
+					<div class="text_holder">
+						<h2>Découvrez une expérience
+							                    d'apprentissage unique pour
+							                    les personnes sourdes !</h2>
+						<p>
+							Nous croyons que l'éducation doit être accessible à tous, quel que soit
+							                        le mode de communication. C'est pourquoi nous avons créé une
+							                        plateforme d'apprentissage en ligne spécialement conçue pour
+							                        répondre aux besoins des personnes sourdes
+						</p>
+						<ul>
+							<li>Expertise pédagogique</li>
+							<li>Engagement envers l'inclusion</li>
+							<li>Diversité des cours</li>
+						</ul>
+
+						<button class="btn_main">Découvrir tous les cours</button>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
