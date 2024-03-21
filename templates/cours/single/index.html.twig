@@ -8,161 +8,167 @@
 
 {% block body %}
 
-	    <div class="cours_page">
+	<div class="cours_page">
 
 
+		<div class="content">
+			<div class="container">
+				<div class="row">
 
-        <div class="content">
-            <div class="container">
-                <div class="row">
+					<div class="col-md-9">
+						<div class="core">
+							<div class="cours_content single">
 
-                    <div class="col-md-9">
-                        <div class="core" >
-                            <div class="cours_content single" >
+								<div class="thumbnail">
+									<img src="{{ asset('images/cours/coursThumb.png') }}" alt="">
+									<div class="category_chimp">
+										Cat 1
+									</div>
+								</div>
 
-                                <div class="thumbnail" >
-                                    <img src="{{ asset('images/cours/coursThumb.png') }}" alt="">
-                                    <div class="category_chimp" > Cat 1 </div>
-                                </div>
-
-                                <div class="infos" >
-                                    <div class="top_head" >
-                                        <span class="teacher">Teacher</span>
-                                        <span class="date">08/03/2024</span>
+								<div class="infos">
+									<div class="top_head">
+										<span class="teacher">Teacher</span>
+										<span class="date">08/03/2024</span>
 
 
-                                    </div>
-                                    <div class="title" >
-                                        <h2 class="" >
-                                            Exploration des Constellations Culinaires : Un Voyage
-                                            Gastronomique à Travers l'Univers des Saveurs
+									</div>
+									<div class="title">
+										<h2 class="">
+											Exploration des Constellations Culinaires : Un Voyage
+											                                            Gastronomique à Travers l'Univers des Saveurs
 
-                                        </h2>
+										</h2>
 
-                                    </div>
-                                    <div class="rating">
-                                        <div class="list_stars">
-                                            <div class="star"><i class="fa-solid fa-star"></i></div>
-                                            <div class="star"><i class="fa-solid fa-star"></i></div>
-                                            <div class="star"><i class="fa-solid fa-star"></i></div>
-                                            <div class="star"><i class="fa-solid fa-star"></i></div>
-                                            <div class="star"><i class="fa-regular fa-star"></i></div>
-                                    
-                                    
-                                    
-                                    
-                                        </div>
-                                        <small>(2)</small>
-                                    </div>
+									</div>
+									<div class="rating">
+										<div class="list_stars">
+											<div class="star">
+												<i class="fa-solid fa-star"></i>
+											</div>
+											<div class="star">
+												<i class="fa-solid fa-star"></i>
+											</div>
+											<div class="star">
+												<i class="fa-solid fa-star"></i>
+											</div>
+											<div class="star">
+												<i class="fa-solid fa-star"></i>
+											</div>
+											<div class="star">
+												<i class="fa-regular fa-star"></i>
+											</div>
 
-                                    <div class="description">
-                                        <p>Plongez dans une aventure culinaire unique avec notre cours fictif sur l'exploration des
-                                            constellations culinaires. Ce parcours captivant vous emmènera à travers les étoiles pour
-                                            découvrir des saveurs intergalactiques et maîtriser l'art de la cuisine cosmique. Des recettes
-                                            créatives aux techniques de présentation innovantes, ce cours vous ouvrira les portes d'un
-                                            univers gustatif extraordinaire.</p>
-                                    </div>
-                                </div>
 
-                              
+										</div>
+										<small>(2)</small>
+									</div>
 
-                            </div>
-                            <div class="single s lesson_content" >
-                                <div>
-                                    <h3>Contenu</h3>
+									<div class="description">
+										<p>Plongez dans une aventure culinaire unique avec notre cours fictif sur l'exploration des
+											                                            constellations culinaires. Ce parcours captivant vous emmènera à travers les étoiles pour
+											                                            découvrir des saveurs intergalactiques et maîtriser l'art de la cuisine cosmique. Des recettes
+											                                            créatives aux techniques de présentation innovantes, ce cours vous ouvrira les portes d'un
+											                                            univers gustatif extraordinaire.</p>
+									</div>
+								</div>
 
-                                </div>
 
-                                <div class="list_lessosn" >
-                                    
+							</div>
+							<div class="single s lesson_content">
+								<div>
+									<h3>Contenu</h3>
+
+								</div>
+
+								<div class="list_lessosn">
+
 
 									{% for i in 1..5 %}
 										<div class="single">
 											<div class="circle"></div>
 											<div class="title">Défis Culinaire Cosmique</div>
 											<div class="duration">19 minutes</div>
-										
+
 										</div>
-										
+
 									{% endfor %}
 
-                                    <div class="single quizz">
-                                        <div class="circle"></div>
-                                        <div class="title">Quizz</div>
-                                        <div class="duration">15 question</div>
-                                    
-                                    </div>
-                                </div>
+									<div class="single quizz">
+										<div class="circle"></div>
+										<div class="title">Quizz</div>
+										<div class="duration">15 question</div>
 
-                            </div>
-                            {% include 'avis/coursAvisSection.html.twig' %}
-                         
+									</div>
+								</div>
 
+							</div>
+							{% include 'avis/coursAvisSection.html.twig' %}
 
 
-                        </div>
-                    </div>
-                    <div class="col-md-3"  >
+						</div>
+					</div>
+					<div class="col-md-3">
 
-                        <div class="right_side" >
+						<div class="right_side">
 
-                            <div class="top_btn_holder" >
+							<div class="top_btn_holder">
 
-                                <button class="btn_main">Accéder à ce cous</button>
-                                
-
-                            </div>
-                            <div class="info_holder">
-                                <div class="single_info_side">
-                                    <div class="icon">
-                            
-                                        <i class="fa-solid fa-hourglass-half"></i>
-                            
-                                    </div>
-                                    <span class="txt">Duration :</span>
-                                    <span class="txt_info"> 3 heures</span>
-                            
-                            
-                                </div>
-                                <div class="single_info_side">
-                                    <div class="icon">
-                            
-                                        <i class="fa-solid fa-bookmark"></i>
-                            
-                                    </div>
-                                    <span class="txt">Leçons :</span>
-                                    <span class="txt_info"> 6</span>
-                            
-                            
-                                </div>
-                                <div class="single_info_side">
-                                    <div class="icon">
-                            
-                                        <i class="fa-solid fa-gauge"></i>
-                            
-                                    </div>
-                                    <span class="txt">Niveau :</span>
-                                    <span class="txt_info">Débutant</span>
-                            
-                            
-                                </div>
-                            
-                            </div>
+								<button class="btn_main">Accéder à ce cous</button>
 
 
+							</div>
+							<div class="info_holder">
+								<div class="single_info_side">
+									<div class="icon">
 
-                        </div>
-                    </div>
-                    
+										<i class="fa-solid fa-hourglass-half"></i>
 
-                </div>
-
-            </div>
-
+									</div>
+									<span class="txt">Duration :</span>
+									<span class="txt_info">
+										3 heures</span>
 
 
-        </div>
-    </div>
+								</div>
+								<div class="single_info_side">
+									<div class="icon">
 
- 
+										<i class="fa-solid fa-bookmark"></i>
+
+									</div>
+									<span class="txt">Leçons :</span>
+									<span class="txt_info">
+										6</span>
+
+
+								</div>
+								<div class="single_info_side">
+									<div class="icon">
+
+										<i class="fa-solid fa-gauge"></i>
+
+									</div>
+									<span class="txt">Niveau :</span>
+									<span class="txt_info">Débutant</span>
+
+
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+
+
 {% endblock %}
