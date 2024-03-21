@@ -33,3 +33,8 @@ cours_quiz_note:
 forum_index:
   path: /forum
   controller: App\Controller\Forum\ForumController::index
+
+
+forum_index:
+  path: /forum/chatbot
+  controller: App\Controller\Forum\ForumController::chatBotIndex
