@@ -44,7 +44,9 @@
     
  
     $("#openForgetPws").on( "click", function() {
-       $(".modal-content").load('../components/auth/forget_pws.html')
+        $.get('/load/popup/reset_pws', function(response) {
+            $('.modal-content').html(response);
+        });
        } );
        $("#openRegister").on( "click", function() {
        $.get('/load/popup/register', function(response) {

@@ -27,4 +27,13 @@ class AuthController extends AbstractController
         return new Response($content);
         
     }
+
+    public function loadResetPwsPopup(): Response
+    {
+
+        $content = $this->renderView('home/auth/popup/resetPws.html.twig'); 
+
+        return new Response($content);
+        
+    }
 }

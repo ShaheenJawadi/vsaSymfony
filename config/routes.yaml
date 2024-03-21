@@ -55,3 +55,8 @@ load_login_popup:
 load_register_popup:
   path: /load/popup/register
   controller: App\Controller\Auth\AuthController::loadRegisterPopup
+
+
+load_register_popup:
+  path: /load/popup/reset_pws
+  controller: App\Controller\Auth\AuthController::loadResetPwsPopup

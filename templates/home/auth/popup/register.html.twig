@@ -51,7 +51,9 @@
     
  
     $("#openLoginPopup").on( "click", function() {
-       $(".modal-content").load('../components/auth/login.html')
+      $.get('/load/popup/login', function(response) {
+            $('.modal-content').html(response);
+        });
        } );
 
 
