@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CoursController extends AbstractController
 {
     
-    public function index(): Response
+    public function coursPage(): Response
     {
         return $this->render('cours/single/index.html.twig', [
             'controller_name' => 'CoursController',
