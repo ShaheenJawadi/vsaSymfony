@@ -1,9 +1,8 @@
-
-.forum_page{
+.forum_page {
     padding: 20px;
 }
 
-.forum_page .left_side{
+.forum_page .left_side {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -15,7 +14,7 @@
     font-weight: 600;
 }
 
-.forum_page .left_side .single_section .list_contributers{
+.forum_page .left_side .single_section .list_contributers {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -29,308 +28,307 @@
     border-bottom: 1px solid #a2a2a28a;
     padding-bottom: 10px;
 }
-.forum_page .left_side .single_section .list_contributers .single:last-of-type{
+
+.forum_page .left_side .single_section .list_contributers .single:last-of-type {
     border-bottom: unset;
 }
+
 .forum_page .left_side .single_section .list_contributers .single .avatar img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
 }
-.forum_page .left_side .single_section .list_contributers .single .username{
+
+.forum_page .left_side .single_section .list_contributers .single .username {
     color: var( --fx-main-text-color);
     font-size: 17px;
 }
 
+
 /* ************************************ */
 
-.forum_page  .add_pub_section {
+.forum_page .add_pub_section {
     display: flex;
     flex-direction: column;
-  
 }
-.forum_page  .add_pub_section .top_entry{
+
+.forum_page .add_pub_section .top_entry {
     display: flex;
     background: #fff;
-    border-radius:5px 5px 0  0 ;
+    border-radius: 5px 5px 0 0;
     border: 1px solid #797b8936;
     padding: 10px;
     align-items: flex-start;
 }
-.forum_page  .add_pub_section .top_entry .entry{
+
+.forum_page .add_pub_section .top_entry .entry {
     flex: 1;
 }
-.forum_page  .add_pub_section .top_entry .entry textarea{
+
+.forum_page .add_pub_section .top_entry .entry textarea {
     resize: none;
     border: unset;
 }
-.forum_page  .add_pub_section .top_entry .entry textarea:focus{
 
+.forum_page .add_pub_section .top_entry .entry textarea:focus {
     box-shadow: unset;
 }
-.forum_page  .add_pub_section .avatar img{
+
+.forum_page .add_pub_section .avatar img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
 }
 
-
-.forum_page  .add_pub_section .btm_btns{
+.forum_page .add_pub_section .btm_btns {
     background: #a9d4e526;
-    border-radius: 0  0 5px 5px;
+    border-radius: 0 0 5px 5px;
     border: 1px solid #797b8936;
     padding: 10px;
     align-items: center;
     justify-content: space-between;
     display: flex;
-
 }
-.forum_page  .add_pub_section .btm_btns .single{
+
+.forum_page .add_pub_section .btm_btns .single {
     color: var(--fx-primary-color);
-    font-size:20px;
+    font-size: 20px;
 }
 
-.forum_page  .add_pub_section .btm_btns  button{
+.forum_page .add_pub_section .btm_btns button {
     font-size: 16px;
 }
 
 
-
 /* ****** */
-.forum_page .nav_section{
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-margin: 15px 0;
-gap: 15px;
+
+.forum_page .nav_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 15px 0;
+    gap: 15px;
 }
 
 .forum_page .nav_section .section_list {
-
     display: flex;
     align-items: center;
     gap: 5px;
     border-bottom: 1px solid #89898929;
     flex: 1;
 }
-.forum_page .nav_section .section_list  .single {
+
+.forum_page .nav_section .section_list .single {
     padding: 10px;
     color: var(--fx-main-text-color);
     cursor: pointer;
 }
-.forum_page .nav_section .section_list  .single:hover{
+
+.forum_page .nav_section .section_list .single:hover {
     color: var(--fx-primary-color);
 }
-.forum_page .nav_section .section_list  .single.selected{
+
+.forum_page .nav_section .section_list .single.selected {
     color: #fff;
     background: var(--fx-primary-color);
-    border-radius:  5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
 }
-.forum_page .nav_section  .search{
 
-}
-.forum_page .nav_section  .search input{
+.forum_page .nav_section .search {}
+
+.forum_page .nav_section .search input {
     border-left: unset;
 }
-.forum_page .nav_section  .search input:focus{
-    box-shadow: unset;
 
+.forum_page .nav_section .search input:focus {
+    box-shadow: unset;
 }
-.forum_page .nav_section  .search .input-group span{
+
+.forum_page .nav_section .search .input-group span {
     background: #fff;
     color: var(--fx-primary-color);
-    
 }
-
-
-
-
-
-
 
 
 /* ..... */
-.forum_page .pub_list{
+
+.forum_page .pub_list {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .forum_page .pub_list .single {
- 
     background: #fff;
     border: 1px solid #797b8936;
     border-radius: 5px;
 }
 
-.forum_page .pub_list .single .head{
+.forum_page .pub_list .single .head {
     display: flex;
     padding: 10px;
     gap: 10px;
 }
 
-.forum_page .pub_list .single .head .avatar img{
-
-    height: 45px ;
+.forum_page .pub_list .single .head .avatar img {
+    height: 45px;
     width: 45px;
     border-radius: 50%;
-
 }
 
-.forum_page .pub_list .single  .head .infos {
+.forum_page .pub_list .single .head .infos {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.forum_page .pub_list .single  .head  .infos .username{
+.forum_page .pub_list .single .head .infos .username {
     color: #000;
     font-size: 16px;
     font-weight: 600;
 }
 
-.forum_page .pub_list .single  .head .infos  .date{
+.forum_page .pub_list .single .head .infos .date {
     color: var(--fx-main-text-color);
     font-size: 14px;
 }
+
 .forum_page .pub_list .single .head .options {
     flex: 1;
     display: flex;
     justify-content: flex-end;
 }
 
-.forum_page .pub_list .single .head .options .drop_btn{
-
-color: #9d9d9d;
-padding :15px;
-cursor: pointer;
+.forum_page .pub_list .single .head .options .drop_btn {
+    color: #9d9d9d;
+    padding: 15px;
+    cursor: pointer;
 }
 
-.forum_page .pub_list .single .content{
-display: flex;
-flex-direction: column;
-padding: 8px;
-gap: 5px;
+.forum_page .pub_list .single .content {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 5px;
 }
 
-.forum_page .pub_list .single .content .title{
+.forum_page .pub_list .single .content .title {
     font-size: 20px;
     color: #000;
 }
-.forum_page .pub_list .single .content  .img_list{
+
+.forum_page .pub_list .single .content .img_list {
     display: flex;
     gap: 8px;
     overflow: auto;
 }
-.forum_page .pub_list .single .content  .img_list img{
+
+.forum_page .pub_list .single .content .img_list img {
     max-height: 200px;
 }
-.forum_page .pub_list .single .content .question{
+
+.forum_page .pub_list .single .content .question {
     color: #000;
     padding-left: 10px;
     font-size: 17px;
 }
 
+.forum_page .pub_list .single .infos {}
 
-
-
-
-
-
-
-.forum_page .pub_list .single .infos {
-
-}
-
-.forum_page .pub_list .single .infos .reactions{
+.forum_page .pub_list .single .infos .reactions {
     display: flex;
     gap: 25px;
     padding: 10px;
     align-items: center;
 }
 
-.forum_page .pub_list .single .infos .reactions .single_reaction{
-display: flex;
-align-items: center;
-font-size: 18px;
-cursor: pointer;
-gap: 4px;
+.forum_page .pub_list .single .infos .reactions .single_reaction {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    gap: 4px;
 }
-.forum_page .pub_list .single .infos .reactions .single_reaction .icon{
+
+.forum_page .pub_list .single .infos .reactions .single_reaction .icon {
     color: var(--fx-primary-color);
 }
 
-.forum_page .pub_list .single .infos .reactions .single_reaction .counting{
+.forum_page .pub_list .single .infos .reactions .single_reaction .counting {
     font-size: 12px;
     color: var(--fx-main-text-color);
 }
-.forum_page .pub_list .single .infos .reactions .single_reaction .txt{
+
+.forum_page .pub_list .single .infos .reactions .single_reaction .txt {
     font-size: 14px;
     color: var(--fx-main-text-color);
-
 }
 
-.forum_page .pub_list .single .infos .reactions .single_reaction .icon.like{
+.forum_page .pub_list .single .infos .reactions .single_reaction .icon.like {
     color: var(--fx-secondary-color);
 }
-.forum_page .pub_list .single .infos .reactions .single_reaction .icon.dislike{
+
+.forum_page .pub_list .single .infos .reactions .single_reaction .icon.dislike {
     color: var(--fx-error-background);
 }
 
-.forum_page .pub_list .single .infos .reactions .single_reaction .icon.comment{
+.forum_page .pub_list .single .infos .reactions .single_reaction .icon.comment {
     color: var(--fx-third-color);
 }
 
+
 /* *************************** */
 
-.forum_page .pub_list .single .list_comments{
+.forum_page .pub_list .single .list_comments {
     display: flex;
     flex-direction: column;
     background: #c9f0ff26;
     gap: 5px;
 }
-.forum_page .pub_list .single .list_comments .single_comment{
+
+.forum_page .pub_list .single .list_comments .single_comment {
     padding: 5px;
     display: flex;
-    border-bottom:1px solid #89898929;
+    border-bottom: 1px solid #89898929;
     margin-left: 10px;
 }
-.forum_page .pub_list .single .list_comments .single_comment:last-of-type{
+
+.forum_page .pub_list .single .list_comments .single_comment:last-of-type {
     border-bottom: unset;
 }
-.forum_page .pub_list .single .list_comments .single_comment .avatar img{
+
+.forum_page .pub_list .single .list_comments .single_comment .avatar img {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-
 }
 
-.forum_page .pub_list .single .list_comments .single_comment .content{
+.forum_page .pub_list .single .list_comments .single_comment .content {
     display: flex;
     flex-direction: column;
 }
-.forum_page .pub_list .single .list_comments .single_comment .content .top{
+
+.forum_page .pub_list .single .list_comments .single_comment .content .top {
     display: flex;
     align-items: center;
     gap: 5px;
 }
-.forum_page .pub_list .single .list_comments .single_comment .content .top .username{
+
+.forum_page .pub_list .single .list_comments .single_comment .content .top .username {
     color: #000;
     font-size: 15px;
 }
-.forum_page .pub_list .single .list_comments .single_comment .content .top .date{
+
+.forum_page .pub_list .single .list_comments .single_comment .content .top .date {
     color: var(--fx-main-text-color);
     font-size: 12px;
 }
 
-
-
-.forum_page .pub_list .single .list_comments .single_comment .content .comment{
+.forum_page .pub_list .single .list_comments .single_comment .content .comment {
     padding-left: 5px;
 }
 
-
-.forum_page .pub_list .single .list_comments .single_comment .options{
+.forum_page .pub_list .single .list_comments .single_comment .options {
     flex: 1;
     padding: 15px;
     color: #6c757d;
@@ -341,116 +339,95 @@ gap: 4px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ****************************************** */
 
 .chatbot_page .holder {
-    border-right: 1px solid  #ddd;
-    border-left: 1px solid  #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
     min-height: 550px;
     display: flex;
     flex-direction: column;
-    padding:  25px 0;
+    padding: 25px 0;
     justify-content: space-between;
-
 }
 
-.chatbot_page .holder  .indicators{
+.chatbot_page .holder .indicators {
     display: flex;
     align-items: center;
     justify-content: space-around;
- }
+}
 
-
-
- .chatbot_page .holder  .indicators .single_in img{
+.chatbot_page .holder .indicators .single_in img {
     height: 250px;
     width: 250px;
     border-radius: 10px;
- }
- .chatbot_page .holder  .indicators .single_in .txt {
+}
+
+.chatbot_page .holder .indicators .single_in .txt {
     text-align: center;
     margin-top: 10px;
     color: #000;
     font-weight: 700;
     font-size: 23px;
- }
+}
 
-
- .chatbot_page .holder   .send_box{
+.chatbot_page .holder .send_box {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 5px 25px;
     align-items: stretch;
- }
+}
 
- .chatbot_page .holder   .send_box button{
+.chatbot_page .holder .send_box button {
     border-radius: 0 50px 50px 0;
     padding: 2px 25px;
     border: unset;
     background: var(--fx-primary-color);
     color: #fff;
- }
- .chatbot_page .holder   .send_box input{
-    border-radius:  50px 0 0 50px ;
+}
+
+.chatbot_page .holder .send_box input {
+    border-radius: 50px 0 0 50px;
     font-size: 18px;
     padding: 10px 25px;
- }
+}
 
-
-
- .chatbot_page .holder  .list {
+.chatbot_page .holder .list {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
- }
+}
 
- .chatbot_page .holder  .list  .single{
+.chatbot_page .holder .list .single {
     display: flex;
     gap: 10px;
     align-items: flex-start;
     max-width: 80%;
     position: relative;
- }
-
- 
-
- .chatbot_page .holder  .list  .single .avatar {
-    padding: 5px;
- }
- 
- .chatbot_page .holder  .list  .single .avatar img {
-    height: 55px ;
-    width: 55px;
-    border-radius: 50%;
- }
-
-
- .chatbot_page .holder  .list  .single  .text{
-    position: relative;
-     background: #cacacade;
-     margin-top: 15px;
-     padding: 16px;
-     font-size: 20px;
-     border-radius: 14px;
-     color: #000;
 }
 
-.chatbot_page .holder  .list  .single  .text::after {
+.chatbot_page .holder .list .single .avatar {
+    padding: 5px;
+}
+
+.chatbot_page .holder .list .single .avatar img {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}
+
+.chatbot_page .holder .list .single .text {
+    position: relative;
+    background: #cacacade;
+    margin-top: 15px;
+    padding: 16px;
+    font-size: 20px;
+    border-radius: 14px;
+    color: #000;
+}
+
+.chatbot_page .holder .list .single .text::after {
     left: -20px;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
@@ -458,28 +435,20 @@ gap: 4px;
     border-right: 10px solid #cacacade;
     content: "";
     top: 20px;
-
     position: absolute;
-  }
-
-
-.chatbot_page .holder  .list  .single.bot {
-
-    align-self: flex-end;
-    flex-direction: row-reverse;
-
-
-
-
 }
 
-.chatbot_page .holder  .list  .single.bot  .text{
-    background: var(--fx-primary-color);
+.chatbot_page .holder .list .single.bot {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
 
+.chatbot_page .holder .list .single.bot .text {
+    background: var(--fx-primary-color);
     color: #fff;
 }
 
-.chatbot_page .holder  .list  .single.bot  .text::after{
+.chatbot_page .holder .list .single.bot .text::after {
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-right: 10px solid transparent;
