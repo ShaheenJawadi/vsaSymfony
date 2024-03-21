@@ -32,13 +32,13 @@
 
 					<div class="text_holder">
 						<h2>Découvrez une expérience
-														                    d'apprentissage unique pour
-														                    les personnes sourdes !</h2>
+																					                    d'apprentissage unique pour
+																					                    les personnes sourdes !</h2>
 						<p>
 							Nous croyons que l'éducation doit être accessible à tous, quel que soit
-														                        le mode de communication. C'est pourquoi nous avons créé une
-														                        plateforme d'apprentissage en ligne spécialement conçue pour
-														                        répondre aux besoins des personnes sourdes
+																					                        le mode de communication. C'est pourquoi nous avons créé une
+																					                        plateforme d'apprentissage en ligne spécialement conçue pour
+																					                        répondre aux besoins des personnes sourdes
 						</p>
 						<ul>
 							<li>Expertise pédagogique</li>
@@ -56,7 +56,7 @@
 		</div>
 	</div>
 
-    
+
 	<div class="explor_cours_section">
 		<div class="our_categories">
 
@@ -64,7 +64,14 @@
 
 			<div class="container">
 
-				<div class="row" id="cours_list"></div>
+				<div class="row" id="cours_list">
+					{% for i in 1..3 %}
+                        <div class="col-md-4">
+						    {% include 'components/cours/coursGrid.html.twig' %}
+                        </div>
+					{% endfor %}
+					
+                </div>
 
 			</div>
 
