@@ -1,0 +1,376 @@
+:root {
+    --fx-primary-color: #00aeef;
+    --fx-primary-color-background: rgba(0, 174, 239, 0.25);
+    --fx-secondary-color: #34C38F;
+    --fx-secondary-color-background: rgba(52, 195, 143, 0.25);
+    --fx-third-color: #9016b2;
+    --fx-third-color-background: rgba(144, 22, 178, 0.25);
+    --fx-page-background: #f5f6f8;
+    --fx-error-background: #f46a6a;
+    --fx-error-background-background: rgba(244, 106, 106, 0.25);
+    --fx-main-text-color: #757783;
+    --fx-secondary-btn-bg: #f1f2f6;
+    --fx-border-color: #E0E2E9 ;
+}
+
+
+body{
+ display: block;
+ background: var(--fx-secondary-btn-bg);
+ 
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+h2.p_color{
+    color: var(--fx-primary-color);
+ 
+}
+
+
+.btn_main{
+    font-size: 20px;
+    padding: 8px 15px;
+    background: var(--fx-primary-color);
+    border: unset;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 20px;
+}
+ .w_block{
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+ }
+/* *************************Header ************************ */
+.header {
+    background: #fff;
+
+}
+
+.header .header_logo img{
+    height: 70px;
+}
+
+.header .nav-link{
+
+    color: var(--fx-main-text-color);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.header .nav-link.active  ,.header .auth_part .nav-link.active{
+    color: var(--fx-primary-color) !important;
+}
+.header .auth_part{
+    align-items: center;
+}
+ 
+.header .auth_part .separator{
+    padding: 25px 0;
+    border-right: 1px solid #cccccc;
+}
+
+.header .badge_my_cours{
+
+    position: relative;
+    margin: 0 20px;
+}
+.header .badge_my_cours  .icon_holder{
+    font-size: 30px;
+    color: var(--fx-main-text-color);
+
+}
+
+.header .badge_my_cours .my_cours_count{
+    position: absolute;
+    background: var(--fx-primary-color);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: -10px;
+    right: -10px;
+
+}
+/* *************************End Header ************************ */
+
+
+
+
+
+
+
+
+
+/* ************************* Footer ************************ */
+
+footer .footer_Holder {
+ 
+   
+    background: #1c1e27;
+}
+
+
+footer .footer_Holder{
+    background-image: url("/assets/footer_bg.png");
+    background-repeat: no-repeat;
+        background-size: cover;
+        padding: 80px 0;
+
+     
+}
+footer .footer_Holder .logo_holder {
+    display: flex;
+    justify-content: center;
+}
+
+footer .footer_Holder .footer_logo {
+
+    height: 120px;
+}
+
+footer .footer_Holder .footer_list_holder{
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+footer .footer_Holder .footer_list_holder .title {
+    display: block;
+    font-size: 22px;
+ 
+}
+footer .footer_Holder .footer_list_holder ul{
+    list-style: none;
+}
+footer .footer_Holder .footer_list_holder ul li {
+        list-style: unset;
+        margin: 8px 0;
+
+}
+
+footer .footer_Holder .footer_social{
+    display: flex;
+    gap: 15px;
+}
+
+footer .footer_Holder .footer_social .item {
+    height: 50px;
+    width: 50px;
+    background: var(--fx-primary-color);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+footer .footer_Holder .footer_social .item:hover {
+  
+    background: #fff;
+    color: var(--fx-primary-color);
+ 
+}
+/* *************************End Footer ************************ */
+
+
+
+
+/* *************************Single cours************************ */
+
+.single_cours_grid{
+    background: #fff;
+    display: block;
+    border-radius: 8px;
+
+}
+.single_cours_grid:hover{
+    box-shadow: 1px 1px 4px 1px #7b7b7b;
+}
+
+.single_cours_grid .img_holder{
+    position: relative;
+    margin-bottom:25px;
+}
+.single_cours_grid .img_holder img {
+    width: 100%;
+}
+.single_cours_grid .img_holder .add_cours_btn{
+    position: absolute;
+    bottom: -23px;
+    left: 15px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    color: var(--fx-primary-color);
+    box-shadow: 0px 3px 3px #6d6d6d;
+}
+.single_cours_grid .img_holder .add_cours_btn:hover{
+    background: var(--fx-primary-color);
+    color: #fff;
+}
+ .category_chimp {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: var(--fx-third-color);
+    background: var(--fx-third-color-background);
+    padding: 2px 10px ;
+    border-radius: 4px;
+    font-size: 19px;
+}
+
+.single_cours_grid .infos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 15px;
+
+}
+
+.single_cours_grid .infos .teacher{
+    color: var(--fx-primary-color);
+    font-size: 20px;
+}
+.single_cours_grid .infos .cours_title {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+}
+ .infos .rating {
+        display: flex;
+            align-items: center;
+            gap: 5px;
+}
+ .infos .rating .list_stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+ .infos .rating .list_stars .star {
+    color: #f3e703;
+}
+
+ .infos .rating small{
+    font-size: 12px;
+    color: var(--fx-main-text-color);
+}
+
+.single_cours_grid .separator{
+width: 100%;
+border-bottom: 1px solid #b8b8b8d3;
+}
+.single_cours_grid .bottom_part{
+    color: var(--fx-main-text-color);
+    text-align: center;
+    padding: 10px 0;
+}
+/* *************************Single cours************************ */
+
+/* *************************Authentification************************ */
+
+
+.auth_holder{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 20px;
+
+}
+.auth_holder .auth_title{
+    color: var(--fx-main-text-color);
+    font-size: 25px;
+    font-weight: 600;
+}
+.auth_holder  .social_btns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.auth_holder  .social_btns button{
+    border: unset;
+    font-size: 25px;
+    color: #fff;
+    padding: 10px 25px ;
+    border-radius: 5px;
+}
+.auth_holder  .social_btns button.fb{
+    background: #2282ed;
+}
+
+.auth_holder  .social_btns button.fb:hover{
+    color: #2282ed;
+    border: 2px solid #2282ed;
+    background: #fff;
+}
+
+.auth_holder  .social_btns button.google{
+    background: #ff663a;
+}
+
+.auth_holder  .social_btns button.google:hover{
+    color: #ff663a;
+    border: 2px solid #ff663a;
+    background: #fff;
+}
+
+
+.auth_holder .separator{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.auth_holder .separator span{
+    color: var(--fx-primary-color);
+    font-size: 18px;
+}
+.auth_holder .separator .line {
+    flex: 1;
+    height: 1px ;
+    background: #aeaeae;
+}
+.auth_holder  .input_holder{
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    flex-direction: column;
+}
+.auth_holder  .input_holder .input-group span{
+    background: var(--fx-primary-color);
+    color: #fff;
+}
+.auth_holder  .input_holder .input-group span i{
+    color: #fff !important;
+}
+.auth_holder  .input_holder .input-group input{
+    font-size: 22px;
+}
+
+.auth_holder .ind{
+    color: var(--fx-main-text-color);
+    font-size: 17px;
+    cursor: pointer;
+}
+.auth_holder button.btn_main{
+    width: 100%;
+}
+/* *************************End Authentification************************ */
