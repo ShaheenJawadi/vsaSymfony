@@ -1,0 +1,36 @@
+{% extends 'home/homeLayout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/quizz.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+	 
+
+   <div class="cours_quizz">
+
+
+
+        <div class="content">
+            <div class="container">
+                     <div class="quizz_note_page" >
+                        <div class="txt" > Votre note est :</div>
+                        <div class="note">16/20</div>
+                        <div class="btm_section" >
+                            <button class="btn_main" >Imprimer</button>
+                        </div>
+
+                     </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
