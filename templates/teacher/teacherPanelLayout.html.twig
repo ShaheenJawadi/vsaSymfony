@@ -1,5 +1,8 @@
 {% extends 'home/homeLayout.html.twig' %}
-
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/teacherPanel.css') }}">
+{% endblock %}
 {% block body %}
    
 
