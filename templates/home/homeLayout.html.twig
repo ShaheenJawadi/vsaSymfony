@@ -17,7 +17,7 @@
 		<section class="header sticky-top">
 			<nav class="navbar   navbar-expand-lg ">
 				<div class="container">
-					<a class="navbar-brand header_logo" href="{{ path('home') }}">
+					<a class="navbar-brand header_logo" href="{{ path('home_index') }}">
 						<img src="{{ asset('images/logo_circle.png') }}" alt=""></a>
 
 
@@ -27,7 +27,7 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+								<a class="nav-link active" aria-current="page" href="{{ path('home_index') }}">Accueil</a>
 							</li>
 
 							<li class="nav-item dropdown">
@@ -36,27 +36,27 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a class="dropdown-item" href="{{ path('cours_filter_index') }}">categories 1</a>
+										<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">categories 1</a>
 									</li>
 									<li>
-										<a class="dropdown-item" href="{{ path('cours_filter_index') }}">categories 1</a>
+										<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">categories 1</a>
 									</li>
 
 								</ul>
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path('cours_filter_index') }}">Cours</a>
+								<a class="nav-link" href="{{ path('home_cours_filter_index') }}">Cours</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#">Enseignants</a>
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path('forum_index') }}">Forum</a>
+								<a class="nav-link" href="{{ path('home_forum_index') }}">Forum</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path('chatbot_index') }}">ChatBot</a>
+								<a class="nav-link" href="{{ path('home_forum_chatbot_index') }}">ChatBot</a>
 							</li>
 
 

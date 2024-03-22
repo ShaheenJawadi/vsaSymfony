@@ -1,46 +1,32 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
 home:
-  path: /
-  controller: App\Controller\HomeController::index
+      resource: "routes/home/home.yaml"
+      prefix: "/"
+      name_prefix: "home_"
 
-cours_filter_index:
-  path: /cours
-  controller: App\Controller\Cours\FilterController::index
+#################################################    
 
-cours_page_index:
-  path: /cours/single
-  controller: App\Controller\Cours\CoursController::coursPage
+auth:
+      resource: "routes/home/auth.yaml"
+      prefix: "/auth"
+      name_prefix: "home_auth_"
 
-cours_lessons_index:
-  path: /cours/single/lessons
-  controller: App\Controller\Cours\CoursController::coursLessonsPage
+#################################################      
 
-cours_quiz_index:
-  path: /cours/single/quiz
-  controller: App\Controller\Quiz\QuizController::index
+cours:
+      resource: "routes/home/cours.yaml"
+      prefix: "/cours"
+      name_prefix: "home_cours_"
 
-cours_quiz_note:
-  path: /cours/single/quiz/note
-  controller: App\Controller\Quiz\QuizController::note
+#################################################      
 
-forum_index:
-  path: /forum
-  controller: App\Controller\Forum\ForumController::index
+quiz:
+      resource: "routes/home/quizz.yaml"
+      prefix: "/quizz"
+      name_prefix: "home_quizz_"
 
-chatbot_index:
-  path: /forum/chatbot
-  controller: App\Controller\Forum\ForumController::chatBotIndex
+#################################################      
 
-load_login_popup:
-  path: /load/popup/login
-  controller: App\Controller\Auth\AuthController::loadLoginPopup
-
-load_register_popup:
-  path: /load/popup/register
-  controller: App\Controller\Auth\AuthController::loadRegisterPopup
-
-load_restPws_popup:
-  path: /load/popup/reset_pws
-  controller: App\Controller\Auth\AuthController::loadResetPwsPopup
+forum:
+      resource: "routes/home/forum_chatbot.yaml"
+      prefix: "/forum"
+      name_prefix: "home_forum_"

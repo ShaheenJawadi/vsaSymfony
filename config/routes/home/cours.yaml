@@ -1,0 +1,11 @@
+filter_index:
+  path: /
+  controller: App\Controller\Cours\FilterController::index
+
+page_index:
+  path: /single
+  controller: App\Controller\Cours\CoursController::coursPage
+
+lessons_index:
+  path: /single/lessons
+  controller: App\Controller\Cours\CoursController::coursLessonsPage

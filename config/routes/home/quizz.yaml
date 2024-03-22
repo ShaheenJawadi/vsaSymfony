@@ -1,0 +1,7 @@
+index:
+  path: /single
+  controller: App\Controller\Quiz\QuizController::index
+
+note:
+  path: /single/note
+  controller: App\Controller\Quiz\QuizController::note

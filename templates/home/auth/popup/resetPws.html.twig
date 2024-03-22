@@ -29,7 +29,7 @@
 
 
 	$("#openLoginPopup").on("click", function () {
-$.get('/load/popup/login', function (response) {
+$.get('/auth/load/popup/login', function (response) {
 $('.modal-content').html(response);
 });
 });

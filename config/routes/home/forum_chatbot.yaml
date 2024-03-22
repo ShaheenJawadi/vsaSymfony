@@ -1,0 +1,7 @@
+index:
+  path: /
+  controller: App\Controller\Forum\ForumController::index
+
+chatbot_index:
+  path: /chatbot
+  controller: App\Controller\Forum\ForumController::chatBotIndex

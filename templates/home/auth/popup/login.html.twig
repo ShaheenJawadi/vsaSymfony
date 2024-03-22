@@ -55,12 +55,12 @@
 
 
 	$("#openForgetPws").on("click", function () {
-$.get('/load/popup/reset_pws', function (response) {
+$.get('/auth/load/popup/reset_pws', function (response) {
 $('.modal-content').html(response);
 });
 });
 $("#openRegister").on("click", function () {
-$.get('/load/popup/register', function (response) {
+$.get('/auth/load/popup/register', function (response) {
 $('.modal-content').html(response);
 });
 });
