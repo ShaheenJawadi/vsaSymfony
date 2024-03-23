@@ -19,25 +19,29 @@ class UserSessionManager
 
     public function setCurrentUser(User $user)
     {
-        $this->session->set('current_user_id', $user->getId());
+        $userData = serialize($user);
+        $this->session->set('current_user_data', $userData);
     }
 
     public function getCurrentUser(): ?User
     {
-        $userId = $this->session->get('current_user_id');
-        if ($userId) {
-            return $this->entityManager->getRepository(User::class)->find($userId);
+
+        $userData = $this->session->get('current_user_data');
+        if ($userData) {
+            // Unserialize the user data to get the user object
+            return unserialize($userData, ['allowed_classes' => [User::class]]);
         }
+
         return null;
     }
 
     public function clearSession()
     {
-        $this->session->remove('current_user_id');
+        $this->session->remove('current_user_data');
     }
 
     public function isUserLoggedIn(): bool
     {
-        return $this->session->has('current_user_id');
+        return $this->session->has('current_user_data');
     }
 }
