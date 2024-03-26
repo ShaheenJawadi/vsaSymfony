@@ -4,9 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SuggestionRepository;
-#[ORM\Entity]
 
-//#[ORM\Entity(repositoryClass: SuggestionRepository::class)]
+#[ORM\Entity(repositoryClass: SuggestionRepository::class)]
 #[ORM\Table(name: "suggestion", indexes: [new ORM\Index(name: "questionsId", columns: ["questionId"])])]
 class Suggestion
 {
