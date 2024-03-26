@@ -5,3 +5,13 @@ index:
 chatbot_index:
   path: /chatbot
   controller: App\Controller\Forum\ForumController::chatBotIndex
+
+delete_publication:
+    path: /delete/{idPub}
+    controller: App\Controller\Forum\ForumController::deletePublication
+    methods: [GET]
+
+delete_comment:
+    path: /deleteComment/{idC}
+    controller: App\Controller\Forum\ForumController::deleteComment
+    methods: [GET]
