@@ -1,14 +1,14 @@
 <div class="single">
 	<div class="head">
 		<div class="avatar">
-			<img src="{{ asset('images/cours/person.jpg') }}" alt="">
+			<img src="{{ pub.user.image is not empty ? pub.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
 
 		</div>
 		<div class="infos">
 			<div class="username">
-				shaheenj
+				{{ pub.user.username }}
 			</div>
-			<div class="date">12/04/1998</div>
+			<div class="date">{{ pub.dateCreation|date('d/m/Y') }}</div>
 
 		</div>
 		<div class="options">
@@ -33,27 +33,20 @@
 	</div>
 
 	<div class="content">
-		<div class="title">dsf jqdhksjqhdkhqskdhkhkqjsdhkqsjh</div>
-		<div class="img_list">
-			<div class="single_img">
-				<img src="{{ asset('images/cours/Image.png') }}" alt="">
-
+    <div class="title"><b>{{ pub.titre }}</b></div>
+		{% if pub.images is not empty %}
+			<div class="img_list">
+				{% set images = pub.images|split(';') %}
+				{% for image in images %}
+					<div class="single_img">
+                		<img src="{{ image }}" alt="Image">
+					</div>
+				{% endfor %}
 			</div>
-			<div class="single_img">
-				<img src="{{ asset('images/cours/Image.png') }}" alt="">
-
-			</div>
-			<div class="single_img">
-				<img src="{{ asset('images/cours/Image.png') }}" alt="">
-
-			</div>
-
-
-		</div>
+		{% endif %}
 		<div class="question">
-			<p>
-				qlksdlqsldkqslkdjlqsjdjqsdlkjqlsk
-			</p>
+			 <p>{{ pub.contenu }}</p>
+
 		</div>
 
 	</div>
@@ -80,8 +73,15 @@
 				<div class="icon comment">
 					<i class="fa-regular fa-message"></i>
 				</div>
-				<div class="counting">1</div>
-				<div class="txt">commantaire</div>
+				{% set commentCount = pub.getCommentaires()|length %}
+				<div class="counting">{{commentCount}}</div>
+				<div class="txt">
+				{% if commentCount == 1 or commentCount ==0 %}
+							commentaire
+						{% else %}
+							commentaires
+						{% endif %}	
+				</div>
 
 			</div>
 
@@ -90,11 +90,11 @@
 	</div>
 
 	<div class="list_comments">
-		{% for i in 1..3 %}
-
-			{% include 'home/components/forum/singleComment.html.twig' %}
-
-		{% endfor %}
+		 {% for commentaire in pub.getCommentaires() %}
+				{% include 'home/components/forum/singleComment.html.twig' with {'comment': commentaire} %}
+			{% else %}
+				<div class="single_comment">No comments found!</div>
+			{% endfor %}
 
 
 	</div>
