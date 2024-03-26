@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 use App\Repository\QuestionsRepository;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-#[ORM\Entity]
 
-//#[ORM\Entity(repositoryClass: QuestionsRepository::class)]
+#[ORM\Entity(repositoryClass: QuestionsRepository::class)]
 #[ORM\Table(name: "questions", indexes: [
     new ORM\Index(name: "quizId", columns: ["quizId"]),
     new ORM\Index(name: "userId", columns: ["userId"])
@@ -31,6 +31,17 @@ class Questions
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: "userId", referencedColumnName: "id")]
     private ?User $userid = null;
+    #[ORM\OneToMany(targetEntity: Suggestion::class, mappedBy: "questionid")]
+    private Collection $suggestions;
+
+    public function __construct() {
+        $this->suggestions = new ArrayCollection();
+    }
+    
+    public function getSuggestions(): Collection {
+        return $this->suggestions;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
