@@ -5,9 +5,8 @@ namespace App\Entity;
 use App\Repository\NotesRepository;
 
 use Doctrine\ORM\Mapping as ORM;
-#[ORM\Entity]
 
-//#[ORM\Entity(repositoryClass: NotesRepository::class)]
+#[ORM\Entity(repositoryClass: NotesRepository::class)]
 #[ORM\Table(name: "notes", indexes: [
     new ORM\Index(name: "userId", columns: ["userId"]),
     new ORM\Index(name: "quizId", columns: ["quizId"])
