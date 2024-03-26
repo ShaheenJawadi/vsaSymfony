@@ -12,7 +12,7 @@ use App\Form\PublicationsType;
 use App\Repository\PublicationsRepository;
 use App\Repository\CommentairesRepository;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 use App\Repository\UserRepository;
@@ -27,12 +27,14 @@ class ForumController extends AbstractController
 
         //FIXME: userid=18
         $user = $userRepository->find(18);
-
+        $contributors=$this->getContributors($rep);
+        
         return $this->render('home/forum/index.html.twig', [
             'controller_name' => 'ForumController',
             'forumPub'=>$form->createView(),
             'pubs'=>$publication,
             'user'=>$user,
+            'contributors'=>$contributors
         ]);
     }
    
@@ -66,7 +68,8 @@ class ForumController extends AbstractController
             $publication->setUser($user18);
             $em->persist($publication);
             $em->flush();
-            //return $this->redirectToRoute('/forum');
+            //TODO:refresh!!
+            // return $this->redirectToRoute('/forum');
         
         // else {
         //     $errors = $form->getErrors(true);
@@ -81,6 +84,14 @@ class ForumController extends AbstractController
         }
 
  //----------------------------------------------------------------------------------//
+ public function getContributors(PublicationsRepository $publicationsRepository)
+ {
+    return  $publicationsRepository->findDistinctContributors();
+ 
+ }
+ 
+
+  //----------------------------------------------------------------------------------//
 
       public function chatBotIndex(): Response
     {
