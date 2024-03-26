@@ -22,46 +22,20 @@
 							<div class="title">Contributeurs</div>
 
 							<div class="list_contributers">
+							{% for contributor in contributors %}
 								<div class="single">
 
 									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
+										<img src="{{ contributor.image is not empty ? contributor.image : asset('images/cours/person.jpg') }}" alt="">
 									</div>
-									<div class="username">kqsdjqkjsd</div>
+									<div class="username">{{ contributor.username }}</div>
 
 
 								</div>
-
-								<div class="single">
-
-									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">amal111</div>
-
-
-								</div>
-
-								<div class="single">
-
-									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">kqsdjqkjsd</div>
-
-
-								</div>
-								<div class="single">
-
-									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">kqsdjqkjsd</div>
-
-
-								</div>
+							{% endfor %}
 
 							</div>
+
 
 						</div>
 					</div>

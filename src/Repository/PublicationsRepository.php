@@ -38,5 +38,23 @@ class PublicationsRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    // More custom methods can be added as needed
-}
+    public function findDistinctContributors()
+    {
+            $em = $this->getEntityManager();
+            $connection = $em->getConnection();
+
+            $sql = "
+                SELECT DISTINCT u.username AS username, u.image AS image FROM publications p
+                JOIN user u ON p.user_id = u.id
+                UNION
+                SELECT DISTINCT u.username, u.image FROM commentaires c
+                JOIN user u ON c.user_id = u.id
+            ";
+
+            // Execute the native query and get a Result object
+            $stmt = $connection->executeQuery($sql);
+
+            // Fetch and return results
+            return $stmt->fetchAllAssociative();
+    }
+    }
