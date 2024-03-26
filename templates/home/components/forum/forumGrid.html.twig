@@ -11,6 +11,9 @@
 			<div class="date">{{ pub.dateCreation|date('d/m/Y') }}</div>
 
 		</div>
+		{# //FIXME:userId=18 #}
+		{% if pub.user.id == 18 %}
+
 		<div class="options">
 
 
@@ -24,11 +27,12 @@
 						<a class="dropdown-item" href="#">Modifier</a>
 					</li>
 					<li>
-						<a class="dropdown-item" href="#">Supprimer</a>
+						<a class="dropdown-item" href="{{ path('home_forum_delete_publication', {'idPub': pub.id}) }}" onclick="return confirm('Are you sure you want to delete this publication?');">Supprimer</a>
 					</li>
 				</ul>
 			</div>
 		</div>
+		{% endif %}
 
 	</div>
 

@@ -19,22 +19,26 @@ use App\Repository\UserRepository;
 class ForumController extends AbstractController
 {
 
-    public function index(Request $request, ManagerRegistry $manager, UserRepository $userRepository,PublicationsRepository $rep, CommentairesRepository $commentairesRepository): Response
+    public function index(Request $request, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep, CommentairesRepository $commentairesRepository): Response
     {
-        $form=$this->addPublication( $request, $manager, $userRepository);
 
-        $publication=$this->getAllPublications($rep);
 
-        //FIXME: userid=18
-        $user = $userRepository->find(18);
-        $contributors=$this->getContributors($rep);
+        $formResponse = $this->addPublication($request, $manager, $userRepository);
+        if ($formResponse !== null) {
+            return $formResponse; 
+        }
+
+
+        $publication = $this->getAllPublications($rep);
+        $user = $userRepository->find(18); // FIXME: userid=18
+        $contributors = $this->getContributors($rep);
         
         return $this->render('home/forum/index.html.twig', [
             'controller_name' => 'ForumController',
-            'forumPub'=>$form->createView(),
-            'pubs'=>$publication,
-            'user'=>$user,
-            'contributors'=>$contributors
+            'forumPub' => $this->createForm(PublicationsType::class, new Publications())->createView(), 
+            'pubs' => $publication,
+            'user' => $user,
+            'contributors' => $contributors
         ]);
     }
    
@@ -48,18 +52,15 @@ class ForumController extends AbstractController
 
     //----------------------------------------------------------------------------------//
 
-    public function addPublication(Request $request, ManagerRegistry $manager, UserRepository $userRepository)
+    public function addPublication(Request $request, ManagerRegistry $manager, UserRepository $userRepository): ?Response
     {
-        $em= $manager->getManager();
-        $publication = new Publications();
-        $form = $this->createForm(PublicationsType::class, $publication);
-
+        $form = $this->createForm(PublicationsType::class, new Publications());
         $form->handleRequest($request);
-        if ($form->isSubmitted()&& $form->isValid()) {
-           // if($form->isValid()){
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $manager->getManager();
+            $publication = $form->getData();
             $publication->setDateCreation(new \DateTime());
-            
-             //FIXME: userid=18
 
             $user18 = $userRepository->find(18);
             if (!$user18) {
@@ -68,20 +69,14 @@ class ForumController extends AbstractController
             $publication->setUser($user18);
             $em->persist($publication);
             $em->flush();
-            //TODO:refresh!!
-            // return $this->redirectToRoute('/forum');
-        
-        // else {
-        //     $errors = $form->getErrors(true);
-        //     foreach ($errors as $error) {
-        //         if ($error->getMessage() === "A publication with this title and content already exists.") {
-        //             $form->addError(new FormError("This publication title and content combination is already in use."));
-        //         }
-        //     }
-        // }
-        } 
-        return $form;
+
+            $this->addFlash('success', 'Publication added successfully.');
+            return $this->redirectToRoute('home_forum_index');
         }
+
+        return null; 
+    }
+
 
  //----------------------------------------------------------------------------------//
  public function getContributors(PublicationsRepository $publicationsRepository)
@@ -92,7 +87,26 @@ class ForumController extends AbstractController
  
 
   //----------------------------------------------------------------------------------//
-
+  public function deletePublication(ManagerRegistry $manager,$idPub,PublicationsRepository $rep)
+  {
+       $PUB=$rep->find($idPub);
+       $em=$manager->getManager();
+       $em->remove($PUB);
+       $em->flush();
+      
+      return $this->redirectToRoute('home_forum_index');
+  }
+  //----------------------------------------------------------------------------------//
+  public function deleteComment(ManagerRegistry $manager,$idC,CommentairesRepository $rep)
+  {
+       $comment=$rep->find($idC);
+       $em=$manager->getManager();
+       $em->remove($comment);
+       $em->flush();
+      
+      return $this->redirectToRoute('home_forum_index');
+  }
+  //----------------------------------------------------------------------------------//
       public function chatBotIndex(): Response
     {
         return $this->render('home/forum/chatbot.html.twig', [
