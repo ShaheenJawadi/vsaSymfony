@@ -14,6 +14,24 @@
 		<p class="comment">
     		{{comment.commentaire}}
 		</p>
+		
 	</div>
+	{# //FIXME:userId=18 #}
+	{% if comment.user.id == 18 %}
+	<div class="options" >
+                <div class="dropdown dropstart">
+                    <div class="drop_btn" data-bs-toggle="dropdown">
+                        <i class="fa-solid fa-ellipsis-h"></i>
+                    </div>
+                  
+                    <ul class="dropdown-menu"  >
+                      <li><a class="dropdown-item" href="#">Modifier</a></li>
+                      <li>
+						<a class="dropdown-item" href="{{ path('home_forum_delete_comment', {'idC':comment.id}) }}" onclick="return confirm('Are you sure you want to delete this comment?');">Supprimer</a>
+					  </li>
+                    </ul>
+                </div>
+    </div>
+	{% endif %}
 
 </div>
