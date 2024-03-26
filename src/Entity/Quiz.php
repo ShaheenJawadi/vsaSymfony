@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\QuizRepository;
 
-#[ORM\Entity]
-
-//#[ORM\Entity(repositoryClass: QuizRepository::class)]
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+#[ORM\Entity(repositoryClass: QuizRepository::class)]
 #[ORM\Table(name: "quiz", indexes: [
     new ORM\Index(name: "coursId", columns: ["coursId"]),
     new ORM\Index(name: "userId", columns: ["userId"])
@@ -33,7 +33,20 @@ class Quiz
     #[ORM\JoinColumn(name: "coursId", referencedColumnName: "id")]
     private ?Cours $coursid = null;
 
+    
+    #[ORM\OneToMany(targetEntity: Questions::class,mappedBy:"quizid")]
 
+    private Collection $questions;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
+
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
     public function getId(): ?int
     {
         return $this->id;

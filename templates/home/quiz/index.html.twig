@@ -1,83 +1,53 @@
 {% extends 'home/homeLayout.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/quizz.css') }}">
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/quizz.css') }}">
 {% endblock %}
 
-
 {% block body %}
+<div class="cours_quizz">
+    <div class="content">
+        <div class="container">
+            <div class="quizz_header">
+                <div class="timer">{{ questionDetails.quiz.duree }}</div>
+                <div class="steps">{{ questionDetails.currentQuestionIndex + 1 }}/{{ questionDetails.totalQuestions }}</div>
+            </div>
 
+            <div class="quizz_core">
+                <div class="question">{{ questionDetails.currentQuestion.question }}</div>
+                {% if questionDetails.currentQuestion.image %}
+                    <div class="img_holder">
+                        <img src="{{ asset(questionDetails.currentQuestion.image) }}" alt="">
+                    </div>
+                {% endif %}
+                <div class="rep_holder">
+                    <div class="row">
+                    {% for sug in questionDetails.currentQuestion.getSuggestions %}
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="sug{{ loop.index }}">
+                                <label class="form-check-label" for="sug{{ loop.index }}">{{ sug.suggestion }}</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div> <!-- rep_holder -->
+            </div> <!-- quizz_core -->
 
-	<div class="cours_quizz">
+            <div class="n_btn_holder">
+                {% if not questionDetails.isLastQuestion %}
+                    <!-- Ensure the 'Next' button is correctly enclosed within the <a> tag -->
+                    <a href="{{ path('home_quizz_quiz_question', {'coursId': questionDetails.quiz.coursid.id, 'questionIndex': questionIndex}) }}">
+                        <button class="btn_main">Next</button>
+                    </a>
+                {% else %}
+                    <!-- The 'Submit' button appears to be correctly placed. Make sure the route name is correct -->
+                    <a href="{{ path('home_quizz_note') }}"><button class="btn_main">Submit</button></a>
+                {% endif %}
+            </div>
 
-
-		<div class="content">
-			<div class="container">
-				<div class="quizz_header">
-					<div class="timer">01:00:00</div>
-					<div class="steps">5/15</div>
-
-				</div>
-
-				<div class="quizz_core">
-
-					<div class="question">Question question question ?</div>
-					<div class="img_holder">
-						<img src="{{ asset('images/cours/coursThumb.png') }}" alt="">
-					</div>
-
-
-					<div class="rep_holder">
-						<div class="row">
-							<div class="col-md-6">
-
-								<div class="form-check ">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep1
-									</label>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep2
-									</label>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep3
-									</label>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep4
-									</label>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class="n_btn_holder">
-					<a href="{{ path('home_quizz_note') }}"><button class="btn_main">soumettre</button></a>
-						
-					</div>
-				</div>
-
-			</div>
-
-
-		</div>
-	</div>
-
+        </div> <!-- container -->
+    </div> <!-- content -->
+</div> <!-- cours_quizz -->
 {% endblock %}
