@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentairesRepository;
-#[ORM\Entity]
-//#[ORM\Entity(repositoryClass: CommentairesRepository::class)]
+
+#[ORM\Entity(repositoryClass: CommentairesRepository::class)]
 #[ORM\Table(name: "commentaires", indexes: [
     new ORM\Index(name: "user_id", columns: ["user_id"]),
     new ORM\Index(name: "id_pub", columns: ["id_pub"])

@@ -3,12 +3,17 @@
 namespace App\Entity;
 use App\Repository\PublicationsRepository;
 
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-#[ORM\Entity]
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-//#[ORM\Entity(repositoryClass: PublicationsRepository::class)]
+
+
+
+#[ORM\Entity(repositoryClass: PublicationsRepository::class)]
 #[ORM\Table(name: "publications", indexes: [new ORM\Index(name: "user_id", columns: ["user_id"])])]
+
 class Publications
 {
     #[ORM\Id]
@@ -34,6 +39,19 @@ class Publications
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
     private ?User $user = null;
+
+    #[ORM\OneToMany(targetEntity:Commentaires::class, mappedBy:"idPub")]
+    private $commentaires;
+
+    public function __construct() {
+        $this->commentaires = new ArrayCollection();
+    }
+    
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+    
 
 
     public function getId(): ?int
