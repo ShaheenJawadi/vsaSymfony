@@ -1,15 +1,18 @@
 <div class="single_comment">
 	<div class="avatar">
-		<img src="{{ asset('images/cours/person.jpg') }}" alt="">
+		<img src="{{ comment.user.image is not empty ? comment.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
+
 	</div>
 	<div class="content">
 		<div class="top">
-			<div class="username">Shaheenj</div>
-			<div class="date">Il y'a 10 jours</div>
+			<div class="username">{{ comment.user.username }}</div>
+            <div class="date">
+			{{ comment.date|date('d/m/Y') }}
+			</div>
 
 		</div>
 		<p class="comment">
-			lsdfjlkdsjflkdjfljdlfj flkjldsfjldjfljdlfj sfjldksjfdfsdfsdf seres resrsfdfdf
+    		{{comment.commentaire}}
 		</p>
 	</div>
 
