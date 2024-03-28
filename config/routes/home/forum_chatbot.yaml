@@ -22,3 +22,9 @@ delete_comment:
 single_publication:
   path: /single/{idPub}
   controller: App\Controller\Forum\ForumController::single
+
+
+
+open_edit_publication:
+  path: /edit/{idPub}
+  controller: App\Controller\Forum\ForumController::edit
