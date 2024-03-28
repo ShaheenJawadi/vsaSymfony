@@ -125,6 +125,19 @@ class ForumController extends AbstractController
           
       ]);
   }
+
+
+  public function edit(PublicationsRepository $rep,int $idPub): Response
+  {
+ 
+    $publication = $this->getAllPublications($rep)[0];
+      
+   
+
+      $content = $this->renderView('teacher/components/cours/single_lesson_form.html.twig',['pub' => $publication,]);
+
+      return new Response($content);
+  }
   //----------------------------------------------------------------------------------//
       public function chatBotIndex(): Response
     {
