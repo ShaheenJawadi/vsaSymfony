@@ -1,0 +1,41 @@
+{% extends 'teacher/teacherPanelLayout.html.twig' %}
+{% block body %}
+
+	<div>
+		<table id="example" class="display" style="width:100%">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+				</tr>
+			</thead>
+		</table>
+
+
+	</div>
+
+{% endblock %}
+
+{% block scripts %}
+	  {{ parent() }}
+	<script>
+    $(document).ready(function(){
+$('#example').DataTable({
+"processing": true,
+"serverSide": true,
+"ajax": {
+"url": "{{ path('teacher_students_datatable') }}",
+"type": "GET"
+},
+"columns": [
+{
+"data": "id"
+}, {
+"data": "title"
+}
+]
+});
+  });
+	</script>
+
+{% endblock %}

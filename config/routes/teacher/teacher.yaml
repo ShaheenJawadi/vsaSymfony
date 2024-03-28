@@ -10,3 +10,9 @@ students:
   controller: App\Controller\Teacher\TeacherController::students_page
 
 
+students_datatable:
+  path: /students_datatble
+  controller: App\Controller\Teacher\TeacherController::datatableData
+  methods: [GET]
+
+ 
