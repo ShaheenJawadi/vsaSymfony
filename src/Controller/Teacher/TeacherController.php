@@ -16,4 +16,11 @@ class TeacherController extends AbstractController
     }
 
   
+
+    public function students_page(): Response
+    {
+        return $this->render('teacher/students/index.html.twig', [
+            'controller_name' => 'TeacherController',
+        ]);
+    }
 }

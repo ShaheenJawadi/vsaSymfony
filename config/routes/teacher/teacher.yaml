@@ -5,4 +5,8 @@ index:
 
 
 
- 
+students:
+  path: /students
+  controller: App\Controller\Teacher\TeacherController::students_page
+
+
