@@ -1,64 +1,54 @@
-{% extends 'home/homeLayout.html.twig' %}
+{% extends 'home/homeLayout.html.twig' %} {% block stylesheets %} {{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/forum.css') }}?v={{ random() }}"> {% endblock %} {% block body %}
+<div class="chatbot_page">
 
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/forum.css') }}">
-{% endblock %}
-
-
-{% block body %}
-	<div class="chatbot_page">
-
-		<div class="container-sm">
-			<div class="holder">
-				<div>
+    <div class="container-sm">
+        <div class="holder">
+            <div>
 
 
-					<div class="indicators">
-						<div class="single_in">
-							<img src="{{ asset('images/forum/how.png') }}" alt="">
-							<div class="txt">
-								How
-							</div>
-						</div>
-						<div class="single_in">
-							<img src="{{ asset('images/forum/may i.png') }}" alt="">
-							<div class="txt">
-								may i
-							</div>
-						</div>
-						<div class="single_in">
-							<img src="{{ asset('images/forum/help.png') }}" alt="">
-							<div class="txt">
-								help you ?
-							</div>
-						</div>
+                <div class="indicators">
+                    <div class="single_in">
+                        <img src="{{ asset('images/forum/how.png') }}" alt="">
+                        <div class="txt">
+                            How
+                        </div>
+                    </div>
+                    <div class="single_in">
+                        <img src="{{ asset('images/forum/may i.png') }}" alt="">
+                        <div class="txt">
+                            may i
+                        </div>
+                    </div>
+                    <div class="single_in">
+                        <img src="{{ asset('images/forum/help.png') }}" alt="">
+                        <div class="txt">
+                            help you ?
+                        </div>
+                    </div>
 
-					</div>
-
-
-					<div class="list">
-
-						{% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': true} %}
-						{% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': false} %}
-						{% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': true} %}
-						{% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': false} %}
-						{% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': true} %}
-						{% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': false} %}
-
-					</div>
-				</div>
-				<div class="send_box">
-					<input type="text" class="form-control" placeholder="Message ">
-					<button>Envoyer</button>
-
-				</div>
-			</div>
+                </div>
 
 
-		</div>
+                <div class="list">
 
-	</div>
+                    {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': true} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': false} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with
+                    {'isBot': true} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': false} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': true} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig'
+                    with {'isBot': false} %}
+
+                </div>
+            </div>
+            <div class="send_box">
+                <input type="text" class="form-control" placeholder="Message ">
+                <button>Envoyer</button>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
 
 
 {% endblock %}
