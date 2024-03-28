@@ -114,12 +114,14 @@ class ForumController extends AbstractController
 
 
 
-  public function single(int $idPub): Response
+  public function single(PublicationsRepository $rep,int $idPub): Response
   {
  
+    $publication = $this->getAllPublications($rep)[0];
       
       return $this->render('home/forum/single.html.twig', [
           'controller_name' => 'ForumController',
+          'pub' => $publication,
           
       ]);
   }
