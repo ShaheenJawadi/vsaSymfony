@@ -1,0 +1,177 @@
+{% extends 'teacher/teacherPanelLayout.html.twig' %} {% block body %}
+<div class="container">
+    <div class="action_section">
+        <div class="section_title">
+            Creér un cours
+
+        </div>
+        <div class="sep">
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div class="form_page">
+
+
+        <div class="d-flex  ">
+            <div class="nav-pills">
+
+
+                <div class="nav flex-column  ">
+                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab_cours" type="button" role="tab" aria-selected="true">Cours</button>
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab_ressource" type="button" role="tab" aria-selected="false">Ressources</button>
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab_lesson" type="button" role="tab" aria-selected="false">Lessons</button>
+
+                </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab_cours" role="tabpanel">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="single_row">
+
+
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" placeholder="">
+                                        <label>Titre du cours</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="single_row thumb">
+                                    <div class="img_holder">
+                                        <img src="/assets/cours/quizz/quizz_img.jpg" alt="">
+                                    </div>
+                                    <button class="btn_main">Image</button>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="single_row">
+
+
+                                    <div class="form-floating">
+                                        <textarea class="form-control" style="height: 100px"></textarea>
+                                        <label>Description</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single_row">
+
+
+                                    <div class="form-floating">
+                                        <select class="form-select" aria-label="Floating label select example">
+                                      <option selected>cat 1</option>
+                                      <option value="1">cat 2</option>
+                                      <option value="2">cat 3</option>
+                                      <option value="3">cat 4</option>
+                                    </select>
+                                        <label>Categorie</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single_row">
+
+
+                                    <div class="form-floating">
+                                        <select class="form-select" aria-label="Floating label select example">
+                                     
+                                    </select>
+                                        <label>Sous Categorie</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="single_row">
+
+
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" placeholder="">
+                                        <label>Tags</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single_row">
+                                    <div class="form-floating">
+                                        <select class="form-select" aria-label="Floating label select example">
+                                     
+                                    </select>
+                                        <label>Niveau</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab_ressource" role="tabpanel">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="single_row">
+
+
+                                    <div class="form-floating">
+                                        <select class="form-select">
+                                      <option selected>Video</option>
+                                      <option value="1">Image</option>
+                                      <option value="2">Article</option>
+                                      
+                                    </select>
+                                        <label>Type</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="Text" class="form-control" placeholder="exemple :https://www.wikipedia.org/...">
+                                    <label>Lien</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab_lesson" role="tabpanel">
+                    <div class="list_lessons">
+
+                    </div>
+                    <div class="d-flex justify-content-center">
+
+                        <button class="btn_main" dynamic-add data-link="{{ path('teacher_cours_add_lesson') }}" data-parent="#tab_lesson .list_lessons">Ajouter un lesson</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        <button class="btn_main">Soumettre</button>
+    </div>
+</div>
+
+{% endblock %}
