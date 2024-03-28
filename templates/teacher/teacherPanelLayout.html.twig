@@ -77,13 +77,14 @@
 
 			</div>
 			{% block body %}{% endblock %}
-			 
+
 		</div>
 
+		{% include 'home/components/global_popup.html.twig' %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-		<script src="/js/main.js"></script>
+		<script src="{{ asset('js/main.js') }}"></script>
 
 
 	</body>
