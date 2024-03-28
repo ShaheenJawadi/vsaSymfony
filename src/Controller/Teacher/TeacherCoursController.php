@@ -16,4 +16,11 @@ class TeacherCoursController extends AbstractController
     }
 
   
+
+    public function add(): Response
+    {
+        return $this->render('teacher/cours/add/index.html.twig', [
+            'controller_name' => 'TeacherController',
+        ]);
+    }
 }
