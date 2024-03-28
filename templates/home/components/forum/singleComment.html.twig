@@ -1,16 +1,37 @@
 <div class="single_comment">
 	<div class="avatar">
-		<img src="{{ asset('images/cours/person.jpg') }}" alt="">
+		<img src="{{ comment.user.image is not empty ? comment.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
+
 	</div>
 	<div class="content">
 		<div class="top">
-			<div class="username">Shaheenj</div>
-			<div class="date">Il y'a 10 jours</div>
+			<div class="username">{{ comment.user.username }}</div>
+            <div class="date">
+			{{ comment.date|date('d/m/Y') }}
+			</div>
 
 		</div>
 		<p class="comment">
-			lsdfjlkdsjflkdjfljdlfj flkjldsfjldjfljdlfj sfjldksjfdfsdfsdf seres resrsfdfdf
+    		{{comment.commentaire}}
 		</p>
+		
 	</div>
+	{# //FIXME:userId=18 #}
+	{% if comment.user.id == 18 %}
+	<div class="options" >
+                <div class="dropdown dropstart">
+                    <div class="drop_btn" data-bs-toggle="dropdown">
+                        <i class="fa-solid fa-ellipsis-h"></i>
+                    </div>
+                  
+                    <ul class="dropdown-menu"  >
+                      <li><a class="dropdown-item" href="#">Modifier</a></li>
+                      <li>
+						<a class="dropdown-item" href="{{ path('home_forum_delete_comment', {'idC':comment.id}) }}" onclick="return confirm('Are you sure you want to delete this comment?');">Supprimer</a>
+					  </li>
+                    </ul>
+                </div>
+    </div>
+	{% endif %}
 
 </div>

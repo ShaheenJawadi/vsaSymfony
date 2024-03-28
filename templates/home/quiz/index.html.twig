@@ -1,83 +1,177 @@
 {% extends 'home/homeLayout.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/quizz.css') }}">
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/quizz.css') }}">
 {% endblock %}
-
 
 {% block body %}
+<div class="cours_quizz">
+    <div class="content">
+        <div class="container">
+            <div class="quizz_header">
+                <div class="timer">{{ questionDetails.quiz.duree }}</div>
+                <div class="steps">{{ questionDetails.currentQuestionIndex + 1 }}/{{ questionDetails.totalQuestions }}</div>
+            </div>
+
+            <div class="quizz_core">
+                <div class="question">{{ questionDetails.currentQuestion.question }}</div>
+                {% if questionDetails.currentQuestion.image %}
+                    <div class="img_holder">
+                        <img src="{{ asset(questionDetails.currentQuestion.image) }}" alt="">
+                    </div>
+                {% endif %}
+                <div class="rep_holder">
+                    <div class="row">
+                    {% for sug in questionDetails.currentQuestion.getSuggestions %}
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question_{{ questionDetails.currentQuestion.id }}" value="{{ sug.id }}" data-status="{{ sug.status }}" id="sug{{ loop.index }}">
+                                <label class="form-check-label" for="sug{{ loop.index }}">{{ sug.suggestion }}</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div> <!-- rep_holder -->
+				<div class="n_btn_holder">
+                {% if not questionDetails.isLastQuestion %}
+					<a href="{{ path('home_quizz_quiz_question', {'coursId': questionDetails.quiz.coursid.id, 'questionIndex': questionDetails.currentQuestionIndex + 1 }) }}">
+                        <button class="btn_main"id="nextSubmitQuiz" type="submit">Next</button>
+                    </a>
+                {% else %}
+                    <button class="btn_main" id="submitQuiz" type="submit">Soumettre</button>
+                {% endif %}
+            </div>
+            </div> <!-- quizz_core -->
+        </div> <!-- container -->
+    </div> <!-- content -->
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	   // Remove the 'scoreSubmitted' item at the start of a new session
+    localStorage.removeItem('scoreSubmitted');
+    let totalQuestions = {{ questionDetails.totalQuestions }};
+    let score = parseInt(localStorage.getItem('score'), 10) || 0;
+
+    function updateScore(isFinalSubmit) {
+        const selectedRadio = Array.from(document.querySelectorAll('.form-check-input')).find(radio => radio.checked);
+        if (selectedRadio && selectedRadio.dataset.status === '1') {
+            score++;
+            if (!isFinalSubmit) {
+                localStorage.setItem('score', score.toString());
+            }
+        }
+    }
+
+    function isAnswerSelected() {
+        return Array.from(document.querySelectorAll('.form-check-input')).some(radio => radio.checked);
+    }
+
+    document.querySelectorAll('#nextSubmitQuiz, #submitQuiz').forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (!isAnswerSelected()) {
+                e.preventDefault();
+                alert("Please select an answer before proceeding.");
+                return;
+            }
+            const isFinalSubmit = this.id === 'submitQuiz';
+            if (isFinalSubmit) {
+                e.preventDefault();
+                updateScore(true);
+                submitScore();
+            } else {
+                updateScore(false);
+            }
+        });
+    });
+
+    function submitScore() {
+		if (localStorage.getItem('scoreSubmitted')) return;
+    	localStorage.setItem('scoreSubmitted', 'true'); // Set a flag that score is submitted
+
+        let scaledScore = (score / totalQuestions) * 20;
+        scaledScore = Math.round(scaledScore);
+        fetch('{{ path('home_quizz_submit_score') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                score: scaledScore,
+                quizId: '{{ questionDetails.quiz.id }}',
+                userId: 18
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                localStorage.removeItem('score');
+                window.location.href = '{{ path('home_quizz_note') }}';
+            } else {
+                console.error('Submission failed');
+            }
+        });
+    }
+
+     let startTime = localStorage.getItem('startTime');
+    let currentTime = new Date().getTime();
+    let durationString = "{{ questionDetails.quiz.duree }}";
+    let parts = durationString.split(':');
+    let durationHours = parseInt(parts[0], 10);
+    let durationMinutes = parseInt(parts[1], 10);
+    let durationSeconds = parseInt(parts[2], 10);
+    let totalDurationSeconds = (durationHours * 3600) + (durationMinutes * 60) + durationSeconds;
+    
+    // Initialize start time if it doesn't exist
+    if (!startTime) {
+        startTime = currentTime;
+        localStorage.setItem('startTime', startTime);
+    } else {
+        // Adjust totalDurationSeconds based on the time already elapsed
+        let timeElapsed = Math.floor((currentTime - startTime) / 1000);
+        totalDurationSeconds -= timeElapsed;
+    }
+
+    let display = document.querySelector('.timer');
+    
+
+    function startTimer(duration, display) {
+        let timer = duration, hours, minutes, seconds;
+        let countdown = setInterval(function () {
+            hours = parseInt(timer / 3600, 10);
+            minutes = parseInt((timer % 3600) / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+
+			if (--timer < 0) {
+				clearInterval(countdown);
+				display.textContent = "00:00:00";
+				localStorage.removeItem('startTime'); // Ensure this is only called once
+				submitScore(); // Submit the score when time is up
+				countdown = null; // Set the countdown variable to null to mark that the timer has finished
+			}
+
+        }, 1000);
+    }
+
+     if (display && !isNaN(totalDurationSeconds) && totalDurationSeconds > 0) {
+        startTimer(totalDurationSeconds, display);
+    } else {
+        console.error('Timer or duration not defined, incorrect format, or expired.');
+    }
+});
+</script>
+{% endblock %}
 
 
-	<div class="cours_quizz">
 
-
-		<div class="content">
-			<div class="container">
-				<div class="quizz_header">
-					<div class="timer">01:00:00</div>
-					<div class="steps">5/15</div>
-
-				</div>
-
-				<div class="quizz_core">
-
-					<div class="question">Question question question ?</div>
-					<div class="img_holder">
-						<img src="{{ asset('images/cours/coursThumb.png') }}" alt="">
-					</div>
-
-
-					<div class="rep_holder">
-						<div class="row">
-							<div class="col-md-6">
-
-								<div class="form-check ">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep1
-									</label>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep2
-									</label>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep3
-									</label>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault" checked>
-									<label class="form-check-label">
-										rep4
-									</label>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class="n_btn_holder">
-					<a href="{{ path('home_quizz_note') }}"><button class="btn_main">soumettre</button></a>
-						
-					</div>
-				</div>
-
-			</div>
-
-
-		</div>
-	</div>
 
 {% endblock %}
+
+

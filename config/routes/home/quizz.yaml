@@ -5,3 +5,17 @@ index:
 note:
   path: /single/note
   controller: App\Controller\Quiz\QuizController::note
+
+quiz_question:
+    path: /single/question/{questionIndex}
+    controller: App\Controller\Quiz\QuizController::index
+    defaults:
+        questionIndex: 0 # Default value if not provided
+    requirements:
+        questionIndex: '\d+' # questionIndex must be a number
+
+
+submit_score:
+    path: /single/submit-score
+    controller: App\Controller\Quiz\QuizController::submitQuizScore
+    methods: [POST]
