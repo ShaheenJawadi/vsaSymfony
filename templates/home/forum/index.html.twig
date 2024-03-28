@@ -1,123 +1,112 @@
-{% extends 'home/homeLayout.html.twig' %}
-
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/forum.css') }}">
-{% endblock %}
+{% extends 'home/homeLayout.html.twig' %} {% block stylesheets %} {{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/forum.css') }}?v={{ random() }}"> {% endblock %} {% block body %}
 
 
-{% block body %}
+<div class="forum_page">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="left_side">
+
+                    <div class="w_block single_section">
+
+                        <div class="title">Contributeurs</div>
+
+                        <div class="list_contributers">
+                            {% for contributor in contributors %}
+                            <div class="single">
+
+                                <div class="avatar">
+                                    <img src="{{ contributor.image is not empty ? contributor.image : asset('images/cours/person.jpg') }}" alt="">
+                                </div>
+                                <div class="username">{{ contributor.username }}</div>
 
 
-	<div class="forum_page">
+                            </div>
+                            {% endfor %}
 
-		<div class="container">
-
-			<div class="row">
-				<div class="col-md-4">
-					<div class="left_side">
-
-						<div class="w_block single_section">
-
-							<div class="title">Contributeurs</div>
-
-							<div class="list_contributers">
-							{% for contributor in contributors %}
-								<div class="single">
-
-									<div class="avatar">
-										<img src="{{ contributor.image is not empty ? contributor.image : asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">{{ contributor.username }}</div>
+                        </div>
 
 
-								</div>
-							{% endfor %}
+                    </div>
+                </div>
+            </div>
 
-							</div>
+            <div class="col-md-8">
+                <div class="core">
 
+                    <div class="">
 
-						</div>
-					</div>
-				</div>
+                        <div class="add_pub_section">
+                            <div class="top_entry">
+                                <div class="avatar">
 
-				<div class="col-md-8">
-					<div class="core">
+                                    <img src="{{ user.image is not empty ? user.image : asset('images/cours/person.jpg') }}" alt="{{ user.username }}"> </div>
+                                <div class="entry">
+                                    <div class="imgs_list"></div>
+                                    <div class="content">
+                                        {{ form_start(forumPub) }} {{ form_row(forumPub.titre) }} {{ form_row(forumPub.contenu) }}
+                                    </div>
 
-						<div class="">
+                                </div>
 
-							<div class="add_pub_section">
-								<div class="top_entry">
-									<div class="avatar">
+                            </div>
+                            <div class="btm_btns">
+                                <div class="single">
 
-											<img src="{{ user.image is not empty ? user.image : asset('images/cours/person.jpg') }}" alt="{{ user.username }}">									</div>
-									<div class="entry">
-										<div class="imgs_list"></div>
-										<div class="content">
-										{{ form_start(forumPub) }}
-										{{ form_row(forumPub.titre) }}
-										{{ form_row(forumPub.contenu) }}
-										</div>
-
-									</div>
-
-								</div>
-								<div class="btm_btns">
-									<div class="single">
-
-										<i class="fa-solid fa-paperclip"></i>
+                                    <i class="fa-solid fa-paperclip"></i>
 
 
-									</div>
-									<div>
-										{{ form_row(forumPub.submit) }}
-										
-									</div>
-               						 {{ form_end(forumPub) }}
-									
+                                </div>
+                                <div>
+                                    {{ form_row(forumPub.submit) }}
+
+                                </div>
+                                {{ form_end(forumPub) }}
 
 
-								</div>
 
-							</div>
+                            </div>
 
-
-							<div class="nav_section">
-								<div class="section_list">
-									<div class="single selected" >Tous</div>
-                       				<div class="single" >Mes publication</div>
-                        
-									<div class="single">Populaire</div>
+                        </div>
 
 
-								</div>
-								<div class="search">
+                        <div class="nav_section">
+                            <div class="section_list">
+                                <div class="single selected">Tous</div>
+                                <div class="single">Mes publication</div>
 
-									<div class="input-group flex-nowrap">
-										<span class="input-group-text">
+                                <div class="single">Populaire</div>
+
+
+                            </div>
+                            <div class="search">
+
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text">
 											<i class="fa-solid fa-magnifying-glass"></i>
 										</span>
-										<input type="text" class="form-control" placeholder="Search feed">
-									</div>
+                                    <input type="text" class="form-control" placeholder="Search feed">
+                                </div>
 
-								</div>
+                            </div>
 
-							</div>
+                        </div>
 
 
-							<div class="pub_list">
-								{% for pub in pubs %}
-									{% include 'home/components/forum/forumGrid.html.twig' with {'pub': pub,'commentPub':pub} %}
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                        <div class="pub_list">
+                            {% for pub in pubs %} {% include 'home/components/forum/forumGrid.html.twig' with {'pub': pub,'commentPub':pub} %} {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		</div>
+    </div>
 
-	</div>
+</div>
 
 
 {% endblock %}

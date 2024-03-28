@@ -305,6 +305,7 @@
 
 .forum_page .pub_list .single .list_comments .single_comment .content {
     display: flex;
+    flex: 1;
     flex-direction: column;
 }
 
@@ -457,4 +458,37 @@
     content: "";
     position: absolute;
     left: unset;
+}
+
+
+/* ******************************* */
+
+.forum_page .pub_list .single .list_comments .single_comment .content .new_comment {}
+
+.forum_page .pub_list .single .list_comments .single_comment .content .new_comment textarea {
+    margin: 10px 5px;
+}
+
+.forum_page .pub_list .single .list_comments .single_comment .content .new_comment .sub {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forum_page .pub_list .single .list_comments .single_comment .content .new_comment button {
+    font-size: 15px;
+}
+
+.forum_page .pub_list .single .list_comments .add.single_comment p,
+.forum_page .pub_list .single .list_comments .add.single_comment .options,
+.forum_page .pub_list .single .list_comments .single_comment .content .new_comment {
+    display: none;
+}
+
+.forum_page .pub_list .single .list_comments .single_comment p,
+.forum_page .pub_list .single .list_comments .add.single_comment .content .new_comment {
+    display: block;
+}
+
+.edit_publication {
+    min-width: 700px;
 }
