@@ -1,0 +1,5 @@
+index:
+  path: /
+  controller: App\Controller\Teacher\TeacherQuizController::index
+
+

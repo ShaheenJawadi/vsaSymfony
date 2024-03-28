@@ -47,3 +47,16 @@ teacher_space:
       resource: "routes/teacher/teacher.yaml"
       prefix: "/teacher"
       name_prefix: "teacher_"
+
+
+      
+teacher_cours:
+      resource: "routes/teacher/cours.yaml"
+      prefix: "/teacher/cours"
+      name_prefix: "teacher_cours_"
+
+
+teacher_quiz:
+      resource: "routes/teacher/quiz.yaml"
+      prefix: "/teacher/quiz"
+      name_prefix: "teacher_quiz_"
