@@ -30,6 +30,8 @@
             });
         });
 
+        /* *********************General popup****** */
+
         $("[openGeneralPopup]").on("click", function() {
 
             $.get($(this).data('link'), function(response) {
@@ -38,9 +40,23 @@
             });
         });
 
+        /* *********************End General popup****** */
+
+
+
+        $("[dynamic-add]").on("click", function() {
+
+            const parent = $(this).data('parent');
+
+            $.get($(this).data('link'), function(response) {
+                $(parent).append(response);
+            });
+
+        });
 
 
     })
+
 
 
 

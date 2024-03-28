@@ -23,4 +23,12 @@ class TeacherCoursController extends AbstractController
             'controller_name' => 'TeacherController',
         ]);
     }
+
+    public function add_lesson( ): Response
+    {
+        $content = $this->renderView('teacher/components/cours/single_lesson_form.html.twig');
+
+        return new Response($content);
+      
+    }
 }
