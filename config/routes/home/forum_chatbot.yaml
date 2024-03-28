@@ -15,3 +15,10 @@ delete_comment:
     path: /deleteComment/{idC}
     controller: App\Controller\Forum\ForumController::deleteComment
     methods: [GET]
+
+
+#################
+
+single_publication:
+  path: /single/{idPub}
+  controller: App\Controller\Forum\ForumController::single
