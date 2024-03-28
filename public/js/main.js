@@ -33,7 +33,7 @@
         $("[openGeneralPopup]").on("click", function() {
 
             $.get($(this).data('link'), function(response) {
-                $('#generalModel  .modal-content').html(response);
+                $('#generalModel  .modal-content .general').html(response);
                 $('#generalModel').modal('show');
             });
         });
