@@ -3,3 +3,8 @@ index:
   controller: App\Controller\Teacher\TeacherCoursController::index
 
 
+add:
+  path: /ajouter
+  controller: App\Controller\Teacher\TeacherCoursController::add
+
+
