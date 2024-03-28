@@ -16,4 +16,12 @@ class TeacherQuizController extends AbstractController
     }
 
   
+
+    public function preview(int $quiz_id): Response
+    {
+        $content = $this->renderView('teacher/components/quiz/preview_popup.html.twig');
+
+        return new Response($content);
+      
+    }
 }
