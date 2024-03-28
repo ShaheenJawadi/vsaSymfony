@@ -106,6 +106,23 @@ class ForumController extends AbstractController
       
       return $this->redirectToRoute('home_forum_index');
   }
+
+
+
+
+
+
+
+
+  public function single(int $idPub): Response
+  {
+ 
+      
+      return $this->render('home/forum/single.html.twig', [
+          'controller_name' => 'ForumController',
+          
+      ]);
+  }
   //----------------------------------------------------------------------------------//
       public function chatBotIndex(): Response
     {
@@ -115,5 +132,7 @@ class ForumController extends AbstractController
     }
    
 
+
+    
    
 }
