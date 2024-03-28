@@ -24,7 +24,7 @@
 
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#">Modifier</a>
+							<a class="dropdown-item" href="#" openGeneralPopup  data-link="{{ path('home_forum_open_edit_publication' , {idPub:pub.id}) }}">Modifier</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="{{ path('home_forum_delete_publication', {'idPub': pub.id}) }}" onclick="return confirm('Are you sure you want to delete this publication?');">Supprimer</a>
