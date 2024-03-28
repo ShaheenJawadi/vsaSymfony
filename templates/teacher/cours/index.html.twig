@@ -1,0 +1,32 @@
+{% extends 'teacher/teacherPanelLayout.html.twig' %}
+{% block body %}
+	<div class="container">
+		<div class="action_section">
+			<div class="section_title">
+				Mes cours
+
+			</div>
+			<div class="sep"></div>
+
+			<a href="#">
+				<button class="btn_main">Ajouter un Cours</button>
+			</a>
+
+		</div>
+
+	</div>
+
+	<div class="cours_list">
+		<div class="container">
+			<div class="row">
+				{% for i in 1..4 %}
+
+					{% include 'teacher/components/cours/cours_grid.html.twig' %}
+
+				{% endfor %}
+			</div>
+
+		</div>
+
+	</div>
+{% endblock %}

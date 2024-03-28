@@ -177,6 +177,7 @@ footer .footer_Holder .footer_social .item:hover {
     background: #fff;
     display: block;
     border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 .single_cours_grid:hover {
@@ -240,6 +241,41 @@ footer .footer_Holder .footer_social .item:hover {
     color: #000;
     font-size: 18px;
     font-weight: 700;
+}
+
+.single_cours_grid .infos .single_data {}
+
+.single_cours_grid .infos .enrollment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.single_cours_grid .infos .enrollment .list {
+    display: flex;
+    align-items: center;
+    gap: -5px;
+    padding: 10px 3px;
+    margin-left: 10px;
+}
+
+.single_cours_grid .infos .enrollment .list .single {
+    margin-left: -24px;
+}
+
+.single_cours_grid .infos .enrollment .list .single img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.single_cours_grid .infos .enrollment .count {
+    color: var(--fx-main-text-color);
+    font-weight: 600;
+}
+
+.single_cours_grid .infos .single_data strong {
+    color: var(--fx-main-text-color);
 }
 
 .infos .rating {
@@ -380,3 +416,30 @@ footer .footer_Holder .footer_social .item:hover {
 
 
 /* *************************End Authentification************************ */
+
+.teacherPanel .options_chimp {
+    color: #fff;
+    background: var(--fx-primary-color);
+    border-radius: 4px;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.teacherPanel .options_chimp .dropdown-toggle {
+    padding: 2px 10px;
+}
+
+.teacherPanel .options_chimp .dropdown-toggle::after {
+    display: none !important;
+}
+
+
+/* *********************** */
+
+.general_popup {}
+
+.general_popup .header_section {
+    padding: 15px 8px;
+    border-bottom: 1px solid var(--fx-primary-color);
+    margin-bottom: 15px;
+}
