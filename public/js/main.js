@@ -30,10 +30,15 @@
             });
         });
 
+        $("[openGeneralPopup]").on("click", function() {
+
+            $.get($(this).data('link'), function(response) {
+                $('#generalModel  .modal-content').html(response);
+                $('#generalModel').modal('show');
+            });
+        });
 
 
-
-        $("#generalModel .modal-content").load('../components/teacher/quiz/cours_quizz_popup.html')
 
     })
 
