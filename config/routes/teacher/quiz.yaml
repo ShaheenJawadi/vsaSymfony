@@ -3,3 +3,8 @@ index:
   controller: App\Controller\Teacher\TeacherQuizController::index
 
 
+preview_popup:
+  path: /preview_popup/{quiz_id}
+  controller: App\Controller\Teacher\TeacherQuizController::preview
+
+
