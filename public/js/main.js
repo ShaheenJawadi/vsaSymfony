@@ -59,6 +59,10 @@
 
 
 
+    $(document).on('click', '.delete_lesson', function() {
+
+        $(this).closest('.single').remove();
+    });
 
 
 })(jQuery);
