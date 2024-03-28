@@ -134,7 +134,7 @@ class ForumController extends AbstractController
       
    
 
-      $content = $this->renderView('teacher/components/cours/single_lesson_form.html.twig',['pub' => $publication,]);
+      $content = $this->renderView('home/components/forum/editForum_popup.html.twig',['pub' => $publication,]);
 
       return new Response($content);
   }
