@@ -18,7 +18,13 @@
 
 	<div class="cours_list">
 		<div class="container">
-			<div class="row"  ></div>
+			<div class="row">
+				{% for i in 1..4 %}
+
+					{% include 'teacher/components/cours/cours_grid.html.twig' %}
+
+				{% endfor %}
+			</div>
 
 		</div>
 
