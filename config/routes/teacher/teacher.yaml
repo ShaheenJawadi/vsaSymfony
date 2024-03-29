@@ -8,11 +8,12 @@ index:
 students:
   path: /students
   controller: App\Controller\Teacher\TeacherController::students_page
+  methods: [GET, POST]
 
 
 students_datatable:
   path: /students_datatble
   controller: App\Controller\Teacher\TeacherController::datatableData
-  methods: [GET]
+  methods: [GET, POST]
 
  
