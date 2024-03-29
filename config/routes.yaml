@@ -31,7 +31,12 @@ forum:
       prefix: "/forum"
       name_prefix: "home_forum_"
 
+#################################################      
 
+avis:
+      resource: "routes/home/avis.yaml"
+      prefix: "/avis"
+      name_prefix: "home_avis_"
 
 ###################################################
 ###################################################

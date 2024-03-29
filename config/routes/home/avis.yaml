@@ -1,0 +1,4 @@
+ajouter_avis:
+  path: /ajouer
+  controller: App\Controller\Avis\AvisController::ajouter
+ 
