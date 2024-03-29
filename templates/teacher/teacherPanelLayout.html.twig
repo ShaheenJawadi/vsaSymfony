@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ random() }}">
     <link rel="stylesheet" href="{{ asset('css/teacherPanel.css')}}?v={{ random() }}"> {% block stylesheets %}{% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -89,7 +90,7 @@
 
     <script src="{{ asset('js/main.js') }}?v={{ random() }}"></script>
 
-
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>
