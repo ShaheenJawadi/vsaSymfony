@@ -34,7 +34,7 @@ class TeacherCoursController extends AbstractController
     {
         $list_cours = $coursRepository->findAll();
         return $this->render('teacher/cours/index.html.twig', [
-            'my_cours' => $list_cours ,
+            'my_cours' => $list_cours,
         ]);
     }
 
@@ -62,14 +62,14 @@ class TeacherCoursController extends AbstractController
 
         $lessonItems = $request->request->get('lesson_list', []);
 
-      
+
 
         $coursEntity = $this->collectCoursData($formData);
         $ressourceEntity = $this->collectRessourceData($formData);
-        $lessonsEntityList =$this->collectLessonsData($request);
+        $lessonsEntityList = $this->collectLessonsData($request);
 
 
-        $errors = $this->validation($coursEntity, $ressourceEntity ,$lessonsEntityList, $validator);
+        $errors = $this->validation($coursEntity, $ressourceEntity, $lessonsEntityList, $validator);
 
         if (count($errors) > 0) {
 
@@ -82,10 +82,9 @@ class TeacherCoursController extends AbstractController
         $entityManager->persist($coursEntity);
         $ressourceEntity->setCoursid($coursEntity);
         $entityManager->persist($ressourceEntity);
-        foreach ($lessonsEntityList as $lessonItem) { 
+        foreach ($lessonsEntityList as $lessonItem) {
             $lessonItem->setCoursid($coursEntity);
             $entityManager->persist($lessonItem);
-
         }
         $entityManager->flush();
 
@@ -138,7 +137,7 @@ class TeacherCoursController extends AbstractController
     }
 
 
-    private function validation($coursEntity, $ressourceErrors,$lessonsEntityList, ValidatorInterface $validator)
+    private function validation($coursEntity, $ressourceErrors, $lessonsEntityList, ValidatorInterface $validator)
     {
 
 
@@ -168,7 +167,7 @@ class TeacherCoursController extends AbstractController
 
 
 
-        foreach ($lessonsEntityList as $lessonItem) { 
+        foreach ($lessonsEntityList as $lessonItem) {
             $lessonErrors = $validator->validate($lessonItem);
 
             if (count($lessonErrors) > 0) {
@@ -179,7 +178,6 @@ class TeacherCoursController extends AbstractController
                     $formErrors[$propertyPath] = $message;
                 }
             }
- 
         }
 
         return $formErrors;
@@ -187,10 +185,10 @@ class TeacherCoursController extends AbstractController
 
 
 
-    public function collectLessonsData($request): array  
+    public function collectLessonsData($request): array
     {
 
-     
+
         $lessons = [];
         $lessonCount = count($request->request->get('lesson_title', []));
         for ($i = 0; $i < $lessonCount; $i++) {
@@ -205,13 +203,30 @@ class TeacherCoursController extends AbstractController
         }
 
 
-        
+
 
 
 
         return $lessons;
     }
 
-    
 
+
+
+    public function delete($id): Response
+    {
+
+        $entityManager = $this->managerRegistry->getManager();
+
+        $entity = $entityManager->getRepository(Cours::class)->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Entity not found');
+        }
+
+        $entityManager->remove($entity);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('teacher_cours_index');
+    }
 }
