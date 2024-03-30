@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CoursRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 
@@ -20,12 +21,15 @@ class Cours
     #[ORM\Column(name: "id", type: "integer")]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(name: "nom", type: "string", length: 80)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(name: "image", type: "string", length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(name: "description", type: "text")]
     private ?string $description = null;
 
@@ -33,22 +37,26 @@ class Cours
     private ?string $tags = null;
 
     #[ORM\Column(name: "isValidated", type: "boolean")]
-    private ?bool $isvalidated = null;
+    private ?bool $isvalidated = false;
 
+    #[Assert\NotBlank]
     #[ORM\Column(name: "slug", type: "string", length: 255, nullable: true)]
     private ?string $slug = null;
 
     #[ORM\Column(name: "views", type: "integer", nullable: true)]
     private ?int $views = null;
 
+    #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Souscategorie::class)]
     #[ORM\JoinColumn(name: "subCategoryId", referencedColumnName: "id")]
     private ?Souscategorie $subcategoryid = null;
 
+    #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Level::class)]
     #[ORM\JoinColumn(name: "niveauId", referencedColumnName: "id")]
     private ?Level $niveauid = null;
 
+    #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: "enseignantId", referencedColumnName: "id")]
     private ?User $enseignantid = null;
