@@ -3,7 +3,7 @@ filter_index:
   controller: App\Controller\Cours\FilterController::index
 
 page_index:
-  path: /single
+  path: /{slug}
   controller: App\Controller\Cours\CoursController::coursPage
 
 lessons_index:

@@ -1,54 +1,54 @@
 {% macro displayCourse(cours) %}
 
 
+	<a class="single_cours_grid" href="{{ path('home_cours_page_index', {'slug': cours.slug})  }}">
+		<div class="img_holder">
+			<img src="{{ asset('images/cours/Image.png') }}" alt="">
+			<div class="add_cours_btn">
 
-<a class="single_cours_grid" href="{{ path('home_cours_page_index') }}">
-    <div class="img_holder">
-        <img src="{{ asset('images/cours/Image.png') }}" alt="">
-        <div class="add_cours_btn">
+				<i class="fa-solid fa-book"></i>
 
-            <i class="fa-solid fa-book"></i>
+			</div>
+			<div class="category_chimp">
+				cat1
 
-        </div>
-        <div class="category_chimp">
-            cat1
+			</div>
 
-        </div>
-
-    </div>
-    <div class="infos">
-        <span class="teacher">educateur</span>
-        <span class="cours_title">jksqdk j sqhkjdkjqshdjk hsqjk hd ksqj</span>
-        <div class="rating">
-            <div class="list_stars">
-                <div class="star">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <div class="star">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <div class="star">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <div class="star">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <div class="star">
-                    <i class="fa-regular fa-star"></i>
-                </div>
-
-
-            </div>
-            <small>(2)</small>
-        </div>
-        <div class="separator"></div>
-        <div class="bottom_part">
-            5 Lessons / 10 Heurs / Débutant
-
-        </div>
+		</div>
+		<div class="infos">
+			<span class="teacher">educateur</span>
+			<span class="cours_title">jksqdk j sqhkjdkjqshdjk hsqjk hd ksqj</span>
+			<div class="rating">
+				<div class="list_stars">
+					<div class="star">
+						<i class="fa-solid fa-star"></i>
+					</div>
+					<div class="star">
+						<i class="fa-solid fa-star"></i>
+					</div>
+					<div class="star">
+						<i class="fa-solid fa-star"></i>
+					</div>
+					<div class="star">
+						<i class="fa-solid fa-star"></i>
+					</div>
+					<div class="star">
+						<i class="fa-regular fa-star"></i>
+					</div>
 
 
-    </div>
+				</div>
+				<small>(2)</small>
+			</div>
+			<div class="separator"></div>
+			<div class="bottom_part">
+				5 Lessons / 10 Heurs / Débutant
+
+			</div>
 
 
-</a>{% endmacro %}
+		</div>
+
+
+	</a>
+{% endmacro %}
