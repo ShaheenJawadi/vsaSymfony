@@ -12,3 +12,9 @@ add_lesson:
   path: /add_lesson
   controller: App\Controller\Teacher\TeacherCoursController::add_lesson
 
+
+
+create:
+  path: /ajouter
+  controller: App\Controller\Teacher\TeacherCoursController::create
+  methods: [POST]
