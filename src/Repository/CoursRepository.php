@@ -12,5 +12,13 @@ class CoursRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Cours::class);
     }
+
+    public function findLastThreeCourses(): array
+    {
+        return $this->createQueryBuilder('c') 
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
  
 }
