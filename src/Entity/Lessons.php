@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LessonsRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 
@@ -16,21 +17,28 @@ class Lessons
     #[ORM\Column(name: "id", type: "integer")]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(name: "titre", type: "string", length: 80)]
     private ?string $titre = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(name: "content", type: "text")]
     private ?string $content = null;
 
+    #[Assert\NotNull]
+    #[Assert\Positive]
     #[ORM\Column(name: "duree", type: "integer", nullable: true)]
     private ?int $duree = null;
 
     #[ORM\Column(name: "image", type: "string", length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[Assert\Url]
     #[ORM\Column(name: "video", type: "string", length: 80, nullable: true)]
     private ?string $video = null;
 
+   
+    #[Assert\Positive]
     #[ORM\Column(name: "classement", type: "integer")]
     private ?int $classement = 0;
 

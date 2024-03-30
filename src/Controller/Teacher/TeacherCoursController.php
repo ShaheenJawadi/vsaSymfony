@@ -67,7 +67,7 @@ class TeacherCoursController extends AbstractController
         $lessonsEntityList =$this->collectLessonsData($request);
 
 
-        $errors = $this->validation($coursEntity, $ressourceEntity, $validator);
+        $errors = $this->validation($coursEntity, $ressourceEntity ,$lessonsEntityList, $validator);
 
         if (count($errors) > 0) {
 
@@ -129,7 +129,7 @@ class TeacherCoursController extends AbstractController
     }
 
 
-    private function validation($coursEntity, $ressourceErrors, ValidatorInterface $validator)
+    private function validation($coursEntity, $ressourceErrors,$lessonsEntityList, ValidatorInterface $validator)
     {
 
 
@@ -156,6 +156,23 @@ class TeacherCoursController extends AbstractController
                 $formErrors[$propertyPath] = $message;
             }
         }
+
+
+
+        foreach ($lessonsEntityList as $lessonItem) { 
+            $lessonErrors = $validator->validate($lessonItem);
+
+            if (count($lessonErrors) > 0) {
+
+                foreach ($ressourceErrors as $error) {
+                    $propertyPath = $error->getPropertyPath();
+                    $message = $error->getMessage();
+                    $formErrors[$propertyPath] = $message;
+                }
+            }
+ 
+        }
+
         return $formErrors;
     }
 
