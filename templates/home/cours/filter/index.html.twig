@@ -1,5 +1,5 @@
 {% extends 'home/homeLayout.html.twig' %}
-
+{% import 'home/components/cours/coursGrid.html.twig' as courGrid %}
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('css/filter_page.css') }}">
@@ -116,12 +116,14 @@
 
 						<div class="container-fluid">
 							<div class="row">
-								{% for i in 1..9 %}
+								 
+
+
+								{% for cours in list_cours %}
 									<div class="col-md-4">
-										{% include 'home/components/cours/coursGrid.html.twig' %}
+										{{ courGrid.displayCourse(cours) }}
 									</div>
 								{% endfor %}
-
 							</div>
 
 						</div>
