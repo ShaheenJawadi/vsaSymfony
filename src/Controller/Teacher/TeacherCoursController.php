@@ -58,13 +58,16 @@ class TeacherCoursController extends AbstractController
         
         $formData = $request->request->all(); 
         
-        $entity =$this->collectCoursData($formData);
-       
-        $errors = $validator->validate($entity);
+        $coursEntity =$this->collectCoursData($formData);
+        $ressourceEntity =$this->collectRessourceData($formData);
+
+        $coursErrors = $validator->validate($coursEntity);
+        $ressourceErrors = $validator->validate($ressourceEntity);
+
  
-        if (count($errors) > 0) {
+        if (count($ressourceErrors) > 0) {
             $formErrors = [];
-            foreach ($errors as $error) {
+            foreach ($ressourceErrors as $error) {
                 $propertyPath = $error->getPropertyPath();
                 $message = $error->getMessage();
                 $formErrors[$propertyPath] = $message;
@@ -75,7 +78,9 @@ class TeacherCoursController extends AbstractController
 
          
         $entityManager = $this->managerRegistry->getManager();
-        $entityManager->persist($entity);
+        $entityManager->persist($coursEntity);
+        $ressourceEntity->setCoursid($coursEntity);
+        $entityManager->persist($ressourceEntity);
         $entityManager->flush();
 
         
@@ -108,5 +113,17 @@ class TeacherCoursController extends AbstractController
         return $entity;
     }
 
+    public function collectRessourceData($formData  ):Ressources{
+
+      
+
+        $entity = new Ressources(); 
+        $entity->setLien( $formData['ressource_link']); 
+        $entity->setType( $formData['ressource_type']); 
+
     
+
+
+        return $entity;
+    }
 }
