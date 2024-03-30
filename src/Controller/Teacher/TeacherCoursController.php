@@ -10,12 +10,12 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response; 
-use Symfony\Component\HttpFoundation\Request; 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class TeacherCoursController extends AbstractController
 {
@@ -35,7 +35,7 @@ class TeacherCoursController extends AbstractController
         ]);
     }
 
-  
+
 
     public function add(): Response
     {
@@ -44,52 +44,46 @@ class TeacherCoursController extends AbstractController
         ]);
     }
 
-    public function add_lesson( ): Response
+    public function add_lesson(): Response
     {
         $content = $this->renderView('teacher/components/cours/single_lesson_form.html.twig');
 
         return new Response($content);
-      
     }
 
 
-    public function create(Request $request, SerializerInterface $serializer, ValidatorInterface $validator): Response
+    public function create(Request $request,  ValidatorInterface $validator): Response
     {
-        
-        $formData = $request->request->all(); 
-        
-        $coursEntity =$this->collectCoursData($formData);
-        $ressourceEntity =$this->collectRessourceData($formData);
 
-        $coursErrors = $validator->validate($coursEntity);
-        $ressourceErrors = $validator->validate($ressourceEntity);
+        $formData = $request->request->all();
 
- 
-        if (count($ressourceErrors) > 0) {
-            $formErrors = [];
-            foreach ($ressourceErrors as $error) {
-                $propertyPath = $error->getPropertyPath();
-                $message = $error->getMessage();
-                $formErrors[$propertyPath] = $message;
-            }
+        $coursEntity = $this->collectCoursData($formData);
+        $ressourceEntity = $this->collectRessourceData($formData);
 
-            return $this->json(['success' => false, 'errors' => $formErrors, 'formData' => $formData], Response::HTTP_BAD_REQUEST);
+
+        $errors = $this->validation($coursEntity, $ressourceEntity, $validator);
+
+        if (count($errors) > 0) {
+
+
+            return $this->json(['success' => false, 'errors' => $errors, 'formData' => $formData], Response::HTTP_BAD_REQUEST);
         }
 
-         
+
         $entityManager = $this->managerRegistry->getManager();
         $entityManager->persist($coursEntity);
         $ressourceEntity->setCoursid($coursEntity);
         $entityManager->persist($ressourceEntity);
         $entityManager->flush();
 
-        
+
         return $this->json(['success' => true, 'message' => 'success'], Response::HTTP_OK);
     }
 
 
 
-    public function collectCoursData($formData  ):Cours{
+    public function collectCoursData($formData): Cours
+    {
 
         $user = $this->managerRegistry->getRepository(User::class)->find(3);
         $sousCategory = $this->managerRegistry->getRepository(Souscategorie::class)->find($formData['subCategoryId']);
@@ -97,33 +91,65 @@ class TeacherCoursController extends AbstractController
         $level = $this->managerRegistry->getRepository(Level::class)->find($formData['niveauId']);
 
 
-        $entity = new Cours(); 
-        $entity->setEnseignantid($user); 
-        $entity->setNom($formData['nom']); 
+        $entity = new Cours();
+        $entity->setEnseignantid($user);
+        $entity->setNom($formData['nom']);
 
-        $entity->setImage($formData['image']); 
-        $entity->setDescription($formData['description']); 
-        $entity->setTags($formData['tags']); 
-        $entity->setSubcategoryid($sousCategory); 
-        $entity->setNiveauid($level); 
+        $entity->setImage($formData['image']);
+        $entity->setDescription($formData['description']);
+        $entity->setTags($formData['tags']);
+        $entity->setSubcategoryid($sousCategory);
+        $entity->setNiveauid($level);
 
-        $entity->setSlug($formData['nom']); 
+        $entity->setSlug($formData['nom']);
 
 
         return $entity;
     }
 
-    public function collectRessourceData($formData  ):Ressources{
+    public function collectRessourceData($formData): Ressources
+    {
 
-      
 
-        $entity = new Ressources(); 
-        $entity->setLien( $formData['ressource_link']); 
-        $entity->setType( $formData['ressource_type']); 
 
-    
+        $entity = new Ressources();
+        $entity->setLien($formData['ressource_link']);
+        $entity->setType($formData['ressource_type']);
+
+
 
 
         return $entity;
+    }
+
+
+    private function validation($coursEntity, $ressourceErrors, ValidatorInterface $validator)
+    {
+
+
+        $coursErrors = $validator->validate($coursEntity);
+
+
+        $formErrors = [];
+        if (count($coursErrors) > 0) {
+
+            foreach ($coursErrors as $error) {
+                $propertyPath = $error->getPropertyPath();
+                $message = $error->getMessage();
+                $formErrors[$propertyPath] = $message;
+            }
+        }
+
+
+        $ressourceErrors = $validator->validate($ressourceErrors);
+        if (count($ressourceErrors) > 0) {
+
+            foreach ($ressourceErrors as $error) {
+                $propertyPath = $error->getPropertyPath();
+                $message = $error->getMessage();
+                $formErrors[$propertyPath] = $message;
+            }
+        }
+        return $formErrors;
     }
 }
