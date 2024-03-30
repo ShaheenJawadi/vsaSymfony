@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 
 class TeacherCoursController extends AbstractController
@@ -112,7 +112,9 @@ class TeacherCoursController extends AbstractController
         $entity->setSubcategoryid($sousCategory);
         $entity->setNiveauid($level);
 
-        $entity->setSlug($formData['nom']);
+
+        $slugger = new AsciiSlugger();
+        $entity->setSlug($slugger->slug($formData['nom'])->lower());
 
 
         return $entity;
