@@ -3,7 +3,7 @@
 
 	<a class="single_cours_grid" href="{{ path('home_cours_page_index', {'slug': cours.slug})  }}">
 		<div class="img_holder">
-			<img src="{{ asset('images/cours/Image.png') }}" alt="">
+			<img src="{{ cours.image }}" alt="">
 			<div class="add_cours_btn">
 
 				<i class="fa-solid fa-book"></i>
@@ -17,7 +17,7 @@
 		</div>
 		<div class="infos">
 			<span class="teacher">educateur</span>
-			<span class="cours_title">jksqdk j sqhkjdkjqshdjk hsqjk hd ksqj</span>
+			<span class="cours_title">{{ cours.nom }}</span>
 			<div class="rating">
 				<div class="list_stars">
 					<div class="star">
@@ -42,9 +42,10 @@
 			</div>
 			<div class="separator"></div>
 			<div class="bottom_part">
-				5 Lessons / 10 Heurs / Débutant
+				{{cours.lessons|length}} Lessons / 10 Heurs / {{ cours.niveauid.niveau }}
 
 			</div>
+	 
 
 
 		</div>
