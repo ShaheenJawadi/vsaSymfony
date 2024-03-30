@@ -70,4 +70,36 @@
     });
 
 
+    $(document).on('submit', "[ajaxForm]", function(e) {
+
+        e.preventDefault();
+        var $this = $(this).parent();
+
+
+        $.ajax({
+            method: "POST",
+            url: $(this).prop('action'),
+            data: new FormData(this),
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+
+                alert('suuc')
+
+            },
+            error: function(request, status, error) {
+                alert('error')
+            }
+
+        });
+
+
+
+    });
+
+
+
+
 })(jQuery);
