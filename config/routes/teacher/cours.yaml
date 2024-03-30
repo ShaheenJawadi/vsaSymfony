@@ -18,3 +18,9 @@ create:
   path: /create 
   controller: App\Controller\Teacher\TeacherCoursController::create
   methods: [POST]
+
+
+  
+delete:
+  path: /delete/{id} 
+  controller: App\Controller\Teacher\TeacherCoursController::delete 
