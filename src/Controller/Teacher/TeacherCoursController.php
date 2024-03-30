@@ -80,6 +80,11 @@ class TeacherCoursController extends AbstractController
         $entityManager->persist($coursEntity);
         $ressourceEntity->setCoursid($coursEntity);
         $entityManager->persist($ressourceEntity);
+        foreach ($lessonsEntityList as $lessonItem) { 
+            $lessonItem->setCoursid($coursEntity);
+            $entityManager->persist($lessonItem);
+
+        }
         $entityManager->flush();
 
 
