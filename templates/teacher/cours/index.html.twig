@@ -1,32 +1,27 @@
-{% extends 'teacher/teacherPanelLayout.html.twig' %}
-{% block body %}
-	<div class="container">
-		<div class="action_section">
-			<div class="section_title">
-				Mes cours
+{% extends 'teacher/teacherPanelLayout.html.twig' %} {% import 'teacher/components/cours/cours_grid.html.twig' as courGrid %} {% block body %}
+<div class="container">
+    <div class="action_section">
+        <div class="section_title">
+            Mes cours
 
-			</div>
-			<div class="sep"></div>
+        </div>
+        <div class="sep"></div>
 
-			<a href="#">
-				<button class="btn_main">Ajouter un Cours</button>
-			</a>
+        <a href="{{ path('teacher_cours_add')  }}">
+            <button class="btn_main">Ajouter un Cours</button>
+        </a>
 
-		</div>
+    </div>
 
-	</div>
+</div>
 
-	<div class="cours_list">
-		<div class="container">
-			<div class="row">
-				{% for i in 1..4 %}
+<div class="cours_list">
+    <div class="container">
+        <div class="row">
+            {% for cours in my_cours %} {{ courGrid.displayCourse(cours) }} {% endfor %}
+        </div>
 
-					{% include 'teacher/components/cours/cours_grid.html.twig' %}
+    </div>
 
-				{% endfor %}
-			</div>
-
-		</div>
-
-	</div>
+</div>
 {% endblock %}
