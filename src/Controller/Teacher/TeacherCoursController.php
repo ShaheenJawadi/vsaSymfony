@@ -3,6 +3,7 @@
 namespace App\Controller\Teacher;
 
 use App\Entity\Cours;
+use App\Entity\Lessons;
 use App\Entity\Level;
 use App\Entity\Ressources;
 use App\Entity\Souscategorie;
@@ -57,8 +58,13 @@ class TeacherCoursController extends AbstractController
 
         $formData = $request->request->all();
 
+        $lessonItems = $request->request->get('lesson_list', []);
+
+      
+
         $coursEntity = $this->collectCoursData($formData);
         $ressourceEntity = $this->collectRessourceData($formData);
+        $lessonsEntityList =$this->collectLessonsData($request);
 
 
         $errors = $this->validation($coursEntity, $ressourceEntity, $validator);
@@ -152,4 +158,34 @@ class TeacherCoursController extends AbstractController
         }
         return $formErrors;
     }
+
+
+
+    public function collectLessonsData($request): array  
+    {
+
+     
+        $lessons = [];
+        $lessonCount = count($request->request->get('lesson_title', []));
+        for ($i = 0; $i < $lessonCount; $i++) {
+            $entity = new Lessons();
+            $entity->setTitre($request->request->get('lesson_title')[$i]);
+            $entity->setVideo($request->request->get('lesson_video')[$i]);
+            $entity->setContent($request->request->get('lesson_content')[$i]);
+            $entity->setDuree($request->request->get('lesson_duration')[$i]);
+            $entity->setClassement($request->request->get('lesson_order')[$i]);
+
+            $lessons[] = $entity;
+        }
+
+
+        
+
+
+
+        return $lessons;
+    }
+
+    
+
 }
