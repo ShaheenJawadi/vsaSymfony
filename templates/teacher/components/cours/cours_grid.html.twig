@@ -1,96 +1,116 @@
-<div class="col-md-3">
-    <div class="single_cours_grid" href="#">
-        <div class="img_holder">
-            <img src="{{ asset('images/cours/Image.png') }}" alt="">
-
-            <div class="options_chimp ">
-                <div class="dropdown">
-                    <div class="  dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                    <ul class=" dropdown-menu dropdown-menu-end ">
-                        <li><a class="dropdown-item " href="# ">Modifier</a></li>
-                        <li><a class="dropdown-item " href="# ">Quiz</a></li>
-                        <li><a class="dropdown-item " href="# ">Supprimer</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="infos ">
-
-            <span class="cours_title ">jksqdk j sqhkjdkjqshdjk hsqjk hd ksqj</span>
-            <div class="single_data ">Categorie : <strong>sqkdkqskjd</strong></div>
-            <div class="single_data ">Sous Categorie : <strong>sqkdkqskjd</strong></div>
-
-            <div class="single_data ">Quiz ✅</div>
-
-            <!-- ❌ -->
-            <div class="single_data ">Clicks: <strong>25</strong></div>
-
-            <div class="rating ">
-                <div class="list_stars ">
-                    <div class="star "><i class="fa-solid fa-star "></i></div>
-                    <div class="star "><i class="fa-solid fa-star "></i></div>
-                    <div class="star "><i class="fa-solid fa-star "></i></div>
-                    <div class="star "><i class="fa-solid fa-star "></i></div>
-                    <div class="star "><i class="fa-regular fa-star "></i></div>
+{% macro displayCourse(cours) %}
 
 
+	<div class="col-md-3">
+		<div class="single_cours_grid" href="#">
+			<div class="img_holder">
+				<img src="{{ cours.image }}" alt="">
+
+				<div class="options_chimp ">
+					<div class="dropdown">
+						<div class="  dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fa-solid fa-ellipsis-vertical"></i>
+						</div>
+						<ul class=" dropdown-menu dropdown-menu-end ">
+							<li>
+								<a class="dropdown-item " href="# ">Modifier</a>
+							</li>
+							<li>
+								<a class="dropdown-item " href="# ">Quiz</a>
+							</li>
+							<li>
+								<a class="dropdown-item " href="# ">Supprimer</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="infos ">
+
+				<span class="cours_title ">{{ cours.nom }}</span>
+				 
+				<div class="single_data ">Sous Categorie :
+					<strong>{{ cours.subcategoryid.nom }}</strong>
+				</div>
+
+				<div class="single_data ">Quiz ✅</div>
+
+				<!-- ❌ -->
+				<div class="single_data ">Views:
+					<strong>{{ cours.views }}</strong>
+				</div>
+
+				<div class="rating ">
+					<div class="list_stars ">
+						<div class="star ">
+							<i class="fa-solid fa-star "></i>
+						</div>
+						<div class="star ">
+							<i class="fa-solid fa-star "></i>
+						</div>
+						<div class="star ">
+							<i class="fa-solid fa-star "></i>
+						</div>
+						<div class="star ">
+							<i class="fa-solid fa-star "></i>
+						</div>
+						<div class="star ">
+							<i class="fa-regular fa-star "></i>
+						</div>
 
 
-                </div>
-                <small>(2)</small>
-            </div>
+					</div>
+					<small>(2)</small>
+				</div>
 
 
+				<div class="separator "></div>
+				<div class="bottom_part ">
+						{{cours.lessons|length}} Lessons / 10 Heurs / {{ cours.niveauid.niveau }}
+
+				</div>
+				<div class="separator "></div>
+				<div class="enrollment ">
+					<div class="list ">
 
 
-            <div class="separator "></div>
-            <div class="bottom_part ">
-                5 Lessons / 10 Heurs / Débutant
+						<div class="single ">
+							<img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
 
-            </div>
-            <div class="separator "></div>
-            <div class="enrollment ">
-                <div class="list ">
+						</div>
+						<div class="single ">
+							<img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
 
+						</div>
+						<div class="single ">
+							<img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
 
-                    <div class="single ">
-                        <img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
+						</div>
+						<div class="single ">
+							<img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
 
-                    </div>
-                    <div class="single ">
-                        <img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
+						</div>
+						<div class="single ">
+							<img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
 
-                    </div>
-                    <div class="single ">
-                        <img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
+						</div>
+						<div class="single ">
+							<img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
 
-                    </div>
-                    <div class="single ">
-                        <img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
+						</div>
+					</div>
+					<div class="count ">25</div>
 
-                    </div>
-                    <div class="single ">
-                        <img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
-
-                    </div>
-                    <div class="single ">
-                        <img src="{{ asset('images/cours/person.jpg') }}" alt=" ">
-
-                    </div>
-                </div>
-                <div class="count ">25</div>
-
-            </div>
+				</div>
 
 
+			</div>
 
-        </div>
 
+		</div>
 
-    </div>
+	</div>
 
-</div>
+{% endmacro %}

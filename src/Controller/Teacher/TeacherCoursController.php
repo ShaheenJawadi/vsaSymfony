@@ -8,6 +8,7 @@ use App\Entity\Level;
 use App\Entity\Ressources;
 use App\Entity\Souscategorie;
 use App\Entity\User;
+use App\Repository\CoursRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,10 +30,11 @@ class TeacherCoursController extends AbstractController
         $this->managerRegistry = $managerRegistry;
     }
 
-    public function index(): Response
+    public function index(CoursRepository $coursRepository): Response
     {
+        $list_cours = $coursRepository->findAll();
         return $this->render('teacher/cours/index.html.twig', [
-            'controller_name' => 'TeacherController',
+            'my_cours' => $list_cours ,
         ]);
     }
 
