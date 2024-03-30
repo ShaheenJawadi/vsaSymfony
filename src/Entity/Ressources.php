@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RessourcesRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 
 //#[ORM\Entity(repositoryClass: RessourcesRepository::class)]
@@ -14,10 +15,10 @@ class Ressources
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(name: "id", type: "integer")]
     private ?int $id = null;
-
+    #[Assert\NotBlank]
     #[ORM\Column(name: "lien", type: "string", length: 250)]
     private ?string $lien = null;
-
+    #[Assert\NotBlank]
     #[ORM\Column(name: "type", type: "string", length: 60)]
     private ?string $type = null;
 
