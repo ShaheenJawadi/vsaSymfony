@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CoursRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 
@@ -60,6 +62,23 @@ class Cours
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: "enseignantId", referencedColumnName: "id")]
     private ?User $enseignantid = null;
+
+
+
+    #[ORM\OneToMany(targetEntity:Lessons::class, mappedBy:"coursid")]
+    private Collection $lessons;
+
+
+
+    public function __construct() {
+        $this->lessons = new ArrayCollection();
+    }
+    
+    public function getLessons(): Collection
+    {
+        return $this->lessons;
+    }
+
 
     public function getId(): ?int
     {
