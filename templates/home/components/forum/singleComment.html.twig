@@ -1,4 +1,4 @@
-<div class="single_comment">
+<div class="single_comment" data-comment-id="{{ comment.id }}">
 	<div class="avatar">
 		<img src="{{ comment.user.image is not empty ? comment.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
 
@@ -18,10 +18,10 @@
 		{% if comment.user.id == 18 %}
 			<div class="new_comment">
 				<div class="comment">
-					<textarea class="form-control" placeholder="comment" rows="2">{{comment.commentaire}}</textarea>
+					<textarea class="form-control comment-text-display" placeholder="comment" rows="2">{{comment.commentaire}}</textarea>
 				</div>
 				<div class="sub">
-					<button class="btn_main">Modifier</button>
+						<button class="btn_main submit_update">Modifier</button>
 				</div>
 			</div>
 		{% endif %}
@@ -45,5 +45,38 @@
 			</div>
 		</div>
 	{% endif %}
+	{% block javascripts %}
+
+<script>
+$('.toggle_edit_comment').click(function() {
+    $(this).closest('.single_comment').find('.new_comment').toggle(); // Toggle edit mode
+});
+
+$('.submit_update').click(function() {
+    var commentDiv = $(this).closest('.single_comment');
+    var commentId = commentDiv.data('comment-id');
+    var textarea = commentDiv.find('textarea');
+    var updatedComment = textarea.val(); // Assuming this is the updated comment
+
+    // AJAX request to update the comment
+    $.ajax({
+        url: "{{ path('home_forum_update_comment') }}",
+        type: "POST",
+        data: {
+            commentId: commentId,
+            comment: updatedComment
+        },
+        success: function(response) {
+ 					commentDiv.find('.comment').first().text(updatedComment);
+                commentDiv.find('.new_comment').hide();             // Optionally, update the displayed comment text if needed
+        },
+        error: function(xhr, status, error) {
+            alert("An error occurred while updating the comment.");
+        }
+    });
+});
+
+</script>
+{% endblock %}
 
 </div>

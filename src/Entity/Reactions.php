@@ -4,9 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ReactionsRepository;
-#[ORM\Entity]
 
-//#[ORM\Entity(repositoryClass: ReactionsRepository::class)]
+#[ORM\Entity(repositoryClass: ReactionsRepository::class)]
 #[ORM\Table(name: "reactions", indexes: [
     new ORM\Index(name: "fk_user_reactions", columns: ["user_id"]),
     new ORM\Index(name: "fk_pub_reactions", columns: ["pub_id"])

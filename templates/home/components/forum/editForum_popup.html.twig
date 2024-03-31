@@ -1,14 +1,15 @@
+
 <div class="forum_page" style="padding: 0;">
     <div class="add_pub_section edit_publication">
         <div class="top_entry">
             <div class="avatar">
-                <img src="{{asset('images/cours/person.jpg')}}" alt="">
+			    <img src="{{ pub.user.image is not empty ? pub.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
             </div>
             <div class="entry">
                 <div class="imgs_list"></div>
                 <div class="content">
-                    <textarea class="form-control" placeholder="Titre" rows="1"> fsgfgsfdgfdgfd gdfsgfdgetrgrzetrzsdazdazeaze</textarea>
-                    <textarea class="form-control" placeholder="Poser votre question" rows="2"> fdg sdfgfdsgdfgfd gf</textarea>
+                    <textarea class="form-control" id="titre" placeholder="Titre" rows="1">{{ pub.titre }}</textarea>
+                    <textarea class="form-control" id="contenu" placeholder="Poser votre question" rows="2">{{ pub.contenu }}</textarea>
 
                 </div>
 
@@ -23,7 +24,7 @@
 
             </div>
             <div>
-                <button class="btn_main">Modifier</button>
+                <button id="updateButton" class="btn_main">Modifier</button>
 
             </div>
 
@@ -31,3 +32,39 @@
 
     </div>
 </div>
+
+{% block javascripts %}
+<script>
+// Add this line to define the URL for redirection
+var homeForumIndexUrl = '{{ path('home_forum_index') }}';
+
+document.getElementById("updateButton").addEventListener("click", function() {
+    var titre = document.getElementById("titre").value;
+    var contenu = document.getElementById("contenu").value;
+    var publicationId = '{{ pub.id }}';
+
+    fetch('/forum/update-publication/' + publicationId, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify({ titre: titre, contenu: contenu }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.status === 'success') {
+            // Use the URL for redirection after a successful update
+            window.location.href = homeForumIndexUrl;
+        } else {
+            alert('Failed to update publication');
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+</script>
+{% endblock %}
+
