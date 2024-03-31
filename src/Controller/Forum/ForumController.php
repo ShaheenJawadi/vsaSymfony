@@ -71,7 +71,19 @@ class ForumController extends AbstractController
                 'dislike' => $reaction['totalDislike']
             ];
         }
-
+        $userReactions = $reactionsRepository->findBy(['user' => $user]);
+        $userReactionsMap = [];
+        foreach ($userReactions as $reaction) {
+            if ($reaction->getJaime() === 1) {
+                $userReactionsMap[$reaction->getPub()->getId()] = 'like';
+            } elseif ($reaction->getDislike() === 1) {
+                $userReactionsMap[$reaction->getPub()->getId()] = 'dislike';
+            }
+        }
+        foreach ($publications as $pub) {
+            $pubId = $pub->getId();
+            $pub->userReaction = $userReactionsMap[$pubId] ?? null;
+        }
         
         return $this->render('home/forum/index.html.twig', [
             'controller_name' => 'ForumController',
@@ -81,6 +93,7 @@ class ForumController extends AbstractController
             'contributors' => $contributors,
             'commentForms' => $commentForms,
             'reactionsByPubId' => $reactionsByPubId,
+            'userReactionsMap' => $userReactionsMap, // Add this line
 
 
         ]);
@@ -296,6 +309,55 @@ public function edit(Request $request,ManagerRegistry $manager, PublicationsRepo
         return new Response($content);
     
 }
+
+public function reactToPublication($pubId, $reactionType, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, PublicationsRepository $publicationsRepository, UserRepository $userRepository): Response
+{
+    $entityManager = $manager->getManager();
+    $user = $userRepository->find(18); // Assuming this is just for testing and will be dynamic in the application
+    $publication = $publicationsRepository->find($pubId);
+
+    if (!$publication || !$user) {
+        return $this->redirectToRoute('home_forum_index');
+    }
+
+    $reaction = $reactionsRepository->findOneBy(['pub' => $publication, 'user' => $user]);
+
+    if ($reaction) {
+        // Reaction exists, so we toggle the like/dislike or remove it if the same reaction is clicked again
+        if (($reactionType === 'like' && $reaction->getJaime() === 1) || ($reactionType === 'dislike' && $reaction->getDislike() === 1)) {
+            // User clicked the same reaction again, so we "unreact" by removing the reaction record
+            $entityManager->remove($reaction);
+        } else {
+            // Toggle the reaction
+            if ($reactionType === 'like') {
+                $reaction->setJaime(1);
+                $reaction->setDislike(0);
+            } else {
+                $reaction->setJaime(0);
+                $reaction->setDislike(1);
+            }
+            $entityManager->persist($reaction);
+        }
+    } else {
+        // No existing reaction, create a new one
+        $reaction = new Reactions();
+        $reaction->setPub($publication);
+        $reaction->setUser($user);
+        if ($reactionType === 'like') {
+            $reaction->setJaime(1);
+            $reaction->setDislike(0);
+        } else {
+            $reaction->setJaime(0);
+            $reaction->setDislike(1);
+        }
+        $entityManager->persist($reaction);
+    }
+
+    $entityManager->flush();
+
+    return $this->redirectToRoute('home_forum_index');
+}
+
     //---------------------------------------------------------------------------------//
     public function chatBotIndex(Request $request, UserRepository $userRepository): Response
     {

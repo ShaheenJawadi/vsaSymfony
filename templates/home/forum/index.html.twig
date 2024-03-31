@@ -98,10 +98,13 @@
 
                         <div class="pub_list">
                             {% for pub in pubs %}
+                                 {% set userReaction = userReactionsMap[pub.id] ?? null %}
+
                                 {% include 'home/components/forum/forumGrid.html.twig' with {
                                     'pub': pub,
                                     'commentForm': commentForms[pub.id],
-                                    'reactions': reactionsByPubId[pub.id] ?? {'jaime': 0, 'dislike': 0}
+                                    'reactions': reactionsByPubId[pub.id] ?? {'jaime': 0, 'dislike': 0},
+                                    'userReaction': userReaction
                                 } %}
                             {% endfor %}
                     </div>
