@@ -57,4 +57,49 @@ class PublicationsRepository extends ServiceEntityRepository
             // Fetch and return results
             return $stmt->fetchAllAssociative();
     }
+
+    /**
+     * Fetch a publication by ID with user and comments details.
+     *
+     * @param int $publicationId The ID of the publication to fetch.
+     * @return Publications|null The Publications object with user and comments details or null if not found.
+     */
+    public function findPublicationWithUserDetails(int $publicationId): ?Publications
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.user', 'u')
+            ->addSelect('u')
+            ->leftJoin('p.commentaires', 'c')
+            ->addSelect('c')
+            ->where('p.id = :publicationId') // Filter by publication ID
+            ->setParameter('publicationId', $publicationId)
+            ->getQuery()
+            ->getOneOrNullResult(); // Use getOneOrNullResult() since we're fetching by ID
     }
+    public function findPubByUserId($userId): array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.user', 'u')
+            ->addSelect('u')
+            ->leftJoin('p.commentaires', 'c')
+            ->addSelect('c')
+            ->where('u.id = :userId') // Filter by user ID
+            ->setParameter('userId', $userId)
+            ->orderBy('p.dateCreation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllPublicationsOrderedByClicks(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.user', 'u')
+            ->addSelect('u')
+            ->leftJoin('p.commentaires', 'c')
+            ->addSelect('c')
+            ->orderBy('p.nbclicks', 'DESC') // Order by 'nbClicks' in descending order
+            ->getQuery()
+            ->getResult();
+    }
+
+}
