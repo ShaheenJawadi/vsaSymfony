@@ -30,17 +30,14 @@
                 </div>
 
 
-                <div class="list">
+                <div class="list"  id="chatContainer">
 
-                    {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': true} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': false} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with
-                    {'isBot': true} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': false} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig' with {'isBot': true} %} {% include 'home/components/forum/chatbot/singleDiscuss.html.twig'
-                    with {'isBot': false} %}
 
                 </div>
             </div>
             <div class="send_box">
-                <input type="text" class="form-control" placeholder="Message ">
-                <button>Envoyer</button>
+                <input type="text" class="form-control" placeholder="Type your message.... " id="messageInput">
+                <button id="sendMessage">Envoyer</button>
 
             </div>
         </div>
@@ -49,6 +46,42 @@
     </div>
 
 </div>
+{% block javascripts %}
 
+<script>
+var userImage = "{{ userImage|default(asset('images/cours/person.jpg')) }}";
 
+console.log("fffffffffffffffffffffffff");
+document.getElementById("sendMessage").addEventListener("click", function() {
+    console.log("clicked!");
+    var messageInput = document.getElementById("messageInput");
+    var userMessage = messageInput.value;
+
+    if (userMessage.trim() !== '') {
+        fetch('{{ path('home_forum_chatbot_action') }}', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', // Important for Symfony to recognize it as an AJAX request
+            },
+            body: JSON.stringify({message: userMessage})
+        })
+        .then(response => response.json())
+        .then(data => {
+            addMessageToChat(false, userMessage); // Display user's message
+            addMessageToChat(true, data.message); // Display bot's response
+            messageInput.value = ''; // Clear input field
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+
+function addMessageToChat(isBot, message) {
+    var chatContainer = document.getElementById("chatContainer");
+    var messageElement = document.createElement("div");
+    messageElement.innerHTML = '<div class="single ' + (isBot ? 'bot' : '') + '"><div class="avatar"><img src="' + (isBot ? '{{ asset("images/forum/chat.jpg") }}' : userImage) + '" alt=""></div><div class="text">' + message + '</div></div>';
+    chatContainer.appendChild(messageElement);
+}
+</script>
+{% endblock %}
 {% endblock %}

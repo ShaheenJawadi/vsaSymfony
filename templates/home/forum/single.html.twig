@@ -16,46 +16,19 @@
 							<div class="title">Contributeurs</div>
 
 							<div class="list_contributers">
-								<div class="single">
+                            {% for contributor in contributors %}
+                            <div class="single">
 
-									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">kqsdjqkjsd</div>
-
-
-								</div>
-
-								<div class="single">
-
-									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">kqsdjqkjsd</div>
+                                <div class="avatar">
+                                    <img src="{{ contributor.image is not empty ? contributor.image : asset('images/cours/person.jpg') }}" alt="">
+                                </div>
+                                <div class="username">{{ contributor.username }}</div>
 
 
-								</div>
+                            </div>
+                            {% endfor %}
 
-								<div class="single">
-
-									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">kqsdjqkjsd</div>
-
-
-								</div>
-								<div class="single">
-
-									<div class="avatar">
-										<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-									</div>
-									<div class="username">kqsdjqkjsd</div>
-
-
-								</div>
-
-							</div>
+                        </div>
 
 						</div>
 					</div>
@@ -68,195 +41,16 @@
 
 							<div class="pub_list" id="pub_list">
 
-                      {% include 'home/components/forum/forumGrid.html.twig' with {'pub': pub,'commentPub':pub} %} 
-								{# <div class="single">
-									<div class="head">
-										<div class="avatar">
-											<img src="{{ asset('images/cours/person.jpg') }}" alt="">
+								{% include 'home/components/forum/forumGrid.html.twig' with {
+									'pub': pub,
+									 'commentPub': pub,
+									'commentForm': commentForm,
+									'reactions': reactionsByPubId[pub.id] ?? {'jaime': 0, 'dislike': 0}
 
-										</div>
-										<div class="infos">
-											<div class="username">
-												shaheenj
-											</div>
-											<div class="date">12/04/1998</div>
-
-										</div>
-										<div class="options">
-
-
-											<div class="dropdown dropstart">
-												<div class="drop_btn" data-bs-toggle="dropdown">
-													<i class="fa-solid fa-ellipsis-v"></i>
-												</div>
-
-												<ul class="dropdown-menu">
-													<li>
-														<a class="dropdown-item" href="#" data-edit-publication="/components/forum/edit_publication.html">Modifier</a>
-													</li>
-													<li>
-														<a class="dropdown-item" href="#">Supprimer</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-
-									</div>
-
-									<div class="content">
-										<div class="title">dsf jqdhksjqhdkhqskdhkhkqjsdhkqsjh</div>
-										<div class="img_list">
-											<div class="single_img">
-												<img src="/assets/cours/Image.png" alt="">
-
-											</div>
-											<div class="single_img">
-												<img src="/assets/cours/Image.png" alt="">
-
-											</div>
-											<div class="single_img">
-												<img src="/assets/cours/Image.png" alt="">
-
-											</div>
-
-
-										</div>
-										<div class="question">
-											<p>
-												qlksdlqsldkqslkdjlqsjdjqsdlkjqlsk
-											</p>
-										</div>
-
-									</div>
-
-
-									<div class="infos">
-										<div class="reactions">
-											<div class="single_reaction">
-												<div class="icon like">
-													<i class="fa-solid fa-thumbs-up"></i>
-													<!--  <i class="fa-regular fa-thumbs-up"></i> -->
-												</div>
-												<div class="counting">15</div>
-												<div class="txt">J'aime</div>
-											</div>
-											<div class="single_reaction">
-												<div class="icon dislike">
-													<i class="fa-regular fa-thumbs-down"></i>
-												</div>
-												<div class="counting">8</div>
-												<div class="txt">Je n'aime pas</div>
-											</div>
-											<div class="single_reaction">
-												<div class="icon comment">
-													<i class="fa-regular fa-message"></i>
-												</div>
-												<div class="counting">1</div>
-												<div class="txt">commantaire</div>
-
-											</div>
-
-										</div>
-
-									</div>
-
-									<div class="list_comments">
-										<div class="single_comment">
-											<div class="avatar">
-												<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-											</div>
-											<div class="content">
-												<div class="top">
-													<div class="username">Shaheenj</div>
-													<div class="date">Il y'a 10 jours</div>
-
-												</div>
-												<p class="comment">
-													lsdfjlkdsjflkdjfljdlfj flkjldsfjldjfljdlfj sfjldksjfdfsdfsdf seres resrsfdfdf
-												</p>
-												<div class="new_comment">
-													<div class="comment">
-														<textarea class="form-control" placeholder="comment" rows="2"></textarea>
-													</div>
-													<div class="sub">
-														<button class="btn_main">Ajouter</button>
-													</div>
-												</div>
-											</div>
-
-										</div>
-										<div class="single_comment">
-											<div class="avatar">
-												<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-											</div>
-											<div class="content">
-												<div class="top">
-													<div class="username">Shaheenj</div>
-													<div class="date">Il y'a 10 jours</div>
-
-												</div>
-												<p class="comment">
-													lsdfjlkdsjflkdjfljdlfj flkjldsfjldjfljdlfj sfjldksjfdfsdfsdf seres resrsfdfdf
-												</p>
-												<div class="new_comment">
-													<div class="comment">
-														<textarea class="form-control" placeholder="comment" rows="2">lsdfjlkdsjflkdjfljdlfj flkjldsfjldjfljdlfj sfjldksjfdfsdfsdf seres resrsfdfdf</textarea>
-													</div>
-													<div class="sub">
-														<button class="btn_main">Modifier</button>
-													</div>
-												</div>
-											</div>
-
-											<div class="options">
-
-
-												<div class="dropdown dropstart">
-													<div class="drop_btn" data-bs-toggle="dropdown">
-														<i class="fa-solid fa-ellipsis-h"></i>
-													</div>
-
-													<ul class="dropdown-menu">
-														<li>
-															<a class="dropdown-item  toggle_edit_comment" href="#">Modifier</a>
-														</li>
-														<li>
-															<a class="dropdown-item" href="#">Supprimer</a>
-														</li>
-													</ul>
-												</div>
-											</div>
-
-										</div>
-										<!-- ------------------ -->
-
-
-										<div class=" single_comment add">
-											<div class="avatar">
-												<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-											</div>
-											<div class="content">
-												<div class="top">
-													<div class="username">Shaheenj</div>
-													<div class="date">Il y'a 10 jours</div>
-
-												</div>
-												<div class="new_comment">
-													<div class="comment">
-														<textarea class="form-control" placeholder="comment" rows="2"></textarea>
-													</div>
-													<div class="sub">
-														<button class="btn_main">Ajouter</button>
-													</div>
-												</div>
-
-											</div>
-
-
-										</div>
-									</div>
-								</div> #}
+									} %}
+								
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -265,4 +59,6 @@
 		</div>
 
 	</div>
+	
+
 {% endblock %}
