@@ -44,5 +44,9 @@ update_publication:
   controller: App\Controller\Forum\ForumController::updatePublication
   methods: [POST]
 
+react_to_publication:
+    path: /react/{pubId}/{reactionType}
+    controller: App\Controller\Forum\ForumController:reactToPublication
+    methods: [GET]
 
 

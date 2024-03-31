@@ -60,20 +60,30 @@
 
 	<div class="infos">
 		<div class="reactions">
-			<div class="single_reaction">
+			{% set likeClass = pub.userReaction == 'like' ? 'user-liked' : '' %}
+			{% set dislikeClass = pub.userReaction == 'dislike' ? 'user-disliked' : '' %}
+			<div class="single_reaction {{ likeClass }}">
+				
+
 				<div class="icon like">
 					<i class="fa-solid fa-thumbs-up"></i>
-					<!--  <i class="fa-regular fa-thumbs-up"></i> -->
 				</div>
 				<div class="counting">{{ reactions.jaime }}</div>
-				<div class="txt">J'aime</div>
+				<div class="txt">
+				<a href="{{ path('home_forum_react_to_publication', {'pubId': pub.id, 'reactionType': 'like'}) }}" >J'aime</a>
+				</div>				
+				
+				
 			</div>
-			<div class="single_reaction">
+			<div class="single_reaction {{ dislikeClass }}">
 				<div class="icon dislike">
 					<i class="fa-regular fa-thumbs-down"></i>
 				</div>
-				<div class="counting">{{ reactions.dislike }}</div>
-				<div class="txt">Je n'aime pas</div>
+					<div class="counting">{{ reactions.dislike }}</div>
+					<div class="txt">
+						<a href="{{ path('home_forum_react_to_publication', {'pubId': pub.id, 'reactionType': 'dislike'}) }}" >Je n'aime pas</a>
+					</div>
+				
 			</div>
 			<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="single_reaction">
 				<div class="icon comment">
@@ -132,3 +142,27 @@
 
 	</div>
 </div>
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Define the sound to be played
+    var audio = new Audio('https://res.cloudinary.com/dkdx59xe9/video/upload/v1709508219/Facebook_Like_Sound_Effect_nbc6ju.mp3');
+
+    // Function to play sound
+    function playSound() {
+        audio.play().catch(error => console.error("Playback prevented by the browser."));
+    }
+
+    // Attach click event listeners to both like and dislike reaction areas
+    document.querySelectorAll('.single_reaction').forEach(function(element) {
+        element.addEventListener('click', function(event) {
+            playSound();
+        });
+    });
+});
+</script>
+
+
+
+{% endblock %}
