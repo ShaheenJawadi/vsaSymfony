@@ -248,8 +248,25 @@
     font-size: 18px;
     cursor: pointer;
     gap: 4px;
+    
 }
-
+.forum_page .pub_list .single .infos .reactions .single_reaction.user-liked {
+    background-color: #DAF1E8;
+    border-radius: 22%;
+    width: 80px;
+   
+}
+.forum_page .pub_list .single .infos .reactions .single_reaction.user-liked .txt {
+    font-weight: bold;
+}
+.forum_page .pub_list .single .infos .reactions .single_reaction.user-disliked {
+    background-color: #f0808057; 
+    border-radius: 22%;
+    width: 128px;
+}
+.forum_page .pub_list .single .infos .reactions .single_reaction.user-disliked .txt {
+    font-weight: bold;
+}
 .forum_page .pub_list .single .infos .reactions .single_reaction .icon {
     color: var(--fx-primary-color);
 }
@@ -266,6 +283,7 @@
 
 .forum_page .pub_list .single .infos .reactions .single_reaction .icon.like {
     color: var(--fx-secondary-color);
+
 }
 
 .forum_page .pub_list .single .infos .reactions .single_reaction .icon.dislike {
