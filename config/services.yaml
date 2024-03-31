@@ -25,3 +25,8 @@ services:
     App\Repository\CoursRepository:
         arguments:
             $registry: '@doctrine'
+    
+    App\Service\OpenAIService:
+        arguments:
+            $client: '@http_client' # This injects the HttpClientInterface service
+            $apiKey: '%env(OPENAI_API_KEY)%'

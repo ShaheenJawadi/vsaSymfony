@@ -24,7 +24,7 @@
 
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#" openGeneralPopup  data-link="{{ path('home_forum_open_edit_publication' , {idPub:pub.id}) }}">Modifier</a>
+							<a class="dropdown-item"  openGeneralPopup  data-link="{{ path('home_forum_open_edit_publication' , {idPub:pub.id}) }}">Modifier</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="{{ path('home_forum_delete_publication', {'idPub': pub.id}) }}" onclick="return confirm('Are you sure you want to delete this publication?');">Supprimer</a>
@@ -65,14 +65,14 @@
 					<i class="fa-solid fa-thumbs-up"></i>
 					<!--  <i class="fa-regular fa-thumbs-up"></i> -->
 				</div>
-				<div class="counting">15</div>
+				<div class="counting">{{ reactions.jaime }}</div>
 				<div class="txt">J'aime</div>
 			</div>
 			<div class="single_reaction">
 				<div class="icon dislike">
 					<i class="fa-regular fa-thumbs-down"></i>
 				</div>
-				<div class="counting">8</div>
+				<div class="counting">{{ reactions.dislike }}</div>
 				<div class="txt">Je n'aime pas</div>
 			</div>
 			<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="single_reaction">
@@ -102,29 +102,33 @@
 		{% else %}
 			<div class="single_comment">No comments found!</div>
 		{% endfor %}
-		<div class=" single_comment add">
-			<div class="avatar">
-				<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-			</div>
-			<div class="content">
-				<div class="top">
-					<div class="username">Shaheenj</div>
-					<div class="date">Il y'a 10 jours</div>
-
-				</div>
-				<div class="new_comment">
-					<div class="comment">
-						<textarea class="form-control" placeholder="comment" rows="2"></textarea>
+		{# //FIXME:userId=18 #}
+		{% if pub.user.id == 18 %}
+			{{ form_start(commentForm) }}
+				<div class="single_comment add">
+					<div class="avatar">
+						<img src="{{ pub.user.image is not empty ? pub.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
 					</div>
-					<div class="sub">
-						<button class="btn_main">Ajouter</button>
+					<div class="content">
+						<div class="top">
+							<div class="username">{{ pub.user.username }}</div>
+						</div>
+						<div class="new_comment">
+							<div class="comment">
+								{{ form_row(commentForm.commentaire, {'label': false,'attr': {'class': 'form-control', 'placeholder': 'comment', 'rows': '2'}}) }}
+								{{ form_row(commentForm.returnPath) }} <!-- This will use the value set in the controller -->
+
+							</div>
+							<div class="sub">
+								<button type="submit" class="btn_main">Ajouter</button>
+							</div>
+						</div>
 					</div>
 				</div>
+			{{ form_end(commentForm) }}
+		{% endif %}
 
-			</div>
 
-
-		</div>
 
 	</div>
 </div>

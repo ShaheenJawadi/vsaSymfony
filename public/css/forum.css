@@ -442,6 +442,7 @@
 .chatbot_page .holder .list .single.bot {
     align-self: flex-end;
     flex-direction: row-reverse;
+    margin-left: 20%;
 }
 
 .chatbot_page .holder .list .single.bot .text {
