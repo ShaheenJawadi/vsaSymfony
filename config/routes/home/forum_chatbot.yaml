@@ -16,15 +16,40 @@ delete_comment:
     controller: App\Controller\Forum\ForumController::deleteComment
     methods: [GET]
 
+add_comment:
+    path: /add-comment/{idPub}
+    controller: App\Controller\Forum\ForumController::addComment
+    methods: [POST]
 
-#################
+update_comment:
+    path: /updateComment
+    controller: App\Controller\Forum\ForumController::updateComment
+    methods: [POST]
+
+chatbot_action:
+    path: /message
+    controller: App\Controller\Forum\ForumController::chatBotAction
+    methods: [POST]
 
 single_publication:
   path: /single/{idPub}
   controller: App\Controller\Forum\ForumController::single
 
-
-
 open_edit_publication:
   path: /edit/{idPub}
   controller: App\Controller\Forum\ForumController::edit
+
+update_publication:
+  path: /update-publication/{idPub}
+  controller: App\Controller\Forum\ForumController::updatePublication
+  methods: [POST]
+
+react_to_publication:
+    path: /react/{pubId}/{reactionType}
+    controller: App\Controller\Forum\ForumController:reactToPublication
+    methods: [GET]
+
+increment_click:
+    path: /increment-click/{pubId}
+    controller: App\Controller\Forum\ForumController:incrementClick
+    methods: [POST]

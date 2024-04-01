@@ -38,6 +38,13 @@
                 <div class="core">
 
                     <div class="">
+                        <div class="flash-messages">
+                                {% for message in app.flashes('danger') %}
+                                    <div class="alert alert-danger">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
 
                         <div class="add_pub_section">
                             <div class="top_entry">
@@ -74,11 +81,16 @@
 
 
                         <div class="nav_section">
-                            <div class="section_list">
-                                <div class="single selected">Tous</div>
-                                <div class="single">Mes publication</div>
+                            <div class="section_list" id="menuContainer">
+                                <div class="single selected"><a href="{{ path('home_forum_index') }}">Tous</a></div>
+                                <div class="single"><a href="?filter=myPublications">Mes publications</a></div>
 
-                                <div class="single">Populaire</div>
+                                <div class="single"><a href="?filter=populaire">Populaire</a></div>
+                                <div class="single"><a href="?filter=mostLiked">Les plus aimés</a></div>
+                                <div class="single"><a href="?filter=mostDisliked">Les moins aimés</a></div>
+
+
+
 
 
                             </div>
@@ -97,8 +109,17 @@
 
 
                         <div class="pub_list">
-                            {% for pub in pubs %} {% include 'home/components/forum/forumGrid.html.twig' with {'pub': pub,'commentPub':pub} %} {% endfor %}
-                        </div>
+                            {% for pub in pubs %}
+                                 {% set userReaction = userReactionsMap[pub.id] ?? null %}
+
+                                {% include 'home/components/forum/forumGrid.html.twig' with {
+                                    'pub': pub,
+                                    'commentForm': commentForms[pub.id],
+                                    'reactions': reactionsByPubId[pub.id] ?? {'jaime': 0, 'dislike': 0},
+                                    'userReaction': userReaction,
+                                    'userComment':user
+                                } %}
+                            {% endfor %}
                     </div>
                 </div>
             </div>
@@ -107,6 +128,12 @@
     </div>
 
 </div>
+
+
+{% endblock %}
+{% block javascripts %}
+
+
 
 
 {% endblock %}

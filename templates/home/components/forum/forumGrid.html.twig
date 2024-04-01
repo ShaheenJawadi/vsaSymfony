@@ -24,7 +24,7 @@
 
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#" openGeneralPopup  data-link="{{ path('home_forum_open_edit_publication' , {idPub:pub.id}) }}">Modifier</a>
+							<a class="dropdown-item"  openGeneralPopup  data-link="{{ path('home_forum_open_edit_publication' , {idPub:pub.id}) }}">Modifier</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="{{ path('home_forum_delete_publication', {'idPub': pub.id}) }}" onclick="return confirm('Are you sure you want to delete this publication?');">Supprimer</a>
@@ -60,38 +60,49 @@
 
 	<div class="infos">
 		<div class="reactions">
-			<div class="single_reaction">
+			{% set likeClass = userReaction == 'like' ? 'user-liked' : '' %}
+			{% set dislikeClass = userReaction == 'dislike' ? 'user-disliked' : '' %}
+			<div class="single_reaction {{ likeClass }}">
+				
+
 				<div class="icon like">
 					<i class="fa-solid fa-thumbs-up"></i>
-					<!--  <i class="fa-regular fa-thumbs-up"></i> -->
 				</div>
-				<div class="counting">15</div>
-				<div class="txt">J'aime</div>
+				<div class="counting">{{ reactions.jaime }}</div>
+				<div class="txt">
+				<a href="{{ path('home_forum_react_to_publication', {'pubId': pub.id, 'reactionType': 'like'}) }}" >J'aime</a>
+				</div>				
+				
+				
 			</div>
-			<div class="single_reaction">
+			<div class="single_reaction {{ dislikeClass }}">
 				<div class="icon dislike">
 					<i class="fa-regular fa-thumbs-down"></i>
 				</div>
-				<div class="counting">8</div>
-				<div class="txt">Je n'aime pas</div>
+					<div class="counting">{{ reactions.dislike }}</div>
+					<div class="txt">
+						<a href="{{ path('home_forum_react_to_publication', {'pubId': pub.id, 'reactionType': 'dislike'}) }}" >Je n'aime pas</a>
+					</div>
+				
 			</div>
-			<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="single_reaction">
-				<div class="icon comment">
 
-					<i class="fa-regular fa-message"></i>
-				</div>
-				{% set commentCount = pub.getCommentaires()|length %}
-				<div class="counting">{{commentCount}}</div>
-				<div class="txt">
-					{% if commentCount == 1 or commentCount ==0 %}
-						commentaire
-					{% else %}
-						commentaires
-					{% endif %}
-				</div>
+				<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="single_reaction_comment" data-pubid="{{ pub.id }}">
+					<div class="icon comment">
 
-			</a>
+						<i class="fa-regular fa-message"></i>
+					</div>
+					{% set commentCount = pub.getCommentaires()|length %}
+					<div class="counting">{{commentCount}}</div>
+					<div class="txt">
+						{% if commentCount == 1 or commentCount ==0 %}
+							commentaire
+						{% else %}
+							commentaires
+						{% endif %}
+					</div>
 
+				</a>
+			
 		</div>
 
 	</div>
@@ -102,29 +113,96 @@
 		{% else %}
 			<div class="single_comment">No comments found!</div>
 		{% endfor %}
-		<div class=" single_comment add">
-			<div class="avatar">
-				<img src="{{ asset('images/cours/person.jpg') }}" alt="">
-			</div>
-			<div class="content">
-				<div class="top">
-					<div class="username">Shaheenj</div>
-					<div class="date">Il y'a 10 jours</div>
-
-				</div>
-				<div class="new_comment">
-					<div class="comment">
-						<textarea class="form-control" placeholder="comment" rows="2"></textarea>
+		{# //FIXME:userId=18 #}
+		{% if user.id == 18 %}
+		<div class="flash-messages">
+                                {% for message in app.flashes('danger') %}
+                                    <div class="alert alert-danger">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+			{{ form_start(commentForm) }}
+				<div class="single_comment add">
+					<div class="avatar">
+						<img src="{{ user.image is not empty ? user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
 					</div>
-					<div class="sub">
-						<button class="btn_main">Ajouter</button>
+					<div class="content">
+						<div class="top">
+							<div class="username">{{user.username }}</div>
+						</div>
+						<div class="new_comment">
+							<div class="comment">
+								{{ form_row(commentForm.commentaire, {'label': false,'attr': {'class': 'form-control', 'placeholder': 'comment', 'rows': '2'}}) }}
+								{{ form_row(commentForm.returnPath) }} <!-- This will use the value set in the controller -->
+
+							</div>
+							<div class="sub">
+								<button type="submit" class="btn_main">Ajouter</button>
+							</div>
+						</div>
 					</div>
 				</div>
+			{{ form_end(commentForm) }}
+		{% endif %}
 
-			</div>
 
-
-		</div>
 
 	</div>
 </div>
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Define the sound to be played
+    var audio = new Audio('https://res.cloudinary.com/dkdx59xe9/video/upload/v1709508219/Facebook_Like_Sound_Effect_nbc6ju.mp3');
+
+    // Function to play sound
+    function playSound() {
+        audio.play().catch(error => console.error("Playback prevented by the browser."));
+    }
+
+    // Attach click event listeners to both like and dislike reaction areas
+    document.querySelectorAll('.single_reaction').forEach(function(element) {
+        element.addEventListener('click', function(event) {
+            playSound();
+        });
+    });
+});
+</script>
+
+<script>
+document.querySelectorAll('.single_reaction_comment').forEach(item => {
+    if (!item.dataset.listenerAttached) { // Check if the listener is not already attached
+        item.addEventListener('click', function(e) {
+            // Prevent default action to avoid following the link immediately
+            e.preventDefault(); 
+            const pubId = this.getAttribute('data-pubid');
+            console.log('Action executed');
+
+            fetch(`/forum/increment-click/${pubId}`, {
+                method: 'POST',
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            }).then(data => {
+                console.log(data);
+                // Navigate to the link after the fetch operation succeeds
+                window.location.href = this.href; // Use 'this.href' to navigate to the URL defined in the 'href' attribute of the clicked element
+            }).catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+        });
+
+        item.dataset.listenerAttached = "true"; // Mark the item to indicate that the listener has been attached
+    }
+});
+
+
+
+
+</script>
+
+{% endblock %}
