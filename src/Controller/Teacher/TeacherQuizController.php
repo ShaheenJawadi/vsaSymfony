@@ -5,6 +5,8 @@ namespace App\Controller\Teacher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response; 
 
+use Symfony\Component\HttpFoundation\Request;
+
 class TeacherQuizController extends AbstractController
 {
 
@@ -39,5 +41,24 @@ class TeacherQuizController extends AbstractController
         ]);
 
         return new Response($content);
+    }
+
+
+    public function create(Request $request): Response
+    {
+
+        $formData = $request->request->all();
+
+        $questionItems = $request->request->get('question', []);
+
+        $suggItems=$request->request->get('suggestion', []);
+ 
+
+    
+ 
+      
+ 
+
+        return $this->json(['success' => true, 'message' => 'success'], Response::HTTP_OK);
     }
 }

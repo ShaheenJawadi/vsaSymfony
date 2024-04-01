@@ -1,71 +1,65 @@
-{% extends 'teacher/teacherPanelLayout.html.twig' %} {% block body %}
-<div class="container">
-    <div class="action_section">
-        <div class="section_title">
-            Creér une Quiz
+{% extends 'teacher/teacherPanelLayout.html.twig' %}
+{% block body %}
+	<div class="container">
+		<div class="action_section">
+			<div class="section_title">
+				Creér une Quiz
 
-        </div>
-        <div class="sep">
-
-        </div>
-
+			</div>
+			<div class="sep"></div>
 
 
-    </div>
+		</div>
 
-</div>
-
-
-<div class="container">
-    <div class="form_page">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="single_row">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" name="nom" placeholder="">
-                            <label>Nom du Quiz</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="single_row">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" name="duree" placeholder="">
-                            <label>Duree</label>
-                        </div>
-                    </div>
-                </div>
+	</div>
 
 
+	<div class="container">
+		<form ajaxform action="{{ path('teacher_quiz_create') }}" method="post">
+			<div class="form_page">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="single_row">
+								<div class="form-floating">
+									<input type="text" class="form-control" name="nom" placeholder="">
+									<label>Nom du Quiz</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="single_row">
+								<div class="form-floating">
+									<input type="text" class="form-control" name="duree" placeholder="">
+									<label>Duree</label>
+								</div>
+							</div>
+						</div>
 
 
-            </div>
-            <div class="form_sep">
-                <div class="t">Questions</div>
-                <div class="sep"></div>
-            </div>
+					</div>
+					<div class="form_sep">
+						<div class="t">Questions</div>
+						<div class="sep"></div>
+					</div>
 
-            <div class="list_lessons" id="list_quiz">
+					<div class="list_lessons" id="list_quiz"></div>
+					<div class="d-flex justify-content-center">
 
-            </div>
-            <div class="d-flex justify-content-center">
+						<div class="btn_main" dynamic-add data-link="{{ path('teacher_quiz_add_question') }}" data-parent="#list_quiz">Ajouter une question</div>
 
-                <button class="btn_main" dynamic-add data-link="{{ path('teacher_quiz_add_question') }}" data-parent="#list_quiz">Ajouter une question</button>
+					</div>
 
-            </div>
-
-        </div>
+				</div>
 
 
+			</div>
 
-
-    </div>
-
-    <div class="d-flex justify-content-center mt-3">
-        <button class="btn_main">Soumettre</button>
-    </div>
-</div>
+			<div class="d-flex justify-content-center mt-3">
+				<button class="btn_main">Soumettre</button>
+			</div>
+		</form>
+	</div>
 
 {% endblock %}
