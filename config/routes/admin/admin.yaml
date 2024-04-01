@@ -1,3 +1,8 @@
 dashboard:
   path: /
   controller: App\Controller\Admin\AdminController::index
+
+
+classification_category_page:
+  path: /category
+  controller: App\Controller\Admin\ClassificationController::category
