@@ -22,3 +22,7 @@ classification_category_create:
 classification_subcategory_page:
   path: /subcategory
   controller: App\Controller\Admin\ClassificationController::subcategory
+
+classification_subcategory_create:
+  path: /subcategory/create
+  controller: App\Controller\Admin\ClassificationController::subcategory_create
