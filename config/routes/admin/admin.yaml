@@ -3,6 +3,14 @@ dashboard:
   controller: App\Controller\Admin\AdminController::index
 
 
+
+
+########################################################
+
 classification_category_page:
   path: /category
   controller: App\Controller\Admin\ClassificationController::category
+
+classification_subcategory_page:
+  path: /subcategory
+  controller: App\Controller\Admin\ClassificationController::subcategory

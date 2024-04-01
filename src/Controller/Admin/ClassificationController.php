@@ -19,7 +19,10 @@ class ClassificationController extends AbstractController
     }
 
  
- 
+    public function subcategory(): Response
+    {
+        return $this->render('admin/classification/subcategory/index.html.twig');
+    }
  
  
 }
