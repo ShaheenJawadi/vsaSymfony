@@ -1,4 +1,16 @@
+avis_index:
+  path: /avis
+  controller: App\Controller\Avis\AvisController::index
 ajouter_avis:
-  path: /ajouer
+  path: /ajouter
   controller: App\Controller\Avis\AvisController::ajouter
+avis_modifier:
+  path: /modifier/{id}
+  controller: App\Controller\Avis\AvisController::modifier
+avis_supprimer:
+  path: /supprimer/{id}
+  controller: App\Controller\Avis\AvisController::supprimer
+  methods: ['GET']
+
+
  

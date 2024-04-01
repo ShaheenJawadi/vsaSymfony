@@ -1,0 +1,38 @@
+{% extends 'home/homeLayout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/cours_page.css') }}">
+{% endblock %}
+
+
+{% block body %}
+<div class="my_review">
+    <h4>Modifier l'Avis</h4>
+    <form method="post" action="{{ path('home_avis_avis_modifier', {'id': avis.getIdAvi()}) }}">
+        {{ form_start(f) }}
+        <div class="rate infos">
+            <span>Notez ce cours</span>
+            <div class="rating">
+                <div class="list_stars">
+                    {# Afficher le champ de note du formulaire avec les étoiles #}
+                    {% for i in 1..5 %}
+                        <div class="star">
+                            <input type="radio" id="star{{ i }}" name="note" value="{{ i }}" {% if f.note.vars.value == i %} checked {% endif %}>
+                            <label for="star{{ i }}"><i class="fa-solid fa-star"></i></label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Écrire un message</label>
+            {{ form_widget(f.message, {'attr': {'class': 'form-control', 'rows': 3}}) }}
+        </div>
+        {# Remplacer le bouton "Save" par le bouton "Modifier" #}
+        <button class="btn_main" type="submit">Modifier</button>
+        {{ form_end(f) }}
+    </form>
+</div>
+
+{% endblock %}
