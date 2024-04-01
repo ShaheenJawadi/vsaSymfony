@@ -30,4 +30,14 @@ class TeacherQuizController extends AbstractController
     {
         return $this->render('teacher/quiz/add/index.html.twig');
     }
+
+    public function add_question(): Response
+    {
+        $q_index = random_int(10,9999);
+        $content = $this->renderView('teacher/components/quiz/single_question_form.html.twig', [
+            'q_index'=>$q_index
+        ]);
+
+        return new Response($content);
+    }
 }
