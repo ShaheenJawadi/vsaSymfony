@@ -11,14 +11,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CoursController extends AbstractController
 {
     
-    public function coursPage(string $slug ,AvisRepository $repo): Response
+    public function coursPage(string $slug ,AvisRepository $repo,CoursRepository $coursRepo): Response
     {
       
-        $avis = $repo->getAll(); // Récupérer la liste des avis depuis le repository
+        $avis = $repo->getAll(); 
+        $singleCours = $coursRepo->findOneBy(['slug' => $slug]);
+ 
+      
         return $this->render('home/cours/single/index.html.twig', [
             'controller_name' => 'CoursController',
-            'avis' => $avis, // Transmettre la variable "avis" au fichier Twig
-
+            'singleCours'=>$singleCours ,
+            'avis' => $avis,  
         ]);
     }
     public function coursLessonsPage(): Response
