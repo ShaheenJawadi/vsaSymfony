@@ -1,0 +1,71 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+{% block adminPanelBody %}
+	<div class="topNavigation_box">
+		<a href="#" class="active">Categories</a>
+		<a href="#">Subcategories</a>
+
+
+	</div>
+	<div class="container">
+		<div class="head">
+			<div class="left">
+				<h3 class="title">Categorie</h3>
+
+			</div>
+			<div class="right">
+				<a href="#" class="btn_main">
+					<div class="icon">
+						<i class="fa-solid fa-circle-plus"></i>
+
+					</div>
+					<div>Ajouter une categorie</div>
+				</a>
+
+			</div>
+		</div>
+		<div class="Dtable_style">
+
+
+			<table id="Dtable" class="table table-striped " style="width:100%">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>nb subcategories</th>
+
+						<th>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>qsdjq</td>
+						<td>sqdqsdqsfsdf</td>
+						<td>qspodipez</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+
+	<script>
+		var $window = $(window);
+$window.on('load', function (key, value) {
+$('#Dtable').DataTable({
+"language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+}
+});
+$(".header").load('/components/admin/header.html')
+// $('footer').load('../components/footer.html')
+
+
+});
+	</script>
+{% endblock %}
