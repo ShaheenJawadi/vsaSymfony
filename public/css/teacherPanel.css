@@ -236,3 +236,21 @@
     background: var(--fx-secondary-color);
     color: #fff;
 }
+
+.teacherPanel .form_page .form_sep {
+    display: flex;
+    gap: 10px;
+    margin: 10px 25px;
+    align-items: center;
+}
+
+.teacherPanel .form_page .form_sep .t {
+    color: var(--fx-main-text-color);
+    font-weight: 600;
+}
+
+.teacherPanel .form_page .form_sep .sep {
+    height: 1px;
+    background: var(--fx-primary-color);
+    flex: 1;
+}
