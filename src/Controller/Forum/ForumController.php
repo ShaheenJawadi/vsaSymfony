@@ -99,7 +99,7 @@ class ForumController extends AbstractController
             'contributors' => $contributors,
             'commentForms' => $commentForms,
             'reactionsByPubId' => $reactionsByPubId,
-            'userReactionsMap' => $userReactionsMap, // Add this line
+            'userReactionsMap' => $userReactionsMap, 
 
 
         ]);
@@ -288,12 +288,29 @@ public function single(PublicationsRepository $rep, ReactionsRepository $reactio
             'dislike' => $reaction['totalDislike']
         ];
     }    
+    $user = $userRepository->find(18); // FIXME: userid=18
+
+    $userReactions = $reactionsRepository->findBy(['user' => $user]);
+    $userReactionsMap = [];
+    foreach ($userReactions as $reaction) {
+        if ($reaction->getJaime() === 1) {
+            $userReactionsMap[$reaction->getPub()->getId()] = 'like';
+        } elseif ($reaction->getDislike() === 1) {
+            $userReactionsMap[$reaction->getPub()->getId()] = 'dislike';
+        }
+    }
+    foreach ($publication as $pub) {
+        $pubId = $pub->getId();
+        $pub->userReaction = $userReactionsMap[$pubId] ?? null;
+    }
     return $this->render('home/forum/single.html.twig', [
         'controller_name' => 'ForumController',
         'pub' => $publication,
         'contributors' => $contributors,
         'commentForm' => $commentForm->createView(),
         'reactionsByPubId' => $reactionsByPubId,
+        'userReactionsMap' => $userReactionsMap, 
+        'user' => $user,
 
     ]);
 }
@@ -384,6 +401,20 @@ public function reactToPublication($pubId, $reactionType, ReactionsRepository $r
     return $this->redirectToRoute('home_forum_index');
 }
 
+public function incrementClick(EntityManagerInterface $entityManager, $pubId): Response
+{
+    $publication = $entityManager->getRepository(Publications::class)->find($pubId);
+
+    if (!$publication) {
+        return $this->json(['error' => 'Publication not found'], 404);
+    }
+
+    $currentClicks = $publication->getNbclicks();
+    $publication->setNbclicks($currentClicks + 1);
+    $entityManager->flush(); 
+
+    return $this->json(['success' => true]);
+}
     //---------------------------------------------------------------------------------//
     public function chatBotIndex(Request $request, UserRepository $userRepository): Response
     {
