@@ -35,6 +35,9 @@ h2.p_color {
     color: #fff;
     border-radius: 8px;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .w_block {
@@ -442,4 +445,32 @@ footer .footer_Holder .footer_social .item:hover {
     padding: 15px 8px;
     border-bottom: 1px solid var(--fx-primary-color);
     margin-bottom: 15px;
+}
+
+.active>.page-link,
+.page-link.active {
+    background: var(--fx-primary-color);
+    border-color: var(--fx-primary-color);
+    color: #fff;
+}
+
+.page-link {
+    color: var(--fx-primary-color);
+}
+
+.Dtable_style th {
+    color: var(--fx-primary-color);
+}
+
+.Dtable_style td {
+    color: #424245;
+    font-weight: 600;
+}
+
+table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
+    box-shadow: inset 0 0 0 9999px rgb(0 174 239 / 9%);
+}
+
+.Dtable_style .row>* {
+    color: var(--fx-main-text-color);
 }

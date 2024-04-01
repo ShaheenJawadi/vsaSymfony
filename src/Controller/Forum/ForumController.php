@@ -30,10 +30,10 @@ use App\Service\OpenAIService;
 class ForumController extends AbstractController
 {
 
-    public function index(Request $request, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep, CommentairesRepository $commentairesRepository): Response
+    public function index(Request $request, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep,OpenAIService $openAIService, CommentairesRepository $commentairesRepository): Response
     {
         
-        $formResponse = $this->addPublication($request, $manager, $userRepository);
+        $formResponse = $this->addPublication($request, $manager,$openAIService, $userRepository,$rep);
         if ($formResponse !== null) {
             return $formResponse; 
         }
@@ -59,6 +59,12 @@ class ForumController extends AbstractController
                     return $pub->getNbClicks() !== null; // Assuming getNbClicks() is your getter method for nbClicks
                 });
                 break;
+            case'mostLiked':
+                $publications=$rep->findAllPublicationsOrderedByJaime();
+                break;
+            case'mostDisliked':
+                $publications=$rep->findAllPublicationsOrderedByDislike();
+                break;
             default:
                 $publications = $this->getAllPublications($rep);
                 break;
@@ -71,7 +77,19 @@ class ForumController extends AbstractController
                 'dislike' => $reaction['totalDislike']
             ];
         }
-
+        $userReactions = $reactionsRepository->findBy(['user' => $user]);
+        $userReactionsMap = [];
+        foreach ($userReactions as $reaction) {
+            if ($reaction->getJaime() === 1) {
+                $userReactionsMap[$reaction->getPub()->getId()] = 'like';
+            } elseif ($reaction->getDislike() === 1) {
+                $userReactionsMap[$reaction->getPub()->getId()] = 'dislike';
+            }
+        }
+        foreach ($publications as $pub) {
+            $pubId = $pub->getId();
+            $pub->userReaction = $userReactionsMap[$pubId] ?? null;
+        }
         
         return $this->render('home/forum/index.html.twig', [
             'controller_name' => 'ForumController',
@@ -81,6 +99,7 @@ class ForumController extends AbstractController
             'contributors' => $contributors,
             'commentForms' => $commentForms,
             'reactionsByPubId' => $reactionsByPubId,
+            'userReactionsMap' => $userReactionsMap, 
 
 
         ]);
@@ -96,7 +115,7 @@ class ForumController extends AbstractController
 
     //----------------------------------------------------------------------------------//
 
-    public function addPublication(Request $request, ManagerRegistry $manager, UserRepository $userRepository): ?Response
+    public function addPublication(Request $request, ManagerRegistry $manager,OpenAIService $openAIService, UserRepository $userRepository,$publicationsRepository): ?Response
     {
         $form = $this->createForm(PublicationsType::class, new Publications());
         $form->handleRequest($request);
@@ -111,7 +130,23 @@ class ForumController extends AbstractController
             if (!$user18) {
                 throw $this->createNotFoundException('No user found for ID 18');
             }
+
             $publication->setUser($user18);
+            $existingPublication = $publicationsRepository->findExistingPublication(
+                $user18->getId(),
+                $publication->getTitre(),
+                $publication->getContenu()
+            );
+            
+            if ($existingPublication) {
+                $this->addFlash('danger', 'A publication with the same title and content already exists.');
+                return $this->redirectToRoute('home_forum_index'); // Adjust the route name accordingly
+            }
+            $publicationText = $publication->getTitre() . " - " . $publication->getContenu();
+            if ($openAIService->checkContent($publicationText)) {
+                $this->addFlash('danger', 'Your publication contains inappropriate content and cannot be added.');
+                return $this->redirectToRoute('home_forum_index');
+            }
             $em->persist($publication);
             $em->flush();
 
@@ -176,7 +211,7 @@ public function updateComment(Request $request, EntityManagerInterface $entityMa
     return new JsonResponse(['success' => 'Comment updated']);
 }
 
-public function addComment(Request $request, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $pubRep, $idPub): ?Response
+public function addComment(Request $request, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $pubRep, $idPub,OpenAIService $openAIService): ?Response
 {
     $form = $this->createForm(CommentairesType::class, new Commentaires());
     $form->handleRequest($request);
@@ -197,7 +232,11 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
             throw $this->createNotFoundException('No user found for ID 18');
         }
         $comment->setUser($user);
-        
+        $commentText = $comment->getCommentaire();
+        if ($openAIService->checkContent($commentText)) {
+            $this->addFlash('danger', 'Your comment contains inappropriate content and cannot be added.');
+            return $this->redirectToRoute('home_forum_index');
+        }
         $em->persist($comment);
         $em->flush();
 
@@ -224,10 +263,10 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
 
 
 
-public function single(PublicationsRepository $rep, ReactionsRepository $reactionsRepository, int $idPub, Request $request, ManagerRegistry $manager, UserRepository $userRepository): Response
+public function single(PublicationsRepository $rep, ReactionsRepository $reactionsRepository,OpenAIService $openAIService, int $idPub, Request $request, ManagerRegistry $manager, UserRepository $userRepository): Response
 {
     // Attempt to handle adding a comment if the form is submitted
-    $formResponse = $this->addComment($request, $manager, $userRepository, $rep, $idPub);
+    $formResponse = $this->addComment($request, $manager, $userRepository, $rep, $idPub,$openAIService);
     if ($formResponse !== null) {
         return $formResponse;
     }
@@ -249,12 +288,29 @@ public function single(PublicationsRepository $rep, ReactionsRepository $reactio
             'dislike' => $reaction['totalDislike']
         ];
     }    
+    $user = $userRepository->find(18); // FIXME: userid=18
+
+    $userReactions = $reactionsRepository->findBy(['user' => $user]);
+    $userReactionsMap = [];
+    foreach ($userReactions as $reaction) {
+        if ($reaction->getJaime() === 1) {
+            $userReactionsMap[$reaction->getPub()->getId()] = 'like';
+        } elseif ($reaction->getDislike() === 1) {
+            $userReactionsMap[$reaction->getPub()->getId()] = 'dislike';
+        }
+    }
+    foreach ($publication as $pub) {
+        $pubId = $pub->getId();
+        $pub->userReaction = $userReactionsMap[$pubId] ?? null;
+    }
     return $this->render('home/forum/single.html.twig', [
         'controller_name' => 'ForumController',
         'pub' => $publication,
         'contributors' => $contributors,
         'commentForm' => $commentForm->createView(),
         'reactionsByPubId' => $reactionsByPubId,
+        'userReactionsMap' => $userReactionsMap, 
+        'user' => $user,
 
     ]);
 }
@@ -295,6 +351,69 @@ public function edit(Request $request,ManagerRegistry $manager, PublicationsRepo
 
         return new Response($content);
     
+}
+
+public function reactToPublication($pubId, $reactionType, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, PublicationsRepository $publicationsRepository, UserRepository $userRepository): Response
+{
+    $entityManager = $manager->getManager();
+    $user = $userRepository->find(18); // Assuming this is just for testing and will be dynamic in the application
+    $publication = $publicationsRepository->find($pubId);
+
+    if (!$publication || !$user) {
+        return $this->redirectToRoute('home_forum_index');
+    }
+
+    $reaction = $reactionsRepository->findOneBy(['pub' => $publication, 'user' => $user]);
+
+    if ($reaction) {
+        // Reaction exists, so we toggle the like/dislike or remove it if the same reaction is clicked again
+        if (($reactionType === 'like' && $reaction->getJaime() === 1) || ($reactionType === 'dislike' && $reaction->getDislike() === 1)) {
+            // User clicked the same reaction again, so we "unreact" by removing the reaction record
+            $entityManager->remove($reaction);
+        } else {
+            // Toggle the reaction
+            if ($reactionType === 'like') {
+                $reaction->setJaime(1);
+                $reaction->setDislike(0);
+            } else {
+                $reaction->setJaime(0);
+                $reaction->setDislike(1);
+            }
+            $entityManager->persist($reaction);
+        }
+    } else {
+        // No existing reaction, create a new one
+        $reaction = new Reactions();
+        $reaction->setPub($publication);
+        $reaction->setUser($user);
+        if ($reactionType === 'like') {
+            $reaction->setJaime(1);
+            $reaction->setDislike(0);
+        } else {
+            $reaction->setJaime(0);
+            $reaction->setDislike(1);
+        }
+        $entityManager->persist($reaction);
+    }
+
+    $entityManager->flush();
+
+    return $this->redirectToRoute('home_forum_index');
+}
+
+public function incrementClick(EntityManagerInterface $entityManager, $pubId): Response
+{
+    $publication = $entityManager->getRepository(Publications::class)->find($pubId);
+
+    if (!$publication) {
+        return $this->json(['error' => 'Publication not found'], 404);
+    }
+
+    $currentClicks = $publication->getNbclicks();
+    $publication->setNbclicks($currentClicks + 1);
+    $entityManager->flush(); 
+
+    return $this->json(['success' => true]);
 }
     //---------------------------------------------------------------------------------//
     public function chatBotIndex(Request $request, UserRepository $userRepository): Response
