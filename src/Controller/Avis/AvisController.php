@@ -97,14 +97,14 @@ class AvisController extends AbstractController
       ]);
     
   }
-  public function supprimer(ManagerRegistry $manger, $id ,AvisRepository $repo): Response
+  public function supprimer( $id, $courSlug ,ManagerRegistry $manger ,AvisRepository $repo): Response
   {
       $avis= $repo->find($id);
       $em =$manger->getManager(); 
 
       $em->remove($avis);
       $em->flush();
-      return $this->redirectToRoute('home_cours_page_index');
+      return $this->redirectToRoute('home_cours_page_index',["slug"=>$courSlug]);
   }
 
   
