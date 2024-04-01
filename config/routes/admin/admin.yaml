@@ -5,12 +5,20 @@ dashboard:
 
 
 
-########################################################
-
+#################################################################
+#################################################################
+#################################################################
+#################################################################
 classification_category_page:
   path: /category
   controller: App\Controller\Admin\ClassificationController::category
 
+classification_category_create:
+  path: /category/create
+  controller: App\Controller\Admin\ClassificationController::category_create
+
+
+#########
 classification_subcategory_page:
   path: /subcategory
   controller: App\Controller\Admin\ClassificationController::subcategory
