@@ -11,7 +11,7 @@ preview_popup:
 
 
 add:
-  path: /ajouter
+  path: /ajouter/{cours_id}
   controller: App\Controller\Teacher\TeacherQuizController::add
 
 
