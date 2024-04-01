@@ -60,8 +60,8 @@
 
 	<div class="infos">
 		<div class="reactions">
-			{% set likeClass = pub.userReaction == 'like' ? 'user-liked' : '' %}
-			{% set dislikeClass = pub.userReaction == 'dislike' ? 'user-disliked' : '' %}
+			{% set likeClass = userReaction == 'like' ? 'user-liked' : '' %}
+			{% set dislikeClass = userReaction == 'dislike' ? 'user-disliked' : '' %}
 			<div class="single_reaction {{ likeClass }}">
 				
 
@@ -85,23 +85,24 @@
 					</div>
 				
 			</div>
-			<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="single_reaction">
-				<div class="icon comment">
 
-					<i class="fa-regular fa-message"></i>
-				</div>
-				{% set commentCount = pub.getCommentaires()|length %}
-				<div class="counting">{{commentCount}}</div>
-				<div class="txt">
-					{% if commentCount == 1 or commentCount ==0 %}
-						commentaire
-					{% else %}
-						commentaires
-					{% endif %}
-				</div>
+				<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="single_reaction_comment" data-pubid="{{ pub.id }}">
+					<div class="icon comment">
 
-			</a>
+						<i class="fa-regular fa-message"></i>
+					</div>
+					{% set commentCount = pub.getCommentaires()|length %}
+					<div class="counting">{{commentCount}}</div>
+					<div class="txt">
+						{% if commentCount == 1 or commentCount ==0 %}
+							commentaire
+						{% else %}
+							commentaires
+						{% endif %}
+					</div>
 
+				</a>
+			
 		</div>
 
 	</div>
@@ -170,6 +171,38 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+document.querySelectorAll('.single_reaction_comment').forEach(item => {
+    if (!item.dataset.listenerAttached) { // Check if the listener is not already attached
+        item.addEventListener('click', function(e) {
+            // Prevent default action to avoid following the link immediately
+            e.preventDefault(); 
+            const pubId = this.getAttribute('data-pubid');
+            console.log('Action executed');
 
+            fetch(`/forum/increment-click/${pubId}`, {
+                method: 'POST',
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            }).then(data => {
+                console.log(data);
+                // Navigate to the link after the fetch operation succeeds
+                window.location.href = this.href; // Use 'this.href' to navigate to the URL defined in the 'href' attribute of the clicked element
+            }).catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+        });
+
+        item.dataset.listenerAttached = "true"; // Mark the item to indicate that the listener has been attached
+    }
+});
+
+
+
+
+</script>
 
 {% endblock %}
