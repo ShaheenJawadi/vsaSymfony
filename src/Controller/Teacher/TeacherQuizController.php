@@ -24,4 +24,10 @@ class TeacherQuizController extends AbstractController
         return new Response($content);
       
     }
+
+
+    public function add(int $cours_id): Response
+    {
+        return $this->render('teacher/quiz/add/index.html.twig');
+    }
 }
