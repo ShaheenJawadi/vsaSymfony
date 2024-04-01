@@ -1,0 +1,22 @@
+index:
+  path: /
+  controller: App\Controller\Categorie\CategorieController::index
+
+add_categorie:
+  path: /add
+  controller: App\Controller\Categorie\CategorieController::addCategorie
+  methods: [POST]
+
+single_categorie:
+  path: /single/{idCat}
+  controller: App\Controller\Categorie\CategorieController::single
+
+delete_categorie:
+  path: /delete/{idCat}
+  controller: App\Controller\Categorie\CategorieController::deleteCategorie
+  methods: [GET]
+
+update_categorie:
+  path: /update
+  controller: App\Controller\Categorie\CategorieController::updateCategorie
+  methods: [POST]
