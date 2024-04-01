@@ -1,0 +1,3 @@
+dashboard:
+  path: /
+  controller: App\Controller\Admin\AdminController::index
