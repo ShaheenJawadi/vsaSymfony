@@ -30,10 +30,10 @@ use App\Service\OpenAIService;
 class ForumController extends AbstractController
 {
 
-    public function index(Request $request, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep, CommentairesRepository $commentairesRepository): Response
+    public function index(Request $request, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep,OpenAIService $openAIService, CommentairesRepository $commentairesRepository): Response
     {
         
-        $formResponse = $this->addPublication($request, $manager, $userRepository);
+        $formResponse = $this->addPublication($request, $manager,$openAIService, $userRepository,$rep);
         if ($formResponse !== null) {
             return $formResponse; 
         }
@@ -58,6 +58,12 @@ class ForumController extends AbstractController
                 $publications = array_filter($rep->findAllPublicationsOrderedByClicks(), function($pub) {
                     return $pub->getNbClicks() !== null; // Assuming getNbClicks() is your getter method for nbClicks
                 });
+                break;
+            case'mostLiked':
+                $publications=$rep->findAllPublicationsOrderedByJaime();
+                break;
+            case'mostDisliked':
+                $publications=$rep->findAllPublicationsOrderedByDislike();
                 break;
             default:
                 $publications = $this->getAllPublications($rep);
@@ -109,7 +115,7 @@ class ForumController extends AbstractController
 
     //----------------------------------------------------------------------------------//
 
-    public function addPublication(Request $request, ManagerRegistry $manager, UserRepository $userRepository): ?Response
+    public function addPublication(Request $request, ManagerRegistry $manager,OpenAIService $openAIService, UserRepository $userRepository,$publicationsRepository): ?Response
     {
         $form = $this->createForm(PublicationsType::class, new Publications());
         $form->handleRequest($request);
@@ -124,7 +130,23 @@ class ForumController extends AbstractController
             if (!$user18) {
                 throw $this->createNotFoundException('No user found for ID 18');
             }
+
             $publication->setUser($user18);
+            $existingPublication = $publicationsRepository->findExistingPublication(
+                $user18->getId(),
+                $publication->getTitre(),
+                $publication->getContenu()
+            );
+            
+            if ($existingPublication) {
+                $this->addFlash('danger', 'A publication with the same title and content already exists.');
+                return $this->redirectToRoute('home_forum_index'); // Adjust the route name accordingly
+            }
+            $publicationText = $publication->getTitre() . " - " . $publication->getContenu();
+            if ($openAIService->checkContent($publicationText)) {
+                $this->addFlash('danger', 'Your publication contains inappropriate content and cannot be added.');
+                return $this->redirectToRoute('home_forum_index');
+            }
             $em->persist($publication);
             $em->flush();
 
@@ -189,7 +211,7 @@ public function updateComment(Request $request, EntityManagerInterface $entityMa
     return new JsonResponse(['success' => 'Comment updated']);
 }
 
-public function addComment(Request $request, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $pubRep, $idPub): ?Response
+public function addComment(Request $request, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $pubRep, $idPub,OpenAIService $openAIService): ?Response
 {
     $form = $this->createForm(CommentairesType::class, new Commentaires());
     $form->handleRequest($request);
@@ -210,7 +232,11 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
             throw $this->createNotFoundException('No user found for ID 18');
         }
         $comment->setUser($user);
-        
+        $commentText = $comment->getCommentaire();
+        if ($openAIService->checkContent($commentText)) {
+            $this->addFlash('danger', 'Your comment contains inappropriate content and cannot be added.');
+            return $this->redirectToRoute('home_forum_index');
+        }
         $em->persist($comment);
         $em->flush();
 
@@ -237,10 +263,10 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
 
 
 
-public function single(PublicationsRepository $rep, ReactionsRepository $reactionsRepository, int $idPub, Request $request, ManagerRegistry $manager, UserRepository $userRepository): Response
+public function single(PublicationsRepository $rep, ReactionsRepository $reactionsRepository,OpenAIService $openAIService, int $idPub, Request $request, ManagerRegistry $manager, UserRepository $userRepository): Response
 {
     // Attempt to handle adding a comment if the form is submitted
-    $formResponse = $this->addComment($request, $manager, $userRepository, $rep, $idPub);
+    $formResponse = $this->addComment($request, $manager, $userRepository, $rep, $idPub,$openAIService);
     if ($formResponse !== null) {
         return $formResponse;
     }

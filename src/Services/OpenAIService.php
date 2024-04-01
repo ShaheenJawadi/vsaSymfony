@@ -64,5 +64,41 @@ class OpenAIService
         }
         
     }
+
+    public function checkContent(string $text): bool
+    {
+        // System message to instruct the model on what to do
+        $systemPrompt = [
+            'role' => 'system',
+            'content' => "Please check the following text for any disrespectful language or inappropriate content. Return 'true' if the text contains any such language, and 'false' otherwise."
+        ];
+
+        // User message that contains the text to be checked
+        $userMessage = [
+            'role' => 'user',
+            'content' => $text
+        ];
+
+        try {
+            $response = $this->client->request('POST', 'https://api.openai.com/v1/chat/completions', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->apiKey,
+                    'Content-Type' => 'application/json',
+                ],
+                'json' => [
+                    'model' => 'gpt-3.5-turbo', // Adjust as necessary
+                    'messages' => [$systemPrompt, $userMessage], // Passing the messages
+                ],
+            ]);
+
+            $data = $response->toArray();
+            $result = $data['choices'][0]['message']['content'] ?? '';
+
+            return trim(strtolower($result)) === 'true';
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
     
 }
