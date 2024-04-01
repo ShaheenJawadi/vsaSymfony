@@ -6,7 +6,7 @@ ajouter_avis:
   controller: App\Controller\Avis\AvisController::ajouter
   methods: ['POST']
 avis_modifier:
-  path: /modifier/{id}
+  path: /modifier/{id}/{courSlug}
   controller: App\Controller\Avis\AvisController::modifier
 avis_supprimer:
   path: /supprimer/{id}

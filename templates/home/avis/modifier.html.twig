@@ -1,15 +1,7 @@
-{% extends 'home/homeLayout.html.twig' %}
-
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/cours_page.css') }}">
-{% endblock %}
-
-
-{% block body %}
+ 
 <div class="my_review">
     <h4>Modifier l'Avis</h4>
-    <form method="post" action="{{ path('home_avis_avis_modifier', {'id': avis.getIdAvi()}) }}">
+    <form method="post" action="{{ path('home_avis_avis_modifier', {'id': avis.getIdAvi(),courSlug:courSlug}) }}">
         {{ form_start(f) }}
         <div class="rate infos">
             <span>Notez ce cours</span>
@@ -34,5 +26,4 @@
         {{ form_end(f) }}
     </form>
 </div>
-
-{% endblock %}
+ 
