@@ -90,28 +90,26 @@
 						<p>{{ avi.getMessage() }}</p>
 					</div>
 
-					
 
-					 
 				</div>
-                <div class="options">
+				<div class="options">
 
 
-						<div class="dropdown dropstart">
-							<div class="drop_btn" data-bs-toggle="dropdown">
-								<i class="fa-solid fa-ellipsis-v"></i>
-							</div>
-
-							<ul class="dropdown-menu">
-								<li>
-									<a href="{{ path('home_avis_avis_modifier', {id: avi.getIdAvi})}}" >modifier</a>
-								</li>
-								<li>
-									<a href="{{ path('home_avis_avis_supprimer', {id: avi.getIdAvi})}}">supprimer</a>
-								</li>
-							</ul>
+					<div class="dropdown dropstart">
+						<div class="drop_btn" data-bs-toggle="dropdown">
+							<i class="fa-solid fa-ellipsis-v"></i>
 						</div>
+
+						<ul class="dropdown-menu">
+							<li>
+								<div opengeneralpopup data-link="{{ path('home_avis_avis_modifier', {id: avi.getIdAvi ,courSlug:courSlug})}}">modifier</div>
+							</li>
+							<li>
+								<a href="{{ path('home_avis_avis_supprimer', {id: avi.getIdAvi})}}">supprimer</a>
+							</li>
+						</ul>
 					</div>
+				</div>
 			</div>
 		{% endfor %}
 	</div>

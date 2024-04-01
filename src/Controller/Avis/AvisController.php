@@ -75,7 +75,7 @@ class AvisController extends AbstractController
          
     }
 
-  public function modifier(Request $req, AvisRepository $repo,  $id,ManagerRegistry $manger): Response
+  public function modifier( $id, $courSlug ,Request $req, AvisRepository $repo, ManagerRegistry $manger): Response
   {
       $em =$manger->getManager(); 
 
@@ -87,12 +87,12 @@ class AvisController extends AbstractController
       if ($form->isSubmitted()){
           $em->persist($avis);
           $em->flush();
-          return $this->redirectToRoute('home_cours_page_index');
+          return $this->redirectToRoute('home_cours_page_index' ,["slug"=>$courSlug]);
       }
       
       return $this->renderForm('home/avis/modifier.html.twig', [
           'f'=>$form,
-        
+        "courSlug"=>$courSlug,
           'avis' => $avis,
       ]);
     
