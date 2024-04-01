@@ -9,7 +9,7 @@ avis_modifier:
   path: /modifier/{id}/{courSlug}
   controller: App\Controller\Avis\AvisController::modifier
 avis_supprimer:
-  path: /supprimer/{id}
+  path: /supprimer/{id}/{courSlug}
   controller: App\Controller\Avis\AvisController::supprimer
   methods: ['GET']
 
