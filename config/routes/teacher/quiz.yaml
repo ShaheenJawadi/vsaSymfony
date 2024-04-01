@@ -15,8 +15,8 @@ add:
   controller: App\Controller\Teacher\TeacherQuizController::add
 
 
-add_lesson:
-  path: /add_lesson
+add_question:
+  path: /add_question
   controller: App\Controller\Teacher\TeacherQuizController::add_question
 
 
