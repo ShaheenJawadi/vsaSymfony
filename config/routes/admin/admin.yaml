@@ -1,0 +1,28 @@
+dashboard:
+  path: /
+  controller: App\Controller\Admin\AdminController::index
+
+
+
+
+#################################################################
+#################################################################
+#################################################################
+#################################################################
+classification_category_page:
+  path: /category
+  controller: App\Controller\Admin\ClassificationController::category
+
+classification_category_create:
+  path: /category/create
+  controller: App\Controller\Admin\ClassificationController::category_create
+
+
+#########
+classification_subcategory_page:
+  path: /subcategory
+  controller: App\Controller\Admin\ClassificationController::subcategory
+
+classification_subcategory_create:
+  path: /subcategory/create
+  controller: App\Controller\Admin\ClassificationController::subcategory_create
