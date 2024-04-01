@@ -29,5 +29,11 @@ class ClassificationController extends AbstractController
         return $this->render('admin/classification/subcategory/index.html.twig');
     }
     
+    public function subcategory_create(): Response
+    {
+        return $this->render('admin/classification/subcategory/create.html.twig');
+    }
+
+    
  
 }
