@@ -11,8 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CoursController extends AbstractController
 {
     
-    public function coursPage(AvisRepository $repo): Response
+    public function coursPage(string $slug ,AvisRepository $repo): Response
     {
+      
         $avis = $repo->getAll(); // Récupérer la liste des avis depuis le repository
         return $this->render('home/cours/single/index.html.twig', [
             'controller_name' => 'CoursController',

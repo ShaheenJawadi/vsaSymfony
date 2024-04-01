@@ -27,15 +27,14 @@ class AvisController extends AbstractController
     public function ajouter(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-
+        $coursId = $request->request->get('courId');
         $note = $request->request->get('note');
         $message = $request->request->get('message');
 
         // ID utilisateur statique
         $userId = 3;
 
-        // ID cours statique
-        $coursId = 2;
+     
 
         // Obtenez l'entité User correspondant à l'ID statique
         $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
@@ -69,8 +68,11 @@ class AvisController extends AbstractController
         $entityManager->persist($avis);
         $entityManager->flush();
 
-        // Rediriger l'utilisateur vers une autre page après l'ajout
-        return $this->redirectToRoute('home_cours_page_index');
+
+
+        $coursSlug= $request->request->get('courSlug');
+        return $this->redirectToRoute('home_cours_page_index' ,["slug"=>$coursSlug]);
+         
     }
 
   public function modifier(Request $req, AvisRepository $repo,  $id,ManagerRegistry $manger): Response

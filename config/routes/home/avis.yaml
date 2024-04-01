@@ -4,6 +4,7 @@ avis_index:
 ajouter_avis:
   path: /ajouter
   controller: App\Controller\Avis\AvisController::ajouter
+  methods: ['POST']
 avis_modifier:
   path: /modifier/{id}
   controller: App\Controller\Avis\AvisController::modifier
