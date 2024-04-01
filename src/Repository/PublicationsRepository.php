@@ -21,11 +21,7 @@ class PublicationsRepository extends ServiceEntityRepository
         parent::__construct($registry, Publications::class);
     }
 
-  /**
-     * Fetch all publications with user details.
-     *
-     * @return array An array of Publications objects with user details
-     */
+  
     public function findAllPublicationsWithUserDetails(): array
     {
         return $this->createQueryBuilder('p')
@@ -51,19 +47,11 @@ class PublicationsRepository extends ServiceEntityRepository
                 JOIN user u ON c.user_id = u.id
             ";
 
-            // Execute the native query and get a Result object
             $stmt = $connection->executeQuery($sql);
 
-            // Fetch and return results
             return $stmt->fetchAllAssociative();
     }
 
-    /**
-     * Fetch a publication by ID with user and comments details.
-     *
-     * @param int $publicationId The ID of the publication to fetch.
-     * @return Publications|null The Publications object with user and comments details or null if not found.
-     */
     public function findPublicationWithUserDetails(int $publicationId): ?Publications
     {
         return $this->createQueryBuilder('p')
@@ -71,10 +59,10 @@ class PublicationsRepository extends ServiceEntityRepository
             ->addSelect('u')
             ->leftJoin('p.commentaires', 'c')
             ->addSelect('c')
-            ->where('p.id = :publicationId') // Filter by publication ID
+            ->where('p.id = :publicationId') 
             ->setParameter('publicationId', $publicationId)
             ->getQuery()
-            ->getOneOrNullResult(); // Use getOneOrNullResult() since we're fetching by ID
+            ->getOneOrNullResult(); 
     }
     public function findPubByUserId($userId): array
     {
@@ -83,7 +71,7 @@ class PublicationsRepository extends ServiceEntityRepository
             ->addSelect('u')
             ->leftJoin('p.commentaires', 'c')
             ->addSelect('c')
-            ->where('u.id = :userId') // Filter by user ID
+            ->where('u.id = :userId') 
             ->setParameter('userId', $userId)
             ->orderBy('p.dateCreation', 'DESC')
             ->getQuery()
@@ -97,9 +85,41 @@ class PublicationsRepository extends ServiceEntityRepository
             ->addSelect('u')
             ->leftJoin('p.commentaires', 'c')
             ->addSelect('c')
-            ->orderBy('p.nbclicks', 'DESC') // Order by 'nbClicks' in descending order
+            ->orderBy('p.nbclicks', 'DESC') 
             ->getQuery()
             ->getResult();
     }
+    public function findExistingPublication($userId, $titre, $contenu)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.user', 'u')
+            ->where('u.id = :userId')
+            ->andWhere('p.titre = :titre')
+            ->andWhere('p.contenu = :contenu')
+            ->setParameter('userId', $userId)
+            ->setParameter('titre', $titre)
+            ->setParameter('contenu', $contenu)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    public function findAllPublicationsOrderedByJaime(): array
+    {
+        
+        $qb = $this->createQueryBuilder('p')
+            ->select('p', 'SUM(r.jaime) AS HIDDEN jaimeSum') 
+            ->leftJoin('App\Entity\Reactions', 'r', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.pub = p.id') 
+            ->groupBy('p.id') 
+            ->orderBy('jaimeSum', 'DESC'); 
 
+        return $qb->getQuery()->getResult();
+    }
+    public function findAllPublicationsOrderedByDislike(): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p', 'SUM(r.dislike) AS HIDDEN dislikeSum') 
+            ->leftJoin('App\Entity\Reactions', 'r', \Doctrine\ORM\Query\Expr\Join::WITH, 'r.pub = p.id') 
+            ->groupBy('p.id') 
+            ->orderBy('dislikeSum', 'DESC'); 
+        return $qb->getQuery()->getResult();
+    }
 }

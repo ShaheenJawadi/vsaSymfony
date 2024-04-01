@@ -113,15 +113,22 @@
 			<div class="single_comment">No comments found!</div>
 		{% endfor %}
 		{# //FIXME:userId=18 #}
-		{% if pub.user.id == 18 %}
+		{% if user.id == 18 %}
+		<div class="flash-messages">
+                                {% for message in app.flashes('danger') %}
+                                    <div class="alert alert-danger">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
 			{{ form_start(commentForm) }}
 				<div class="single_comment add">
 					<div class="avatar">
-						<img src="{{ pub.user.image is not empty ? pub.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
+						<img src="{{ user.image is not empty ? user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
 					</div>
 					<div class="content">
 						<div class="top">
-							<div class="username">{{ pub.user.username }}</div>
+							<div class="username">{{user.username }}</div>
 						</div>
 						<div class="new_comment">
 							<div class="comment">
