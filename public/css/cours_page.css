@@ -1,31 +1,33 @@
-.cours_page{
+.cours_page {
     margin: 30px 0;
 }
 
-.cours_page .right_side{
-background: #fff;
+.cours_page .right_side {
+    background: #fff;
 }
 
-.cours_page .right_side .top_btn_holder{
+.cours_page .right_side .top_btn_holder {
     background: var(--fx-border-color);
     padding: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.cours_page .right_side .info_holder{
+
+.cours_page .right_side .info_holder {
     border: 1px solid var(--fx-border-color);
     padding: 25px;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-.cours_page .right_side .info_holder .single_info_side{
+
+.cours_page .right_side .info_holder .single_info_side {
     display: flex;
     gap: 8px;
-
 }
-.cours_page .right_side .info_holder .single_info_side .icon{
+
+.cours_page .right_side .info_holder .single_info_side .icon {
     font-size: 18px;
     width: 30px;
     height: 30px;
@@ -37,66 +39,67 @@ background: #fff;
     border-radius: 50%;
     color: var(--fx-primary-color);
 }
+
 .cours_page .right_side .info_holder span {
     display: block;
     font-size: 18px;
-    
 }
-.cours_page .right_side .info_holder span.txt{
+
+.cours_page .right_side .info_holder span.txt {
     color: var(--fx-main-text-color);
 }
 
-.cours_page .core{
+.cours_page .core {
     display: flex;
     flex-direction: column;
     gap: 15px;
-
 }
 
 .cours_page .core .single {
     background: #fff;
-        border: 1px solid var(--fx-border-color);
+    border: 1px solid var(--fx-border-color);
 }
-.cours_page .core .single.s{
+
+.cours_page .core .single.s {
     padding: 15px;
 }
+
 .cours_page .core .cours_content {
     display: flex;
     flex-direction: column;
- 
 }
-.cours_page .core .cours_content .thumbnail{
-    position: relative;
 
+.cours_page .core .cours_content .thumbnail {
+    position: relative;
 }
+
 .cours_page .core .cours_content .thumbnail img {
     width: 100%;
 }
 
-.cours_page .core .cours_content .infos{
+.cours_page .core .cours_content .infos {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 25px;
-
 }
- 
+
 .cours_page .core .cours_content .infos .top_head .teacher {
- color: var(--fx-primary-color);
+    color: var(--fx-primary-color);
 }
 
 .cours_page .core .cours_content .infos .top_head .date {
     color: var(--fx-main-text-color);
 }
 
-.cours_page .core .cours_content .infos .description{
+.cours_page .core .cours_content .infos .description {
     border-top: 1px solid var(--fx-border-color);
     margin-top: 5px;
     padding-top: 5px;
     font-size: 18px;
     color: var(--fx-main-text-color);
-
 }
+
 
 /*  */
 
@@ -112,79 +115,86 @@ background: #fff;
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
+
 .cours_page .core .lesson_content .list_lessosn .single {
     display: flex;
     gap: 15px;
     justify-content: center;
 }
-.cours_page .core .lesson_content .list_lessosn .single .title{
+
+.cours_page .core .lesson_content .list_lessosn .single .title {
     flex: 1;
     font-size: 18px;
 }
-.cours_page .core .lesson_content .list_lessosn .single .duration{
+
+.cours_page .core .lesson_content .list_lessosn .single .duration {
     color: var(--fx-main-text-color);
 }
-.cours_page .core .lesson_content .list_lessosn .single .circle{
+
+.cours_page .core .lesson_content .list_lessosn .single .circle {
     background: var(--fx-primary-color);
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
-.cours_page .core .lesson_content .list_lessosn .single.quizz{
+
+.cours_page .core .lesson_content .list_lessosn .single.quizz {
     border-bottom: unset;
 }
 
-.cours_page .core .lesson_content .list_lessosn .single.quizz .circle{
+.cours_page .core .lesson_content .list_lessosn .single.quizz .circle {
     background: #f5f000;
 }
 
 
-
-
 /*  */
 
-.cours_page .core .info_review{
+.cours_page .core .info_review {
     display: flex;
     flex-direction: column;
-    
 }
 
-.cours_page .core .info_review .general{
+.cours_page .core .info_review .general {
     padding-bottom: 15px;
     border-bottom: 1px solid var(--fx-border-color);
     display: flex;
     gap: 2px;
     margin: 10px 0;
 }
+
 .cours_page .core .info_review .general .list {
     flex: 3;
     display: flex;
     flex-direction: column;
     grid-area: 8px;
 }
-.cours_page .core .info_review .general .list .single_class_review{
+
+.cours_page .core .info_review .general .list .single_class_review {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .cours_page .core .info_review .general .list .single_class_review .title {
     color: #000;
     font-size: 18px;
     min-width: 150px;
-        padding: 0 10px;
+    padding: 0 10px;
 }
+
 .cours_page .core .info_review .general .list .single_class_review .sep {
     height: 3px;
     background: var(--fx-primary-color);
     flex: 1;
-
 }
+
 .cours_page .core .info_review .general .list .single_class_review .count {
     color: var(--fx-main-text-color);
     min-width: 50px;
     padding: 0 10px;
 }
-.cours_page .core .info_review .general .counting{
+
+.cours_page .core .info_review .general .counting {
     flex: 2;
     background: var(--fx-border-color);
     border-radius: 8px;
@@ -193,16 +203,13 @@ background: #fff;
     align-items: center;
     justify-content: center;
     gap: 15px;
-
 }
 
-
-.cours_page .core .info_review .general .counting .avg{
+.cours_page .core .info_review .general .counting .avg {
     color: var(--fx-primary-color);
     font-size: 30px;
     font-weight: 700;
 }
-
 
 .cours_page .core .info_review .list_rating {
     display: flex;
@@ -219,7 +226,7 @@ background: #fff;
     padding-bottom: 20px;
 }
 
-.cours_page .core .info_review .list_rating .item .avatar img{
+.cours_page .core .info_review .list_rating .item .avatar img {
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -229,48 +236,57 @@ background: #fff;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    flex: 1;
 }
 
-.cours_page .core .info_review .list_rating .item .avis_content .top{
+.cours_page .core .info_review .list_rating .item .options .drop_btn {
+    color: var(--fx-main-text-color);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.cours_page .core .info_review .list_rating .item .avis_content .top {
     display: flex;
     align-items: center;
     gap: 5px;
-
 }
 
-.cours_page .core .info_review .list_rating .item .avis_content .top .name{
+.cours_page .core .info_review .list_rating .item .avis_content .top .name {
     font-size: 20px;
     color: #000;
     font-weight: 600;
 }
-.cours_page .core .info_review .list_rating .star{
+
+.cours_page .core .info_review .list_rating .star {
     font-size: 10px !important;
 }
+
 .cours_page .core .info_review .list_rating .item .avis_content .top .date {
     color: var(--fx-primary-color);
 }
 
-.cours_page .core .info_review .list_rating .item .avis_content .top .rating_class{
+.cours_page .core .info_review .list_rating .item .avis_content .top .rating_class {
     font-size: 14px;
     color: var(--fx-main-text-color);
 }
 
-.cours_page .core .info_review .my_review{
+.cours_page .core .info_review .my_review {
     display: flex;
-    
     flex-direction: column;
     gap: 15px;
-
 }
-.cours_page .core .info_review .my_review .rate{
+
+.cours_page .core .info_review .my_review .rate {
     display: flex;
     align-items: center;
     gap: 25px;
 }
-.cours_page .core .info_review .my_review button{
+
+.cours_page .core .info_review .my_review button {
     width: max-content;
 }
 
-.cours_page .core .info_review .my_review span , .cours_page .core .info_review .my_review label{
+.cours_page .core .info_review .my_review span,
+.cours_page .core .info_review .my_review label {
     color: var(--fx-main-text-color);
 }
