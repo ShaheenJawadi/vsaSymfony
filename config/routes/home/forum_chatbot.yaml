@@ -49,4 +49,7 @@ react_to_publication:
     controller: App\Controller\Forum\ForumController:reactToPublication
     methods: [GET]
 
-
+increment_click:
+    path: /increment-click/{pubId}
+    controller: App\Controller\Forum\ForumController:incrementClick
+    methods: [POST]
