@@ -1,8 +1,8 @@
 {% extends 'admin/adminPanelLayout.html.twig' %}
 {% block adminPanelBody %}
 	<div class="topNavigation_box">
-		<a href="#">Categories</a>
-		<a href="#" class="active">Subcategories</a>
+		<a href="{{ path('admin_classification_category_page')}}">Categories</a>
+		<a href="{{ path('admin_classification_subcategory_page')}}"   class="active">Subcategories</a>
 
 
 	</div>
@@ -13,7 +13,7 @@
 
 			</div>
 			<div class="right">
-				<a href="#" class="btn_main">
+				<a href="{{ path('admin_classification_subcategory_create')}}"  class="btn_main">
 					<div class="icon">
 						<i class="fa-solid fa-circle-plus"></i>
 
