@@ -1,13 +1,13 @@
 {% extends 'admin/adminPanelLayout.html.twig' %}
 {% block adminPanelBody %}
- 
+
 	<div class="container">
 		<div class="head">
 			<div class="left">
 				<h3 class="title">Users</h3>
 
 			</div>
-			 
+
 		</div>
 		<div class="Dtable_style">
 
@@ -24,13 +24,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>qsdjq</td>
-						<td>sqdqsdqsfsdf</td>
-						<td>qspodipez</td>
-						<td>qspodipez</td>
-
-					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -48,12 +41,24 @@
 		var $window = $(window);
 $window.on('load', function (key, value) {
 $('#Dtable').DataTable({
+"ajax": {
+"url":"{{ path('admin_get_users_list') }}",
+"type":"GET",
+"dataSrc":""
+},
+"columns":[
+	 {"data":"0"},
+	 {"data":"1"},
 
+	 {"data":"2"},
+	  {"data":"3"}
+
+],
 "language": {
 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
 }
 });
- 
+
 
 });
 	</script>
