@@ -1,61 +1,65 @@
 <div class="auth_holder">
 
-    <div class="auth_title">S'inscrire avec</div>
-    <div class="social_btns">
-        <button class="fb">
+ {{ form_start(formR)  }} 
+	<div class="auth_title">S'inscrire avec</div>
+	<div class="social_btns">
+		<button class="fb">
 			<i class="fa-brands fa-facebook-f"></i>
 			<span>Facebook</span>
 		</button>
-        <button class="google">
+		<button class="google">
 			<i class="fa-brands fa-google"></i>
 			<span>Google</span>
 		</button>
 
 
-    </div>
-    <div class="separator">
-        <div class="line"></div>
-        <span>Ou</span>
-        <div class="line"></div>
+	</div>
+	<div class="separator">
+		<div class="line"></div>
+		<span>Ou</span>
+		<div class="line"></div>
 
-    </div>
-
-    <div class="input_holder">
+	</div>
 
 
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
+	<div class="input_holder">
+
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text">
 				<i class="fa-solid fa-user"></i>
 			</span>
-            <input type="text" class="form-control" placeholder="Username">
-        </div>
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
+			{{ form_row(formR.username) }}
+		</div>
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text">
 				<i class="fa-solid fa-at"></i>
 			</span>
-            <input type="email" class="form-control" placeholder="Email">
-        </div>
+				{{ form_row(formR.email) }}
+		</div>
 
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text">
 				<i class="fa-solid fa-lock"></i>
 			</span>
-            <input type="password" class="form-control" placeholder="Mot de passe">
-        </div>
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
+				{{ form_row(formR.password) }}
+		</div>
+		<div class="input-group flex-nowrap">
+			<span class="input-group-text">
 				<i class="fa-solid fa-lock"></i>
 			</span>
-            <input type="password" class="form-control" placeholder="Repeter mot de passe">
-        </div>
-    </div>
+            
+			{{ form_row(formR.repeatPassword) }}
+		</div>
+	</div>
 
 
-    <button class="btn_main">S'inscrire</button>
+	{{ form_row(formR.submit) }}
+{{form_end(formR)}}
 
-    <div class="ind" id="openLoginPopup">
-        Vous avez déjà un compte?
-    </div>
+
+	<div class="ind" id="openLoginPopup">
+		Vous avez déjà un compte?
+	</div>
 
 
 </div>
