@@ -12,13 +12,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\UserRepository;
+
 
 use Doctrine\Persistence\ManagerRegistry;
 
 class QuizController extends AbstractController
 {
-    public function index(Request $request, QuizRepository $quizRepository): Response
-{
+    public function index(Request $request, QuizRepository $quizRepository, UserRepository $userRepository): Response
+    {$user = $userRepository->find(18); // FIXME: userid=18
+        if (!$user) {
+            throw $this->createNotFoundException('No user found for id 18');
+        }
+
+        $userId = $user->getId();
         $coursId=2;   
         $questionIndex = $request->attributes->get('questionIndex'); // Extract questionIndex from the route
     
@@ -28,8 +35,8 @@ class QuizController extends AbstractController
         } else {
             $questionIndex = (int) $questionIndex; // Ensure questionIndex is an integer
         } 
-    $quiz = $this->getQuizByCoursId($coursId, $quizRepository);
-    $questionDetails = $this->fetchQuestionDetails($quizRepository, $coursId, $questionIndex);
+    $quiz = $this->getQuizByCoursId($coursId, $quizRepository,$userId);
+    $questionDetails = $this->fetchQuestionDetails($quizRepository, $coursId, $questionIndex,$userId);
 
     return $this->render('home/quiz/index.html.twig', [
         'controller_name' => 'QuizController',
@@ -39,9 +46,9 @@ class QuizController extends AbstractController
 
 }
 
-    private function fetchQuestionDetails(QuizRepository $quizRepository, int $coursId, int $questionIndex)
+    private function fetchQuestionDetails(QuizRepository $quizRepository, int $coursId, int $questionIndex,int $userId)
     {
-        $quizzes = $this->getQuizByCoursId($coursId, $quizRepository);
+        $quizzes = $this->getQuizByCoursId($coursId, $quizRepository,$userId);
 
         if (empty($quizzes)) {
             return null;
@@ -66,9 +73,10 @@ class QuizController extends AbstractController
         ];
     }
 
-    private function getQuizByCoursId(int $coursId, QuizRepository $quizRepository)
+    private function getQuizByCoursId(int $coursId, QuizRepository $quizRepository, int $userId)
     {
-        return $quizRepository->findQuizByCoursId($coursId);
+        
+        return $quizRepository->findQuizByCoursId($coursId,$userId);
     }
 
     public function note(Request $request): Response
