@@ -28,7 +28,7 @@ delete:
   ##################################
 
 edit:
-  path: /edit/{slug}
+  path: /edit/{id}
   controller: App\Controller\Teacher\TeacherCoursController::edit
 
 

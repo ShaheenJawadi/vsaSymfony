@@ -3,7 +3,14 @@
 	<div class="container">
 		<div class="action_section">
 			<div class="section_title">
-				Creér un cours
+				
+
+				{% if edit_cours is defined %}
+					Modifier {{edit_cours.nom}}
+				{% else %}
+				 Creér un cours
+					
+				{% endif %}
 
 			</div>
 			<div class="sep"></div>
@@ -72,8 +79,8 @@
 
 
 											<div class="form-floating">
-												<select class="form-select">
-													<option selected>cat 1</option>
+												<select class="form-select" >
+													<option  >cat 1</option>
 													<option value="1">cat 2</option>
 													<option value="2">cat 3</option>
 													<option value="3">cat 4</option>
@@ -87,7 +94,7 @@
 
 
 											<div class="form-floating">
-												<select class="form-select" name="subCategoryId">
+												<select class="form-select"  name="subCategoryId">
 													<option selected>cat 1</option>
 													<option value="1">scat 2</option>
 													<option value="2">scat 3</option>
