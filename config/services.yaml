@@ -30,3 +30,8 @@ services:
         arguments:
             $client: '@http_client' # This injects the HttpClientInterface service
             $apiKey: '%env(OPENAI_API_KEY)%'
+
+    App\Service\UserSessionManager:
+        arguments:
+            $session: '@session' # This injects the HttpClientInterface service
+            $entityManager: '@doctrine.orm.entity_manager'
