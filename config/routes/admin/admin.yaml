@@ -26,3 +26,18 @@ classification_subcategory_page:
 classification_subcategory_create:
   path: /subcategory/create
   controller: App\Controller\Admin\ClassificationController::subcategory_create
+
+
+
+#################################################################
+#################################################################
+#################################################################
+#################################################################
+
+
+
+
+
+users:
+  path: /users 
+  controller: App\Controller\Admin\AdminController::users

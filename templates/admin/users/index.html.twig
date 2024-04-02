@@ -1,27 +1,13 @@
 {% extends 'admin/adminPanelLayout.html.twig' %}
 {% block adminPanelBody %}
-	<div class="topNavigation_box">
-		<a href="{{ path('admin_classification_category_page')}}">Categories</a>
-		<a href="{{ path('admin_classification_subcategory_page')}}"   class="active">Subcategories</a>
-
-
-	</div>
+ 
 	<div class="container">
 		<div class="head">
 			<div class="left">
-				<h3 class="title">Categorie</h3>
+				<h3 class="title">Users</h3>
 
 			</div>
-			<div class="right">
-				<a href="{{ path('admin_classification_subcategory_create')}}"  class="btn_main">
-					<div class="icon">
-						<i class="fa-solid fa-circle-plus"></i>
-
-					</div>
-					<div>Ajouter une Sous Categorie</div>
-				</a>
-
-			</div>
+			 
 		</div>
 		<div class="Dtable_style">
 
@@ -29,10 +15,12 @@
 			<table id="Dtable" class="table table-striped " style="width:100%">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>nb subcategories</th>
+						<th>Nom</th>
+						<th>Prenom</th>
 
+						<th>Email</th>
 						<th>Options</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -40,6 +28,8 @@
 						<td>qsdjq</td>
 						<td>sqdqsdqsfsdf</td>
 						<td>qspodipez</td>
+						<td>qspodipez</td>
+
 					</tr>
 				</tbody>
 			</table>
@@ -58,6 +48,7 @@
 		var $window = $(window);
 $window.on('load', function (key, value) {
 $('#Dtable').DataTable({
+
 "language": {
 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
 }
