@@ -2,6 +2,7 @@
 
 namespace App\Controller\Auth;
 
+use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -10,7 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UserType;
-use App\Controller\Auth\UserModifyType;
+use App\Form\UserModifyType;
+use App\Repository\UserRepository;
 
 class AuthController extends AbstractController
 {
@@ -34,7 +36,7 @@ class AuthController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $manager->getManager();
             $user = $form->getData();
-            $user->setDateCreation(new \DateTime());
+       
 
             // Find the user dynamically, you may have some logic here to find the user
             // For example, if you have the email address of the user, you can find it like this:
@@ -54,12 +56,16 @@ class AuthController extends AbstractController
             $this->addFlash('success', 'User registered successfully.');
             return $this->redirectToRoute('home_forum_index');
         }
-        return null;
 
 
-        $content = $this->renderView('home/auth/popup/register.html.twig');
+        $content = $this->renderView(
+            'home/auth/popup/register.html.twig',
+            ["formR" => $form->createView()]
+        );
         return new Response($content);
     }
+
+
 
     public function loadResetPwsPopup(): Response
     {
@@ -105,11 +111,11 @@ class AuthController extends AbstractController
         return $this->redirectToRoute('///'); // Replace '///' with the appropriate route
     }
     public function allUsers(UserRepository $userRepository)
-{
-    $users = $userRepository->findAll();
+    {
+        $users = $userRepository->findAll();
 
-    return $users;
-}
+        return $users;
+    }
 
 
 
