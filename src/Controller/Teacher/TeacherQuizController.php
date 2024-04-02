@@ -1,10 +1,10 @@
 <?php
 namespace App\Controller\Teacher;
 
-use App\Entity\Quiz; // Assurez-vous d'importer l'entité Quiz
+use App\Entity\Quiz; 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException; // Importez cette classe pour gérer les cas où le quiz n'est pas trouvé
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException; 
 use App\Repository\QuizRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,8 +18,8 @@ class TeacherQuizController extends AbstractController
 
     public function index(QuizRepository $quizRepository, UserRepository $userRepository): Response
     {
-        $quizId = 1; 
-        $user = $userRepository->find(18); // FIXME: userid=18
+        $quizId = 1;  //TODO FIXME: quizid=1
+        $user = $userRepository->find(18); //TODO FIXME: userid=18
         if (!$user) {
             throw $this->createNotFoundException('No user found for id 18');
         }
@@ -34,7 +34,10 @@ class TeacherQuizController extends AbstractController
         ]);
     }
 
-    
+    public function add(): Response
+    {
+        return $this->render('teacher/quiz/add/index.html.twig' );
+    }
     public function preview(int $quiz_id, QuizRepository $quizRepository): Response
     {
 
@@ -75,12 +78,6 @@ class TeacherQuizController extends AbstractController
       $questionItems = $request->request->get('question', []);
 
       $suggItems=$request->request->get('suggestion', []);
-
-
-  
-
-    
-
 
       return $this->json(['success' => true, 'message' => 'success'], Response::HTTP_OK);
   }
