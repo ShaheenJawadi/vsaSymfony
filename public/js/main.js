@@ -7,29 +7,12 @@
     });
 
     $(document).ready(function() {
+
+
+
         $.get('/auth/load/popup/login', function(response) {
             $('#authModel .modal-content').html(response);
         });
-
-        $("#openForgetPws").on("click", function() {
-            $.get('/auth/load/popup/reset_pws', function(response) {
-                $('#authModel .modal-content').html(response);
-            });
-        });
-        $("#openRegister").on("click", function() {
-            $.get('/auth/load/popup/register', function(response) {
-                $('#authModel .modal-content').html(response);
-            });
-        });
-
-
-
-        $("#openLoginPopup").on("click", function() {
-            $.get('/auth/load/popup/login', function(response) {
-                $('#authModel .modal-content').html(response);
-            });
-        });
-
         /* *********************General popup****** */
 
         $("[openGeneralPopup]").on("click", function() {
@@ -56,6 +39,38 @@
 
 
     })
+
+
+
+    $(document).on('click', '#openRegister', function() {
+
+
+        $.get('/auth/load/popup/register', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+    });
+
+
+
+    $(document).on('click', '#openForgetPws', function() {
+
+        $.get('/auth/load/popup/reset_pws', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+    });
+
+
+    $(document).on('click', '#openLoginPopup', function() {
+
+        $.get('/auth/load/popup/login', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+    });
+
+
+
+
+
 
 
 
