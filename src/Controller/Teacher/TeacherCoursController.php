@@ -42,7 +42,7 @@ class TeacherCoursController extends AbstractController
 
     public function add(): Response
     {
-        return $this->render('teacher/cours/add/index.html.twig' );
+        return $this->render('teacher/cours/add/index.html.twig');
     }
 
     public function add_lesson(): Response
@@ -58,8 +58,8 @@ class TeacherCoursController extends AbstractController
 
         $formData = $request->request->all();
 
-        $lessonItems = $request->request->get('lesson_list', []);
 
+        $updateCoursId = $request->request->get('coursId');
 
 
         $coursEntity = $this->collectCoursData($formData);
@@ -74,10 +74,53 @@ class TeacherCoursController extends AbstractController
 
             return $this->json(['success' => false, 'errors' => $errors, 'formData' => $formData], Response::HTTP_BAD_REQUEST);
         }
-
-
         $entityManager = $this->managerRegistry->getManager();
-        $entityManager->persist($coursEntity);
+
+
+
+
+        if ($updateCoursId) {
+
+
+            $entity = $entityManager->getRepository(Cours::class)->find($updateCoursId);
+
+
+            $entity->setNom($coursEntity->getNom());
+
+            $entity->setImage($coursEntity->getImage());
+            $entity->setDescription($coursEntity->getDescription());
+            $entity->setTags($coursEntity->getTags());
+            $entity->setSubcategoryid($coursEntity->getSubcategoryid());
+            $entity->setNiveauid($coursEntity->getNiveauid());
+
+
+            $slugger = new AsciiSlugger();
+            $entity->setSlug($slugger->slug($coursEntity->getNom())->lower());
+            $entityManager->persist($entity);
+
+
+            $RessourceToDelete = $entityManager->getRepository(Ressources::class)->findBy(["coursid" => $updateCoursId]);
+
+            foreach ($RessourceToDelete as $entityR) {
+                $entityManager->remove($entityR);
+            }
+
+
+            $LessonsToDelete = $entityManager->getRepository(Lessons::class)->findBy(["coursid" => $updateCoursId]);
+
+            foreach ($LessonsToDelete as $entityL) {
+                $entityManager->remove($entityL);
+            }
+
+
+         
+            $coursEntity = $entity;
+        } else {
+
+            $entityManager->persist($coursEntity);
+        }
+
+
         $ressourceEntity->setCoursid($coursEntity);
         $entityManager->persist($ressourceEntity);
         foreach ($lessonsEntityList as $lessonItem) {
@@ -100,7 +143,7 @@ class TeacherCoursController extends AbstractController
 
         $level = $this->managerRegistry->getRepository(Level::class)->find($formData['niveauId']);
 
-
+        //up top
         $entity = new Cours();
         $entity->setEnseignantid($user);
         $entity->setNom($formData['nom']);
@@ -194,8 +237,8 @@ class TeacherCoursController extends AbstractController
             $entity->setTitre($request->request->get('lesson_title')[$i]);
             $entity->setVideo($request->request->get('lesson_video')[$i]);
             $entity->setContent($request->request->get('lesson_content')[$i]);
-            $entity->setDuree($request->request->get('lesson_duration')[$i]);
-            $entity->setClassement($request->request->get('lesson_order')[$i]);
+            $entity->setDuree((int)$request->request->get('lesson_duration')[$i]);
+            $entity->setClassement((int)$request->request->get('lesson_order')[$i]);
 
             $lessons[] = $entity;
         }
@@ -234,7 +277,7 @@ class TeacherCoursController extends AbstractController
 
         $entityManager = $this->managerRegistry->getManager();
 
-        $entity = $entityManager->getRepository(Cours::class)->findOneBy ([ 'id' =>$id]);
+        $entity = $entityManager->getRepository(Cours::class)->findOneBy(['id' => $id]);
         return $this->render('teacher/cours/add/index.html.twig', [
             'edit_cours' => $entity,
         ]);
