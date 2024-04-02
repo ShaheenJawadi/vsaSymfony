@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-#[ORM\Entity]
+ 
 
-//#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: "user", indexes: [new ORM\Index(name: "fk_level_id", columns: ["level_id"])])]
 class User
 {

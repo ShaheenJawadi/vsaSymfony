@@ -9,3 +9,9 @@ load_register_popup:
 load_restPws_popup:
   path: /load/popup/reset_pws
   controller: App\Controller\Auth\AuthController::loadResetPwsPopup
+
+
+register_post:
+  path: /register
+  controller: App\Controller\Auth\AuthController::register
+  methods: [POST]
