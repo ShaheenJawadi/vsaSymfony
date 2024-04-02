@@ -13,7 +13,7 @@
                     </div>
                     <ul class=" dropdown-menu dropdown-menu-end ">
                         <li>
-                            <a class="dropdown-item " href="# ">Modifier</a>
+                            <a class="dropdown-item " href="{{ path('teacher_cours_edit' , {slug:cours.slug}) }}">Modifier</a>
                         </li>
                         <li>
                             <a class="dropdown-item " href="{{ path('teacher_quiz_add' , {cours_id:cours.id}) }}">Quiz</a>
