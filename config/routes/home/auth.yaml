@@ -21,3 +21,9 @@ login_post:
   path: /login
   controller: App\Controller\Auth\AuthController::login
   methods: [POST]
+
+  
+logout:
+  path: /logout
+  controller: App\Controller\Auth\AuthController::logout
+ 

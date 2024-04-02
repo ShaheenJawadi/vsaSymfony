@@ -108,5 +108,14 @@ class AuthController extends AbstractController
     }
  
 
+    public function logout(Request $request ,ManagerRegistry $managerRegistry , UserRepository $userRepository) {
+
+        $this->user_session->clearSession();
+         
+        return $this->redirectToRoute('home_index');
+        
+
+    }
+
 
 }
