@@ -78,6 +78,42 @@ h2.p_color {
     border-right: 1px solid #cccccc;
 }
 
+.header .auth_part .profile {
+    position: relative;
+    margin-right: 10px;
+}
+
+.header .auth_part .profile .dropdown-menu li .ic {
+    color: var(--fx-primary-color);
+}
+
+.header .auth_part .profile .dropdown-menu li span {
+    margin-left: 10px;
+    font-size: 16px;
+    color: var(--fx-main-text-color);
+    font-weight: 700;
+}
+
+.header .auth_part .profile .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--fx-main-text-color);
+}
+
+.header .auth_part .profile .dropdown-toggle::after {
+    display: none;
+}
+
+.header .auth_part .profile .profile-pic img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--fx-primary-color);
+}
+
 .header .badge_my_cours {
     position: relative;
     margin: 0 20px;
