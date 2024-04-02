@@ -41,3 +41,8 @@ classification_subcategory_create:
 users:
   path: /users 
   controller: App\Controller\Admin\AdminController::users
+
+
+get_users_list:
+  path: /users/datatable 
+  controller: App\Controller\Admin\AdminController::users_list
