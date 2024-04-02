@@ -24,6 +24,8 @@
 
 	<div class="container ">
 		<form ajaxform action="{{ path('teacher_cours_create') }}" method="post">
+		{% if edit_cours is defined %}<input type="hidden" value="{{edit_cours.id}}" name="coursId">  {% endif %}
+		
 			<div class="form_page">
 
 
