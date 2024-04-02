@@ -130,6 +130,7 @@ class TeacherCoursController extends AbstractController
         $entityManager->flush();
 
 
+     
         return $this->json(['success' => true, 'message' => 'success'], Response::HTTP_OK);
     }
 
