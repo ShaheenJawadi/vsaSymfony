@@ -46,3 +46,8 @@ users:
 get_users_list:
   path: /users/datatable 
   controller: App\Controller\Admin\AdminController::users_list
+
+
+delete_user:
+  path: /users/delete/{id} 
+  controller: App\Controller\Admin\AdminController::delete_user
