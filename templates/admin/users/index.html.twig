@@ -51,7 +51,13 @@ $('#Dtable').DataTable({
 	 {"data":"1"},
 
 	 {"data":"2"},
-	  {"data":"3"}
+	  {"render": function(data , type , row , meta) {
+		return '<a class="option delete" href="'+row[3]+'"><i class="fa-solid fa-trash"></i></a>';
+	  }
+	  
+	 
+	 
+	 }
 
 ],
 "language": {
