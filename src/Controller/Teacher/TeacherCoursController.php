@@ -42,9 +42,7 @@ class TeacherCoursController extends AbstractController
 
     public function add(): Response
     {
-        return $this->render('teacher/cours/add/index.html.twig', [
-            'controller_name' => 'TeacherController',
-        ]);
+        return $this->render('teacher/cours/add/index.html.twig' );
     }
 
     public function add_lesson(): Response
@@ -228,5 +226,17 @@ class TeacherCoursController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('teacher_cours_index');
+    }
+
+
+    public function edit($id): Response
+    {
+
+        $entityManager = $this->managerRegistry->getManager();
+
+        $entity = $entityManager->getRepository(Cours::class)->findOneBy ([ 'id' =>$id]);
+        return $this->render('teacher/cours/add/index.html.twig', [
+            'edit_cours' => $entity,
+        ]);
     }
 }
