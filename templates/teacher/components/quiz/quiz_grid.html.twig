@@ -7,7 +7,7 @@
                     Cours
                 </div>
                 <div class="title">
-                    kdjqklsdlkqsdjqjsdlkjsqlkdjqsld
+                    {{ quiz.nom }}
                 </div>
 
             </div>
@@ -18,11 +18,11 @@
                     </div>
                     <ul class=" dropdown-menu dropdown-menu-end ">
 
-                        <li><div class="dropdown-item " href="# " openGeneralPopup data-link="{{ path('teacher_quiz_preview_popup' , {quiz_id:1}) }}">Afficher</div></li>
+                        <li><div class="dropdown-item "  openGeneralPopup data-link="{{ path('teacher_quiz_preview_popup' , {quiz_id:quiz.id}) }}">Afficher</div></li>
 
                         <li><a class="dropdown-item " href="# ">Modifier</a></li>
 
-                        <li><a class="dropdown-item " href="# ">Supprimer</a></li>
+                        <li><a class="dropdown-item " href="{{ path('teacher_quiz_delete_quiz', {'idQuiz': quiz.id}) }}" onclick="return confirm('Are you sure you want to delete this quiz ?');">Supprimer</a></li>
                     </ul>
                 </div>
 
@@ -30,8 +30,8 @@
         </div>
 
         <div class="infos">
-            <div class="s">Duration : <span> 15Min</span> </div>
-            <div class="s">Nb Question: <span>10</span></div>
+            <div class="s">Duration : <span> {{ quiz.duree }}</span> </div>
+            <div class="s">Nb Question: <span>{{quiz.getQuestions()|length}}</span></div>
 
 
         </div>
