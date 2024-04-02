@@ -15,3 +15,9 @@ register_post:
   path: /register
   controller: App\Controller\Auth\AuthController::register
   methods: [POST]
+
+
+login_post:
+  path: /login
+  controller: App\Controller\Auth\AuthController::login
+  methods: [POST]
