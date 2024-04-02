@@ -7,7 +7,10 @@ preview_popup:
   path: /preview_popup/{quiz_id}
   controller: App\Controller\Teacher\TeacherQuizController::preview
 
-
+delete_quiz:
+    path: /delete/{idQuiz}
+    controller: App\Controller\Teacher\TeacherQuizController::deleteQuiz
+    methods: [GET]
 
 
 add:
