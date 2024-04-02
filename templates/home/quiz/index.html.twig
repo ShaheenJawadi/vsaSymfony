@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
     	localStorage.setItem('scoreSubmitted', 'true'); // Set a flag that score is submitted
 
         let scaledScore = (score / totalQuestions) * 20;
-        scaledScore = Math.round(scaledScore);
+       scaledScore = scaledScore.toFixed(2);
         fetch('{{ path('home_quizz_submit_score') }}', {
             method: 'POST',
             headers: {
