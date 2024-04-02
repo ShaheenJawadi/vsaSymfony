@@ -24,3 +24,15 @@ create:
 delete:
   path: /delete/{id} 
   controller: App\Controller\Teacher\TeacherCoursController::delete 
+
+  ##################################
+
+edit:
+  path: /edit/{id}
+  controller: App\Controller\Teacher\TeacherCoursController::edit
+
+
+update:
+  path: /update 
+  controller: App\Controller\Teacher\TeacherCoursController::update
+  methods: [POST]
