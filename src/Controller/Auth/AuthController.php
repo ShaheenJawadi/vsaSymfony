@@ -44,11 +44,33 @@ class AuthController extends AbstractController
         return new Response($content);
     }
 
-    public function register():Response {
+    public function register(Request $request ,ManagerRegistry $managerRegistry) {
 
+        $formData = $request->request->all();
         
-        return 1 ;
+
+        $userEntity = new User();
+        $userEntity->setNom($formData["nom"]);
+        $userEntity->setPrenom($formData["prenom"]);
+
+        $userEntity->setUsername($formData["username"]);
+        $userEntity->setEmail($formData["email"]);
+        $userEntity->setPassword($formData["password"]);
+
+        // $formData["repreta_password"]
+    
+
+        $entityManager = $managerRegistry->getManager();
+        $entityManager->persist($userEntity);
+        
+         
+        
+        $entityManager->flush();
+        return $this->redirectToRoute('home_index');
+        
 
     }
  
+
+    
 }
