@@ -13,9 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UserType;
 use App\Form\UserModifyType;
 use App\Repository\UserRepository;
+use App\Service\UserSessionManager;
 
 class AuthController extends AbstractController
-{
+{ 
+    private $user_session ; 
+    public function __construct(UserSessionManager $user_session)
+    {
+        $this->user_session = $user_session; 
+    }
+
+
 
     public function loadLoginPopup(): Response
     {
@@ -73,4 +81,32 @@ class AuthController extends AbstractController
  
 
     
+
+    public function login(Request $request ,ManagerRegistry $managerRegistry , UserRepository $userRepository) {
+
+        $formData = $request->request->all();
+        
+        $username =$formData["username"];
+        $pws =$formData["password"];
+
+        $usr = $userRepository->findOneBy(['username' => $username]);
+        if($usr && $usr->getPassword() == $pws ){
+            
+            $this->user_session->setCurrentUser($usr);
+
+            return $this->redirectToRoute('home_index');
+
+        }
+        else {
+             dd('error');
+        }
+ 
+         
+        
+        
+
+    }
+ 
+
+
 }
