@@ -20,20 +20,18 @@ use Doctrine\Persistence\ManagerRegistry;
 class QuizController extends AbstractController
 {
     public function index(Request $request, QuizRepository $quizRepository, UserRepository $userRepository): Response
-    {$user = $userRepository->find(18); // FIXME: userid=18
+    {$user = $userRepository->find(18); // TODO FIXME: userid=18
         if (!$user) {
             throw $this->createNotFoundException('No user found for id 18');
         }
 
         $userId = $user->getId();
-        $coursId=2;   
-        $questionIndex = $request->attributes->get('questionIndex'); // Extract questionIndex from the route
-    
-        // If for some reason questionIndex is not found, default to 0
+        $coursId=2;   // TODO FIXME: coursid=2
+        $questionIndex = $request->attributes->get('questionIndex'); 
         if ($questionIndex === null) {
             $questionIndex = 0;
         } else {
-            $questionIndex = (int) $questionIndex; // Ensure questionIndex is an integer
+            $questionIndex = (int) $questionIndex; 
         } 
     $quiz = $this->getQuizByCoursId($coursId, $quizRepository,$userId);
     $questionDetails = $this->fetchQuestionDetails($quizRepository, $coursId, $questionIndex,$userId);
@@ -54,7 +52,7 @@ class QuizController extends AbstractController
             return null;
         }
 
-        $quiz = $quizzes[0]; // Assuming using the first quiz
+        $quiz = $quizzes[0]; 
         $questions = $quiz->getQuestions();
 
         if ($questionIndex < 0 || $questionIndex >= count($questions)) {
@@ -84,8 +82,7 @@ class QuizController extends AbstractController
         $session = $request->getSession();
         $score = $session->get('quizScore', 'Not available');
         
-        // Remove the score from the session if you don't need it anymore
-        $session->remove('quizScore');
+        // $session->remove('quizScore');
     
         return $this->render('home/quiz/note.html.twig', [
             'score' => $score,
@@ -100,7 +97,6 @@ class QuizController extends AbstractController
 
         $em = $manager->getManager();
 
-        // Find the specific user and quiz
         $user = $em->getRepository(User::class)->find($userId);
         $quiz = $em->getRepository(Quiz::class)->find($quizId);
 
@@ -108,27 +104,22 @@ class QuizController extends AbstractController
             return new JsonResponse(['status' => 'error', 'message' => 'User or quiz not found'], 404);
         }
 
-        // Check if a note already exists for this user and quiz
-        $note = $em->getRepository(Notes::class)->findOneBy(['userid' => $user, 'quizid' => $quiz]);
+        // $note = $em->getRepository(Notes::class)->findOneBy(['userid' => $user, 'quizid' => $quiz]);
 
-        // If no note exists, create a new one
-        if (!$note) {
+        // if (!$note) {
             $note = new Notes();
             $note->setUserid($user);
             $note->setQuizid($quiz);
-        }
+        // }
 
-        // Set or update the score
         $note->setNote($score);
 
-        // Persist and flush the note entity
         $em->persist($note);
         $em->flush();
 
         $session = $request->getSession();
         $session->set('quizScore', $score);
 
-        // Return the success response
         return new JsonResponse(['status' => 'success']);
     }
 

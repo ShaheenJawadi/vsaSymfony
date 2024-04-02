@@ -33,7 +33,7 @@ class QuizRepository extends ServiceEntityRepository
             ->leftJoin('questions.suggestions', 'suggestions')
             ->addSelect('questions', 'suggestions')
             ->andWhere('q.coursid = :coursId')
-            ->andWhere('q.userid = :userId') // Assuming direct association for simplicity
+            ->andWhere('q.userid = :userId') 
             ->setParameter('coursId', $coursId)
             ->setParameter('userId', $userId)
             ->getQuery()
@@ -61,7 +61,7 @@ class QuizRepository extends ServiceEntityRepository
             ->leftJoin('q.questions', 'questions')
             ->leftJoin('questions.suggestions', 'suggestions')
             ->addSelect('cours', 'questions', 'suggestions')
-            ->andWhere('q.userid = :userId') // Filter by userid
+            ->andWhere('q.userid = :userId') 
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
