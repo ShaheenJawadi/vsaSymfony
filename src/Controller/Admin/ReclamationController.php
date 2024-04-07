@@ -17,6 +17,9 @@ class ReclamationController extends AbstractController
         return $this->render('admin/reclamation/index.html.twig');
     }
   
-
+    public function single($id): Response
+    {
+        return $this->render('admin/reclamation/single.html.twig');
+    }
   
 }
