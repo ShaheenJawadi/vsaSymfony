@@ -86,7 +86,6 @@ body {
 }
 
 .adminPanel .main .content .box .head {
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -97,14 +96,16 @@ body {
     font-weight: 700;
     color: var(--fx-primary-color);
 }
-.adminPanel .main .content .box .topNavigation_box{
+
+.adminPanel .main .content .box .topNavigation_box {
     display: flex;
     align-items: center;
     gap: 10px;
     background: var(--fx-secondary-btn-bg);
-        margin-top: -15px;
-        margin-bottom: 20px;
+    margin-top: -15px;
+    margin-bottom: 20px;
 }
+
 .adminPanel .main .content .box .topNavigation_box a {
     background: #fff;
     font-size: 20px;
@@ -113,12 +114,13 @@ body {
     padding: 15px 25px;
     border-bottom: 1px solid var(--fx-primary-color);
     box-shadow: 5px -8px 8px 3px #78787845;
-
 }
+
 .adminPanel .main .content .box .topNavigation_box a.active {
     background: var(--fx-primary-color);
     color: #fff;
 }
+
 .adminPanel .main .navBar .list {
     padding: 25px;
     padding-right: 0;
@@ -149,21 +151,49 @@ body {
 }
 
 .adminPanel .form_page {
-
     display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
 }
-.adminPanel .form_page.s{
+
+.adminPanel .form_page.s {
     align-items: center;
 }
-.adminPanel .form_page.s .single_row{
+
+.adminPanel .form_page.s .single_row {
     max-width: 600px;
     min-width: 500px;
 }
-.adminPanel .form_page .s_btn{
+
+.adminPanel .form_page .s_btn {
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.data_info {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+}
+
+.data_info .single .tit {
+    color: var(--fx-main-text-color);
+    font-size: 19px;
+}
+
+.data_info .single .data {
+    font-size: 20px;
+    color: #000;
+}
+
+.data_info .single.op_btn {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    align-items: end;
     justify-content: center;
 }
