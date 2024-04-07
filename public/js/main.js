@@ -65,6 +65,9 @@
         $.get('/auth/load/popup/login', function(response) {
             $('#authModel .modal-content').html(response);
         });
+
+
+
     });
 
 
@@ -115,6 +118,13 @@
     });
 
 
+    $(document).on('mouseover', '.header .nav-item.dropdown .single_item', function() {
 
+        $(this).find('.subcategories').addClass('show');
+    });
+    $(document).on('mouseout', '.header .nav-item.dropdown .single_item', function() {
+
+        $(this).find('.subcategories').removeClass('show');
+    });
 
 })(jQuery);
