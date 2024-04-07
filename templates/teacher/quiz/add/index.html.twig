@@ -16,6 +16,7 @@
 
 	<div class="container">
 		<form ajaxform action="{{ path('teacher_quiz_create') }}" method="post">
+		<input type="hidden" name="coursId" value="{{coursId}}">
 			<div class="form_page">
 				<div class="container">
 					<div class="row">
