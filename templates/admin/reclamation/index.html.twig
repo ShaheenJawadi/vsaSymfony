@@ -1,0 +1,58 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+{% block adminPanelBody %}
+
+
+	<div class="container">
+		<div class="head">
+			<div class="left">
+				<h3 class="title">Reclamations</h3>
+
+			</div>
+
+		</div>
+		<div class="Dtable_style">
+
+
+			<table id="Dtable" class="table table-striped " style="width:100%">
+				<thead>
+					<tr>
+						<th>Titre</th>
+						<th>Description</th>
+
+						<th>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>qsdjq</td>
+						<td>sqdqsdqsfsdf</td>
+						<td>
+							<a class="option " href="'+row[3]+'">
+								<i class="fa-solid fa-eye"></i>
+							</a>
+							<a class="option delete" href="'+row[3]+'">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</tbody>
+
+
+</div>{% endblock %}{% block scripts %}
+
+
+<script>
+	var $window = $(window);
+$window.on('load', function (key, value) {
+$('#Dtable').DataTable({
+"language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+}
+});
+
+
+});
+</script>{% endblock %}

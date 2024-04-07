@@ -14,7 +14,7 @@ class ReclamationController extends AbstractController
  
     public function index(): Response
     {
-        return $this->render('home/reclamation/index.html.twig');
+        return $this->render('admin/reclamation/index.html.twig');
     }
   
 
