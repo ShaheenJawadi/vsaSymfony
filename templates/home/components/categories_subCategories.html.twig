@@ -1,14 +1,36 @@
 <li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
 		Categories
 	</a>
 	<ul class="dropdown-menu">
-		<li>
-			<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">categories 1</a>
-		</li>
-		<li>
-			<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">categories 1</a>
-		</li>
 
+		<li class="single_item">
+			<a class="dropdown-item" href="#">categories 1</a>
+			<ul class="dropdown-menu subcategories">
+				<li>
+					<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">Subcategory 1.1</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">Subcategory 1.2</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">Subcategory 1.3</a>
+				</li>
+			</ul>
+		</li>
+		<li class="single_item">
+			<a class="dropdown-item" href="#">categories 2</a>
+
+			<ul class="dropdown-menu subcategories">
+				<li>
+					<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">Subcategory 2.1</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">Subcategory 2.2</a>
+				</li>
+
+			</ul>
+
+		</li>
 	</ul>
 </li>
