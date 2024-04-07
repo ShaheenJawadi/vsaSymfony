@@ -15,3 +15,7 @@ avis_supprimer:
 
 
  
+
+add_reclamation_page:
+  path: /reclamation
+  controller: App\Controller\Avis\ReclamationController::index
