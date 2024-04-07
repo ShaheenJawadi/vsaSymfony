@@ -69,3 +69,7 @@ delete_user:
 reclamations:
   path: /reclamations 
   controller: App\Controller\Admin\ReclamationController::index
+  
+single_reclamation:
+  path: /reclamations/{id} 
+  controller: App\Controller\Admin\ReclamationController::single
