@@ -1,58 +1,55 @@
 {% extends 'admin/adminPanelLayout.html.twig' %}
+
 {% block adminPanelBody %}
+    <div class="container">
+        <div class="head">
+            <div class="left">
+                <h3 class="title">Réclamations</h3>
+            </div>
+        </div>
+        <div class="Dtable_style">
+            <table id="Dtable" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Date</th> <!-- Nouvelle colonne pour la date -->
+                        <th>Statut</th> <!-- Nouvelle colonne pour le statut -->
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reclamation in reclamations %}
+                    <tr>
+                        <td>{{ reclamation.Type }}</td>
+                        <td>{{ reclamation.description }}</td>
+                        <td>{{ reclamation.date ? reclamation.date|date('d/m/Y') : 'N/A' }}</td> <!-- Affichage de la date formatée -->
+                        <td>{{ reclamation.status }}</td> <!-- Affichage du statut -->
+                        <td>
+                            <a class="option" href="{{ path('admin_single_reclamation', {id: reclamation.getIdReclamation()}) }}">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a class="option delete" href="{{ path('admin_supprimer_reclamation', {id: reclamation.getIdReclamation()}) }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
 
-
-	<div class="container">
-		<div class="head">
-			<div class="left">
-				<h3 class="title">Reclamations</h3>
-
-			</div>
-
-		</div>
-		<div class="Dtable_style">
-
-
-			<table id="Dtable" class="table table-striped " style="width:100%">
-				<thead>
-					<tr>
-						<th>Titre</th>
-						<th>Description</th>
-
-						<th>Options</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>qsdjq</td>
-						<td>sqdqsdqsfsdf</td>
-						<td>
-							<a class="option " href="{{ path('admin_single_reclamation', {id:1})}}">
-								<i class="fa-solid fa-eye"></i>
-							</a>
-							<a class="option delete" href="#">
-								<i class="fa-solid fa-trash"></i>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</tbody>
-
-
-</div>{% endblock %}{% block scripts %}
-
-
+{% block scripts %}
 <script>
-	var $window = $(window);
-$window.on('load', function (key, value) {
-$('#Dtable').DataTable({
-"language": {
-"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
-}
-});
-
-
-});
-</script>{% endblock %}
+    var $window = $(window);
+    $window.on('load', function (key, value) {
+        $('#Dtable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+            }
+        });
+    });
+</script>
+{% endblock %}
