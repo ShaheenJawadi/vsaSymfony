@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ReclamationsRepository;
-#[ORM\Entity]
+use App\Repository\ReclamationRepository;
 
-//#[ORM\Entity(repositoryClass: ReclamationsRepository::class)]
+use Doctrine\DBAL\Types\Types;
+
+//#[ORM\Entity(repositoryClass: ReclamationRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: "reclamations", indexes: [new ORM\Index(name: "id_user", columns: ["id_user"])])]
 class Reclamations
 {
