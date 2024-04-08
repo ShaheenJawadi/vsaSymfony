@@ -73,3 +73,9 @@ reclamations:
 single_reclamation:
   path: /reclamations/{id} 
   controller: App\Controller\Admin\ReclamationController::single
+  methods: ['GET']
+
+supprimer_reclamation:
+  path: /reclamations/supprimer/{id} 
+  controller: App\Controller\Admin\ReclamationController::delete_Rec
+  
