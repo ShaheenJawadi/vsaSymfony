@@ -19,3 +19,7 @@ avis_supprimer:
 add_reclamation_page:
   path: /reclamation
   controller: App\Controller\Avis\ReclamationController::index
+ajouter_reclamation:
+  path: /ajouterRec
+  controller: App\Controller\Avis\ReclamationController::ajouterRec
+  methods: ['POST']
