@@ -18,5 +18,12 @@ class ReclamationRepository extends ServiceEntityRepository{
         {
             return $this->findAll();
         }
-
+        public function findReclamationById(int $id): ?Reclamations
+        {
+            return $this->createQueryBuilder('a')
+                ->andWhere('a.id = :id')
+                ->setParameter('id', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
+        }
 }
