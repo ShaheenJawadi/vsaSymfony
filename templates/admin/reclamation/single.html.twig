@@ -1,47 +1,43 @@
 {% extends 'admin/adminPanelLayout.html.twig' %}
 {% block adminPanelBody %}
-	<div class="container">
-		<div class="head">
-			<div class="left">
-				<h3 class="title">Reclamation #1</h3>
+    <div class="container">
+        <div class="head">
+            <div class="left">
+                <h3 class="title">Reclamation {{ reclamation.getIdReclamation }}</h3>
+            </div>
+        </div>
 
-			</div>
+        <div class="data_info">
+            <div class="single">
+                <div class="tit">
+                    Type
+                </div>
+                <div class="data">
+                    {{ reclamation.type }}
+                </div>
+            </div>
+            <div class="single">
+                <div class="tit">
+                    Description
+                </div>
+                <div class="data">
+                    {{ reclamation.description }}
+                </div>
+            </div>
 
-		</div>
-
-		<div class="data_info">
-			<div class="single">
-				<div class="tit">
-					Titre
-				</div>
-				<div class="data">
-					qlkdqskljdlkqsjdlkjqsldkjql skjd
-				</div>
-			</div>
-			<div class="single">
-				<div class="tit">
-					Description
-				</div>
-				<div class="data">
-					qlkdqskljdlkqsjdlkjqsldkjql qlkdqskljdlkqsjdlkjqsldkjql qlkdqskljdlkqsjdlkjqsldkjql qlkdqskljdlkqsjdlkjqsldkjql qlkdqskljdlkqsjdlkjqsldkjql qlkdqskljdlkqsjdlkjqsldk jqlqlkdqskljdlkqsj dlkjqsldkjqlsqlkdqskljdlkqsjdlkjqsldkjqlk jdqlkdqskljdlkqsjdlkjqsldkjql
-				</div>
-			</div>
-
-			<div class="single op_btn ">
-				<div class="form-group">
-					<label>Status</label>
-					<select class="form-select">
-						<option value="1" selected>status 1</option>
-						<option value="2">status 2</option>
-						<option value="3">status 3</option>
-					</select>
-				</div>
-				<div class="btn_main">Enregistrer Status</div>
-			</div>
-
-
-		</div>
-	</div>
-
-
+            <div class="single op_btn">
+               <form method="post" action="{{ path('admin_modifier_statut_reclamation', {'id': reclamation.getIdReclamation}) }}">
+					   <div class="form-group">
+						<label for="nouveau_statut">Nouveau Statut</label>
+						<select class="form-select" id="nouveau_statut" name="nouveau_statut">
+							<option value="en_attente">En Attente</option>
+							<option value="en_cours">En Cours</option>
+							<option value="reponse_envoyee_par_email">Réponse envoyée par email</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">Modifier Statut</button>
+				</form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
