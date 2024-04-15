@@ -199,7 +199,7 @@ class TeacherCoursController extends AbstractController
 
         $ressourceErrors = $validator->validate($ressourceErrors);
         if (count($ressourceErrors) > 0) {
-
+ 
             foreach ($ressourceErrors as $error) {
                 $propertyPath = $error->getPropertyPath();
                 $message = $error->getMessage();
@@ -209,19 +209,22 @@ class TeacherCoursController extends AbstractController
 
 
 
-        foreach ($lessonsEntityList as $lessonItem) {
+        foreach ($lessonsEntityList as $key => $lessonItem) {
             $lessonErrors = $validator->validate($lessonItem);
 
+       
             if (count($lessonErrors) > 0) {
 
-                foreach ($ressourceErrors as $error) {
+                foreach ($lessonErrors as $error) {
+           
+
                     $propertyPath = $error->getPropertyPath();
                     $message = $error->getMessage();
-                    $formErrors[$propertyPath] = $message;
+                    $formErrors[$propertyPath][$key] = $message;
                 }
             }
         }
-
+ 
         return $formErrors;
     }
 
