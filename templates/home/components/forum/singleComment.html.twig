@@ -5,14 +5,15 @@
 	</div>
 	<div class="content">
 		<div class="top">
-			<div class="username">{{ comment.user.username }}</div>
+			<div class="username">{{ comment.user.username }} - <span class="rolePub">{{ comment.user.role | capitalize }}</span>
+			</div>
 			<div class="date">
 				{{ comment.date|date('d/m/Y') }}
 			</div>
 
 		</div>
 		<p class="comment">
-			{{comment.commentaire}}
+			<span class="comment-text">{{ comment.commentaire }}</span>
 		</p>
 		{# //FIXME:userId=18 #}
 		{% if comment.user.id == 18 %}
@@ -45,38 +46,40 @@
 			</div>
 		</div>
 	{% endif %}
-	{% block javascripts %}
+{% block javascripts %}
 
-<script>
-$('.toggle_edit_comment').click(function() {
-    $(this).closest('.single_comment').find('.new_comment').toggle(); // Toggle edit mode
-});
+	<script>
+		$(document).on('click', '.toggle_edit_comment', function() {
+			$(this).closest('.single_comment').find('.new_comment').toggle(); // Toggle edit mode
+		});
 
-$('.submit_update').click(function() {
-    var commentDiv = $(this).closest('.single_comment');
-    var commentId = commentDiv.data('comment-id');
-    var textarea = commentDiv.find('textarea');
-    var updatedComment = textarea.val(); // Assuming this is the updated comment
+		$(document).on('click', '.submit_update', function() {
+			var commentDiv = $(this).closest('.single_comment');
+			var commentId = commentDiv.data('comment-id');
+			var textarea = commentDiv.find('textarea');
+			var updatedComment = textarea.val(); // This is the updated comment
 
-    // AJAX request to update the comment
-    $.ajax({
-        url: "{{ path('home_forum_update_comment') }}",
-        type: "POST",
-        data: {
-            commentId: commentId,
-            comment: updatedComment
-        },
-        success: function(response) {
- 					commentDiv.find('.comment').first().text(updatedComment);
-                commentDiv.find('.new_comment').hide();             // Optionally, update the displayed comment text if needed
-        },
-        error: function(xhr, status, error) {
-            alert("An error occurred while updating the comment.");
-        }
-    });
-});
+			// AJAX request to update the comment
+			$.ajax({
+				url: "{{ path('home_forum_update_comment') }}",
+				type: "POST",
+				data: {
+					commentId: commentId,
+					comment: updatedComment
+				},
+				success: function(response) {
+					commentDiv.find('.comment-text').empty().html(updatedComment);
+					commentDiv.find('.new_comment').hide();
+					window.location.href = "{{ path('home_forum_index') }}";
+ 
+				},
+				error: function(xhr, status, error) {
+					alert("An error occurred while updating the comment.");
+				}
+			});
+		});
+	</script>
 
-</script>
 {% endblock %}
 
 </div>

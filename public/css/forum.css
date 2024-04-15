@@ -44,7 +44,11 @@
     font-size: 17px;
 }
 
+.rolePub {
+    color: var(--fx-main-text-color);
+    font-size: 14px;
 
+}
 /* ************************************ */
 
 .forum_page .add_pub_section {

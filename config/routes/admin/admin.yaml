@@ -84,4 +84,20 @@ supprimer_reclamation:
   path: /reclamations/supprimer/{id} 
   controller: App\Controller\Admin\ReclamationController::delete_Rec
 
+#################################################################
+#################################################################
+#################################################################
+#################################################################
 
+forum_index:
+  path: /forum 
+  controller: App\Controller\Admin\ForumController::index
+  
+single_publication:
+  path: /forum/{id} 
+  controller: App\Controller\Admin\ForumController::single
+  methods: ['GET']
+
+supprimer_publication:
+  path: /forum/supprimer/{id} 
+  controller: App\Controller\Admin\ForumController::deletePublication
