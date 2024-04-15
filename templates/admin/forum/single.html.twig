@@ -1,0 +1,134 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+
+{% block adminPanelBody %}
+{% block stylesheets %} 
+<link rel="stylesheet" href="{{ asset('css/forumAdmin.css') }}?v={{ random() }}"> {% endblock %}
+<div class="forum_admin">
+    <div class="head">
+        <div class="left">
+            <h3 class="title">Publication #{{pub.id}}</h3>
+
+        </div>
+
+    </div>
+    <div class="pub_list">
+        <div class="singlePub">
+            <div class="headUser">
+                <div class="avatar">
+                    <img src="{{ pub.user.image is not empty ? pub.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
+
+                </div>
+                <div class="infos">
+                    <div class="username">
+                        {{ pub.user.username }} - <span class="rolePub">{{ pub.user.role | capitalize }}</span>
+                    </div>
+                    <div>{{ pub.dateCreation|date('d/m/Y') }}</div>
+
+                </div>
+
+            </div>
+
+            <div class="contentPub">
+                <div class="title">
+                    <b>{{ pub.titre }}</b>
+                </div>
+                {% if pub.images is not empty %}
+                    <div class="img_list">
+                        {% set images = pub.images|split(';') %}
+                        {% for image in images %}
+                            <div class="single_img">
+                                <img src="{{ image }}" alt="Image">
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="question">
+                    <p>{{ pub.contenu }}</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="infos">
+                <div class="reactions">
+                    <div class="single_reaction">
+                        
+                            {% set reactions = reactionsByPubId[pub.id] ?? {'jaime': 0, 'dislike': 0} %}
+
+                        <div class="icon like">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
+                        <div class="counting">{{ reactions.jaime }}</div>
+                        <div class="txt">
+                        Likes
+                        </div>				
+                        
+                        
+                    </div>
+                    <div class="single_reaction">
+                        <div class="icon dislike">
+                            <i class="fa-regular fa-thumbs-down"></i>
+                        </div>
+                            <div class="counting">{{ reactions.dislike }}</div>
+                            <div class="txt">
+                                Dislikes
+                            </div>
+                        
+                    </div>
+
+                        <div class="single_reaction_comment" data-pubid="{{ pub.id }}">
+                            <div class="icon comment">
+
+                                <i class="fa-regular fa-message"></i>
+                            </div>
+                            {% set commentCount = pub.getCommentaires()|length %}
+                            <div class="counting">{{commentCount}}</div>
+                            <div class="txt">
+                                {% if commentCount == 1 or commentCount ==0 %}
+                                    commentaire
+                                {% else %}
+                                    commentaires
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    
+                </div>
+
+            </div>
+
+            <div class="list_comments">
+                {% for comment in pub.getCommentaires() %}
+                        <div class="single_comment_pub">
+                            <div class="avatar">
+                                <img src="{{ comment.user.image is not empty ? comment.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
+
+                            </div>
+                            <div class="contentComment">
+                                <div class="top">
+                                    <div class="username">{{ comment.user.username }}
+                                    - <span class="rolePub">{{ comment.user.role | capitalize }}</span></div>
+                                    <div class="date">
+                                        {{ comment.date|date('d/m/Y') }}
+                                    </div>
+
+                                </div>
+                                <p class="comment">
+                                    {{comment.commentaire}}
+                                </p>
+                                
+                            </div>
+                        </div>
+                {% else %}
+                    <div class="single_comment">No comments found!</div>
+                {% endfor %}
+                
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

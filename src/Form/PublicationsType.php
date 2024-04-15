@@ -18,7 +18,7 @@ class PublicationsType extends AbstractType
         $builder
         ->add('titre', TextareaType::class,['attr'=>['class' => 'form-control',
         'placeholder' => 'Titre',
-        'rows' => 1],'label' => false,'required' => false])
+        'rows' => 1],'label' => false])
 
         ->add('contenu', TextareaType::class,['attr'=>['class' => 'form-control',
         'placeholder' => 'Poser votre question',
