@@ -107,8 +107,13 @@
                 alert('suuc')
 
             },
-            error: function(request, status, error) {
-                alert('error')
+            error: function(data) {
+                var response = data.responseJSON;
+                var errors = response.errors;
+
+                $.each(errors, function(key, value) {
+                    $('[name="' + key + '"]').addClass('error');
+                });
             }
 
         });
