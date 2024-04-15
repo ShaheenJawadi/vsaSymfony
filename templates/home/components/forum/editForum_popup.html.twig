@@ -37,7 +37,6 @@
 <script>
 // Add this line to define the URL for redirection
 var homeForumIndexUrl = '{{ path('home_forum_index') }}';
-
 document.getElementById("updateButton").addEventListener("click", function() {
     var titre = document.getElementById("titre").value;
     var contenu = document.getElementById("contenu").value;
@@ -51,19 +50,28 @@ document.getElementById("updateButton").addEventListener("click", function() {
         },
         body: JSON.stringify({ titre: titre, contenu: contenu }),
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if (data.status === 'success') {
-            // Use the URL for redirection after a successful update
-            window.location.href = homeForumIndexUrl;
-        } else {
-            alert('Failed to update publication');
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            if (data.status === 'success') {
+                // Use the URL for redirection after a successful update
+                window.location.href = homeForumIndexUrl;
+            } else {
+                alert('Failed to update publication. Status is ' + data.status);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // Close the modal after updating, whether it is successful or not
+            $('#generalModel').modal('hide');
+        });
 });
 </script>
 {% endblock %}

@@ -6,10 +6,10 @@
 		</div>
 		<div class="infos">
 			<div class="username">
-				{{ pub.user.username }}
+				{{ pub.user.username }} - <span class="rolePub">{{ pub.user.role | capitalize }}</span>
 			</div>
 			<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="date">{{ pub.dateCreation|date('d/m/Y') }}</a>
-
+			
 		</div>
 		{# //FIXME:userId=18 #}
 		{% if pub.user.id == 18 %}
@@ -133,9 +133,10 @@
 						</div>
 						<div class="new_comment">
 							<div class="comment">
-								{{ form_row(commentForm.commentaire, {'label': false,'attr': {'class': 'form-control', 'placeholder': 'comment', 'rows': '2'}}) }}
-								{{ form_row(commentForm.returnPath) }} <!-- This will use the value set in the controller -->
-
+								{{ form_widget(commentForm.commentaire, {'label': false,'attr': {'class': 'form-control', 'placeholder': 'comment', 'rows': '2'}}) }}
+								 
+								{{ form_widget(commentForm.returnPath) }} <!-- This will use the value set in the controller -->
+									
 							</div>
 							<div class="sub">
 								<button type="submit" class="btn_main">Ajouter</button>

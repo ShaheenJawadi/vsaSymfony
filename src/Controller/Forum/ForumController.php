@@ -16,6 +16,7 @@ use App\Form\PublicationsType;
 use App\Repository\PublicationsRepository;
 use App\Repository\ReactionsRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface; 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use App\Repository\CommentairesRepository;
 use Symfony\Component\Form\FormError;
@@ -37,7 +38,16 @@ class ForumController extends AbstractController
         if ($formResponse !== null) {
             return $formResponse; 
         }
-        $publications = $this->getAllPublications($rep);
+        $form = $this->createForm(PublicationsType::class, new Publications());
+        $form->handleRequest($request);
+
+        $searchTerm = $request->query->get('searchTerm'); 
+
+        if ($searchTerm !== null) {
+            $publications = $rep->searchPublicationsWithUserDetails($searchTerm);
+        } else {
+            $publications = $this->getAllPublications($rep);
+        }
         $user = $userRepository->find(18); // FIXME: userid=18
         $contributors = $this->getContributors($rep);
         foreach ($publications as $pub) {
@@ -46,6 +56,7 @@ class ForumController extends AbstractController
             ]);
             $commentForms[$pub->getId()] = $commentForm->createView();
             $commentForm->get('returnPath')->setData('index');
+            
 
         }
         $filter = $request->query->get('filter');
@@ -90,10 +101,22 @@ class ForumController extends AbstractController
             $pubId = $pub->getId();
             $pub->userReaction = $userReactionsMap[$pubId] ?? null;
         }
-        
+        if ($form->isSubmitted() && !$form->isValid()) {
         return $this->render('home/forum/index.html.twig', [
             'controller_name' => 'ForumController',
-            'forumPub' => $this->createForm(PublicationsType::class, new Publications())->createView(), 
+            'forumPub' => $form->createView(),
+            'pubs' => $publications,
+            'user' => $user,
+            'contributors' => $contributors,
+            'commentForms' => $commentForms,
+            'reactionsByPubId' => $reactionsByPubId,
+            'userReactionsMap' => $userReactionsMap, 
+        ]);
+    }
+
+        return $this->render('home/forum/index.html.twig', [
+            'controller_name' => 'ForumController',
+            'forumPub' => $form->createView(),
             'pubs' => $publications,
             'user' => $user,
             'contributors' => $contributors,
@@ -328,7 +351,8 @@ public function updatePublication(Request $request, EntityManagerInterface $em, 
             $em->persist($publication);
             $em->flush();
 
-            return new JsonResponse(['status' => 'success', 'message' => 'Publication updated successfully']);
+            // Redirect to the home_forum_index route
+            return new RedirectResponse($this->generateUrl('home_forum_index'));
         }
 
         return new JsonResponse(['status' => 'error', 'message' => 'Publication not found']);
