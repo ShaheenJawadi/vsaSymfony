@@ -40,10 +40,10 @@ class PublicationsRepository extends ServiceEntityRepository
             $connection = $em->getConnection();
 
             $sql = "
-                SELECT DISTINCT u.username AS username, u.image AS image FROM publications p
+                SELECT DISTINCT u.username AS username, u.image AS image, u.role AS role FROM publications p
                 JOIN user u ON p.user_id = u.id
                 UNION
-                SELECT DISTINCT u.username, u.image FROM commentaires c
+                SELECT DISTINCT u.username, u.image, u.role FROM commentaires c
                 JOIN user u ON c.user_id = u.id
             ";
 
@@ -122,4 +122,20 @@ class PublicationsRepository extends ServiceEntityRepository
             ->orderBy('dislikeSum', 'DESC'); 
         return $qb->getQuery()->getResult();
     }
+
+    public function searchPublicationsWithUserDetails(string $searchTerm): array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.user', 'u')
+            ->addSelect('u')
+            ->leftJoin('p.commentaires', 'c')
+            ->addSelect('c')
+            ->where('p.titre LIKE :searchTerm OR p.contenu LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
+            ->orderBy('p.dateCreation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
 }
