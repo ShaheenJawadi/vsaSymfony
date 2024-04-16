@@ -44,4 +44,5 @@ class AvisRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+    
 }
