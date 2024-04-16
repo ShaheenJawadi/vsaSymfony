@@ -61,8 +61,18 @@ class ReclamationController extends AbstractController
         $entityManager->flush();
     
         // Rediriger vers la page de réclamation
-        return $this->redirectToRoute('home_avis_add_reclamation_page');
+        return $this->redirectToRoute('home_avis_afficher_reclamation');
     }
+    public function afficherRec(ReclamationRepository $repo): Response
+    {      
+          // Récupérer toutes les réclamations depuis le repository
+        $reclamations = $repo->findAll();
 
+        // Transmettre les réclamations au template Twig pour l'affichage
+        return $this->render('home/reclamation/afficher.html.twig', [
+            'reclamations' => $reclamations,
+        ]);
+        
+    }
 
 }
