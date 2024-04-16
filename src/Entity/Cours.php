@@ -68,7 +68,8 @@ class Cours
     #[ORM\OneToMany(targetEntity:Lessons::class, mappedBy:"coursid")]
     private Collection $lessons;
 
-
+    #[ORM\OneToOne(targetEntity:Ressources::class, mappedBy:"coursid")]
+    private Ressources $ressource;
 
     public function __construct() {
         $this->lessons = new ArrayCollection();
@@ -78,6 +79,12 @@ class Cours
     {
         return $this->lessons;
     }
+
+    public function getRessource(): ?Ressources
+    {
+        return $this->ressource;
+    }
+
 
 
     public function getId(): ?int

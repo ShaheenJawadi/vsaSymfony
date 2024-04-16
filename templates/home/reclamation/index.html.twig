@@ -1,0 +1,38 @@
+{% extends 'home/homeLayout.html.twig' %}
+{% import 'home/components/cours/coursGrid.html.twig' as courGrid %}
+
+{% block body %}
+    <div class="container">
+        <div class="reclamation_page page">
+           
+            <h3 class="tit">Ajouter Réclamation</h3>
+            
+            <form action="{{ path('home_avis_ajouter_reclamation') }}" method="post">
+                <div class="form_holder">
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select class="form-control" id="type" name="type">
+                            <option value="" disabled selected>Choisissez votre type</option>
+                            <option value="cours">Cours</option>
+                            <option value="note">Note</option>
+                            <option value="certificat">Certificat</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" style="height: 100px"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn_main">Envoyer</button>
+                    </div>
+                </div>
+            </form>
+             <h6 class="nav-item">
+					<a class="nav-link" href="{{ path('home_avis_afficher_reclamation') }}">Mes Reclamation</a>
+			</h6>
+        </div>
+        
+    </div>
+{% endblock %}

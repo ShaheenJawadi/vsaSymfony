@@ -7,29 +7,12 @@
     });
 
     $(document).ready(function() {
+
+
+
         $.get('/auth/load/popup/login', function(response) {
             $('#authModel .modal-content').html(response);
         });
-
-        $("#openForgetPws").on("click", function() {
-            $.get('/auth/load/popup/reset_pws', function(response) {
-                $('#authModel .modal-content').html(response);
-            });
-        });
-        $("#openRegister").on("click", function() {
-            $.get('/auth/load/popup/register', function(response) {
-                $('#authModel .modal-content').html(response);
-            });
-        });
-
-
-
-        $("#openLoginPopup").on("click", function() {
-            $.get('/auth/load/popup/login', function(response) {
-                $('#authModel .modal-content').html(response);
-            });
-        });
-
         /* *********************General popup****** */
 
         $("[openGeneralPopup]").on("click", function() {
@@ -59,6 +42,41 @@
 
 
 
+    $(document).on('click', '#openRegister', function() {
+
+
+        $.get('/auth/load/popup/register', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+    });
+
+
+
+    $(document).on('click', '#openForgetPws', function() {
+
+        $.get('/auth/load/popup/reset_pws', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+    });
+
+
+    $(document).on('click', '#openLoginPopup', function() {
+
+        $.get('/auth/load/popup/login', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+
+
+
+    });
+
+
+
+
+
+
+
+
     $(document).on('click', '.delete_lesson', function() {
 
         $(this).closest('.single').remove();
@@ -74,7 +92,7 @@
 
         e.preventDefault();
         var $this = $(this).parent();
-
+        $('.form-control').removeClass('error');
 
         $.ajax({
             method: "POST",
@@ -86,11 +104,31 @@
             processData: false,
             success: function(data) {
 
-                alert('suuc')
+                if (data.success) {
+                    // Redirect to the route returned by the server
+                    window.location.href = data.route;
+                }
 
             },
-            error: function(request, status, error) {
-                alert('error')
+            error: function(data) {
+                var response = data.responseJSON;
+                var errors = response.errors;
+
+
+
+
+                $.each(errors, function(key, value) {
+                    if (Array.isArray(value)) {
+                        for (var i = 0; i < value.length; i++) {
+                            $('[name="' + key + '[]"]').eq(i).addClass('error');
+
+                        }
+
+                    } else {
+                        $('[name="' + key + '"]').addClass('error');
+                    }
+                    // $('[name="' + key + '"]').addClass('error');
+                });
             }
 
         });
@@ -100,6 +138,13 @@
     });
 
 
+    $(document).on('mouseover', '.header .nav-item.dropdown .single_item', function() {
 
+        $(this).find('.subcategories').addClass('show');
+    });
+    $(document).on('mouseout', '.header .nav-item.dropdown .single_item', function() {
+
+        $(this).find('.subcategories').removeClass('show');
+    });
 
 })(jQuery);

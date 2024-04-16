@@ -12,7 +12,7 @@
 
 
 					<div class="form-floating">
-						<input type="text" class="form-control" name="lesson_title[]" placeholder="">
+						<input type="text" class="form-control" name="lesson_title[]" placeholder="" value="{% if lesson is defined %} {{lesson.titre}} {% endif %}">
 						<label>Titre du lesson</label>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 
 
 					<div class="form-floating">
-						<input type="text" class="form-control" name="lesson_video[]" placeholder="">
+						<input type="text" class="form-control" name="lesson_video[]"   value="{% if lesson is defined %} {{lesson.video}} {% endif %}" placeholder="">
 						<label>Video</label>
 					</div>
 				</div>
@@ -36,7 +36,8 @@
 
 
 					<div class="form-floating">
-						<textarea class="form-control" name="lesson_content[]" style="height: 100px"></textarea>
+						<textarea class="form-control" name="lesson_content[]" style="height: 100px">{% if lesson is defined %} {{lesson.content}} {% endif %} 
+						</textarea>
 						<label>Contenu</label>
 					</div>
 				</div>
@@ -46,7 +47,7 @@
 
 
 					<div class="form-floating">
-						<input type="number" name="lesson_duration[]" class="form-control" placeholder="">
+						<input type="number" name="lesson_duree[]"  value="{% if lesson is defined %} {{lesson.duree}} {% endif %}" class="form-control" placeholder="">
 						<label>Duree</label>
 					</div>
 				</div>
@@ -55,7 +56,7 @@
 				<div class="single_row">
 
 					<div class="form-floating">
-						<input type="number" name="lesson_order[]" class="form-control" placeholder="">
+						<input type="number" name="lesson_classement[]"  value="{% if lesson is defined %} {{lesson.classement}} {% endif %}" class="form-control" placeholder="">
 						<label>classement</label>
 					</div>
 				</div>

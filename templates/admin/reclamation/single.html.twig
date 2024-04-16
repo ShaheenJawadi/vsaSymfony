@@ -1,0 +1,43 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+{% block adminPanelBody %}
+    <div class="container">
+        <div class="head">
+            <div class="left">
+                <h3 class="title">Reclamation {{ reclamation.getIdReclamation }}</h3>
+            </div>
+        </div>
+
+        <div class="data_info">
+            <div class="single">
+                <div class="tit">
+                    Type
+                </div>
+                <div class="data">
+                    {{ reclamation.type }}
+                </div>
+            </div>
+            <div class="single">
+                <div class="tit">
+                    Description
+                </div>
+                <div class="data">
+                    {{ reclamation.description }}
+                </div>
+            </div>
+
+            <div class="single op_btn">
+               <form method="post" action="{{ path('admin_modifier_statut_reclamation', {'id': reclamation.getIdReclamation}) }}">
+					   <div class="form-group">
+						<label for="nouveau_statut">Nouveau Statut</label>
+						<select class="form-select" id="nouveau_statut" name="nouveau_statut">
+							<option value="en_attente">En Attente</option>
+							<option value="en_cours">En Cours</option>
+							<option value="reponse_envoyee_par_email">Réponse envoyée par email</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">Modifier Statut</button>
+				</form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

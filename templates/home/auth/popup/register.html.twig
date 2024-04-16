@@ -1,61 +1,75 @@
 <div class="auth_holder">
 
-    <div class="auth_title">S'inscrire avec</div>
-    <div class="social_btns">
-        <button class="fb">
+	<div class="auth_title">S'inscrire avec</div>
+	<div class="social_btns">
+		<button class="fb">
 			<i class="fa-brands fa-facebook-f"></i>
 			<span>Facebook</span>
 		</button>
-        <button class="google">
+		<button class="google">
 			<i class="fa-brands fa-google"></i>
 			<span>Google</span>
 		</button>
 
 
-    </div>
-    <div class="separator">
-        <div class="line"></div>
-        <span>Ou</span>
-        <div class="line"></div>
+	</div>
+	<div class="separator">
+		<div class="line"></div>
+		<span>Ou</span>
+		<div class="line"></div>
 
-    </div>
-
-    <div class="input_holder">
+	</div>
 
 
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
-				<i class="fa-solid fa-user"></i>
-			</span>
-            <input type="text" class="form-control" placeholder="Username">
-        </div>
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
-				<i class="fa-solid fa-at"></i>
-			</span>
-            <input type="email" class="form-control" placeholder="Email">
-        </div>
-
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
-				<i class="fa-solid fa-lock"></i>
-			</span>
-            <input type="password" class="form-control" placeholder="Mot de passe">
-        </div>
-        <div class="input-group flex-nowrap">
-            <span class="input-group-text">
-				<i class="fa-solid fa-lock"></i>
-			</span>
-            <input type="password" class="form-control" placeholder="Repeter mot de passe">
-        </div>
-    </div>
+	<form action="{{ path('home_auth_register_post') }}" method="post">
+		<div class="input_holder">
 
 
-    <button class="btn_main">S'inscrire</button>
+			<div class="input-group flex-nowrap">
+				<span class="input-group-text">
+					<i class="fa-solid fa-user"></i>
+				</span>
+				<input type="text" class="form-control" name="nom" placeholder="Nom">
+			</div>
 
-    <div class="ind" id="openLoginPopup">
-        Vous avez déjà un compte?
-    </div>
+			<div class="input-group flex-nowrap">
+				<span class="input-group-text">
+					<i class="fa-solid fa-user"></i>
+				</span>
+				<input type="text" class="form-control" name="prenom" placeholder="Prenom">
+			</div>
+
+			<div class="input-group flex-nowrap">
+				<span class="input-group-text">
+					<i class="fa-solid fa-user"></i>
+				</span>
+				<input type="text" class="form-control" name="username" placeholder="Username">
+			</div>
+			<div class="input-group flex-nowrap">
+				<span class="input-group-text">
+					<i class="fa-solid fa-at"></i>
+				</span>
+				<input type="email" class="form-control" name="email" placeholder="Email">
+			</div>
+
+			<div class="input-group flex-nowrap">
+				<span class="input-group-text">
+					<i class="fa-solid fa-lock"></i>
+				</span>
+				<input type="password" class="form-control" name="password" placeholder="Mot de passe">
+			</div>
+			<div class="input-group flex-nowrap">
+				<span class="input-group-text">
+					<i class="fa-solid fa-lock"></i>
+				</span>
+				<input type="password" class="form-control" name="repreta_password" placeholder="Repeter mot de passe">
+			</div>
+		</div>
+		<button type="submit" class="btn_main">S'inscrire</button>
+	</form>
+	<div class="ind" id="openLoginPopup">
+		Vous avez déjà un compte?
+	</div>
 
 
 </div>

@@ -1,0 +1,16 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+</head>
+<div class="my_review">
+    <h4>Modifier l'Avis</h4>
+    <form method="post" action="{{ path('home_avis_avis_modifier', {'id': avis.getIdAvi(), courSlug: courSlug}) }}">
+        {{ form_start(f) }}
+        <div class="form-group">
+            <label class="form-label">Note</label>
+            {{ form_widget(f.note, {'attr': {'class': 'form-control', 'rows': 3}}) }}
+            <label class="form-label">Écrire un message</label>
+            {{ form_widget(f.message, {'attr': {'class': 'form-control', 'rows': 3}}) }}
+      
+        {{ form_end(f) }}
+    </form>
+</div>

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentairesRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentairesRepository::class)]
 #[ORM\Table(name: "commentaires", indexes: [
@@ -18,6 +19,8 @@ class Commentaires
     private ?int $id = null;
 
     #[ORM\Column(name: "commentaire", type: "string", length: 500)]
+    #[Assert\NotBlank(message: "Le commentaire ne peut pas être vide.")]
+
     private ?string $commentaire = null;
 
     #[ORM\Column(name: "date", type: "datetime")]
