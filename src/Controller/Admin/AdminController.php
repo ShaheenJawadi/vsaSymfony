@@ -21,11 +21,11 @@ class AdminController extends AbstractController
     }
 
 
-    public function users( ): Response
-    { 
+    public function users(): Response
+    {
 
         return $this->render(
-            'admin/users/index.html.twig' 
+            'admin/users/index.html.twig'
         );
     }
 
@@ -34,29 +34,27 @@ class AdminController extends AbstractController
         $users = $userRepository->findAll();
 
 
-        $data = array( ) ; 
+        $data = array();
         foreach ($users as $user) {
-            $u = array($user->getNom() , $user->getPrenom() , $user->getEmail() , $this->generateUrl('admin_delete_user' , array("id"=>$user->getId())));
-          array_push($data ,$u);
+            $u = array($user->getNom(), $user->getPrenom(), $user->getEmail(), $this->generateUrl('admin_delete_user', array("id" => $user->getId())));
+            array_push($data, $u);
         }
- 
-        
+
+
 
         return new JsonResponse($data);
     }
-    
-    public function delete_user($id , UserRepository $userRepository ,ManagerRegistry $manager): Response
-    {
-       $user = $userRepository->findOneBy(['id'=>$id]);
 
-      
-       $em=$manager->getManager();
-       $em->remove($user);
-       $em->flush();
-       return $this->render(
-            'admin/users/index.html.twig' 
+    public function delete_user($id, UserRepository $userRepository, ManagerRegistry $manager): Response
+    {
+        $user = $userRepository->findOneBy(['id' => $id]);
+
+
+        $em = $manager->getManager();
+        $em->remove($user);
+        $em->flush();
+        return $this->render(
+            'admin/users/index.html.twig'
         );
     }
-    
-    
 }
