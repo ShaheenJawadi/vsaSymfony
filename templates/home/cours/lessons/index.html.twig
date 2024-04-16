@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/cours_lessons.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/cours_lessons.css') }}?v=5">
 {% endblock %}
 
 
@@ -19,18 +19,22 @@
 						<div class="core">
 
 							<div class="content_holder">
-								<div class="thumb"></div>
+								<div class="thumb">
+									<iframe src="https://www.youtube.com/embed/6_gXiBe9y9A" frameborder="0" allowfullscreen></iframe>
+								</div>
 								<div class="content">
 									qkldkqsjdljqsjd lqsjdljqlsdjl doqdiozdoiauodiuiazdlk zad
-									                                    azmldmlazkdlmz dpaozdpaz
-									                                    dqsdsqsdljqslkdlqksj idoazd zad
+																		                                    azmldmlazkdlmz dpaozdpaz
+																		                                    dqsdsqsdljqslkdlqksj idoazd zad
 
 
 								</div>
 
 							</div>
-							<a href="{{ path('home_quizz_index') }}"><button class="btn_main">Suivant</button></a>
-							
+							<a href="{{ path('home_quizz_index') }}">
+								<button class="btn_main">Suivant</button>
+							</a>
+
 
 						</div>
 					</div>
