@@ -17,8 +17,11 @@ class AvisType extends AbstractType
         $builder
             ->add('note')
             ->add('message')
-            ->add('save', SubmitType::class)
-        ;
+            ->add('modifier', SubmitType::class, [
+                'label' => 'Modifier',
+                'attr' => ['class' => 'btn_main'],
+            ])
+        ;        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

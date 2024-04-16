@@ -26,4 +26,5 @@ class ReclamationRepository extends ServiceEntityRepository{
                 ->getQuery()
                 ->getOneOrNullResult();
         }
+     public function findReclamationByUserid(int $idUser): ?Reclamations{}
 }
