@@ -9,12 +9,30 @@
 
                         </div>
                         <div class="form_page s">
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
+                            <div class="single_row">
+                                <div class="form-group">
+                                    <label>Categorie</label>
+                                    <select class="form-select">
+                                        <option value="1" selected>ccat1</option>
+                                        <option value="2">cat2</option>
+                                        <option value="3">cat3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="single_row">
+                                <div class="form-group">
+                                    <label>Nom de sous Category</label>
+                                    <input type="text" class="form-control" placeholder="">
+
+                                </div>
+                            </div>
+
+
                             <div class=" s_btn">
-                            <button class="btn_main mt-3">Enregistrer </button>
-                        </div>
-                            {{ form_end(form) }}
+                                <button class="btn_main">Enregistrer </button>
+
+                            </div>
                         </div>
                     </div>
 
@@ -22,4 +40,3 @@
 {% endblock %}
 
 
- 
