@@ -43,7 +43,7 @@ class CategorieController extends AbstractController
             $entityManager->flush();
             return $this->category($entityManager);
         }
-        return $this->render('admin/classification/category/create.html.twig', [
+        return $this->render('admin/Categorie/category/create.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
@@ -63,7 +63,7 @@ class CategorieController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             return $this->category($entityManager);
         }
-        return $this->render('admin/classification/category/edit.html.twig', [
+        return $this->render('admin/Categorie/category/edit.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
@@ -87,7 +87,7 @@ class CategorieController extends AbstractController
     {
         $SouscategorieRepository = $entityManager->getRepository(Souscategorie::class);
         $Souscategorie = $SouscategorieRepository->findAll();
-        return $this->render('admin/classification/subcategory/index.html.twig',[
+        return $this->render('admin/Categorie/subcategory/index.html.twig',[
             'Souscategorie' => $Souscategorie,
         ]);
     }
@@ -110,11 +110,11 @@ class CategorieController extends AbstractController
             return $this->subcategory($entityManager);
         }
 
-        return $this->render('admin/classification/subcategory/create.html.twig', [
+        return $this->render('admin/Categorie/subcategory/create.html.twig', [
             'subcategory' => $subcategory,
             'form' => $form->createView(),
         ]);
-        return $this->render('admin/classification/subcategory/create.html.twig');
+        return $this->render('admin/Categorie/subcategory/create.html.twig');
     }
     /**
      * @Route("/subCategory/{id}/edit", name="subcategory_edit", methods={"GET", "POST"})
@@ -131,11 +131,11 @@ class CategorieController extends AbstractController
             return $this->subcategory($entityManager);
         }
 
-        return $this->render('admin/classification/subcategory/create.html.twig', [
+        return $this->render('admin/Categorie/subcategory/create.html.twig', [
             'subcategory' => $subcategory,
             'form' => $form->createView(),
         ]);
-        return $this->render('admin/classification/subcategory/create.html.twig');
+        return $this->render('admin/Categorie/subcategory/create.html.twig');
     }
 
     /**
