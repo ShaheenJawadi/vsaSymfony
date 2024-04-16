@@ -7,4 +7,36 @@ preview_popup:
   path: /preview_popup/{quiz_id}
   controller: App\Controller\Teacher\TeacherQuizController::preview
 
+delete_quiz:
+    path: /delete/{idQuiz}
+    controller: App\Controller\Teacher\TeacherQuizController::deleteQuiz
+    methods: [GET]
 
+
+add:
+  path: /ajouter/{cours_id}
+  controller: App\Controller\Teacher\TeacherQuizController::add
+
+
+add_question:
+  path: /add_question
+  controller: App\Controller\Teacher\TeacherQuizController::add_question
+
+
+
+create:
+  path: /create 
+  controller: App\Controller\Teacher\TeacherQuizController::create
+  methods: [POST]
+
+
+
+up:
+  path: /modifier/{quiz_id}
+  controller: App\Controller\Teacher\TeacherQuizController::up  
+
+
+updatess:
+  path: /updatess/{id}
+  controller: App\Controller\Teacher\TeacherQuizController::update
+  methods: [POST]

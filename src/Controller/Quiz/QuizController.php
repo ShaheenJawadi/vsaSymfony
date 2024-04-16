@@ -12,24 +12,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\UserRepository;
+
 
 use Doctrine\Persistence\ManagerRegistry;
 
 class QuizController extends AbstractController
 {
-    public function index(Request $request, QuizRepository $quizRepository): Response
-{
-        $coursId=2;   
-        $questionIndex = $request->attributes->get('questionIndex'); // Extract questionIndex from the route
-    
-        // If for some reason questionIndex is not found, default to 0
+    public function index(Request $request, QuizRepository $quizRepository, UserRepository $userRepository): Response
+    {$user = $userRepository->find(3); // TODO FIXME: userid
+        if (!$user) {
+            throw $this->createNotFoundException('No user found');
+        }
+
+        $userId = $user->getId();
+        $coursId=6;   // TODO FIXME: coursid
+        $questionIndex = $request->attributes->get('questionIndex'); 
         if ($questionIndex === null) {
             $questionIndex = 0;
         } else {
-            $questionIndex = (int) $questionIndex; // Ensure questionIndex is an integer
+            $questionIndex = (int) $questionIndex; 
         } 
-    $quiz = $this->getQuizByCoursId($coursId, $quizRepository);
-    $questionDetails = $this->fetchQuestionDetails($quizRepository, $coursId, $questionIndex);
+    $quiz = $this->getQuizByCoursId($coursId, $quizRepository,$userId);
+    $questionDetails = $this->fetchQuestionDetails($quizRepository, $coursId, $questionIndex,$userId);
 
     return $this->render('home/quiz/index.html.twig', [
         'controller_name' => 'QuizController',
@@ -39,15 +44,15 @@ class QuizController extends AbstractController
 
 }
 
-    private function fetchQuestionDetails(QuizRepository $quizRepository, int $coursId, int $questionIndex)
+    private function fetchQuestionDetails(QuizRepository $quizRepository, int $coursId, int $questionIndex,int $userId)
     {
-        $quizzes = $this->getQuizByCoursId($coursId, $quizRepository);
+        $quizzes = $this->getQuizByCoursId($coursId, $quizRepository,$userId);
 
         if (empty($quizzes)) {
             return null;
         }
 
-        $quiz = $quizzes[0]; // Assuming using the first quiz
+        $quiz = $quizzes[0]; 
         $questions = $quiz->getQuestions();
 
         if ($questionIndex < 0 || $questionIndex >= count($questions)) {
@@ -66,9 +71,10 @@ class QuizController extends AbstractController
         ];
     }
 
-    private function getQuizByCoursId(int $coursId, QuizRepository $quizRepository)
+    private function getQuizByCoursId(int $coursId, QuizRepository $quizRepository, int $userId)
     {
-        return $quizRepository->findQuizByCoursId($coursId);
+        
+        return $quizRepository->findQuizByCoursId($coursId,$userId);
     }
 
     public function note(Request $request): Response
@@ -76,8 +82,7 @@ class QuizController extends AbstractController
         $session = $request->getSession();
         $score = $session->get('quizScore', 'Not available');
         
-        // Remove the score from the session if you don't need it anymore
-        $session->remove('quizScore');
+        // $session->remove('quizScore');
     
         return $this->render('home/quiz/note.html.twig', [
             'score' => $score,
@@ -92,7 +97,6 @@ class QuizController extends AbstractController
 
         $em = $manager->getManager();
 
-        // Find the specific user and quiz
         $user = $em->getRepository(User::class)->find($userId);
         $quiz = $em->getRepository(Quiz::class)->find($quizId);
 
@@ -100,27 +104,22 @@ class QuizController extends AbstractController
             return new JsonResponse(['status' => 'error', 'message' => 'User or quiz not found'], 404);
         }
 
-        // Check if a note already exists for this user and quiz
-        $note = $em->getRepository(Notes::class)->findOneBy(['userid' => $user, 'quizid' => $quiz]);
+        // $note = $em->getRepository(Notes::class)->findOneBy(['userid' => $user, 'quizid' => $quiz]);
 
-        // If no note exists, create a new one
-        if (!$note) {
+        // if (!$note) {
             $note = new Notes();
             $note->setUserid($user);
             $note->setQuizid($quiz);
-        }
+        // }
 
-        // Set or update the score
         $note->setNote($score);
 
-        // Persist and flush the note entity
         $em->persist($note);
         $em->flush();
 
         $session = $request->getSession();
         $session->set('quizScore', $score);
 
-        // Return the success response
         return new JsonResponse(['status' => 'success']);
     }
 

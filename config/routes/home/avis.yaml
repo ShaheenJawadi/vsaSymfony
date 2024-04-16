@@ -1,4 +1,28 @@
+avis_index:
+  path: /avis
+  controller: App\Controller\Avis\AvisController::index
 ajouter_avis:
-  path: /ajouer
+  path: /ajouter
   controller: App\Controller\Avis\AvisController::ajouter
+  methods: ['POST']
+avis_modifier:
+  path: /modifier/{id}/{courSlug}
+  controller: App\Controller\Avis\AvisController::modifier
+avis_supprimer:
+  path: /supprimer/{id}/{courSlug}
+  controller: App\Controller\Avis\AvisController::supprimer
+  methods: ['GET']
+
+
  
+
+add_reclamation_page:
+  path: /reclamation
+  controller: App\Controller\Avis\ReclamationController::index
+ajouter_reclamation:
+  path: /ajouterRec
+  controller: App\Controller\Avis\ReclamationController::ajouterRec
+  methods: ['POST']
+afficher_reclamation:
+  path: /afficher
+  controller: App\Controller\Avis\ReclamationController::afficherRec

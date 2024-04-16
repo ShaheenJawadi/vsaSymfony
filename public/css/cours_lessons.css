@@ -59,6 +59,15 @@
     background: #ddd;
     height: 450px;
     width: 100%;
+    position: relative;
+}
+
+.cours_lessons .core .content_holder .thumb iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .cours_lessons .core .content_holder .content {

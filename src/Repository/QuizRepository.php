@@ -26,17 +26,48 @@ class QuizRepository extends ServiceEntityRepository
      * @param int $coursId The ID of the cours to find quizzes for
      * @return Quiz[] Returns an array of Quiz objects
      */
-    public function findQuizByCoursId(int $coursId): array
+    public function findQuizByCoursId(int $coursId, int $userId): array
     {
         return $this->createQueryBuilder('q')
-            ->leftJoin('q.questions', 'questions') // Assume 'questions' is the property name in Quiz entity for Questions association
-            ->leftJoin('questions.suggestions', 'suggestions') // Assume 'suggestions' is the property name in Questions entity for Suggestion association
-            ->addSelect('questions', 'suggestions') // Select the joined entities as well
-            ->andWhere('q.coursid = :val')
-            ->setParameter('val', $coursId)
+            ->leftJoin('q.questions', 'questions')
+            ->leftJoin('questions.suggestions', 'suggestions')
+            ->addSelect('questions', 'suggestions')
+            ->andWhere('q.coursid = :coursId')
+            ->andWhere('q.userid = :userId') 
+            ->setParameter('coursId', $coursId)
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
     }
+
+
+    public function getQuizById(int $idQuiz): ?Quiz
+    {
+        return $this->createQueryBuilder('q')
+            ->leftJoin('q.coursid', 'cours')
+            ->leftJoin('q.questions', 'questions')
+            ->leftJoin('questions.suggestions', 'suggestions')
+            ->addSelect('cours', 'questions', 'suggestions')
+            ->andWhere('q.id = :id')
+            ->setParameter('id', $idQuiz)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getAllQuizzesWithDetails(int $userId): array
+    {
+        return $this->createQueryBuilder('q')
+            ->leftJoin('q.coursid', 'cours')
+            ->leftJoin('q.questions', 'questions')
+            ->leftJoin('questions.suggestions', 'suggestions')
+            ->addSelect('cours', 'questions', 'suggestions')
+            ->andWhere('q.userid = :userId') 
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     
 
 }

@@ -21,7 +21,8 @@
                                 <div class="avatar">
                                     <img src="{{ contributor.image is not empty ? contributor.image : asset('images/cours/person.jpg') }}" alt="">
                                 </div>
-                                <div class="username">{{ contributor.username }}</div>
+                                <div class="username">{{ contributor.username }} - <span class="rolePub">{{ contributor.role | capitalize }}</span>
+                                </div>
 
 
                             </div>
@@ -54,7 +55,16 @@
                                 <div class="entry">
                                     <div class="imgs_list"></div>
                                     <div class="content">
-                                        {{ form_start(forumPub) }} {{ form_row(forumPub.titre) }} {{ form_row(forumPub.contenu) }}
+                                        {{ form_start(forumPub, {'attr': {'novalidate': 'novalidate'}}) }} 
+                                        {{ form_widget(forumPub.titre) }} 
+                                        {% if form_errors(forumPub.titre) %}
+                                            <div class="alert alert-danger">{{ form_errors(forumPub.titre)|replace({ '<ul>': '', '</ul>': '', '<li>': '', '</li>': '' }) }}</div>
+                                        {% endif %}
+                                        {{ form_widget(forumPub.contenu) }}
+                                        {% if form_errors(forumPub.contenu) %}
+                                         <div class="alert alert-danger">{{ form_errors(forumPub.contenu)|replace({ '<ul>': '', '</ul>': '', '<li>': '', '</li>': '' }) }}</div>
+
+                                        {% endif %}
                                     </div>
 
                                 </div>
@@ -95,21 +105,23 @@
 
                             </div>
                             <div class="search">
-
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text">
-											<i class="fa-solid fa-magnifying-glass"></i>
-										</span>
-                                    <input type="text" class="form-control" placeholder="Search feed">
-                                </div>
-
+                                <form action="{{ path('home_forum_index') }}" method="GET"> 
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Search feed" name="searchTerm">
+                                    </div>
+                                </form>
                             </div>
+
 
                         </div>
 
 
                         <div class="pub_list">
                             {% for pub in pubs %}
+                             {% if commentForms[pub.id] is defined %}
                                  {% set userReaction = userReactionsMap[pub.id] ?? null %}
 
                                 {% include 'home/components/forum/forumGrid.html.twig' with {
@@ -119,6 +131,7 @@
                                     'userReaction': userReaction,
                                     'userComment':user
                                 } %}
+                            {% endif %}
                             {% endfor %}
                     </div>
                 </div>

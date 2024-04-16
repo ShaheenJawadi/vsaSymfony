@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\QuizRepository;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\QuizRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
 #[ORM\Table(name: "quiz", indexes: [
     new ORM\Index(name: "coursId", columns: ["coursId"]),
@@ -20,9 +19,17 @@ class Quiz
     private ?int $id = null;
 
     #[ORM\Column(name: "nom", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Le nom du quiz ne peut pas être vide.")]
+
     private ?string $nom = null;
 
     #[ORM\Column(name: "duree", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "La durée quiz ne peut pas être vide.")]
+    #[Assert\Regex(
+        pattern: "/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/",
+        message: "Le format de la durée doit être hh:mm:ss"
+    )]
+    
     private ?string $duree = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
@@ -33,9 +40,7 @@ class Quiz
     #[ORM\JoinColumn(name: "coursId", referencedColumnName: "id")]
     private ?Cours $coursid = null;
 
-    
-    #[ORM\OneToMany(targetEntity: Questions::class,mappedBy:"quizid")]
-
+    #[ORM\OneToMany(targetEntity: Questions::class, mappedBy: "quizId", cascade: ["persist", "remove"])]
     private Collection $questions;
 
     public function __construct()
@@ -43,10 +48,6 @@ class Quiz
         $this->questions = new ArrayCollection();
     }
 
-    public function getQuestions(): Collection
-    {
-        return $this->questions;
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -57,10 +58,9 @@ class Quiz
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -69,36 +69,42 @@ class Quiz
         return $this->duree;
     }
 
-    public function setDuree(string $duree): static
+    public function setDuree(string $duree): self
     {
         $this->duree = $duree;
-
         return $this;
     }
 
-    public function getUserid(): ?User
+    public function getUserId(): ?User
     {
         return $this->userid;
     }
 
-    public function setUserid(?User $userid): static
+    public function setUserId(?User $userId): self
     {
-        $this->userid = $userid;
-
+        $this->userid = $userId;
         return $this;
     }
 
-    public function getCoursid(): ?Cours
+    public function getCoursId(): ?Cours
     {
         return $this->coursid;
     }
 
-    public function setCoursid(?Cours $coursid): static
+    public function setCoursId(?Cours $coursId): self
     {
-        $this->coursid = $coursid;
-
+        $this->coursid = $coursId;
         return $this;
     }
 
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
 
+    public function setQuestions(Collection $questions): self
+    {
+        $this->questions = $questions;
+        return $this;
+    }
 }

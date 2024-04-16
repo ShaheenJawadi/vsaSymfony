@@ -10,9 +10,9 @@ quiz_question:
     path: /single/question/{questionIndex}
     controller: App\Controller\Quiz\QuizController::index
     defaults:
-        questionIndex: 0 # Default value if not provided
+        questionIndex: 0 
     requirements:
-        questionIndex: '\d+' # questionIndex must be a number
+        questionIndex: '\d+' 
 
 
 submit_score:

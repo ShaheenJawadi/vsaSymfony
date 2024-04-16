@@ -1,0 +1,71 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+{% block adminPanelBody %}
+
+	<div class="container">
+		<div class="head">
+			<div class="left">
+				<h3 class="title">Users</h3>
+
+			</div>
+
+		</div>
+		<div class="Dtable_style">
+
+
+			<table id="Dtable" class="table table-striped " style="width:100%">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prenom</th>
+
+						<th>Email</th>
+						<th>Options</th>
+
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+
+	<script>
+		var $window = $(window);
+$window.on('load', function (key, value) {
+$('#Dtable').DataTable({
+"ajax": {
+"url":"{{ path('admin_get_users_list') }}",
+"type":"GET",
+"dataSrc":""
+},
+"columns":[
+	 {"data":"0"},
+	 {"data":"1"},
+
+	 {"data":"2"},
+	  {"render": function(data , type , row , meta) {
+		return '<a class="option delete" href="'+row[3]+'"><i class="fa-solid fa-trash"></i></a>';
+	  }
+	  
+	 
+	 
+	 }
+
+],
+"language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+}
+});
+
+
+});
+	</script>
+{% endblock %}

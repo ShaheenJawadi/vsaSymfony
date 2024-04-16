@@ -38,6 +38,8 @@ h2.p_color {
     display: flex;
     align-items: center;
     gap: 15px;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .w_block {
@@ -68,6 +70,36 @@ h2.p_color {
     color: var(--fx-primary-color) !important;
 }
 
+.header .nav-item.dropdown .dropdown-menu {
+    border-radius: 0;
+    padding: 0;
+}
+
+.header .nav-item.dropdown .dropdown-menu .dropdown-item {
+    font-size: 18px;
+    padding: 5px 12px;
+    min-width: 200px;
+}
+
+.header .nav-item.dropdown .dropdown-menu .dropdown-item:hover {
+    background: var(--fx-primary-color);
+    color: #fff;
+}
+
+.header .nav-item.dropdown .dropdown-menu .dropdown-item:active {
+    color: inherit;
+    background: unset;
+}
+
+.header .nav-item.dropdown .single_item {
+    position: relative;
+}
+
+.header .nav-item.dropdown .single_item .subcategories {
+    top: 0;
+    left: 100%;
+}
+
 .header .auth_part {
     align-items: center;
 }
@@ -75,6 +107,42 @@ h2.p_color {
 .header .auth_part .separator {
     padding: 25px 0;
     border-right: 1px solid #cccccc;
+}
+
+.header .auth_part .profile {
+    position: relative;
+    margin-right: 10px;
+}
+
+.header .auth_part .profile .dropdown-menu li .ic {
+    color: var(--fx-primary-color);
+}
+
+.header .auth_part .profile .dropdown-menu li span {
+    margin-left: 10px;
+    font-size: 16px;
+    color: var(--fx-main-text-color);
+    font-weight: 700;
+}
+
+.header .auth_part .profile .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--fx-main-text-color);
+}
+
+.header .auth_part .profile .dropdown-toggle::after {
+    display: none;
+}
+
+.header .auth_part .profile .profile-pic img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--fx-primary-color);
 }
 
 .header .badge_my_cours {
@@ -436,6 +504,28 @@ footer .footer_Holder .footer_social .item:hover {
     display: none !important;
 }
 
+.reclamation_page {
+    background: #fff;
+    border-radius: 10px;
+    margin: 25px;
+    padding: 25px;
+}
+
+.page .tit {
+    color: var(--fx-primary-color);
+    margin-bottom: 20px;
+}
+
+.page .form_holder {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.page .form_holder label {
+    color: var(--fx-main-text-color);
+}
+
 
 /* *********************** */
 
@@ -473,4 +563,16 @@ table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
 
 .Dtable_style .row>* {
     color: var(--fx-main-text-color);
+}
+
+.Dtable_style .option {
+    color: var(--fx-primary-color);
+}
+
+.Dtable_style .option.delete {
+    color: #fd0000;
+}
+
+.form-control.error {
+    border: 1px solid var(--fx-error-background);
 }

@@ -2,10 +2,10 @@
     <div class="header_section">
 
         <div class="txt">
-            Cours
+        Cours
         </div>
         <div class="title">
-            kdjqklsdlkqsdjqjsdlkjsqlkdjqsld
+            {{quiz.coursid.nom}}
         </div>
 
 
@@ -13,111 +13,29 @@
     </div>
 
     <div class="question_list">
+        {% for question in quiz.getQuestions() %}
         <div class="single">
-
-
             <div class="question">
-                qdhqskjdqs dkhqskjd qhsd?
+                {{ question.question }}
             </div>
 
-            <div class="img_holder">
-                <img src="{{ asset('images/cours/Image.png') }}" alt="">
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="single_rep correct">
-                        qsQS
-                    </div>
-
+            {% if question.image %}
+                <div class="img_holder">
+                    <img src="{{question.image}}" alt="">
                 </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="single">
-
-
-            <div class="question">
-                qdhqskjdqs dkhqskjd qhsd?
-            </div>
+            {% endif %}
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="single_rep correct">
-                        qsQS
+                {% for suggestion in question.getSuggestions() %}
+                    <div class="col-md-6">
+                        <div class="single_rep{{ suggestion.status ? ' correct' : '' }}">
+                            {{ suggestion.suggestion }}
+                        </div>
                     </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
+                {% endfor %}
             </div>
         </div>
-        <div class="single">
-
-
-            <div class="question">
-                qdhqskjdqs dkhqskjd qhsd?
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="single_rep correct">
-                        qsQS
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="single_rep">
-                        qsQS
-                    </div>
-
-                </div>
-            </div>
-        </div>
+       
+        {% endfor %}
     </div>
 </div>

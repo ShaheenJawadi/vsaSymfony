@@ -37,3 +37,10 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: twig.extension }
+
+
+    App\Service\UserSessionManager:
+        arguments:
+            $session: '@session' # This injects the HttpClientInterface service
+            $entityManager: '@doctrine.orm.entity_manager'
+

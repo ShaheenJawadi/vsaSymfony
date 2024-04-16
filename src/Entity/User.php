@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-#[ORM\Entity]
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints as Assert;
 
-//#[ORM\Entity(repositoryClass: UserRepository::class)]
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: "user", indexes: [new ORM\Index(name: "fk_level_id", columns: ["level_id"])])]
 class User
 {
@@ -15,19 +18,28 @@ class User
     #[ORM\Column(name: "id", type: "integer")]
     private ?int $id = null;
 
-    #[ORM\Column(name: "nom", type: "string", length: 255)]
+    #[ORM\Column(name: "nom", type: "string", length: 20)]
+    #[Assert\NotBlank(message: "Name cannot be blank")]
+    #[Assert\Regex(pattern: "/^[a-zA-Z]+$/", message: "Name can only contain alphabetical characters")]
     private ?string $nom = null;
 
-    #[ORM\Column(name: "prenom", type: "string", length: 255)]
+
+    #[ORM\Column(name: "prenom", type: "string", length: 20)]
+    #[Assert\NotBlank(message: "prenom cannot be blank")]
+    #[Assert\Regex(pattern: "/^[a-zA-Z]+$/", message: "prenom can only contain alphabetical characters")]
     private ?string $prenom = null;
 
-    #[ORM\Column(name: "username", type: "string", length: 255)]
+    #[ORM\Column(name: "username", type: "string", length: 20)]
+    #[Assert\NotBlank(message: "Username cannot be blank")]
+    #[Assert\Regex(pattern: "/^[a-zA-Z0-9_]+$/", message: "Username can only contain alphabetical characters, numbers, and underscores")]
     private ?string $username = null;
 
     #[ORM\Column(name: "date_de_naissance", type: "date", nullable: true)]
     private ?\DateTimeInterface $dateDeNaissance = null;
 
     #[ORM\Column(name: "email", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Email cannot be blank")]
+    #[Assert\Email(message: "Invalid email format")]
     private ?string $email = null;
 
     #[ORM\Column(name: "password", type: "string", length: 255)]
@@ -186,6 +198,4 @@ class User
 
         return $this;
     }
-
-
 }
