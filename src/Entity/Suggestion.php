@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SuggestionRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: SuggestionRepository::class)]
 #[ORM\Table(name: "suggestion", indexes: [new ORM\Index(name: "questionsId", columns: ["questionId"])])]
@@ -15,15 +16,16 @@ class Suggestion
     private ?int $id = null;
 
     #[ORM\Column(name: "suggestion", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Les suggestions ne peuvent pas être vide.")]
+
     private ?string $suggestion = null;
 
     #[ORM\Column(name: "status", type: "boolean")]
     private ?bool $status = null;
 
-    #[ORM\ManyToOne(targetEntity: Questions::class)]
+    #[ORM\ManyToOne(targetEntity: Questions::class, inversedBy: "suggestions")]
     #[ORM\JoinColumn(name: "questionId", referencedColumnName: "id")]
-    private ?Questions $questionid = null;
-
+    private ?Questions $questionId = null;
 
     public function getId(): ?int
     {
@@ -35,36 +37,31 @@ class Suggestion
         return $this->suggestion;
     }
 
-    public function setSuggestion(string $suggestion): static
+    public function setSuggestion(string $suggestion): self
     {
         $this->suggestion = $suggestion;
-
         return $this;
     }
 
-    public function isStatus(): ?bool
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): static
+    public function setStatus(bool $status): self
     {
         $this->status = $status;
-
         return $this;
     }
 
-    public function getQuestionid(): ?Questions
+    public function getQuestionId(): ?Questions
     {
-        return $this->questionid;
+        return $this->questionId;
     }
 
-    public function setQuestionid(?Questions $questionid): static
+    public function setQuestionId(?Questions $questionId): self
     {
-        $this->questionid = $questionid;
-
+        $this->questionId = $questionId;
         return $this;
     }
-
-
 }

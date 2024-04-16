@@ -1,0 +1,94 @@
+{% extends 'teacher/teacherPanelLayout.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="action_section">
+            <div class="section_title">
+                Modifier votre Quiz
+            </div>
+            <div class="sep"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <form ajaxform action="{{ path('teacher_quiz_updatess', {id: quiz_id}) }}" method="post">
+            <div class="form_page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="single_row">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="nom" value="{{ quiz.nom }}">
+                                    <label>Nom du Quiz</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="single_row">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="duree" value="{{ quiz.duree }}">
+                                    <label>Duree (HH:MM:SS)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_sep">
+                        <div class="t">Questions</div>
+                        <div class="sep"></div>
+                    </div>
+
+                    <div class="list_lessons" id="list_quiz">
+                        {% for question in quiz.getQuestions() %}
+                            <div class="single">
+                                <input type="hidden" name="questions[{{ question.getId() }}][id]" value="{{ question.getId() }}">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="single_row">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control" name="questions[{{ question.getId() }}][question]" value="{{ question.question }}">
+                                                    <label>Question</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="single_row thumb">
+                                                {% if question.image %}
+                                                    <div class="img_holder">
+                                                        <img src="{{ question.image }}" alt="">
+                                                    </div>
+                                                {% endif %}
+                                                <div class="btn_main">Image</div>
+                                            </div>
+                                        </div>
+                                        {% for suggestion in question.getSuggestions() %}
+                                            <div class="col-md-6">
+                                                <input type="hidden" name="questions[{{ question.getId() }}][suggestions][{{ suggestion.getId() }}][id]" value="{{ suggestion.getId() }}">
+                                                <div class="single_row">
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" name="questions[{{ question.getId() }}][suggestions][{{ suggestion.getId() }}][suggestion]" value="{{ suggestion.suggestion }}">
+                                                        <label>
+																		{% if loop.index == 4 %}
+																		Reponse
+																		{% endif %}
+																		{% if loop.index < 4 %}
+																		suggestion {{ loop.index }}
+																		{% endif %}
+																		</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button class="btn_main">Soumettre</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
