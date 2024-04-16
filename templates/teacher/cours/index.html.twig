@@ -15,8 +15,15 @@
 
 </div>
 
+
+
 <div class="cours_list">
     <div class="container">
+    {% for flash_message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ flash_message }}
+    </div>
+{% endfor %}
         <div class="row">
             {% for cours in my_cours %} {{ courGrid.displayCourse(cours) }} {% endfor %}
         </div>

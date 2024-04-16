@@ -115,9 +115,11 @@ class TeacherCoursController extends AbstractController
 
          
             $coursEntity = $entity;
+            $this->addFlash('success', 'Le cours a été ajouté avec succès!');
         } else {
 
             $entityManager->persist($coursEntity);
+            $this->addFlash('success', 'Le cours a été modifié avec succès!');
         }
 
 
@@ -130,8 +132,10 @@ class TeacherCoursController extends AbstractController
         $entityManager->flush();
 
 
-     
-        return $this->json(['success' => true, 'message' => 'success'], Response::HTTP_OK);
+        
+             
+            
+        return $this->json(['success' => true, 'message' => 'success','route' => $this->generateUrl('teacher_cours_index')], Response::HTTP_OK);
     }
 
 
