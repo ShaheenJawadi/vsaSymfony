@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Vision Sign</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ random() }}"> {% block stylesheets %}{% endblock %}
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	</head>
+
+	<body>
+
+
+		<section class="header sticky-top">
+			<nav class="navbar   navbar-expand-lg ">
+				<div class="container">
+					<a class="navbar-brand header_logo" href="{{ path('home_index') }}">
+						<img src="{{ asset('images/logo_circle.png') }}" alt=""></a>
+
+
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="{{ path('home_index') }}">Accueil</a>
+							</li>
+
+							{% include 'home/components/categories_subCategories.html.twig' %}
+
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('home_cours_filter_index') }}">Cours</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Enseignants</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('home_forum_index') }}">Forum</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('home_forum_chatbot_index') }}">ChatBot</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('home_avis_add_reclamation_page') }}">Reclamation</a>
+							</li>
+
+						</ul>
+
+
+						<ul class="navbar-nav   mb-2 mb-lg-0 auth_part">
+
+							{% if  current_user is not defined  or current_user is  null %}
+								<li class="nav-item">
+									<a class="nav-link active" type="button" data-bs-toggle="modal" data-bs-target="#authModel" href="#">Connexion</a>
+								</li>
+								<li class="nav-item nav-link ">
+									/
+								</li>
+								<li class="nav-item">
+									<a class="nav-link " href="#">Inscription</a>
+								</li>
+							{% else %}
+								<li class=" profile">
+									<a class=" dropdown-toggle" href="#" ole="button" data-bs-toggle="dropdown" aria-expanded="false">
+										<div class="profile-pic">
+											<img src="{{ asset('images/cours/person.jpg') }}" alt="Profile Picture">
+										</div>
+										<div class="username">
+											{{current_user.username}}
+										</div>
+
+									</a>
+									<ul class="dropdown-menu">
+
+										<li>
+											<a class="dropdown-item" href="#">
+												<i class="ic fa-solid fa-gear"></i>
+												<span>Parametre</span>
+											</a>
+										</li>
+										<li>
+											<hr class="dropdown-divider">
+										</li>
+										<li>
+											<a class="dropdown-item" href="{{ path('home_auth_logout') }}">
+												<i class=" ic fa-solid fa-right-from-bracket"></i>
+												<span>Deconnexion</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								{# 
+								                        <a  href="{{ path('home_auth_logout') }}"  >  logout</a> #}
+							{% endif %}
+
+							<li class="separator"></li>
+
+
+							<li class="nav-item">
+								<div class="badge_my_cours">
+									<div class="icon_holder">
+										<i class="fa-solid fa-briefcase"></i>
+									</div>
+									<div class="my_cours_count">1</div>
+								</div>
+
+
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									<Button class="btn_main">Faire un don</Button>
+								</a>
+							</li>
+						</ul>
+
+
+					</div>
+				</div>
+
+			</nav>
+		</section>
+		<div class="home_page"> {% block body %}{% endblock %}
+{% block adminPanelBody %}
+    <div class="container">
+        <div class="head">
+            <div class="left">
+                <h3 class="title">Mes Réclamations</h3>
+            </div>
+            
+        </div>
+        <div class="Dtable_style">
+            <table id="Dtable" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reclamation in reclamations %}
+                    <tr>
+                        <td>{{ reclamation.Type }}</td>
+                        <td>{{ reclamation.description }}</td>
+                        <td>{{ reclamation.date ? reclamation.date|date('d/m/Y') : 'N/A' }}</td>
+                        <td>{{ reclamation.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="right">
+                <h6 class="nav-item">
+                    <a class="nav-link" href="{{ path('home_avis_add_reclamation_page') }}">Ajouter Réclamation</a>
+                </h6>
+            </div>
+    </div>
+    
+{% endblock %}
+<footer>
+				<div class="footer_Holder" style="background-image: url({{ asset('images/footer_bg.png')}})">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="logo_holder"><img src="{{ asset('images/logo_circle.png') }}" class="footer_logo" alt=""></div>
+
+							</div>
+							<div class="col-md-3">
+								<div class="footer_list_holder">
+									<span class="title">Categories</span>
+									<ul>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+									</ul>
+
+								</div>
+
+							</div>
+
+							<div class="col-md-3">
+								<div class="footer_list_holder">
+									<span class="title">Cours</span>
+									<ul>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+										<li><a href="#">-----------------------------</a></li>
+									</ul>
+
+								</div>
+
+							</div>
+
+							<div class="col-md-3">
+								<div class="footer_social">
+									<a class="item" href="#">
+										<i class="fa-brands fa-facebook"></i>
+									</a>
+									<a class="item" href="#">
+										<i class="fa-brands fa-instagram"></i>
+									</a>
+									<a class="item" href="#">
+										<i class="fa-brands fa-x-twitter"></i>
+									</a>
+
+
+								</div>
+
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</footer>
+
+			{% include 'home/auth/popup/index.html.twig' %}
+			{% include 'home/components/global_popup.html.twig' %}
+
+
+		</div>
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+		<script src="{{ asset('js/main.js') }}?v={{ random() }}"></script>
+
+
+	</body>
+
+</html>

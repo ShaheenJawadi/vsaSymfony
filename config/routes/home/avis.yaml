@@ -23,3 +23,6 @@ ajouter_reclamation:
   path: /ajouterRec
   controller: App\Controller\Avis\ReclamationController::ajouterRec
   methods: ['POST']
+afficher_reclamation:
+  path: /afficher
+  controller: App\Controller\Avis\ReclamationController::afficherRec
