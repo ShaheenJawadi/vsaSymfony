@@ -1,0 +1,120 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+{% block adminPanelBody %}
+	<div class="topNavigation_box">
+		<a href="{{ path('admin_category_list')}}">Categories</a>
+		<a href="{{ path('admin_subcategory_list')}}"   class="active">Subcategories</a>
+
+
+	</div>
+	<div class="container">
+		<div class="head">
+			<div class="left">
+				<h3 class="title">Categorie</h3>
+
+			</div>
+			<div class="right">
+				<a href="{{ path('admin_subcategory_create')}}"  class="btn_main">
+					<div class="icon">
+						<i class="fa-solid fa-circle-plus"></i>
+
+					</div>
+					<div>Ajouter une Sous Categorie</div>
+				</a>
+
+			</div>
+		</div>
+		<div class="Dtable_style">
+
+
+			<table id="Dtable" class="table table-striped " style="width:100%">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Name</th>
+						<th>status</th>
+						<th>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for category in Souscategorie %}
+						<tr>
+							<td>{{ category.id }}</td>
+							<td>{{ category.nom }}</td>
+							<td>{% if category.status == "active"  %}
+									<span style="color:green;">{{ category.status }}</span>
+								{% else %}
+									<span style="color:red;">{{ category.status }}</span>
+								{% endif %}
+							</td>
+							<td><a style="color:#00aeef;" href="{{ path('subcategory_edit', {'id': category.id}) }}">Edit</a><br>
+								<a href="{{ path('subcategory_delete', {'id': category.id}) }}" class="delete-category" style="color:red;" data-id="{{ category.id }}">Delete</a>
+							</td>
+						<tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+
+	<script>
+		var $window = $(window);
+    		$window.on('load', function (key, value) {
+    			$('#Dtable').DataTable({
+    				"language": {
+    				"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+    				}
+    			},
+    			 "columnDefs": [
+                                { "targets": 0, "data": "id" },
+                                { "targets": 1, "data": "name" },
+                                { "targets": 2, "data": "status" },
+                                { "targets": 3, "data": null,
+                                  "render": function (data, type, row, meta) {
+                                      return '<a href="' + data.editUrl + '" style="color:#00aeef;">Edit</a><br>' +
+                                             '<a href="#" class="delete-category btn" style="color:red;" data-id="' + data.id + '">Delete</a>';
+                                  }
+                                }
+                            ] });
+			$(".header").load('/components/admin/header.html')
+			// $('footer').load('../components/footer.html')
+		});
+		document.addEventListener('DOMContentLoaded', function() {
+			const deleteLinks = document.querySelectorAll('.delete-category');
+
+			deleteLinks.forEach(function(link) {
+				link.addEventListener('click', function(event) {
+					event.preventDefault();
+					const categoryId = link.dataset.id;
+					if (confirm('Êtes-vous sûr de vouloir supprimer cette sous-catégorie?')) {
+						// Send an AJAX request to delete the category
+						fetch(`/subCategory/${categoryId}/delete`, {
+							method: 'DELETE',
+						})
+						.then(response => {
+							console.log(response);
+							if (response.ok) {
+								// Optionally, handle success response
+								// Reload the page or update UI as needed
+								location.reload(); // For example, reload the page
+							} else {
+								// Handle error response
+								console.error('Failed to delete category');
+							}
+						})
+						.catch(error => {
+							console.error('Error:', error);
+						});
+					}
+				});
+			});
+		});
+	</script>
+{% endblock %}
