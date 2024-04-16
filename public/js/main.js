@@ -92,7 +92,7 @@
 
         e.preventDefault();
         var $this = $(this).parent();
-
+        $('.form-control').removeClass('error');
 
         $.ajax({
             method: "POST",
@@ -104,15 +104,30 @@
             processData: false,
             success: function(data) {
 
-                alert('suuc')
+                if (data.success) {
+                    // Redirect to the route returned by the server
+                    window.location.href = data.route;
+                }
 
             },
             error: function(data) {
                 var response = data.responseJSON;
                 var errors = response.errors;
 
+
+
+
                 $.each(errors, function(key, value) {
-                    $('[name="' + key + '"]').addClass('error');
+                    if (Array.isArray(value)) {
+                        for (var i = 0; i < value.length; i++) {
+                            $('[name="' + key + '[]"]').eq(i).addClass('error');
+
+                        }
+
+                    } else {
+                        $('[name="' + key + '"]').addClass('error');
+                    }
+                    // $('[name="' + key + '"]').addClass('error');
                 });
             }
 
