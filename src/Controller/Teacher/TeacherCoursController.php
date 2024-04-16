@@ -169,7 +169,7 @@ class TeacherCoursController extends AbstractController
 
 
         $entity = new Ressources();
-        $entity->setLien($formData['ressource_link']);
+        $entity->setLien($formData['ressource_lien']);
         $entity->setType($formData['ressource_type']);
 
 
@@ -199,9 +199,12 @@ class TeacherCoursController extends AbstractController
 
         $ressourceErrors = $validator->validate($ressourceErrors);
         if (count($ressourceErrors) > 0) {
-
+ 
             foreach ($ressourceErrors as $error) {
                 $propertyPath = $error->getPropertyPath();
+                if($propertyPath == 'lien' || $propertyPath == 'type'){
+                    $propertyPath = 'ressource_'.$propertyPath;
+                }
                 $message = $error->getMessage();
                 $formErrors[$propertyPath] = $message;
             }
@@ -209,19 +212,26 @@ class TeacherCoursController extends AbstractController
 
 
 
-        foreach ($lessonsEntityList as $lessonItem) {
+        foreach ($lessonsEntityList as $key => $lessonItem) {
             $lessonErrors = $validator->validate($lessonItem);
 
+       
             if (count($lessonErrors) > 0) {
 
-                foreach ($ressourceErrors as $error) {
+                foreach ($lessonErrors as $error) {
+
+           
+
                     $propertyPath = $error->getPropertyPath();
+                    if($propertyPath == 'titre' || $propertyPath == 'video' || $propertyPath == 'content' || $propertyPath == 'duree' || $propertyPath == 'classement'){
+                        $propertyPath = 'lesson_'.$propertyPath;
+                    }
                     $message = $error->getMessage();
-                    $formErrors[$propertyPath] = $message;
+                    $formErrors[$propertyPath][$key] = $message;
                 }
             }
         }
-
+ 
         return $formErrors;
     }
 
@@ -238,8 +248,8 @@ class TeacherCoursController extends AbstractController
             $entity->setTitre($request->request->get('lesson_title')[$i]);
             $entity->setVideo($request->request->get('lesson_video')[$i]);
             $entity->setContent($request->request->get('lesson_content')[$i]);
-            $entity->setDuree((int)$request->request->get('lesson_duration')[$i]);
-            $entity->setClassement((int)$request->request->get('lesson_order')[$i]);
+            $entity->setDuree((int)$request->request->get('lesson_duree')[$i]);
+            $entity->setClassement((int)$request->request->get('lesson_classement')[$i]);
 
             $lessons[] = $entity;
         }
