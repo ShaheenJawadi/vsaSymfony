@@ -17,6 +17,11 @@
 	<div class="container">
 		<form ajaxform action="{{ path('teacher_quiz_create') }}" method="post">
 		<input type="hidden" name="coursId" value="{{coursId}}">
+		{% if errors %}
+		     	{% for error in errors %}
+		        	<div class="alert alert-danger">{{ error.message }}</div>
+		    	{% endfor %}
+			{% endif %}	
 			<div class="form_page">
 				<div class="container">
 					<div class="row">
@@ -63,4 +68,5 @@
 		</form>
 	</div>
 
+	
 {% endblock %}

@@ -4,7 +4,7 @@
             <div class="related_cours">
 
                 <div class="txt">
-                    Cours
+                    Quiz
                 </div>
                 <div class="title">
                     {{ quiz.nom }}
@@ -20,7 +20,7 @@
 
                         <li><div class="dropdown-item "  openGeneralPopup data-link="{{ path('teacher_quiz_preview_popup' , {quiz_id:quiz.id}) }}">Afficher</div></li>
 
-                        <li><a class="dropdown-item " href="# ">Modifier</a></li>
+                        <li><a class="dropdown-item " href="{{ path('teacher_quiz_up' , {quiz_id:quiz.id}) }}">Modifier</a></li>
 
                         <li><a class="dropdown-item " href="{{ path('teacher_quiz_delete_quiz', {'idQuiz': quiz.id}) }}" onclick="return confirm('Are you sure you want to delete this quiz ?');">Supprimer</a></li>
                     </ul>
