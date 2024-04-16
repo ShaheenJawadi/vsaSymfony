@@ -80,3 +80,4 @@ admin_space:
       resource: "routes/admin/admin.yaml"
       prefix: "/admin"
       name_prefix: "admin_"
+

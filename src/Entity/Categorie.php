@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 //#[ORM\Entity(repositoryClass: CategorieRepository::class)]
 #[ORM\Entity]
@@ -27,8 +29,16 @@ class Categorie
     #[ORM\Column(name: "image", type: "string", length: 600, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(name: "nbSousCategorie", type: "integer", nullable: true)]
-    private ?int $nbsouscategorie = null;
+    #[ORM\Column(name: "nbSousCategorie", type: "integer", nullable: false , options: ["default" => "0"])]
+    private ?int $nbsouscategorie = 0;
+
+    #[ORM\OneToMany(targetEntity:"App\Entity\Souscategorie", mappedBy:"categorie")]
+    private $souscategories;
+
+    public function __construct()
+    {
+        $this->souscategories = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -94,6 +104,14 @@ class Categorie
         $this->nbsouscategorie = $nbsouscategorie;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Souscategorie[]
+     */
+    public function getSouscategories(): Collection
+    {
+        return $this->souscategories;
     }
 
 

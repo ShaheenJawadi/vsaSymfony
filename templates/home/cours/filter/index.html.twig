@@ -27,64 +27,27 @@
 						<div class="filter_side_bar">
 							<h3>Categories</h3>
 							<ul class="categories">
-
-								<li>
-									<div>
-										<span class="cat_title">
-											<a href="#">cat 1</a>
-										</span>
-									</div>
-									<ul class="souCategory">
-										<li class="subCat_title">
-											<a href="#">1 subcat 1</a>
-										</li>
-										<li class="subCat_title">
-											<a href="#">1 subcat 2</a>
-										</li>
-										<li class="subCat_title">
-											<a href="#">1 subcat 3</a>
-										</li>
-									</ul>
-								</li>
-
-								<li>
-									<div>
-										<span class="cat_title">
-											<a href="#">cat 2</a>
-										</span>
-									</div>
-									<ul class="souCategory">
-										<li class="subCat_title">
-											<a href="#">2 subcat 1</a>
-										</li>
-										<li class="subCat_title">
-											<a href="#">2 subcat 2</a>
-										</li>
-
-									</ul>
-								</li>
-
-								<li>
-									<div>
-										<span class="cat_title">
-											<a href="#">cat 3</a>
-										</span>
-									</div>
-									<ul class="souCategory">
-										<li class="subCat_title">
-											<a href="#">3 subcat 1</a>
-										</li>
-										<li class="subCat_title">
-											<a href="#">3 subcat 2</a>
-										</li>
-										<li class="subCat_title">
-											<a href="#">3 subcat 3</a>
-										</li>
-										<li class="subCat_title">
-											<a href="#">3 subcat 4</a>
-										</li>
-									</ul>
-								</li>
+								{% for category in getCategories() %}
+									<li>
+										<div>
+											<span class="cat_title">
+												<a href="#">{{ category.nom }}</a>
+											</span>
+										</div>
+										{% for subcategoryArray in getSubcategories(category) %}
+											<li>
+												<div>
+													<span class="cat_title">
+														<a href="#">{{ subcategoryArray.subcategory }}</a>
+													</span>
+												</div>
+												{# 
+													
+												#}
+											</li>
+										{% endfor %}
+									</li>
+								{% endfor %}
 							</ul>
 
 						</div>
