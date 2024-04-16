@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use Assert\NotBlank;
+use Doctrine\DBAL\Types\Types;
+
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ReclamationRepository;
-
-use Doctrine\DBAL\Types\Types;
 
 //#[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 #[ORM\Entity]
@@ -18,9 +19,11 @@ class Reclamations
     private ?int $idReclamation = null;
 
     #[ORM\Column(name: "type", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "type is required")]
     private ?string $type = null;
 
     #[ORM\Column(name: "description", type: "string", length: 700)]
+    #[NotBlank(message: "description is required")]
     private ?string $description = null;
 
     #[ORM\Column(name: "status", type: "string", length: 255)]

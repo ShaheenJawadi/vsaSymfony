@@ -4,8 +4,9 @@
 {% block body %}
     <div class="container">
         <div class="reclamation_page page">
-            <h3 class="tit">Réclamation</h3>
-
+           
+            <h3 class="tit">Ajouter Réclamation</h3>
+            
             <form action="{{ path('home_avis_ajouter_reclamation') }}" method="post">
                 <div class="form_holder">
                     <div class="form-group">
@@ -28,6 +29,10 @@
                     </div>
                 </div>
             </form>
+             <h6 class="nav-item">
+					<a class="nav-link" href="{{ path('home_avis_afficher_reclamation') }}">Mes Reclamation</a>
+			</h6>
         </div>
+        
     </div>
 {% endblock %}

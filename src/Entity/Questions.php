@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Entity;
-use App\Repository\QuestionsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\QuestionsRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuestionsRepository::class)]
 #[ORM\Table(name: "questions", indexes: [
@@ -19,6 +20,8 @@ class Questions
     private ?int $id = null;
 
     #[ORM\Column(name: "question", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "La question ne peut pas être vide.")]
+
     private ?string $question = null;
 
     #[ORM\Column(name: "image", type: "string", length: 255, nullable: true)]
@@ -26,20 +29,18 @@ class Questions
 
     #[ORM\ManyToOne(targetEntity: Quiz::class)]
     #[ORM\JoinColumn(name: "quizId", referencedColumnName: "id")]
-    private ?Quiz $quizid = null;
+    private ?Quiz $quizId = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: "userId", referencedColumnName: "id")]
-    private ?User $userid = null;
-    #[ORM\OneToMany(targetEntity: Suggestion::class, mappedBy: "questionid")]
+    private ?User $userId = null;
+
+    #[ORM\OneToMany(targetEntity: Suggestion::class, mappedBy: "questionId", cascade: ["persist", "remove"])]
     private Collection $suggestions;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->suggestions = new ArrayCollection();
-    }
-    
-    public function getSuggestions(): Collection {
-        return $this->suggestions;
     }
 
     public function getId(): ?int
@@ -52,10 +53,9 @@ class Questions
         return $this->question;
     }
 
-    public function setQuestion(string $question): static
+    public function setQuestion(string $question): self
     {
         $this->question = $question;
-
         return $this;
     }
 
@@ -64,36 +64,42 @@ class Questions
         return $this->image;
     }
 
-    public function setImage(?string $image): static
+    public function setImage(?string $image): self
     {
         $this->image = $image;
-
         return $this;
     }
 
-    public function getQuizid(): ?Quiz
+    public function getQuizId(): ?Quiz
     {
-        return $this->quizid;
+        return $this->quizId;
     }
 
-    public function setQuizid(?Quiz $quizid): static
+    public function setQuizId(?Quiz $quizId): self
     {
-        $this->quizid = $quizid;
-
+        $this->quizId = $quizId;
         return $this;
     }
 
-    public function getUserid(): ?User
+    public function getUserId(): ?User
     {
-        return $this->userid;
+        return $this->userId;
     }
 
-    public function setUserid(?User $userid): static
+    public function setUserId(?User $userId): self
     {
-        $this->userid = $userid;
-
+        $this->userId = $userId;
         return $this;
     }
 
+    public function getSuggestions(): Collection
+    {
+        return $this->suggestions;
+    }
 
+    public function setSuggestions(Collection $suggestions): self
+    {
+        $this->suggestions = $suggestions;
+        return $this;
+    }
 }

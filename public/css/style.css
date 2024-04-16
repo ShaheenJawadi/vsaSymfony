@@ -39,6 +39,7 @@ h2.p_color {
     align-items: center;
     gap: 15px;
     justify-content: center;
+    cursor: pointer;
 }
 
 .w_block {
