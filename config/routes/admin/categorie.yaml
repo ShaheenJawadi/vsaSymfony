@@ -20,3 +20,12 @@ update_categorie:
   path: /update
   controller: App\Controller\Categorie\CategorieController::updateCategorie
   methods: [POST]
+
+category_list:
+  path: /category
+  controller: App\Controller\Categorie\CategorieController::category
+
+
+subcategory_list:
+  path: /subcategory
+  controller: App\Controller\Categorie\CategorieController::subcategory
