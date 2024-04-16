@@ -38,13 +38,11 @@
 									Categories
 								</a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">categories 1</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">categories 1</a>
-                                </li>
-
+                                {% for category in getCategories() %}
+                                    <li>
+                                        <a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">{{ category.nom }}</a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </li>
 

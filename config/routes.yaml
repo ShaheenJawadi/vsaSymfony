@@ -81,9 +81,3 @@ admin_space:
       prefix: "/admin"
       name_prefix: "admin_"
 
-##########################
-
-admin_categorie:
-      resource: "routes/admin/categorie.yaml"
-      prefix: "/admin/categorie"
-      name_prefix: "admin_categorie"

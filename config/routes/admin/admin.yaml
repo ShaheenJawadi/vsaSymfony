@@ -10,19 +10,37 @@ dashboard:
 #################################################################
 #################################################################
 classification_category_page:
-  path: /category
+  path: /classification/category
   controller: App\Controller\Admin\ClassificationController::category
 
 classification_category_create:
-  path: /category/create
+  path: /classification/category/create
   controller: App\Controller\Admin\ClassificationController::category_create
 
 
 #########
 classification_subcategory_page:
-  path: /subcategory
+  path: /classification/subcategory
   controller: App\Controller\Admin\ClassificationController::subcategory
 
 classification_subcategory_create:
-  path: /subcategory/create
+  path: /classification/subcategory/create
   controller: App\Controller\Admin\ClassificationController::subcategory_create
+
+  ####################
+
+category_list:
+    path: /category
+    controller: App\Controller\Categorie\CategorieController::category
+
+subcategory_list:
+    path: /subcategory
+    controller: App\Controller\Categorie\CategorieController::subcategory
+
+category_create:
+  path: /category/create
+  controller: App\Controller\Categorie\CategorieController::category_create
+
+subcategory_create:
+  path: /subcategory/create
+  controller: App\Controller\Categorie\CategorieController::subcategory_create
