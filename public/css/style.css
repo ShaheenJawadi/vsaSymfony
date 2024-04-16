@@ -571,3 +571,7 @@ table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
 .Dtable_style .option.delete {
     color: #fd0000;
 }
+
+.form-control.error {
+    border: 1px solid var(--fx-error-background);
+}

@@ -1,0 +1,175 @@
+.forum_admin {
+    padding: 20px;
+}
+.forum_admin .pub_list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.forum_admin .pub_list .singlePub {
+    background: #fff;
+    border: 1px solid #797b8936;
+    border-radius: 5px;
+}
+.forum_admin .pub_list .singlePub .headUser {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}
+
+.forum_admin .pub_list .singlePub .headUser .avatar img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.forum_admin .pub_list .singlePub .headUser .infos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.forum_admin .pub_list .singlePub .headUser .infos .username {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.forum_admin .pub_list .singlePub .headUser .infos .date {
+    color: var(--fx-main-text-color);
+    font-size: 14px;
+}
+.forum_admin .pub_list .singlePub .contentPub {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 5px;
+}
+.forum_admin .pub_list .singlePub .contentPub .title {
+    font-size: 20px;
+    color: #000;
+}
+
+.forum_admin .pub_list .singlePub .contentPub .img_list {
+    display: flex;
+    gap: 8px;
+    overflow: auto;
+}
+
+.forum_admin .pub_list .singlePub .contentPub .img_list img {
+    max-height: 200px;
+}
+
+.forum_admin .pub_list .singlePub .contentPub .question {
+    color: #000;
+    padding-left: 10px;
+    font-size: 17px;
+}
+.forum_admin .pub_list .singlePub .infos {}
+
+.forum_admin .pub_list .singlePub .infos .reactions {
+    display: flex;
+    gap: 25px;
+    padding: 10px;
+    align-items: center;
+}
+
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    gap: 4px;
+    
+}
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction_comment {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    gap: 4px;
+    
+}
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction .icon {
+    color: var(--fx-primary-color);
+}
+
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction .counting {
+    font-size: 12px;
+    color: var(--fx-main-text-color);
+}
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction_comment .counting {
+    font-size: 12px;
+    color: var(--fx-main-text-color);
+}
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction .txt {
+    font-size: 14px;
+    color: var(--fx-main-text-color);
+}
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction_comment .txt {
+    font-size: 14px;
+    color: var(--fx-main-text-color);
+}
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction .icon.like {
+    color: var(--fx-secondary-color);
+
+}
+
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction .icon.dislike {
+    color: var(--fx-error-background);
+}
+
+.forum_admin .pub_list .singlePub .infos .reactions .single_reaction_comment .icon.comment {
+    color: var(--fx-third-color);
+}
+
+.forum_admin .pub_list .singlePub .list_comments {
+    display: flex;
+    flex-direction: column;
+    background: #c9f0ff26;
+    gap: 5px;
+}
+
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub {
+    padding: 5px;
+    display: flex;
+    border-bottom: 1px solid #89898929;
+    margin-left: 10px;
+}
+
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub:last-of-type {
+    border-bottom: unset;
+}
+
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub .avatar img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub .contentComment {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub .contentComment .top {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub .contentComment .top .username {
+    color: #000;
+    font-size: 15px;
+}
+.rolePub {
+    color: var(--fx-main-text-color);
+    font-size: 14px;
+
+}
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub .contentComment .top .date {
+    color: var(--fx-main-text-color);
+    font-size: 12px;
+}
+
+.forum_admin .pub_list .singlePub .list_comments .single_comment_pub .contentComment .comment {
+    padding-left: 5px;
+}
