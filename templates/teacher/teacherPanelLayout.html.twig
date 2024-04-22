@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="top_ind">
 
-                    Espace enseignant
+                    Espace enseignant {% if  getCurrentUser() is  not  null %} - {{getCurrentUser().username}} {% endif %} 
                 </div>
 
 
@@ -66,7 +66,7 @@
 
                         <ul class="navbar-nav   mb-2 mb-lg-0 auth_part">
                             <li class="nav-item">
-                                <a class="nav-link active to_home" type="button" href="#">Basculer vers l'espace étudiant</a>
+                                <a class="nav-link active to_home" type="button" href="{{ path('home_index') }}">Basculer vers l'espace étudiant</a>
                             </li>
 
 
