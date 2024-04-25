@@ -50,3 +50,19 @@ services:
         tags:
             - { name: twig.extension }
 
+    
+    cloudinary_php:
+        class: Cloudinary\Cloudinary
+        arguments:
+            - 
+              cloud_name: '%env(CLOUDINARY_CLOUD_NAME)%'
+              api_key: '%env(CLOUDINARY_API_KEY)%'
+              api_secret: '%env(CLOUDINARY_API_SECRET)%'
+              
+      
+    App\Service\UploadImg:
+        arguments:
+            $cloudinary: '@cloudinary_php'
+            $cacert: '%kernel.project_dir%/config/cacert.pem'
+
+
