@@ -63,6 +63,5 @@ services:
     App\Service\UploadImg:
         arguments:
             $cloudinary: '@cloudinary_php'
-            $cacert: '%kernel.project_dir%/config/cacert.pem'
 
 
