@@ -26,3 +26,4 @@
 /.phpstorm.meta.php
 /.phpstorm.meta.php
 /migrations/
+.env
