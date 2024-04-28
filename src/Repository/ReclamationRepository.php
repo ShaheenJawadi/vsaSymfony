@@ -27,4 +27,32 @@ class ReclamationRepository extends ServiceEntityRepository{
                 ->getOneOrNullResult();
         }
      public function findReclamationByUserid(int $idUser): ?Reclamations{}
+     public function findUserEmailByUserId(int $userId): ?string
+     {
+        return $this->createQueryBuilder('r')
+        ->select('u.email')
+        ->join('r.idUser', 'u')
+        ->where('u.id = :userId')
+        ->setParameter('userId', $userId)
+        ->getQuery()
+        ->getSingleScalarResult();
+     }
+     public function findUserEmailByUserIdAndReclamationId(int $userId, int $reclamationId): ?string
+{
+    $result = $this->createQueryBuilder('r')
+        ->select('u.email')
+        ->join('r.idUser', 'u')
+        ->where('u.id = :userId')
+        ->andWhere('r.idReclamation = :reclamationId')
+        ->setParameter('userId', $userId)
+        ->setParameter('reclamationId', $reclamationId)
+        ->getQuery()
+        ->getResult();
+
+    if (!empty($result)) {
+        return $result[0]['email'];
+    }
+
+    return null;
+}
 }

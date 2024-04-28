@@ -44,6 +44,11 @@ services:
             $session: '@session' # This injects the HttpClientInterface service
             $entityManager: '@doctrine.orm.entity_manager'
 
+
+<<<<<<< HEAD
+    App\Service\EmailService:
+        autowire: true
+=======
     App\Twig\userExtension:
         arguments:
             $userSessionManager: '@App\Service\UserSessionManager'
@@ -65,3 +70,4 @@ services:
             $cloudinary: '@cloudinary_php'
 
 
+>>>>>>> cfc3f6b3fb689522a8c28689cedff8ced1c1af25
