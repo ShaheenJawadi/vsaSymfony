@@ -29,7 +29,10 @@ class Quiz
         pattern: "/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/",
         message: "Le format de la durée doit être hh:mm:ss"
     )]
-    
+    #[Assert\NotEqualTo(
+        value: "00:00:00",
+        message: "La durée ne peut pas être 00:00:00."
+    )]
     private ?string $duree = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
