@@ -102,6 +102,11 @@ modifier_statut_reclamation:
 supprimer_reclamation:
   path: /reclamations/supprimer/{id} 
   controller: App\Controller\Admin\ReclamationController::delete_Rec
+envoyer_mail_Rec:
+  path: /reclamations/envoyer_mail/{userId}/{id} 
+  controller: App\Controller\Admin\ReclamationController::sendEmailToUserAction
+
+
 
 #################################################################
 #################################################################
