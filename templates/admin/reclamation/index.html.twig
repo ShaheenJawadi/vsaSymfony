@@ -15,7 +15,9 @@
                         <th>Description</th>
                         <th>Date</th> <!-- Nouvelle colonne pour la date -->
                         <th>Statut</th> <!-- Nouvelle colonne pour le statut -->
+                        <th>Réponse Traiter ou non</th>
                         <th>Options</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -25,17 +27,20 @@
                         <td>{{ reclamation.description }}</td>
                         <td>{{ reclamation.date ? reclamation.date|date('d/m/Y') : 'N/A' }}</td> <!-- Affichage de la date formatée -->
                         <td>{{ reclamation.status }}</td> <!-- Affichage du statut -->
+                        <td>{{ reclamation.repondre == 1 ? 'true' : 'false' }}</td>
                         <td>
+                            <a class="option" href="{{ path('admin_envoyer_mail_Rec', {userId: reclamation.getIdUser().getId(), id: reclamation.getIdReclamation()}) }}">
+                                <i class="fa-solid fa-envelope"></i>
+                             </a>
                             <a class="option" href="{{ path('admin_single_reclamation', {id: reclamation.getIdReclamation()}) }}">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                             <a class="option delete" href="{{ path('admin_supprimer_reclamation', {id: reclamation.getIdReclamation()}) }}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
-                            <a class="option" href="{{ path('admin_envoyer_mail_Rec', {userId: reclamation.getIdUser().getId(), id: reclamation.getIdReclamation()}) }}">
-                               <i class="fa-solid fa-envelope"></i>
-                            </a>
+                            
                         </td>
+                        
                     </tr>
                     {% endfor %}
                 </tbody>

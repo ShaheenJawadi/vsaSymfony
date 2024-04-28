@@ -24,8 +24,10 @@ class EmailService
             ->from('leila.zaouali@esprit.tn')
             ->to($userEmail)
             ->subject('Reponse De La Reclamation Envoyee')
-            ->text('Votre Reclamtion a ete traiter vous pouver voir la reponse sur notre application  ou site web. Cordialement')
-            ->html('<p>Votre Reclamtion a ete traiter vous pouver voir la reponse sur notre application  ou site web. Cordialement</p>');
+            ->text('Votre Réclamtion a été traiter, vous pouver voir la réponse sur notre application  ou site web.                                                                    
+             Cordialement')
+            ->html('<p>Votre Réclamtion a été traiter, vous pouver voir la réponse sur notre application  ou site web.                                                                           
+            Cordialement</p>');
     
         $this->mailer->send($email);
     }
