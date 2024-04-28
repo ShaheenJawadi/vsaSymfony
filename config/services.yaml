@@ -48,6 +48,9 @@ services:
     App\Service\EmailService:
         autowire: true
         
+ 
+
+ 
     App\Twig\userExtension:
         arguments:
             $userSessionManager: '@App\Service\UserSessionManager'
@@ -67,5 +70,3 @@ services:
     App\Service\UploadImg:
         arguments:
             $cloudinary: '@cloudinary_php'
-
-
