@@ -14,21 +14,24 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
+use App\Service\UploadImg;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-
+ 
 
 class TeacherCoursController extends AbstractController
 {
 
 
-    private $managerRegistry;
-
+    private $managerRegistry; 
     public function __construct(ManagerRegistry $managerRegistry)
     {
         $this->managerRegistry = $managerRegistry;
+      
     }
+
+
+ 
 
     public function index(CoursRepository $coursRepository): Response
     {
@@ -53,9 +56,18 @@ class TeacherCoursController extends AbstractController
     }
 
 
-    public function create(Request $request,  ValidatorInterface $validator): Response
+    public function create(Request $request,  ValidatorInterface $validator, UploadImg $imageUploader): Response
     {
 
+
+
+        $file = $request->files->get('image');  
+        $tempFilePath = $file->getRealPath();
+ 
+        $uploadResult = $imageUploader->upload($tempFilePath);
+
+
+        dd($uploadResult);
         $formData = $request->request->all();
 
 
