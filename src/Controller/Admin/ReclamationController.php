@@ -95,6 +95,12 @@ class ReclamationController extends AbstractController
     {
         // Appelez la méthode sendEmailToUser du service ReclamationService avec l'ID de l'utilisateur et l'ID de la réclamation
         $this->emailService->sendEmailToUser($userId, $id);
+        
+        $reclamation = $this->getDoctrine()->getRepository(Reclamations::class)->find($id);
+        $reclamation->setRepondre(1);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($reclamation);
+        $entityManager->flush();
     
         // Ajoutez un message de confirmation ou redirigez l'utilisateur vers une autre page
         $this->addFlash('success', 'L\'e-mail a été envoyé avec succès.');
