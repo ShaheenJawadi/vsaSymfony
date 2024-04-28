@@ -40,7 +40,7 @@ class ReclamationController extends AbstractController
         // Récupérer les données de la requête
         $type = $request->request->get('type');
         $description = $request->request->get('description');
-        $status = "En attente";
+        $status = "pending";
     
         // Valider le type
         $allowedTypes = ['cours', 'note', 'certificat', 'autre'];

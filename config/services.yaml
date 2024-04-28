@@ -45,9 +45,11 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
 
 
- 
     App\Service\EmailService:
         autowire: true
+        
+ 
+
  
     App\Twig\userExtension:
         arguments:
@@ -68,6 +70,3 @@ services:
     App\Service\UploadImg:
         arguments:
             $cloudinary: '@cloudinary_php'
-
-
-
