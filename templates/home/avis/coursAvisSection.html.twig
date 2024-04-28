@@ -2,50 +2,58 @@
 	<h3>Avis</h3>
 	<div class="general">
 		<div class="list">
-			
-				<div class="single_class_review">
-					<div class="title">Stellaire</div>
-					<div class="5">{{ countByNote[5] }}</div>
-					<div class="count">{{ countByNote[5] }}</div>
-				</div>
-				<div class="single_class_review">
-					<div class="title">Galactique</div>
-					<div class="4">{{ countByNote[4] }}</div>
-					<div class="count">{{ countByNote[4] }}</div>
-				</div>
-				<div class="single_class_review">
-					<div class="title">Solaire</div>
-					<div class="3">{{ countByNote[3] }}</div>
-					<div class="count">{{ countByNote[3] }}</div>
-				</div>
-				<div class="single_class_review">
-					<div class="title">Lunaire</div>
-					<div class="2">{{ countByNote[2] }}</div>
-					<div class="count">{{ countByNote[2] }}</div>
-				</div>
-				<div class="single_class_review">
-					<div class="title">Cométaire</div>
-					<div class="1">{{ countByNote[1] }}</div>
-					<div class="count">{{ countByNote[1] }}</div>
-				</div>
+
+			<div class="single_class_review">
+				<div class="title">Stellaire</div>
+				<div class="sep"></div>
+				<div class="count">{{ countByNote[5] }}</div>
 			</div>
-			
-		<div>
-			<div class="counting infos">
-		<div class="avg">{{ averageNote }}</div> <!-- Afficher la moyenne des notes ici -->
-		<div class="rating">
-			<div class="list_stars">
-				<!-- Vous pouvez afficher les étoiles en fonction de la moyenne des notes -->
-				{% for i in 1..5 %}
-					{% if i <= averageNote %}
-						<div class="star"><i class="fa-solid fa-star"></i></div>
-					{% else %}
-						<div class="star"><i class="fa-regular fa-star"></i></div>
-					{% endif %}
-				{% endfor %}
+			<div class="single_class_review">
+				<div class="title">Galactique</div>
+				<div class="sep"></div>
+				<div class="count">{{ countByNote[4] }}</div>
+			</div>
+			<div class="single_class_review">
+				<div class="title">Solaire</div>
+				<div class="sep"></div>
+				<div class="count">{{ countByNote[3] }}</div>
+			</div>
+			<div class="single_class_review">
+				<div class="title">Lunaire</div>
+				<div class="sep"></div>
+				<div class="count">{{ countByNote[2] }}</div>
+			</div>
+			<div class="single_class_review">
+				<div class="title">Cométaire</div>
+				<div class="sep"></div>
+				<div class="count">{{ countByNote[1] }}</div>
 			</div>
 		</div>
-		<div class="total">{{ avis|length }} Avis</div> <!-- Afficher le nombre total d'avis -->
+
+
+		<div class="counting infos">
+			<div class="avg">{{ averageNote }}</div>
+			<!-- Afficher la moyenne des notes ici -->
+			<div class="rating">
+				<div
+					class="list_stars">
+					<!-- Vous pouvez afficher les étoiles en fonction de la moyenne des notes -->
+					{% for i in 1..5 %}
+						{% if i <= averageNote %}
+							<div class="star">
+								<i class="fa-solid fa-star"></i>
+							</div>
+						{% else %}
+							<div class="star">
+								<i class="fa-regular fa-star"></i>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+			<div class="total">{{ avis|length }}
+				Avis</div>
+			<!-- Afficher le nombre total d'avis -->
 		</div>
 	</div>
 
@@ -137,7 +145,7 @@
 			</div>
 			<div>
 				<label class="form-label">Écrire un message</label>
-				<textarea class="form-control" rows="3" name="message" ></textarea>
+				<textarea class="form-control" rows="3" name="message"></textarea>
 			</div>
 			<button class="btn_main" type="submit">Poster</button>
 		</form>
