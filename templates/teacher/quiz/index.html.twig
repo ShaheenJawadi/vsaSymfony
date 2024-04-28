@@ -7,7 +7,10 @@
 
 			</div>
 			<div class="sep"></div>
+			<div class="section_title">
+				<input type="search" class="form-control p-3" placeholder="Chercher un quiz" aria-describedby="search-icon-1"  id="searchapplication" style="width:100%; height:20px">
 
+			</div>
 
 		</div>
 
@@ -25,5 +28,30 @@
 		</div>
 
 	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function searchApplication(keyword) {
+            $(".card1").each(function () {
+                var found = false;
+               // $(this).find(".card-body1").children("div").each(function () {
+				  $(this).find(".card-body2").children(".title").each(function () {
+                    if ($(this).text().toLowerCase().includes(keyword.toLowerCase())) {
+                        found = true;
+                        return false; 
+                    }
+                });
+                $(this).toggle(found); 
+            });
+        }
+
+        $("#searchapplication").on("keyup", function () {
+            var searchText = $(this).val();
+            searchApplication(searchText);
+        });
+    });
+</script>
 
 {% endblock %}
