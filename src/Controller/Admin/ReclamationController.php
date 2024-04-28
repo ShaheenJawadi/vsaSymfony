@@ -3,13 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Reclamations;
+use App\Service\EmailService;
 use App\Repository\ReclamationRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\Persistence\ManagerRegistry;
 
 
 class ReclamationController extends AbstractController
@@ -70,7 +71,7 @@ class ReclamationController extends AbstractController
 
         // Vérifier si le nouveau statut est valide (à ajouter selon vos besoins)
         // Exemple de validation basique :
-        if (!in_array($nouveauStatut, ['en_attente', 'en_cours', 'reponse_envoyee_par_email'])) {
+        if (!in_array($nouveauStatut, ['pending', 'validated', 'rejected'])) {
             throw $this->createNotFoundException('Statut invalide');
         }
 
@@ -83,6 +84,21 @@ class ReclamationController extends AbstractController
 
         // Redirection vers la page de détails de la réclamation
         return $this->redirectToRoute('admin_reclamations', ['id' => $reclamation->getIdReclamation()]);
+    }
+    private $emailService;
+
+    public function __construct(EmailService $emailService) // Injection de dépendance du service EmailService
+    {
+        $this->emailService = $emailService;
+    }
+    public function sendEmailToUserAction(Request $request, $userId, $id): Response
+    {
+        // Appelez la méthode sendEmailToUser du service ReclamationService avec l'ID de l'utilisateur et l'ID de la réclamation
+        $this->emailService->sendEmailToUser($userId, $id);
+    
+        // Ajoutez un message de confirmation ou redirigez l'utilisateur vers une autre page
+        $this->addFlash('success', 'L\'e-mail a été envoyé avec succès.');
+        return $this->redirectToRoute('admin_reclamations');
     }
 }  
     

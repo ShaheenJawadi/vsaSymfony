@@ -32,6 +32,9 @@
                             <a class="option delete" href="{{ path('admin_supprimer_reclamation', {id: reclamation.getIdReclamation()}) }}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
+                            <a class="option" href="{{ path('admin_envoyer_mail_Rec', {userId: reclamation.getIdUser().getId(), id: reclamation.getIdReclamation()}) }}">
+                               <i class="fa-solid fa-envelope"></i>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

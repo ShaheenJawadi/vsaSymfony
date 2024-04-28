@@ -17,7 +17,6 @@
         "symfony/asset": "5.4.*",
         "symfony/asset-mapper": "6.3.*",
         "symfony/console": "5.4.*",
-        "symfony/doctrine-messenger": "5.4.*",
         "symfony/dotenv": "5.4.*",
         "symfony/expression-language": "5.4.*",
         "symfony/flex": "^1.17|^2",
