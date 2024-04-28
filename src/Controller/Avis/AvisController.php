@@ -19,10 +19,22 @@ class AvisController extends AbstractController
     public function index(AvisRepository $repo): Response
     {
         $avis = $repo->getAll(); // Récupérer la liste des avis depuis le repository
+        $averageNote = $repo->getAverageNote(); // Récupérer la moyenne des notes
+        $countByNote = [
+            5 => $repo->getCountByNote(5),
+            4 => $repo->getCountByNote(4),
+            3 => $repo->getCountByNote(3),
+            2 => $repo->getCountByNote(2),
+            1 => $repo->getCountByNote(1),
+        ]; // Récupérer le nombre d'avis pour chaque note
+    
         return $this->render('home/avis/coursAvisSection.html.twig', [
             'avis' => $avis, // Transmettre la variable "avis" au fichier Twig
+            'averageNote' => $averageNote, // Transmettre la moyenne des notes au fichier Twig
+            'countByNote' => $countByNote, // Transmettre le nombre d'avis pour chaque note au fichier Twig
         ]);
     }
+    
 
     public function ajouter(Request $request): Response
     {
