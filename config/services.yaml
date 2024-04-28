@@ -43,4 +43,9 @@ services:
         arguments:
             $session: '@session' # This injects the HttpClientInterface service
             $entityManager: '@doctrine.orm.entity_manager'
+    
+    App\Service\ReclamationService:
+        autowire: true
 
+    App\Service\EmailService:
+        autowire: true
