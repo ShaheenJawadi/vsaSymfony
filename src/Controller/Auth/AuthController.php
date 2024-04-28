@@ -15,6 +15,7 @@ use App\Form\UserModifyType;
 use App\Repository\UserRepository;
 use App\Service\UserSessionManager;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuthController extends AbstractController
 {
@@ -87,7 +88,7 @@ class AuthController extends AbstractController
         return $this->redirectToRoute('home_index');
     } */
 
-    public function register(Request $request, ManagerRegistry $managerRegistry)
+    public function register(Request $request, ManagerRegistry $managerRegistry,ValidatorInterface $validator)
     {
 
         $formData = $request->request->all();
@@ -104,6 +105,13 @@ class AuthController extends AbstractController
             $userEntity->setPassword($formData["password"]);
         } else {
             return new Response("Passwords don't match");
+        }
+        $errors = $validator->validate($userEntity);
+
+        if (count($errors) > 0) {
+            $errorsString = (string) $errors;
+    
+            return new Response($errorsString);
         }
        
         $entityManager = $managerRegistry->getManager();

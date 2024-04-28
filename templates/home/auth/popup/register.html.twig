@@ -71,5 +71,29 @@
 		Vous avez déjà un compte?
 	</div>
 
-
 </div>
+% block javascripts %}
+<script>
+    $(document).ready(function() {
+        $('#registerForm').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response !== 'Success') {
+                        // Handle the validation errors
+                        console.log(response);
+                    } else {
+                        // The form was submitted successfully
+                        window.location.href = "{{ path('home_forum_index') }}";
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+
