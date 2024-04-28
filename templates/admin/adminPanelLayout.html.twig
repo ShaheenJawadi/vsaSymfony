@@ -21,16 +21,16 @@
 
 		<div class="adminPanel">
 			<div class="header sticky-top">
-				<nav class="nav ">
+				<nav class="nav  header">
 
 					<a class="navbar-brand header_logo" href="#">
 						<img src="{{ asset('images/logo_circle.png') }}" alt="">
 						<span>Vsa Admin</span>
 					</a>
+ 
 
-
-					<div class="right_side">
-						<a class="single">
+					<div class="right_side auth_part">
+						<a class="single" href="{{ path('home_index') }}">
 							<div class="icon">
 								<i class="fa-solid fa-diamond-turn-right"></i>
 							</div>
@@ -41,9 +41,12 @@
 							</div>
 						</div>
 						<div class="single profile">
-							<a class=" dropdown-toggle" href="#" ole="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<a class=" dropdown-toggle " href="#" ole="button" data-bs-toggle="dropdown" aria-expanded="false">
 								<div class="profile-pic">
 									<img  src="{{ asset('images/cours/person.jpg') }}"  alt="Profile Picture">
+								</div>
+								<div class="username">
+											{{getCurrentUser().username}}
 								</div>
 
 							</a>
