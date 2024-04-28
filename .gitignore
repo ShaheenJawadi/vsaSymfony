@@ -19,3 +19,11 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /.vscode
+/.idea/
+/.phpunit/
+/.php_cs
+/.phpstorm.meta.php
+/.phpstorm.meta.php
+/.phpstorm.meta.php
+/migrations/
+.env

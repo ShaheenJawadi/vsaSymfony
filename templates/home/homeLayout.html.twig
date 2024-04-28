@@ -57,7 +57,7 @@
 
 						<ul class="navbar-nav   mb-2 mb-lg-0 auth_part">
 
-							{% if  current_user is not defined  or current_user is  null %}
+							{% if  getCurrentUser() is    null %}
 								<li class="nav-item">
 									<a class="nav-link active" type="button" data-bs-toggle="modal" data-bs-target="#authModel" href="#">Connexion</a>
 								</li>
@@ -74,7 +74,7 @@
 											<img src="{{ asset('images/cours/person.jpg') }}" alt="Profile Picture">
 										</div>
 										<div class="username">
-											{{current_user.username}}
+											{{getCurrentUser().username}}
 										</div>
 
 									</a>
@@ -98,7 +98,7 @@
 									</ul>
 								</li>
 								{# 
-								                        <a  href="{{ path('home_auth_logout') }}"  >  logout</a> #}
+																                        <a  href="{{ path('home_auth_logout') }}"  >  logout</a> #}
 							{% endif %}
 
 							<li class="separator"></li>
@@ -118,47 +118,9 @@
 								<a class="nav-link" href="#">
 									<Button class="btn_main">Faire un don</Button>
 								</a>
-                            <ul class="dropdown-menu">
-                                {% for category in getCategories() %}
-                                    <li>
-                                        <a class="dropdown-item" href="{{ path('home_cours_filter_index') }}">{{ category.nom }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('home_cours_filter_index') }}">Cours</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Enseignants</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('home_forum_index') }}">Forum</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('home_forum_chatbot_index') }}">ChatBot</a>
-                        </li>
-
-
-                    </ul>
-
-
-                    <ul class="navbar-nav   mb-2 mb-lg-0 auth_part">
-                        <li class="nav-item">
-                            <a class="nav-link active" type="button" data-bs-toggle="modal" data-bs-target="#authModel" href="#">Connexion</a>
-                        </li>
-                        <li class="nav-item nav-link ">
-                            /
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="#">Inscription</a>
-                        </li>
-                        <li class="separator"></li>
 							</li>
 						</ul>
-
 
 
 					</div>

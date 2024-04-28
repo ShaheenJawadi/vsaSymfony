@@ -47,5 +47,29 @@ services:
     App\Service\ReclamationService:
         autowire: true
 
+<<<<<<< HEAD
     App\Service\EmailService:
         autowire: true
+=======
+    App\Twig\userExtension:
+        arguments:
+            $userSessionManager: '@App\Service\UserSessionManager'
+        tags:
+            - { name: twig.extension }
+
+    
+    cloudinary_php:
+        class: Cloudinary\Cloudinary
+        arguments:
+            - 
+              cloud_name: '%env(CLOUDINARY_CLOUD_NAME)%'
+              api_key: '%env(CLOUDINARY_API_KEY)%'
+              api_secret: '%env(CLOUDINARY_API_SECRET)%'
+              
+      
+    App\Service\UploadImg:
+        arguments:
+            $cloudinary: '@cloudinary_php'
+
+
+>>>>>>> cfc3f6b3fb689522a8c28689cedff8ced1c1af25
