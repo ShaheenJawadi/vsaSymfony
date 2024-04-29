@@ -529,3 +529,26 @@
 .edit_publication {
     min-width: 700px;
 }
+.edit_publication .top_entry .entry .img_list{
+    display: flex;
+    gap: 8px;
+    overflow: auto;
+}
+
+.edit_publication .top_entry .entry .img_list img {
+    max-height: 200px;
+}
+
+.edit_publication .top_entry .entry .img_list .single_img .delete-btn {
+    position: absolute;
+    
+    color: red; 
+    border: red;
+    border-radius: 50%; 
+    line-height: 20px; 
+    cursor: pointer;
+    width: 17px;
+    height: 17px;
+    font-size: 18px;
+    font-weight: bold;
+}

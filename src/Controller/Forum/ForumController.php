@@ -480,4 +480,30 @@ public function incrementClick(EntityManagerInterface $entityManager, $pubId): R
 
 
 
+
+public function deleteImageAction(ManagerRegistry $manager, Request $request, $publicationId, PublicationsRepository $rep): Response
+{
+    $data = json_decode($request->getContent(), true);
+    $imageUrl = $data['image']; 
+    
+    $entityManager = $manager->getManager();
+    $publication = $rep->find($publicationId);
+    
+    if (!$publication) {
+        throw $this->createNotFoundException('Publication not found');
+    }
+
+    $currentImages = $publication->getImages();
+
+    $updatedImages = array_filter($currentImages, function ($image) use ($imageUrl) {
+        return $image !== $imageUrl;
+    });
+
+    $publication->setImages($updatedImages);
+
+    $entityManager->persist($publication);
+    $entityManager->flush();
+
+    return $this->json(['status' => 'success']);
+}
 }
