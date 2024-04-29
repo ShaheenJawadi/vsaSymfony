@@ -6,23 +6,29 @@
 			    <img src="{{ pub.user.image is not empty ? pub.user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
             </div>
             <div class="entry">
-                <div class="imgs_list"></div>
+                
                 <div class="content">
                     <textarea class="form-control" id="titre" placeholder="Titre" rows="1">{{ pub.titre }}</textarea>
                     <textarea class="form-control" id="contenu" placeholder="Poser votre question" rows="2">{{ pub.contenu }}</textarea>
 
                 </div>
+                {% if pub.images is not empty %}
+                <div class="img_list">
+                    {% for image in pub.images %}
+                    <div class="single_img">
+                        <img src="{{ image }}" alt="Image">
+                        <button class="delete-btn" data-image="{{ image }}">×</button>
+
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
 
             </div>
 
         </div>
         <div class="btm_btns">
-            <div class="single">
-
-                <i class="fa-solid fa-paperclip"></i>
-
-
-            </div>
+            
             <div>
                 <button id="updateButton" class="btn_main">Modifier</button>
 
@@ -35,7 +41,40 @@
 
 {% block javascripts %}
 <script>
-// Add this line to define the URL for redirection
+function handleDeleteButtonClick(event) {
+    var imageUrl = event.target.dataset.image; 
+    var publicationId = '{{ pub.id }}'; 
+
+    fetch('/forum/delete-image/' + publicationId, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify({ image: imageUrl }), 
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        if (data.status === 'success') {
+            event.target.parentNode.remove();
+        } else {
+            alert('Failed to delete image. Status is ' + data.status);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+document.querySelectorAll('.delete-btn').forEach(function(button) {
+    button.addEventListener('click', handleDeleteButtonClick);
+})
 var homeForumIndexUrl = '{{ path('home_forum_index') }}';
 document.getElementById("updateButton").addEventListener("click", function() {
     var titre = document.getElementById("titre").value;
@@ -59,7 +98,6 @@ document.getElementById("updateButton").addEventListener("click", function() {
         .then(data => {
             console.log(data);
             if (data.status === 'success') {
-                // Use the URL for redirection after a successful update
                 window.location.href = homeForumIndexUrl;
             } else {
                 alert('Failed to update publication. Status is ' + data.status);
@@ -69,10 +107,13 @@ document.getElementById("updateButton").addEventListener("click", function() {
             console.error('Error:', error);
         })
         .finally(() => {
-            // Close the modal after updating, whether it is successful or not
             $('#generalModel').modal('hide');
         });
 });
 </script>
+
+
+
+
 {% endblock %}
 

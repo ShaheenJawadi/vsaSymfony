@@ -49,17 +49,16 @@
 {% block javascripts %}
 
 	<script>
-		$(document).on('click', '.toggle_edit_comment', function() {
-			$(this).closest('.single_comment').find('.new_comment').toggle(); // Toggle edit mode
+		$('.toggle_edit_comment').click(function() {
+			$(this).closest('.single_comment').find('.new_comment').toggle(); 
 		});
 
-		$(document).on('click', '.submit_update', function() {
+		$('.submit_update').click(function() {
 			var commentDiv = $(this).closest('.single_comment');
 			var commentId = commentDiv.data('comment-id');
 			var textarea = commentDiv.find('textarea');
-			var updatedComment = textarea.val(); // This is the updated comment
+			var updatedComment = textarea.val(); 
 
-			// AJAX request to update the comment
 			$.ajax({
 				url: "{{ path('home_forum_update_comment') }}",
 				type: "POST",
@@ -68,10 +67,11 @@
 					comment: updatedComment
 				},
 				success: function(response) {
-					commentDiv.find('.comment-text').empty().html(updatedComment);
-					commentDiv.find('.new_comment').hide();
-					window.location.href = "{{ path('home_forum_index') }}";
- 
+							commentDiv.find('.comment').first().text(updatedComment);
+							
+						commentDiv.find('.new_comment').hide();       
+						window.location.href = "{{ path('home_forum_index') }}";
+
 				},
 				error: function(xhr, status, error) {
 					alert("An error occurred while updating the comment.");
