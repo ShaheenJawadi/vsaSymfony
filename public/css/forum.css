@@ -552,3 +552,6 @@
     font-size: 18px;
     font-weight: bold;
 }
+.edit_publication  .btm_btns .btn_main{
+    align-items:flex-end ;
+}

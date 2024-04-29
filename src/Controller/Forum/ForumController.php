@@ -349,7 +349,7 @@ public function updatePublication(Request $request, EntityManagerInterface $em, 
         if ($publication) {
             $publication->setTitre($data['titre']);
             $publication->setContenu($data['contenu']);
-
+            
             $em->persist($publication);
             $em->flush();
 
