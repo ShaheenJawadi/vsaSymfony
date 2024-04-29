@@ -9,9 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-
-
 #[ORM\Entity(repositoryClass: PublicationsRepository::class)]
 #[ORM\Table(name: "publications", indexes: [new ORM\Index(name: "user_id", columns: ["user_id"])])]
 
@@ -33,7 +30,7 @@ class Publications
     #[ORM\Column(name: "contenu", type: "string", length: 500)]
     #[Assert\NotBlank(message: "Le contenu ne peut pas être vide.")]
     #[Assert\Length(
-        max: 50,
+        max: 500,
         maxMessage: "Le contenu ne peut pas dépasser {{ limit }} caractères."
     )]
     private ?string $contenu = null;
@@ -94,17 +91,22 @@ class Publications
         return $this;
     }
 
-    public function getImages(): ?string
+    public function getImages(): ?array
     {
-        return $this->images;
+        return $this->images ? explode(';', $this->images) : null;
     }
 
-    public function setImages(string $images): static
+    public function setImages(array|string $images): static
     {
-        $this->images = $images;
+        if (is_array($images)) {
+            $this->images = implode(';', $images);
+        } else {
+            $this->images = $images;
+        }
 
         return $this;
     }
+
 
     public function getDateCreation(): ?\DateTimeInterface
     {
@@ -141,6 +143,5 @@ class Publications
 
         return $this;
     }
-
 
 }

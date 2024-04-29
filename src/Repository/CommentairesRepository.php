@@ -25,7 +25,7 @@ class CommentairesRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.idPub = :publicationId')
             ->setParameter('publicationId', $publicationId)
-            ->orderBy('c.date', 'ASC') // or 'DESC' based on your preference
+            ->orderBy('c.date', 'ASC')
             ->getQuery()
             ->getResult();
     }

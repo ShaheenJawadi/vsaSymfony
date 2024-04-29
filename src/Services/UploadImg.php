@@ -23,4 +23,15 @@ class UploadImg
         
         return $uploadResult['secure_url'];
     }
+    public function uploadMultiple($files, $separator = ';')
+    {
+        $urls = [];
+
+        foreach ($files as $file) {
+            $filePath = $file->getRealPath();
+            $urls[] = $this->upload($filePath);
+        }
+
+        return implode($separator, $urls);
+    }
 }
