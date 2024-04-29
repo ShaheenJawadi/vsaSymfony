@@ -126,3 +126,22 @@ supprimer_publication:
   path: /forum/supprimer/{id} 
   controller: App\Controller\Admin\ForumController::deletePublication
 
+
+#################################################################
+#################################################################
+#################################################################
+#################################################################
+
+quiz_index:
+  path: /quiz 
+  controller: App\Controller\Admin\QuizController::index
+
+quiz_view:
+  path: /quiz/{id} 
+  controller: App\Controller\Admin\QuizController::view
+  methods: ['GET']
+
+quiz_delete:
+  path: /quiz/delete/{id} 
+  controller: App\Controller\Admin\QuizController::delete
+
