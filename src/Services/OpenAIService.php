@@ -16,7 +16,6 @@ class OpenAIService
     } 
 
         public function getChatResponse(string $userMessage, array $history): ?string {
-            // Include the historical messages in the messages array
             $messages = $history;
             $systemPrompt = [
                 'role' => 'system',
@@ -30,12 +29,11 @@ class OpenAIService
                 
                 Remember, your goal is to make learning TSL accessible and comprehensible, using the user's preferred language for communication, thereby enhancing their ability to engage with and support the deaf community."
             ];
-            // Add the current user message
             $messages = [
-                $systemPrompt, // Include the system prompt first
+                $systemPrompt, 
                 [
                     'role' => 'user',
-                    'content' => $userMessage // Include the user's message
+                    'content' => $userMessage 
                 ]
             ];
         
@@ -47,7 +45,7 @@ class OpenAIService
                 ],
                 'json' => [
                     'model' => 'gpt-3.5-turbo',
-                    'messages' => $messages, // Using the prepared messages array
+                    'messages' => $messages, 
                 ],
             ]);
 
@@ -56,10 +54,7 @@ class OpenAIService
             
             return trim($chatResponse);
         } catch (\Exception $e) {
-            // Log the exception message
             error_log($e->getMessage());
-            // For debugging, you might temporarily return the error message
-            // return "Error: " . $e->getMessage();
             return "Sorry, I couldn't process your request.";
         }
         
@@ -67,13 +62,11 @@ class OpenAIService
 
     public function checkContent(string $text): bool
     {
-        // System message to instruct the model on what to do
         $systemPrompt = [
             'role' => 'system',
             'content' => "Please check the following text for any disrespectful language or inappropriate content. Return 'true' if the text contains any such language, and 'false' otherwise."
         ];
 
-        // User message that contains the text to be checked
         $userMessage = [
             'role' => 'user',
             'content' => $text
@@ -86,8 +79,8 @@ class OpenAIService
                     'Content-Type' => 'application/json',
                 ],
                 'json' => [
-                    'model' => 'gpt-3.5-turbo', // Adjust as necessary
-                    'messages' => [$systemPrompt, $userMessage], // Passing the messages
+                    'model' => 'gpt-3.5-turbo', 
+                    'messages' => [$systemPrompt, $userMessage], 
                 ],
             ]);
 

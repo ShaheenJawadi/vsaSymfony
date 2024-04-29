@@ -17,11 +17,13 @@ use App\Repository\PublicationsRepository;
 use App\Repository\ReactionsRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface; 
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Service\UploadImg;
 
 use App\Repository\CommentairesRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 
@@ -30,11 +32,10 @@ use App\Service\OpenAIService;
 
 class ForumController extends AbstractController
 {
-
-    public function index(Request $request, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep,OpenAIService $openAIService, CommentairesRepository $commentairesRepository): Response
+    public function index(Request $request, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep,OpenAIService $openAIService, CommentairesRepository $commentairesRepository, UploadImg $imageUploader): Response
     {
         
-        $formResponse = $this->addPublication($request, $manager,$openAIService, $userRepository,$rep);
+        $formResponse = $this->addPublication($request, $manager,$openAIService, $userRepository,$rep,$imageUploader);
         if ($formResponse !== null) {
             return $formResponse; 
         }
@@ -138,7 +139,7 @@ class ForumController extends AbstractController
 
     //----------------------------------------------------------------------------------//
 
-    public function addPublication(Request $request, ManagerRegistry $manager,OpenAIService $openAIService, UserRepository $userRepository,$publicationsRepository): ?Response
+    public function addPublication(Request $request, ManagerRegistry $manager,OpenAIService $openAIService, UserRepository $userRepository,$publicationsRepository, UploadImg $imageUploader): ?Response
     {
         $form = $this->createForm(PublicationsType::class, new Publications());
         $form->handleRequest($request);
@@ -146,6 +147,17 @@ class ForumController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $manager->getManager();
             $publication = $form->getData();
+            $images = $form->get('images')->getData();
+
+            
+            if (!empty($images)) {
+                $files = array_filter($images, function ($image) {
+                    return $image instanceof UploadedFile;
+                });
+        
+                $uploadResult = $imageUploader->uploadMultiple($files); 
+                $publication->setImages($uploadResult);
+            }
             $publication->setDateCreation(new \DateTime());
             //FIXME:USER18 
 
@@ -170,6 +182,7 @@ class ForumController extends AbstractController
                 $this->addFlash('danger', 'Your publication contains inappropriate content and cannot be added.');
                 return $this->redirectToRoute('home_forum_index');
             }
+           
             $em->persist($publication);
             $em->flush();
 
@@ -207,10 +220,8 @@ class ForumController extends AbstractController
         $em->remove($comment);
         $em->flush();
         
-        // Check for the publication ID in the query parameters
         $idPub = $request->query->get('idPub');
 
-        // Redirect based on the presence of the publication ID
         if ($idPub !== null) {
             return $this->redirectToRoute('home_forum_single_publication', ['idPub' => $idPub]);
         } else {
@@ -233,6 +244,7 @@ public function updateComment(Request $request, EntityManagerInterface $entityMa
 
     return new JsonResponse(['success' => 'Comment updated']);
 }
+//----------------------------------------------------------------------------------//
 
 public function addComment(Request $request, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $pubRep, $idPub,OpenAIService $openAIService): ?Response
 {
@@ -268,10 +280,8 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
         $returnPath = $form->get('returnPath')->getData(); 
 
         if ($returnPath === 'index') {
-            // If the comment was added from the index page, redirect back there
             return $this->redirectToRoute('home_forum_index');
         } else {
-            // Otherwise, redirect to the single publication page
             return $this->redirectToRoute('home_forum_single_publication', ['idPub' => $idPub]);
         }
     }
@@ -279,26 +289,17 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
    
     return null; 
 }
-
-
-
-
-
-
-
+//----------------------------------------------------------------------------------//
 public function single(PublicationsRepository $rep, ReactionsRepository $reactionsRepository,OpenAIService $openAIService, int $idPub, Request $request, ManagerRegistry $manager, UserRepository $userRepository): Response
 {
-    // Attempt to handle adding a comment if the form is submitted
     $formResponse = $this->addComment($request, $manager, $userRepository, $rep, $idPub,$openAIService);
     if ($formResponse !== null) {
         return $formResponse;
     }
 
-    // Create the comment form
     $commentForm = $this->createForm(CommentairesType::class, new Commentaires());
 
-    // Set the returnPath dynamically based on the current action
-    $commentForm->get('returnPath')->setData('single'); // Use a clear and consistent identifier for the return path
+    $commentForm->get('returnPath')->setData('single'); 
 
     $publication = $rep->findPublicationWithUserDetails($idPub);
     $contributors = $this->getContributors($rep);
@@ -337,6 +338,7 @@ public function single(PublicationsRepository $rep, ReactionsRepository $reactio
 
     ]);
 }
+//----------------------------------------------------------------------------------//
 
 public function updatePublication(Request $request, EntityManagerInterface $em, PublicationsRepository $rep, $idPub): Response
 {
@@ -347,11 +349,10 @@ public function updatePublication(Request $request, EntityManagerInterface $em, 
         if ($publication) {
             $publication->setTitre($data['titre']);
             $publication->setContenu($data['contenu']);
-
+            
             $em->persist($publication);
             $em->flush();
 
-            // Redirect to the home_forum_index route
             return new RedirectResponse($this->generateUrl('home_forum_index'));
         }
 
@@ -359,6 +360,7 @@ public function updatePublication(Request $request, EntityManagerInterface $em, 
     }
 
 }
+//----------------------------------------------------------------------------------//
 
 public function edit(Request $request,ManagerRegistry $manager, PublicationsRepository $rep, int $idPub): Response
 {
@@ -380,7 +382,7 @@ public function edit(Request $request,ManagerRegistry $manager, PublicationsRepo
 public function reactToPublication($pubId, $reactionType, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, PublicationsRepository $publicationsRepository, UserRepository $userRepository): Response
 {
     $entityManager = $manager->getManager();
-    $user = $userRepository->find(18); // Assuming this is just for testing and will be dynamic in the application
+    $user = $userRepository->find(18); 
     $publication = $publicationsRepository->find($pubId);
 
     if (!$publication || !$user) {
@@ -390,12 +392,9 @@ public function reactToPublication($pubId, $reactionType, ReactionsRepository $r
     $reaction = $reactionsRepository->findOneBy(['pub' => $publication, 'user' => $user]);
 
     if ($reaction) {
-        // Reaction exists, so we toggle the like/dislike or remove it if the same reaction is clicked again
         if (($reactionType === 'like' && $reaction->getJaime() === 1) || ($reactionType === 'dislike' && $reaction->getDislike() === 1)) {
-            // User clicked the same reaction again, so we "unreact" by removing the reaction record
             $entityManager->remove($reaction);
         } else {
-            // Toggle the reaction
             if ($reactionType === 'like') {
                 $reaction->setJaime(1);
                 $reaction->setDislike(0);
@@ -406,7 +405,6 @@ public function reactToPublication($pubId, $reactionType, ReactionsRepository $r
             $entityManager->persist($reaction);
         }
     } else {
-        // No existing reaction, create a new one
         $reaction = new Reactions();
         $reaction->setPub($publication);
         $reaction->setUser($user);
@@ -424,6 +422,7 @@ public function reactToPublication($pubId, $reactionType, ReactionsRepository $r
 
     return $this->redirectToRoute('home_forum_index');
 }
+//----------------------------------------------------------------------------------//
 
 public function incrementClick(EntityManagerInterface $entityManager, $pubId): Response
 {
@@ -439,10 +438,10 @@ public function incrementClick(EntityManagerInterface $entityManager, $pubId): R
 
     return $this->json(['success' => true]);
 }
-    //---------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------//
     public function chatBotIndex(Request $request, UserRepository $userRepository): Response
     {
-        $user = $userRepository->find(3);
+        $user = $userRepository->find(18);
     
         $userImage = null;
         if ($user && $user->getImage()) {
@@ -455,7 +454,8 @@ public function incrementClick(EntityManagerInterface $entityManager, $pubId): R
     }
     
  
-    
+//----------------------------------------------------------------------------------//
+ 
    
   public function chatBotAction(Request $request, OpenAIService $openAIService, SessionInterface $session): JsonResponse {
     if ($request->isXmlHttpRequest()) {
@@ -466,10 +466,9 @@ public function incrementClick(EntityManagerInterface $entityManager, $pubId): R
 
         $responseMessage = $openAIService->getChatResponse($userMessage, $history);
 
-        // Update the conversation history
-        // Note: You may need to adjust the structure depending on how you want to display messages
+        
         $history[] = ['role' => 'user', 'content' => $userMessage];
-        $history[] = ['role' => 'assistant', 'content' => $responseMessage]; // Assuming the role is 'assistant'
+        $history[] = ['role' => 'assistant', 'content' => $responseMessage]; 
         $session->set('chat_history', $history);
 
         return new JsonResponse(['message' => $responseMessage]);
@@ -481,4 +480,30 @@ public function incrementClick(EntityManagerInterface $entityManager, $pubId): R
 
 
 
+
+public function deleteImageAction(ManagerRegistry $manager, Request $request, $publicationId, PublicationsRepository $rep): Response
+{
+    $data = json_decode($request->getContent(), true);
+    $imageUrl = $data['image']; 
+    
+    $entityManager = $manager->getManager();
+    $publication = $rep->find($publicationId);
+    
+    if (!$publication) {
+        throw $this->createNotFoundException('Publication not found');
+    }
+
+    $currentImages = $publication->getImages();
+
+    $updatedImages = array_filter($currentImages, function ($image) use ($imageUrl) {
+        return $image !== $imageUrl;
+    });
+
+    $publication->setImages($updatedImages);
+
+    $entityManager->persist($publication);
+    $entityManager->flush();
+
+    return $this->json(['status' => 'success']);
+}
 }

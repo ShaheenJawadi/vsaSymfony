@@ -48,13 +48,9 @@ class ReactionsRepository extends ServiceEntityRepository
 
         $result = $qb->getQuery()->getOneOrNullResult();
 
-        // Return a default structure if no reactions are found
         if (!$result) {
             return ['likes' => 0, 'dislikes' => 0];
         }
-
-        // Assuming the 'jaime' and 'dislike' fields are stored as integers in the database.
-        // This ensures that the return values are integers even if the database fields allow nulls.
         return [
             'likes' => (int) $result['totalJaime'],
             'dislikes' => (int) $result['totalDislike'],
