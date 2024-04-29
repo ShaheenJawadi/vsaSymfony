@@ -53,3 +53,8 @@ increment_click:
     path: /increment-click/{pubId}
     controller: App\Controller\Forum\ForumController:incrementClick
     methods: [POST]
+
+delete_image:
+    path: /delete-image/{publicationId}
+    controller: App\Controller\Forum\ForumController:deleteImageAction
+    methods: [POST]
