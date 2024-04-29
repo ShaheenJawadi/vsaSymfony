@@ -1,0 +1,55 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+
+{% block adminPanelBody %}
+    <div class="container">
+        <div class="head">
+            <div class="left">
+                <h3 class="title">Quiz</h3>
+            </div>
+        </div>
+        <div class="Dtable_style">
+            <table id="Dtable" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Durée</th>
+                        <th>Nombre des questions</th>
+                        <th>Ajouté par</th> <!-- New column for user name -->
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quiz in quizzes %}
+                    <tr>
+                        <td>{{ quiz.nom }}</td>
+                        <td>{{ quiz.duree }}</td>
+                        <td>{{ quiz.getQuestions()|length }}</td>
+                        <td>{{ quiz.getUserId().username }}</td> <!-- Fetching the user name associated with the quiz -->
+                        <td style="text-align: right;">
+                            <a class="option" href="{{ path('admin_quiz_view', {id: quiz.id}) }}">
+                                <i class="fa-solid fa-eye"></i> Voir
+                            </a>
+                            <a class="option delete" href="{{ path('admin_quiz_delete', {id: quiz.id}) }}">
+                                <i class="fa-solid fa-trash"></i> Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var $window = $(window);
+    $window.on('load', function (key, value) {
+        $('#Dtable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"
+            }
+        });
+    });
+</script>
+{% endblock %}

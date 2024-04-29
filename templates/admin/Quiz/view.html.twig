@@ -1,0 +1,41 @@
+{% extends 'admin/adminPanelLayout.html.twig' %}
+
+{% block adminPanelBody %}
+<div class="quiz_popup general_popup">
+    <div class="header_section">
+        <div class="txt">
+            Cours
+        </div>
+        <div class="title">
+            {{ quiz.coursid.nom }}
+        </div>
+    </div>
+
+    <div class="question_list">
+        {% for question in quiz.getQuestions() %}
+        <div class="single">
+            <div class="question">
+                {{ question.question }}
+            </div>
+
+            {% if question.image %}
+            <div class="img_holder">
+                <img src="{{ question.image }}" alt="">
+            </div>
+            {% endif %}
+
+            <div class="row">
+                {% for suggestion in question.getSuggestions() %}
+                <div class="col-md-6">
+                    <div class="single_rep{{ suggestion.status ? ' correct' : '' }}">
+                        {{ suggestion.suggestion }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
