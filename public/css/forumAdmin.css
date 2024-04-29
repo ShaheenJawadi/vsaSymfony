@@ -173,3 +173,8 @@
 .forum_admin .pub_list .singlePub .list_comments .single_comment_pub .contentComment .comment {
     padding-left: 5px;
 }
+.charts-container {
+    display: flex;
+    gap: 20px 0;
+    flex-direction: column;
+}
