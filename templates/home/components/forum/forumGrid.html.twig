@@ -41,15 +41,14 @@
 			<b>{{ pub.titre }}</b>
 		</div>
 		{% if pub.images is not empty %}
-			<div class="img_list">
-				{% set images = pub.images|split(';') %}
-				{% for image in images %}
-					<div class="single_img">
-						<img src="{{ image }}" alt="Image">
-					</div>
-				{% endfor %}
+		<div class="img_list">
+			{% for image in pub.images %}
+			<div class="single_img">
+				<img src="{{ image }}" alt="Image">
 			</div>
-		{% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
 		<div class="question">
 			<p>{{ pub.contenu }}</p>
 
@@ -135,7 +134,7 @@
 							<div class="comment">
 								{{ form_widget(commentForm.commentaire, {'label': false,'attr': {'class': 'form-control', 'placeholder': 'comment', 'rows': '2'}}) }}
 								 
-								{{ form_widget(commentForm.returnPath) }} <!-- This will use the value set in the controller -->
+								{{ form_widget(commentForm.returnPath) }} 
 									
 							</div>
 							<div class="sub">
@@ -155,15 +154,12 @@
 {% block javascripts %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Define the sound to be played
     var audio = new Audio('https://res.cloudinary.com/dkdx59xe9/video/upload/v1709508219/Facebook_Like_Sound_Effect_nbc6ju.mp3');
 
-    // Function to play sound
     function playSound() {
         audio.play().catch(error => console.error("Playback prevented by the browser."));
     }
 
-    // Attach click event listeners to both like and dislike reaction areas
     document.querySelectorAll('.single_reaction').forEach(function(element) {
         element.addEventListener('click', function(event) {
             playSound();
@@ -174,9 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 document.querySelectorAll('.single_reaction_comment').forEach(item => {
-    if (!item.dataset.listenerAttached) { // Check if the listener is not already attached
+    if (!item.dataset.listenerAttached) { 
         item.addEventListener('click', function(e) {
-            // Prevent default action to avoid following the link immediately
             e.preventDefault(); 
             const pubId = this.getAttribute('data-pubid');
             console.log('Action executed');
@@ -190,14 +185,13 @@ document.querySelectorAll('.single_reaction_comment').forEach(item => {
                 return response.json();
             }).then(data => {
                 console.log(data);
-                // Navigate to the link after the fetch operation succeeds
-                window.location.href = this.href; // Use 'this.href' to navigate to the URL defined in the 'href' attribute of the clicked element
+                window.location.href = this.href; 
             }).catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             });
         });
 
-        item.dataset.listenerAttached = "true"; // Mark the item to indicate that the listener has been attached
+        item.dataset.listenerAttached = "true"; 
     }
 });
 

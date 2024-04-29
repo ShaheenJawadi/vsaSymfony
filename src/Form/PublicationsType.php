@@ -23,6 +23,13 @@ class PublicationsType extends AbstractType
         ->add('contenu', TextareaType::class,['attr'=>['class' => 'form-control',
         'placeholder' => 'Poser votre question',
         'rows' => 2],'label' => false])
+        ->add('images', FileType::class, [
+            'multiple' => true,
+            'required' => false,
+            'label' => false,
+            'attr' => ['accept' => 'image/*']
+        ])
+
         ->add('submit', SubmitType::class, ['label' => 'Soumettre','attr' => ['class' => 'btn_main']]
          
     );

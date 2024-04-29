@@ -35,7 +35,6 @@
 
 {% block javascripts %}
 <script>
-// Add this line to define the URL for redirection
 var homeForumIndexUrl = '{{ path('home_forum_index') }}';
 document.getElementById("updateButton").addEventListener("click", function() {
     var titre = document.getElementById("titre").value;
@@ -59,7 +58,6 @@ document.getElementById("updateButton").addEventListener("click", function() {
         .then(data => {
             console.log(data);
             if (data.status === 'success') {
-                // Use the URL for redirection after a successful update
                 window.location.href = homeForumIndexUrl;
             } else {
                 alert('Failed to update publication. Status is ' + data.status);
@@ -69,7 +67,6 @@ document.getElementById("updateButton").addEventListener("click", function() {
             console.error('Error:', error);
         })
         .finally(() => {
-            // Close the modal after updating, whether it is successful or not
             $('#generalModel').modal('hide');
         });
 });
