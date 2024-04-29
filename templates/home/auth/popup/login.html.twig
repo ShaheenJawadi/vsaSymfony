@@ -39,9 +39,11 @@
 			</div>
 		</div>
 
-	<div class="ind" id="openForgetPws">
+	<div class="ind" id="openForgetPws" href="{{path ('password_reset_request')}}">
 		Mot de passe oublié ?
 	</div>
+
+	
 
 	<button class="btn_main" type="submit">Login</button>
 
@@ -51,3 +53,13 @@
 
 
 </div>
+<!-- Add the Recaptcha script here -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LeALcopAAAAAPdua0xfZJ9MJkbaj6OBobc0pIBe"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LeALcopAAAAAPdua0xfZJ9MJkbaj6OBobc0pIBe', {action: 'login'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+            console.log('Recaptcha executed, token:', token); // Add this line to debug
+        });
+    });
+</script>

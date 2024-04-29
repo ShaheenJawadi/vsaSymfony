@@ -7,12 +7,15 @@ use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: "user", indexes: [new ORM\Index(name: "fk_level_id", columns: ["level_id"])])]
-class User
+class User implements UserInterface
 {
+   
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(name: "id", type: "integer")]
@@ -198,4 +201,32 @@ class User
 
         return $this;
     }
+    public function getRoles(): array
+    {
+        return ['ROLE_USER']; // This should be adjusted according to your application's role logic
+    }
+
+   
+
+    public function getSalt(): ?string
+    {
+        // If you are using bcrypt, argon2, or another modern algorithm, return null
+        return null;
+    }
+
+   
+
+    public function eraseCredentials()
+    {
+        // Implement this method if needed to clean up any sensitive data
+    }
+
+
+     // Existing code...
+
+     public function getUserIdentifier(): ?string
+     {
+         return $this->email;
+     }
+ 
 }

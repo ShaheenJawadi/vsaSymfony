@@ -45,7 +45,7 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
 
 
- 
+    
     App\Service\EmailService:
         autowire: true
  
@@ -69,5 +69,10 @@ services:
         arguments:
             $cloudinary: '@cloudinary_php'
 
+    App\Controller\PasswordResetController:
+        arguments:
+            $emailService: '@App\Service\EmailService'
+            $userRepository: '@App\Repository\UserRepository'
+            $entityManager: '@doctrine.orm.entity_manager'
 
 

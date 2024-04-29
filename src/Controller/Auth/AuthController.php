@@ -16,6 +16,13 @@ use App\Repository\UserRepository;
 use App\Service\UserSessionManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Karser\Recaptcha3Bundle\Service\Recaptcha3;
+use ReCaptcha\ReCaptcha;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use App\Service\EmailService;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
+use VictorPrdh\RecaptchaBundle\Validator\Recaptcha2Validator;
+
 
 class AuthController extends AbstractController
 {
@@ -88,11 +95,18 @@ class AuthController extends AbstractController
         return $this->redirectToRoute('home_index');
     } */
 
-    public function register(Request $request, ManagerRegistry $managerRegistry,ValidatorInterface $validator)
+    public function register(Request $request, ManagerRegistry $managerRegistry, ValidatorInterface $validator)
     {
 
         $formData = $request->request->all();
+        // Validate the reCAPTCHA response
+    $recaptchaResponse = $formData['g-recaptcha-response'];
+    $recaptcha = new \ReCaptcha\ReCaptcha('6LdvDcspAAAAAJHEwXnr7S1CaKuMcJUh4EUrZylj');
+    $resp = $recaptcha->verify($recaptchaResponse, $request->getClientIp());
 
+    if (!$resp->isSuccess()) {
+        return new Response('Invalid reCAPTCHA response');
+    }
 
         $userEntity = new User();
         $userEntity->setNom($formData["nom"]);
@@ -100,26 +114,30 @@ class AuthController extends AbstractController
 
         $userEntity->setUsername($formData["username"]);
         $userEntity->setEmail($formData["email"]);
-        
+
         if ($formData["repreta_password"] == $formData["password"]) {
             $userEntity->setPassword($formData["password"]);
         } else {
             return new Response("Passwords don't match");
         }
+
+    
         $errors = $validator->validate($userEntity);
 
         if (count($errors) > 0) {
             $errorsString = (string) $errors;
-    
+
             return new Response($errorsString);
         }
-       
+
         $entityManager = $managerRegistry->getManager();
         $entityManager->persist($userEntity);
         $entityManager->flush();
+         // Send a verification email
+   
         return $this->redirectToRoute('home_forum_index');
     }
- 
+
 
 
     /*
@@ -146,20 +164,54 @@ class AuthController extends AbstractController
     {
 
         $formData = $request->request->all();
+         // Validate the reCAPTCHA response
+  
 
         $username = $formData["username"];
         $pws = $formData["password"];
 
+
         $usr = $userRepository->findOneBy(['username' => $username]);
         if ($usr && $usr->getPassword() == $pws) {
+            // Get the Recaptcha response from the request
+            $recaptchaResponse = $request->request->get('g-recaptcha-response');
+
+            // Validate the Recaptcha response
+
 
             $this->user_session->setCurrentUser($usr);
+
 
             return $this->redirectToRoute('home_forum_index');
         } else {
             dd('error');
         }
     }
+
+    /* public function login(Request $request, ManagerRegistry $managerRegistry, UserRepository $userRepository, Recaptcha3 $recaptcha)
+    {
+        $formData = $request->request->all();
+
+        $username = $formData["username"];
+        $pws = $formData["password"];
+        $captcha = $formData['g-recaptcha-response']; // This should be the name of your Recaptcha field in your form
+
+        // Validate the Recaptcha response
+        if (!$recaptcha->verify($captcha, 'login')) { // 'login' should be the action name you set when you rendered the Recaptcha widget in your form
+            dd('Invalid Recaptcha');
+        }
+
+        $usr = $userRepository->findOneBy(['username' => $username]);
+        if ($usr && $usr->getPassword() == $pws) {
+            $this->user_session->setCurrentUser($usr);
+
+            return $this->redirectToRoute('home_forum_index');
+        } else {
+            dd('error');
+        }
+    } */
+
+
 
 
     public function logout(Request $request, ManagerRegistry $managerRegistry, UserRepository $userRepository)

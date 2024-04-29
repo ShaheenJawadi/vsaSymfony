@@ -1,5 +1,28 @@
 <div class="auth_holder">
+ {% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        $(document).ready(function() {
+            $('#registerForm').on('submit', function(e) {
+                e.preventDefault();
 
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response !== 'Success') {
+                            console.log(response);
+                        } else {
+                            // The form was submitted successfully
+                            window.location.href = "{{ path('home_forum_index') }}";
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    {% endblock %}
 	<div class="auth_title">S'inscrire avec</div>
 	<div class="social_btns">
 		<button class="fb">
@@ -21,9 +44,8 @@
 	</div>
 
 
-	<form action="{{ path('home_auth_register_post') }}" method="post">
+	<form id ="registerForm" action="{{ path('home_auth_register_post') }}" method="post">
 		<div class="input_holder">
-
 
 			<div class="input-group flex-nowrap">
 				<span class="input-group-text">
@@ -64,7 +86,10 @@
 				</span>
 				<input type="password" class="form-control" name="repreta_password" placeholder="Repeter mot de passe">
 			</div>
+						<div class="g-recaptcha" data-sitekey="6LdvDcspAAAAAFHiT0dfSZjh5PpMzxa-f-tMvXvH"></div>
+
 		</div>
+		
 		<button type="submit" class="btn_main">S'inscrire</button>
 	</form>
 	<div class="ind" id="openLoginPopup">
@@ -72,28 +97,5 @@
 	</div>
 
 </div>
-% block javascripts %}
-<script>
-    $(document).ready(function() {
-        $('#registerForm').on('submit', function(e) {
-            e.preventDefault();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: $(this).serialize(),
-                success: function(response) {
-                    if (response !== 'Success') {
-                        // Handle the validation errors
-                        console.log(response);
-                    } else {
-                        // The form was submitted successfully
-                        window.location.href = "{{ path('home_forum_index') }}";
-                    }
-                }
-            });
-        });
-    });
-</script>
-{% endblock %}
 
