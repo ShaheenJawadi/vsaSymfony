@@ -532,7 +532,7 @@
 .edit_publication .top_entry .entry .img_list{
     display: flex;
     gap: 8px;
-    overflow: auto;
+    flex-wrap: wrap;    
 }
 
 .edit_publication .top_entry .entry .img_list img {
@@ -540,18 +540,44 @@
 }
 
 .edit_publication .top_entry .entry .img_list .single_img .delete-btn {
+    top: -6px;
+    right: -2px;
+    z-index: 99;
     position: absolute;
-    
-    color: red; 
-    border: red;
-    border-radius: 50%; 
-    line-height: 20px; 
+    color: var(--fx-main-text-color);
+    border: 1px solid var(--fx-main-text-color);
+    border-radius: 50%;
+    /* line-height: 20px; */
     cursor: pointer;
-    width: 17px;
-    height: 17px;
-    font-size: 18px;
-    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    font-size: 23px;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .edit_publication  .btm_btns .btn_main{
     align-items:flex-end ;
+}
+.edit_publication .top_entry .entry .img_list .single_img{
+    position: relative;
+}
+
+input[type=file]::file-selector-button {
+    display: none;
+}
+.clipInput{
+    position: relative;
+    
+}
+.clipInput input{
+    padding-left: 32px;
+    background: transparent;
+}
+.clipInput svg{
+    position: absolute;
+    top: 27%;
+    left: 0;
+    z-index: -1;
 }

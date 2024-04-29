@@ -47,6 +47,14 @@
                 </tbody>
             </table>
         </div>
+        <div id="charts-container" class="charts-container">
+            <div class="statTitle">
+                <h4 class="title" style="color: #00aeef">Statistiques</h4>
+            </div>
+            <div id="linechart_div"></div>
+            <div id="reaction_chart_div"></div>
+        </div>
+        
     </div>
 {% endblock %}
 
@@ -60,5 +68,44 @@
             }
         });
     });
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+ google.charts.load('current', {'packages':['corechart']});
+      
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawReactionCharts);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable({{ chartData | json_encode | raw }});
+        var options = {
+            title: 'Publication Count Over Time',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('linechart_div'));
+
+        chart.draw(data, options);
+    }
+     function drawReactionCharts() {
+    var chartData = {{ reactionChartData | raw }};
+    var chartArea = document.getElementById('reaction_chart_div');
+
+    for (var pubName in chartData) {
+        var data = google.visualization.arrayToDataTable(chartData[pubName]);
+
+        var options = {
+            title: 'Reaction Distribution for ' + pubName,
+        };
+
+        var chartDiv = document.createElement("div");
+        chartArea.appendChild(chartDiv);
+
+        var chart = new google.visualization.PieChart(chartDiv);
+        chart.draw(data, options);
+    }
+}
 </script>
 {% endblock %}
