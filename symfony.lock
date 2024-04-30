@@ -235,6 +235,9 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/ux-cropperjs": {
+        "version": "v2.17.0"
+    },
     "symfony/ux-turbo": {
         "version": "v2.16.0"
     },
