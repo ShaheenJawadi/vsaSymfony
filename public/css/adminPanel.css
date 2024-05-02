@@ -121,7 +121,7 @@ body {
 }
 
 .adminPanel .main .navBar .list {
-    padding: 25px;
+    padding: 10px 20px;
     padding-right: 0;
     display: flex;
     flex-direction: column;
@@ -134,7 +134,7 @@ body {
     align-items: center;
     color: #fff;
     font-size: 25px;
-    padding: 8px;
+    padding: 5px 8px;
 }
 
 .adminPanel .main .navBar .list .single.active {

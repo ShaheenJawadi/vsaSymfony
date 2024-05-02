@@ -3,8 +3,10 @@ index:
   controller: App\Controller\Quiz\QuizController::index
 
 note:
-  path: /single/note
+  path: /single/note/{quizId}
   controller: App\Controller\Quiz\QuizController::note
+  requirements:
+        quizId: '\d+'
 
 quiz_question:
     path: /single/question/{questionIndex}
@@ -19,3 +21,8 @@ submit_score:
     path: /single/submit-score
     controller: App\Controller\Quiz\QuizController::submitQuizScore
     methods: [POST]
+
+pdf:
+  path: /single/pdf/{quizId}
+  controller: App\Controller\Quiz\QuizController::pdf
+
