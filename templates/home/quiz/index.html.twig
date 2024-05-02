@@ -32,7 +32,7 @@
                         </div>
                     {% endfor %}
                     </div>
-                </div> <!-- rep_holder -->
+                </div> 
 				<div class="n_btn_holder">
                 {% if not questionDetails.isLastQuestion %}
 					<a href="{{ path('home_quizz_quiz_question', {'coursId': questionDetails.quiz.coursid.id, 'questionIndex': questionDetails.currentQuestionIndex + 1 }) }}">
@@ -42,9 +42,9 @@
                     <button class="btn_main" id="submitQuiz" type="submit">Soumettre</button>
                 {% endif %}
             </div>
-            </div> <!-- quizz_core -->
-        </div> <!-- container -->
-    </div> <!-- content -->
+            </div>
+        </div> 
+    </div> 
 
 {% block javascripts %}
 <script>
@@ -99,14 +99,14 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({
                 score: scaledScore,
                 quizId: '{{ questionDetails.quiz.id }}',
-                userId: 18
+                userId: 18 //TODO changer userID
             })
         })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
                 localStorage.removeItem('score');
-                window.location.href = '{{ path('home_quizz_note') }}';
+                window.location.href = '{{ path('home_quizz_note', {'quizId': questionDetails.quiz.id}) }}';
             } else {
                 console.error('Submission failed');
             }

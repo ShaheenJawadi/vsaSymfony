@@ -13,8 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\UserRepository;
-
-
+use App\Services\PdfService;
 use Doctrine\Persistence\ManagerRegistry;
 
 class QuizController extends AbstractController
@@ -42,6 +41,32 @@ class QuizController extends AbstractController
         'quizz' => $quiz,
     ]);
 
+}
+
+public function pdf($quizId, PdfService $pdf, QuizRepository $quizRepository, NotesRepository $notesRepository): Response {
+    $quiz = $quizRepository->find($quizId);
+    if (!$quiz) {
+        throw $this->createNotFoundException('Quiz not found');
+    }
+
+    $userId=18;
+    $note = $notesRepository->findOneBy(['quizid' => $quiz, 'userid' => $userId]);
+
+    $html = $this->renderView('home/quiz/pdf.html.twig', [
+        'quiz' => $quiz,
+        'note' => $note,
+    ]);
+    $filename = 'quiz_'.$quiz->getNom().'.pdf'; 
+    $binaryPdf = $pdf->generateBinaryPDF($html);
+
+    return new Response(
+        $binaryPdf,
+        200,
+        [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+        ]
+    );
 }
 
     private function fetchQuestionDetails(QuizRepository $quizRepository, int $coursId, int $questionIndex,int $userId)
@@ -77,7 +102,7 @@ class QuizController extends AbstractController
         return $quizRepository->findQuizByCoursId($coursId,$userId);
     }
 
-    public function note(Request $request): Response
+    public function note(Request $request, $quizId): Response
     {
         $session = $request->getSession();
         $score = $session->get('quizScore', 'Not available');
@@ -86,6 +111,8 @@ class QuizController extends AbstractController
     
         return $this->render('home/quiz/note.html.twig', [
             'score' => $score,
+            'quizId'=>$quizId
+            
         ]);
     }
      public function submitQuizScore(Request $request, ManagerRegistry $manager): JsonResponse
@@ -104,13 +131,13 @@ class QuizController extends AbstractController
             return new JsonResponse(['status' => 'error', 'message' => 'User or quiz not found'], 404);
         }
 
-        // $note = $em->getRepository(Notes::class)->findOneBy(['userid' => $user, 'quizid' => $quiz]);
+         $note = $em->getRepository(Notes::class)->findOneBy(['userid' => $user, 'quizid' => $quiz]);
 
-        // if (!$note) {
+         if (!$note) {
             $note = new Notes();
             $note->setUserid($user);
             $note->setQuizid($quiz);
-        // }
+         }
 
         $note->setNote($score);
 
@@ -119,6 +146,7 @@ class QuizController extends AbstractController
 
         $session = $request->getSession();
         $session->set('quizScore', $score);
+        $session->set('quizId', $quizId);
 
         return new JsonResponse(['status' => 'success']);
     }
