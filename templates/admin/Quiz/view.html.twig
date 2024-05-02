@@ -4,7 +4,7 @@
 <div class="quiz_popup general_popup">
     <div class="header_section">
         <div class="txt">
-            Cours
+            Nom du cours appartenant au quiz :
         </div>
         <div class="title">
             {{ quiz.coursid.nom }}
@@ -15,6 +15,7 @@
         {% for question in quiz.getQuestions() %}
         <div class="single">
             <div class="question">
+            Question: <br>
                 {{ question.question }}
             </div>
 
@@ -34,6 +35,7 @@
                 {% endfor %}
             </div>
         </div>
+        <hr>
         {% endfor %}
     </div>
 </div>
