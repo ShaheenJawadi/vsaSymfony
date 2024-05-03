@@ -106,8 +106,6 @@ public function pdf($quizId, PdfService $pdf, QuizRepository $quizRepository, No
     {
         $session = $request->getSession();
         $score = $session->get('quizScore', 'Not available');
-        
-        // $session->remove('quizScore');
     
         return $this->render('home/quiz/note.html.twig', [
             'score' => $score,
