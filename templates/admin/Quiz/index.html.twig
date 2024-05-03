@@ -14,7 +14,7 @@
                         <th>Nom</th>
                         <th>Durée</th>
                         <th>Nombre des questions</th>
-                        <th>Ajouté par</th> <!-- New column for user name -->
+                        <th>Ajouté par</th> 
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -24,7 +24,7 @@
                         <td>{{ quiz.nom }}</td>
                         <td>{{ quiz.duree }}</td>
                         <td>{{ quiz.getQuestions()|length }}</td>
-                        <td>{{ quiz.getUserId().username }}</td> <!-- Fetching the user name associated with the quiz -->
+                        <td>{{ quiz.getUserId().username }}</td> 
                         <td style="text-align: right;">
                             <a class="option" href="{{ path('admin_quiz_view', {id: quiz.id}) }}">
                                 <i class="fa-solid fa-eye"></i> Voir
