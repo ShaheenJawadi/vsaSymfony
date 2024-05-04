@@ -45,21 +45,23 @@ class AvisRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
     public function getAverageNote(): float
-{
-    $avisList = $this->findAll();
-    $totalNotes = count($avisList);
-    $sumNotes = 0;
-
-    foreach ($avisList as $avis) {
-        $sumNotes += $avis->getNote();
+    {
+        $avisList = $this->findAll();
+        $totalNotes = count($avisList);
+        $sumNotes = 0;
+    
+        foreach ($avisList as $avis) {
+            $sumNotes += $avis->getNote();
+        }
+    
+        if ($totalNotes > 0) {
+            $averageNote = $sumNotes / $totalNotes;
+            return number_format($averageNote, 1); // Formatage avec deux chiffres après la virgule
+        } else {
+            return 0; // Vous pouvez choisir de retourner une valeur spécifique pour le cas où il n'y a pas de notes.
+        }
     }
-
-    if ($totalNotes > 0) {
-        return $sumNotes / $totalNotes;
-    } else {
-        return 0; // Vous pouvez choisir de retourner une valeur spécifique pour le cas où il n'y a pas de notes.
-    }
-}
+    
 public function getCountByNote(int $note): int
 {
     return $this->createQueryBuilder('a')
