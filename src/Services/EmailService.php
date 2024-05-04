@@ -23,7 +23,7 @@ class EmailService
         $email = (new Email())
             ->from('leila.zaouali@esprit.tn')
             ->to($userEmail)
-            ->subject('Reponse De La Reclamation Envoyee')
+            ->subject('Reponse De La Réclamation Envoyée')
             ->text('Votre Réclamtion a été traiter, vous pouver voir la réponse sur notre application  ou site web.                                                                    
              Cordialement')
             ->html('<p>Votre Réclamtion a été traiter, vous pouver voir la réponse sur notre application  ou site web.                                                                           
