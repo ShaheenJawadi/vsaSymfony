@@ -74,7 +74,6 @@ class ForumController extends AbstractController
             }
         }
     
-        // Create chart data array
         $chartData = [['Date', 'Number of Publications']];
     
         foreach ($publicationDates as $date => $count) {
