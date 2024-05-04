@@ -51,8 +51,7 @@
                             <div class="top_entry">
                                 <div class="avatar">
 
-                                    <img src="{{ user.image is not empty ? user.image : asset('images/cours/person.jpg') }}" alt="{{ user.username }}"> </div>
-                                <div class="entry">
+                                        <img src="{{ user.image|default(asset('images/cours/person.jpg')) }}" alt="{{ user.username }}"> </div>                                <div class="entry">
                                     <div class="imgs_list"></div>
                                     <div class="content">
                                         {{ form_start(forumPub, {'attr': {'novalidate': 'novalidate'}}) }} 
@@ -130,7 +129,8 @@
                                     'commentForm': commentForms[pub.id],
                                     'reactions': reactionsByPubId[pub.id] ?? {'jaime': 0, 'dislike': 0},
                                     'userReaction': userReaction,
-                                    'userComment':user
+                                    'userComment':user,
+                                    'user':user
                                 } %}
                             {% endif %}
                             {% endfor %}
