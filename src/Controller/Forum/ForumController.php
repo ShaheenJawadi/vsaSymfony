@@ -168,7 +168,7 @@ class ForumController extends AbstractController
             $publication->setDateCreation(new \DateTime());
             
 
-            $user=$this->userSession->getCurrentUser(); 
+            $user = $userRepository->find($this->userSession->getCurrentUser()->getId());
             $user18=$user->getId();
             if (!$user18) {
                 throw $this->createNotFoundException('No user found ');
@@ -270,7 +270,7 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
         }
         $comment->setIdPub($publication); 
 
-        $user = $this->userSession->getCurrentUser(); 
+        $user = $userRepository->find($this->userSession->getCurrentUser()->getId());
         if (!$user) {
             throw $this->createNotFoundException('No user found for ID 18');
         }
@@ -390,7 +390,7 @@ public function edit(Request $request,ManagerRegistry $manager, PublicationsRepo
 public function reactToPublication($pubId, $reactionType, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, PublicationsRepository $publicationsRepository, UserRepository $userRepository): Response
 {
     $entityManager = $manager->getManager();
-    $user = $this->userSession->getCurrentUser(); 
+    $user = $userRepository->find($this->userSession->getCurrentUser()->getId());
     $publication = $publicationsRepository->find($pubId);
 
     if (!$publication || !$user) {
