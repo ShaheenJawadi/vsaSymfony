@@ -3,33 +3,33 @@ namespace App\Controller\Avis;
 
 use App\Entity\User;
 use App\Entity\Reclamations;
+use App\Service\UserSessionManager;
 use App\Repository\ReclamationRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\Persistence\ManagerRegistry;
 
 class ReclamationController extends AbstractController
 {
     private $security;
-
+    private $userSession;
+    public function __construct(UserSessionManager $userSession,Security $security) // Injection de dépendance du service EmailService
+    {
+        $this->userSession = $userSession;
+        $this->security = $security;
+    }
     public function index(): Response
     {
         return $this->render('home/reclamation/index.html.twig');
     }
 
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
-
     public function ajouterRec(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $userId = 3;
-    
+        $userId=$this->userSession->getCurrentUser();    
         // Obtenez l'entité User correspondant à l'ID statique
         $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
     
