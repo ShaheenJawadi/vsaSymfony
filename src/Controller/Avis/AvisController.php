@@ -2,17 +2,18 @@
 
 namespace App\Controller\Avis;
 
-use Symfony\Component\Security\Core\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Avis;
 use App\Entity\User;
 use App\Entity\Cours;
-use App\Repository\AvisRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use App\Form\AvisType;
+use App\Repository\AvisRepository;
+use App\Service\UserSessionManager;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AvisController extends AbstractController
 {
@@ -34,8 +35,11 @@ class AvisController extends AbstractController
             'countByNote' => $countByNote, // Transmettre le nombre d'avis pour chaque note au fichier Twig
         ]);
     }
-    
-
+    private $userSession;
+    public function __construct(UserSessionManager $userSession) // Injection de dépendance du service EmailService
+    {
+        $this->userSession = $userSession;
+    }
     public function ajouter(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -44,7 +48,7 @@ class AvisController extends AbstractController
         $message = $request->request->get('message');
 
         // ID utilisateur statique
-        $userId = 3;
+        $userId=$this->userSession->getCurrentUser();
 
      
 
