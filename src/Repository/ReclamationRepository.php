@@ -26,7 +26,15 @@ class ReclamationRepository extends ServiceEntityRepository{
                 ->getQuery()
                 ->getOneOrNullResult();
         }
-     public function findReclamationByUserid(int $idUser): ?Reclamations{}
+     public function findReclamationByCurrentUserid(int $idUser): array{
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.idUser = :idUser')
+        ->setParameter('idUser', $idUser)
+        ->getQuery()
+        ->getResult();
+
+     }
+     
      public function findUserEmailByUserId(int $userId): ?string
      {
         return $this->createQueryBuilder('r')
