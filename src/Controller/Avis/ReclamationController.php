@@ -64,9 +64,11 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('home_avis_afficher_reclamation');
     }
     public function afficherRec(ReclamationRepository $repo): Response
-    {      
+    {     
+        $user=$this->userSession->getCurrentUser();  
+        $userId=$user->getId();
           // Récupérer toutes les réclamations depuis le repository
-        $reclamations = $repo->findAll();
+        $reclamations = $repo-> findReclamationByCurrentUserid($userId);
 
         // Transmettre les réclamations au template Twig pour l'affichage
         return $this->render('home/reclamation/afficher.html.twig', [
