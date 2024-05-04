@@ -43,7 +43,7 @@ class Publications
 
     #[ORM\Column(name: "nbClicks", type: "integer", nullable: true)]
     private ?int $nbclicks = null;
-    #[ORM\ManyToOne(targetEntity: User::class, cascade: ["persist"])]
+    #[ORM\ManyToOne(targetEntity: User::class)]
 
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
     private ?User $user = null;

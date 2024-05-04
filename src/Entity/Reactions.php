@@ -27,7 +27,7 @@ class Reactions
     #[ORM\JoinColumn(name: "pub_id", referencedColumnName: "id")]
     private ?Publications $pub = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, cascade: ["persist"])]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
     private ?User $user = null;
 

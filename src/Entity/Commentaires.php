@@ -30,7 +30,7 @@ class Commentaires
     #[ORM\JoinColumn(name: "id_pub", referencedColumnName: "id")]
     private ?Publications $idPub = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, cascade: ["persist"])]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
     private ?User $user = null;
 
