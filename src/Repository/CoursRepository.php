@@ -15,10 +15,7 @@ class CoursRepository extends ServiceEntityRepository
 
     public function findLastThreeCourses(): array
     {
-        return $this->createQueryBuilder('c') 
-            ->setMaxResults(3)
-            ->getQuery()
-            ->getResult();
+        return $this->findAll();
     }
  
 }

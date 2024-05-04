@@ -25,7 +25,9 @@
     </div>
 {% endfor %}
         <div class="row">
-            {% for cours in my_cours %} {{ courGrid.displayCourse(cours) }} {% endfor %}
+            {% for cours in my_cours %}
+                {{ courGrid.displayCourse(cours) }}
+            {% endfor %}
         </div>
 
     </div>
