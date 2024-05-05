@@ -65,16 +65,19 @@
 }
 
 .filter_page .filter_side_bar .categories .cat_title {
-    font-size: 18px;
+    font-size: 16px;
     color: #000;
     font-weight: 600;
 }
 
-.filter_page .filter_side_bar .categories .souCategory {}
+.filter_page .filter_side_bar .categories .souCategory {
+    padding-right: 5px;
+}
 
 .filter_page .filter_side_bar .categories .souCategory .subCat_title {
-    font-size: 20px;
+    font-size: 18px;
     color: var(--fx-main-text-color);
+    margin-bottom: 5px;
 }
 
 .filter_page .filter_side_bar .categories .souCategory .subCat_title:hover,
