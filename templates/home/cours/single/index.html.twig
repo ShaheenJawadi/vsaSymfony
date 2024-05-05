@@ -99,8 +99,15 @@
 						<div class="right_side">
 
 							<div class="top_btn_holder">
+							{% if  getCurrentUser() is    null %}
+								<a class="btn_main" type="button" data-bs-toggle="modal" data-bs-target="#authModel" href="#" id="openLogin">Accéder à ce cous</a>
 
-								<a class="btn_main" href="{{ path('home_cours_lessons_index') }}">Accéder à ce cous</a>
+	
+							{% else %}
+								<a class="btn_main" href="{{ path('home_cours_lessons_index', {'slug': singleCours.slug}) }}">Accéder à ce cous</a>
+
+							{% endif %}
+
 
 
 							</div>
