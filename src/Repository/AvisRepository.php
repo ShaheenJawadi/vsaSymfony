@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Avis;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -71,7 +72,16 @@ public function getCountByNote(int $note): int
         ->getQuery()
         ->getSingleScalarResult();
 }
-
+public function findAvisWithUserByUserId(int $id_user): ?Avis
+{
+    return $this->createQueryBuilder('a')
+        ->select('a, u') // Sélectionner l'avis et l'utilisateur associé
+        ->join('a.id_user', 'u') // Joindre avec l'entité User
+        ->where('u.id = :id_user')
+        ->setParameter('id_user', $id_user)
+        ->getQuery()
+        ->getOneOrNullResult();
+}
 
 
 }
