@@ -29,9 +29,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use App\Repository\UserRepository;
 use App\Service\OpenAIService;
+use App\Service\UserSessionManager;
 
 class ForumController extends AbstractController
 {
+    private $userSession;
+    public function __construct(UserSessionManager $userSession) 
+    {
+        $this->userSession = $userSession;
+       
+    }
     public function index(Request $request, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, UserRepository $userRepository, PublicationsRepository $rep,OpenAIService $openAIService, CommentairesRepository $commentairesRepository, UploadImg $imageUploader): Response
     {
         
@@ -49,7 +56,7 @@ class ForumController extends AbstractController
         } else {
             $publications = $this->getAllPublications($rep);
         }
-        $user = $userRepository->find(18); // FIXME: userid=18
+        $user =$this->userSession->getCurrentUser(); 
         $contributors = $this->getContributors($rep);
         foreach ($publications as $pub) {
             $commentForm = $this->createForm(CommentairesType::class, new Commentaires(), [
@@ -68,7 +75,7 @@ class ForumController extends AbstractController
                 break;
             case 'populaire':
                 $publications = array_filter($rep->findAllPublicationsOrderedByClicks(), function($pub) {
-                    return $pub->getNbClicks() !== null; // Assuming getNbClicks() is your getter method for nbClicks
+                    return $pub->getNbClicks() !== null; 
                 });
                 break;
             case'mostLiked':
@@ -159,16 +166,17 @@ class ForumController extends AbstractController
                 $publication->setImages($uploadResult);
             }
             $publication->setDateCreation(new \DateTime());
-            //FIXME:USER18 
+            
 
-            $user18 = $userRepository->find(18);
+            $user = $userRepository->find($this->userSession->getCurrentUser()->getId());
+            $user18=$user->getId();
             if (!$user18) {
-                throw $this->createNotFoundException('No user found for ID 18');
+                throw $this->createNotFoundException('No user found ');
             }
 
-            $publication->setUser($user18);
+            $publication->setUser($user);
             $existingPublication = $publicationsRepository->findExistingPublication(
-                $user18->getId(),
+                $user->getId(),
                 $publication->getTitre(),
                 $publication->getContenu()
             );
@@ -262,7 +270,7 @@ public function addComment(Request $request, ManagerRegistry $manager, UserRepos
         }
         $comment->setIdPub($publication); 
 
-        $user = $userRepository->find(18);
+        $user = $userRepository->find($this->userSession->getCurrentUser()->getId());
         if (!$user) {
             throw $this->createNotFoundException('No user found for ID 18');
         }
@@ -312,7 +320,7 @@ public function single(PublicationsRepository $rep, ReactionsRepository $reactio
             'dislike' => $reaction['totalDislike']
         ];
     }    
-    $user = $userRepository->find(18); // FIXME: userid=18
+    $user = $this->userSession->getCurrentUser(); 
 
     $userReactions = $reactionsRepository->findBy(['user' => $user]);
     $userReactionsMap = [];
@@ -382,7 +390,7 @@ public function edit(Request $request,ManagerRegistry $manager, PublicationsRepo
 public function reactToPublication($pubId, $reactionType, ReactionsRepository $reactionsRepository, ManagerRegistry $manager, PublicationsRepository $publicationsRepository, UserRepository $userRepository): Response
 {
     $entityManager = $manager->getManager();
-    $user = $userRepository->find(18); 
+    $user = $userRepository->find($this->userSession->getCurrentUser()->getId());
     $publication = $publicationsRepository->find($pubId);
 
     if (!$publication || !$user) {
@@ -441,7 +449,7 @@ public function incrementClick(EntityManagerInterface $entityManager, $pubId): R
 //---------------------------------------------------------------------------------//
     public function chatBotIndex(Request $request, UserRepository $userRepository): Response
     {
-        $user = $userRepository->find(18);
+        $user = $this->userSession->getCurrentUser(); 
     
         $userImage = null;
         if ($user && $user->getImage()) {
