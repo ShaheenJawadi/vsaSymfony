@@ -111,7 +111,6 @@
 		{% else %}
 			<div class="single_comment">No comments found!</div>
 		{% endfor %}
-		{% if user.id == pub.user.id %}
 		<div class="flash-messages">
                                 {% for message in app.flashes('danger') %}
                                     <div class="alert alert-danger">
@@ -142,7 +141,6 @@
 					</div>
 				</div>
 			{{ form_end(commentForm) }}
-		{% endif %}
 
 
 
