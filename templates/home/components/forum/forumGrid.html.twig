@@ -11,8 +11,7 @@
 			<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="date">{{ pub.dateCreation|date('d/m/Y') }}</a>
 			
 		</div>
-		{# //FIXME:userId=18 #}
-		{% if pub.user.id == 18 %}
+		{% if user.id == pub.user.id %}
 
 			<div class="options">
 
@@ -112,8 +111,7 @@
 		{% else %}
 			<div class="single_comment">No comments found!</div>
 		{% endfor %}
-		{# //FIXME:userId=18 #}
-		{% if user.id == 18 %}
+		{% if user.id == pub.user.id %}
 		<div class="flash-messages">
                                 {% for message in app.flashes('danger') %}
                                     <div class="alert alert-danger">

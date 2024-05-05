@@ -15,8 +15,7 @@
 		<p class="comment">
 			<span class="comment-text">{{ comment.commentaire }}</span>
 		</p>
-		{# //FIXME:userId=18 #}
-		{% if comment.user.id == 18 %}
+		{% if user.id == pub.user.id %}
 			<div class="new_comment">
 				<div class="comment">
 					<textarea class="form-control comment-text-display" placeholder="comment" rows="2">{{comment.commentaire}}</textarea>
@@ -27,8 +26,7 @@
 			</div>
 		{% endif %}
 	</div>
-	{# //FIXME:userId=18 #}
-	{% if comment.user.id == 18 %}
+	{% if user.id == pub.user.id %}
 		<div class="options">
 			<div class="dropdown dropstart">
 				<div class="drop_btn" data-bs-toggle="dropdown">

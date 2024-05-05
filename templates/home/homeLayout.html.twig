@@ -71,7 +71,9 @@
 								<li class=" profile">
 									<a class=" dropdown-toggle" href="#" ole="button" data-bs-toggle="dropdown" aria-expanded="false">
 										<div class="profile-pic">
-											<img src="{{ asset('images/cours/person.jpg') }}" alt="Profile Picture">
+											<img src="{{ getCurrentUser().image|default(asset('images/cours/person.jpg')) }}" alt="Profile Picture">                                <div class="entry">
+
+											{# <img src="{{ asset('images/cours/person.jpg') }}" alt="Profile Picture"> #}
 										</div>
 										<div class="username">
 											{{getCurrentUser().username}}
