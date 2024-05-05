@@ -68,16 +68,25 @@ class Cours
     #[ORM\OneToMany(targetEntity:Lessons::class, mappedBy:"coursid")]
     private Collection $lessons;
 
+    #[ORM\OneToMany(targetEntity:Avis::class, mappedBy:"coursid")]
+    private Collection $avis;
+
     #[ORM\OneToOne(targetEntity:Ressources::class, mappedBy:"coursid")]
     private Ressources $ressource;
 
     public function __construct() {
         $this->lessons = new ArrayCollection();
+        $this->avis = new ArrayCollection();
+
     }
     
     public function getLessons(): Collection
     {
         return $this->lessons;
+    }
+    public function getAvis(): Collection
+    {
+        return $this->avis;
     }
 
     public function getRessource(): ?Ressources
@@ -219,6 +228,23 @@ class Cours
             $totalDuration += $lesson->getDuree();
         }
         return $totalDuration;
+    }
+
+    public function getAverageRating(): ?float
+    {
+        $totalRating = 0;
+        $numberOfRatings = 0;
+
+        foreach ($this->avis as $rating) {
+            $totalRating += $rating->getNote();
+            $numberOfRatings++;
+        }
+
+        if ($numberOfRatings > 0) {
+            return round($totalRating / $numberOfRatings, 1);
+        } else {
+            return null;
+        }
     }
 
 }
