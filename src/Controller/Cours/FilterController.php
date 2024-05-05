@@ -14,8 +14,8 @@ class FilterController extends AbstractController
     public function index(CoursRepository $coursRepository , Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
-        $limit = 1;   
-        $offset = ($page - 1) * $limit; 
+        $limit = $request->query->getInt('limit', 3);
+        $offset = ($page - 1) * $limit;
         $data = $coursRepository->findBy([], null, $limit, $offset);
         $totalItems = $coursRepository->count([]);
         $totalPages = ceil($totalItems / $limit);
@@ -26,6 +26,7 @@ class FilterController extends AbstractController
             'data' => $data,
             'currentPage' => $page,
             'totalPages' => $totalPages,
+            'limit' => $limit,
         ]);
     }
 }

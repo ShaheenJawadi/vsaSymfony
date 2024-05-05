@@ -56,12 +56,12 @@
 						<div>
 							<div class="top_filter">
 								<div class=" sort_by">
-									<label class="form-label">Trier par</label>
-									<select class="form-select">
-										<option selected>Par nom</option>
-										<option value="1">date d'ajoute</option>
-										<option value="2">rating</option>
-									</select>
+									<label class="form-label">Par Page</label>
+									<select class="form-select" onchange="changeLimit(this.value)">
+            <option {% if limit == 3 %}selected{% endif %} value="3">3</option>
+            <option {% if limit == 9 %}selected{% endif %} value="9">9</option>
+            <option {% if limit == 15 %}selected{% endif %} value="15">15</option>
+        </select>
 								</div>
 								<div class="display_mode">
 									<div class="single selected">
@@ -123,4 +123,21 @@
 
 		</div>
 	</div>
+{% endblock %}
+
+
+{% block scripts %}
+	{{ parent() }}
+	<script>
+    
+
+    $(document).ready(function() {
+        $('.form-select').change(function() {
+            var limit = $(this).val();
+            var urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('limit', limit);
+        window.location.search = urlParams.toString();
+        });
+    });
+</script>
 {% endblock %}
