@@ -1,9 +1,9 @@
 {% macro displayCourse(cours) %}
 
 
-	<div class="col-md-4">
+	<div class="col-md-12">
 
-		<a class="single_cours_grid" href="{{ path('home_cours_page_index', {'slug': cours.slug}) }}">
+		<a class="single_cours_grid list_view" href="{{ path('home_cours_page_index', {'slug': cours.slug}) }}">
 			<div class="img_holder">
 				<img src="{{ cours.image }}" alt="">
 				<div class="add_cours_btn">
@@ -20,6 +20,7 @@
 			<div class="infos">
 				<span class="teacher">{{cours.enseignantid.username}}</span>
 				<span class="cours_title">{{ cours.nom }}</span>
+				<p class="description">{{cours.description}}</p>
 				<div class="rating">
 					<div class="list_stars">
 						{% for i in 1..5 %}
@@ -52,4 +53,6 @@
 
 		</a>
 	</div>
+
+ 
 {% endmacro %}

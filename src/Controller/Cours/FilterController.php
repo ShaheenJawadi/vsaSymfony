@@ -14,6 +14,8 @@ class FilterController extends AbstractController
     public function index(CoursRepository $coursRepository , Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
+        $displayMode = $request->query->get('display_mode', 'grid');
+
         $limit = $request->query->getInt('limit', 3);
         $searchTerm = $request->query->get('search');
         $subcategory = $request->query->get('subcategory');
@@ -36,6 +38,7 @@ class FilterController extends AbstractController
             'limit' => $limit,
             'searchTerm' => $searchTerm,
             'subcategory' => $subcategory,
+            'displayMode'=> $displayMode,
         ]);
     }
 }
