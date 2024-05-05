@@ -22,14 +22,13 @@
 								<div class="thumbnail">
 									<img src="{{ asset('images/cours/coursThumb.png') }}" alt="">
 									<div class="category_chimp">
-										Cat 1
+										{{ singleCours.subcategoryid.nom }}
 									</div>
 								</div>
 
 								<div class="infos">
 									<div class="top_head">
-										<span class="teacher">{{singleCours.enseignantid.nom}}</span>
-										<span class="date">08/03/2024</span>
+										<span class="teacher">{{singleCours.enseignantid.username}}</span> 
 
 
 									</div>
@@ -39,25 +38,20 @@
 									</div>
 									<div class="rating">
 										<div class="list_stars">
-											<div class="star">
-												<i class="fa-solid fa-star"></i>
-											</div>
-											<div class="star">
-												<i class="fa-solid fa-star"></i>
-											</div>
-											<div class="star">
-												<i class="fa-solid fa-star"></i>
-											</div>
-											<div class="star">
-												<i class="fa-solid fa-star"></i>
-											</div>
-											<div class="star">
-												<i class="fa-regular fa-star"></i>
-											</div>
+						{% for i in 1..5 %}
+							{% if singleCours.getAverageRating() is not null and i <= singleCours.getAverageRating() %}
+								<div class="star">
+									<i class="fa-solid fa-star"></i>
+								</div>
+							{% else %}
+								<div class="star">
+									<i class="fa-regular fa-star"></i>
+								</div>
+							{% endif %}
+						{% endfor %}
 
-
-										</div>
-										<small>(2)</small>
+					</div>
+										<small>({{singleCours.getAverageRating()}})</small>
 									</div>
 
 									<div class="description">
@@ -80,7 +74,7 @@
 										<div class="single">
 											<div class="circle"></div>
 											<div class="title">{{lesson.titre}}</div>
-											<div class="duration">{{lesson.duree}} minutes</div>
+											<div class="duration">{{lesson.duree}} Heures</div>
 
 										</div>
 
@@ -89,7 +83,7 @@
 									<div class="single quizz">
 										<div class="circle"></div>
 										<div class="title">Quizz</div>
-										<div class="duration">15 question</div>
+										<div class="duration"></div>
 
 									</div>
 								</div>
@@ -119,7 +113,7 @@
 									</div>
 									<span class="txt">Duration :</span>
 									<span class="txt_info">
-										3 heures</span>
+										{{singleCours.getLessonsDuration()}} heures</span>
 
 
 								</div>
@@ -131,7 +125,7 @@
 									</div>
 									<span class="txt">Leçons :</span>
 									<span class="txt_info">
-										6</span>
+										{{singleCours.lessons|length}}</span>
 
 
 								</div>
@@ -142,7 +136,7 @@
 
 									</div>
 									<span class="txt">Niveau :</span>
-									<span class="txt_info">Débutant</span>
+									<span class="txt_info">{{ singleCours.niveauid.niveau }}</span>
 
 
 								</div>
