@@ -18,4 +18,25 @@ class CoursRepository extends ServiceEntityRepository
         return $this->findAll();
     }
  
+    public function findBySearchTerm($searchTerm, $limit, $offset)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.nom LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countBySearchTerm($searchTerm)
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->andWhere('c.nom LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

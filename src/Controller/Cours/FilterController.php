@@ -15,9 +15,11 @@ class FilterController extends AbstractController
     {
         $page = $request->query->getInt('page', 1);
         $limit = $request->query->getInt('limit', 3);
+        $searchTerm = $request->query->get('search');
         $offset = ($page - 1) * $limit;
-        $data = $coursRepository->findBy([], null, $limit, $offset);
-        $totalItems = $coursRepository->count([]);
+        $data = $coursRepository->findBySearchTerm($searchTerm, $limit, $offset);
+        $totalItems = $coursRepository->countBySearchTerm($searchTerm);
+
         $totalPages = ceil($totalItems / $limit);
 
          
@@ -27,6 +29,7 @@ class FilterController extends AbstractController
             'currentPage' => $page,
             'totalPages' => $totalPages,
             'limit' => $limit,
+            'searchTerm' => $searchTerm,
         ]);
     }
 }
