@@ -14,7 +14,7 @@
 
 		<div class="filter_header" style="background-image: url({{ asset('images/filter/header.png')}})">
 			<div class="seach_bar_holder">
-				<input type="text" class="form-control search_bar">
+			 <input type="text" class="form-control search_bar" value="{{ searchTerm }}" placeholder="Search" onkeydown="if (event.keyCode == 13) { event.preventDefault(); search(this.value); }">
 			</div>
 		</div>
 
@@ -130,6 +130,11 @@
 	{{ parent() }}
 	<script>
     
+	 function search(value) {
+        var urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('search', value);
+        window.location.search = urlParams.toString();
+    }
 
     $(document).ready(function() {
         $('.form-select').change(function() {
