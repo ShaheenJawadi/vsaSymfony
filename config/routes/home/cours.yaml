@@ -7,5 +7,5 @@ page_index:
   controller: App\Controller\Cours\CoursController::coursPage
 
 lessons_index:
-  path: /single/lessons
+  path: /{slug}/lessons
   controller: App\Controller\Cours\CoursController::coursLessonsPage
