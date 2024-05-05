@@ -22,7 +22,7 @@ class Ressources
     #[ORM\Column(name: "type", type: "string", length: 60)]
     private ?string $type = null;
 
-    #[ORM\ManyToOne(targetEntity: Cours::class)]
+    #[ORM\OneToOne(targetEntity: Cours::class)]
     #[ORM\JoinColumn(name: "coursId", referencedColumnName: "id")]
     private ?Cours $coursid = null;
     public function getId(): ?int
