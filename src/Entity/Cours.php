@@ -8,9 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-#[ORM\Entity]
 
-//#[ORM\Entity(repositoryClass: CoursRepository::class)]
+
+#[ORM\Entity(repositoryClass: CoursRepository::class)]
 #[ORM\Table(name: "cours", indexes: [
     new ORM\Index(name: "subCategoryId", columns: ["subCategoryId"]),
     new ORM\Index(name: "niveauId", columns: ["niveauId"]),

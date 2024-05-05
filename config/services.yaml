@@ -22,19 +22,7 @@ services:
             - '../src/Kernel.php'
             - '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    App\Repository\CoursRepository:
-        arguments:
-            $registry: '@doctrine'
-
-    App\Repository\UsercoursRepository:
-        arguments:
-            $registry: '@doctrine'
-
-    App\Repository\LessonsRepository:
-        arguments:
-            $registry: '@doctrine'
+ 
 
     App\Service\OpenAIService:
         arguments:
