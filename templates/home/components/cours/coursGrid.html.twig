@@ -16,7 +16,7 @@
 
 		</div>
 		<div class="infos">
-			<span class="teacher">educateur</span>
+			<span class="teacher">{{cours.enseignantid.username}}</span>
 			<span class="cours_title">{{ cours.nom }}</span>
 			<div class="rating">
 				<div class="list_stars">
@@ -42,7 +42,7 @@
 			</div>
 			<div class="separator"></div>
 			<div class="bottom_part">
-				{{cours.lessons|length}} Lessons / 10 Heurs / {{ cours.niveauid.niveau }}
+				{{cours.lessons|length}} Lessons /{{cours.getLessonsDuration()}} Heurs / {{ cours.niveauid.niveau }}
 
 			</div>
 	 

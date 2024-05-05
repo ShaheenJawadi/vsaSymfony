@@ -212,5 +212,13 @@ class Cours
         return $this;
     }
 
+    public function getLessonsDuration(): int
+    {
+        $totalDuration = 0;
+        foreach ($this->lessons as $lesson) {
+            $totalDuration += $lesson->getDuree();
+        }
+        return $totalDuration;
+    }
 
 }
