@@ -24,14 +24,23 @@
 								</div>
 								<div class="content">
 									qkldkqsjdljqsjd lqsjdljqlsdjl doqdiozdoiauodiuiazdlk zad
-																		                                    azmldmlazkdlmz dpaozdpaz
-																		                                    dqsdsqsdljqslkdlqksj idoazd zad
+																											                                    azmldmlazkdlmz dpaozdpaz
+																											                                    dqsdsqsdljqslkdlqksj idoazd zad
 
 
 								</div>
 
 							</div>
-							<a href="{{ path('home_quizz_index') }}">
+
+
+							<a   
+							 {% if nextLesson =="quiz" %}
+
+							 href="{{ path('home_quizz_index') }}"
+								{% else %}
+								href="{{ path('home_cours_lessons_index', {'slug': singleCours.slug , lesson:nextLesson}) }}"
+							{% endif %} >
+							
 								<button class="btn_main">Suivant</button>
 							</a>
 
@@ -41,36 +50,18 @@
 					<div class="col-md-3">
 						<div class="side_bar">
 
-							<div class="single done">
-								<div class="circle"></div>
-								<div class="title">
-									lesson 1</div>
 
-							</div>
-							<div class="single  done">
-								<div class="circle"></div>
-								<div class="title">
-									lesson 2</div>
+							{% for key, lesson in singleCours.lessons %}
+								<div class="single  {% if key+1 ==userCours.stage %}current {% elseif  key+1<userCours.stage %}done{% endif %}">
+									<div class="circle"></div>
+									<div class="title">
+										lesson {{key+1}}</div>
 
-							</div>
-							<div class="single current">
-								<div class="circle"></div>
-								<div class="title">
-									lesson 3</div>
+								</div>
+							{% endfor %}
 
-							</div>
-							<div class="single">
-								<div class="circle"></div>
-								<div class="title">
-									lesson 4</div>
-
-							</div>
-							<div class="single">
-								<div class="circle"></div>
-								<div class="title">
-									lesson 5</div>
-
-							</div>
+						
+						
 							<div class="single quizz">
 								<div class="circle"></div>
 								<div class="title">

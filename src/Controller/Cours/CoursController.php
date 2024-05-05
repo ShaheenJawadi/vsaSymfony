@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Usercours;
+use App\Repository\LessonsRepository;
 use App\Service\UserSessionManager;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\UserRepository;
@@ -50,10 +51,10 @@ class CoursController extends AbstractController
         ]);
     }
 
-    public function coursLessonsPage(string $slug, Request $request, UserRepository $userRepository,  CoursRepository $coursRepo, UsercoursRepository $usercoursRepository): Response
+    public function coursLessonsPage(string $slug, Request $request, UserRepository $userRepository,  CoursRepository $coursRepo, UsercoursRepository $usercoursRepository , LessonsRepository $lessonsRepository): Response
     {
 
-
+       
 
         $singleCours = $coursRepo->findOneBy(['slug' => $slug]);
         $user = $this->userSession->getCurrentUser();
@@ -72,10 +73,42 @@ class CoursController extends AbstractController
             $entityManager->persist($userCoursEntity);
 
             $entityManager->flush();
+
+            return $this->render('home/cours/lessons/index.html.twig', [
+                'singleCours' => $singleCours,
+                'userCours' => $checkUserCours,
+            ]);
         }
+
+        else {
+            $l = $request->query->getInt('lesson',1);
+
+          
+            if($l>$checkUserCours->getStage() && $l <= $singleCours->getLessons()->count()){
+                $checkUserCours->setStage($l);
+                $entityManager->persist($checkUserCours);
+                $entityManager->flush();
+            }
+            
+        }
+        $checkUserCours = $usercoursRepository->findOneBy(['coursid' => $singleCours->getId(), 'userid' => $user->getId()]);
+        $currentLesson = $lessonsRepository->findOneBy(['coursid' => $singleCours->getId(), 'classement' => $checkUserCours->getStage()]);
+
+        $next = $lessonsRepository->findOneBy(['coursid' => $singleCours->getId(), 'classement' => $checkUserCours->getStage() + 1]);
+        if($next == null){
+            $nextLesson = "quiz";
+        }
+        else {
+            $nextLesson = $checkUserCours->getStage() + 1;
+        }
+
 
         return $this->render('home/cours/lessons/index.html.twig', [
             'singleCours' => $singleCours,
+            'userCours' => $checkUserCours,
+            'currentLesson'=>$currentLesson,
+            'nextLesson'=>$nextLesson,
+
 
         ]);
     }

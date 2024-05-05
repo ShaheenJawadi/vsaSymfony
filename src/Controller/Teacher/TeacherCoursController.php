@@ -66,8 +66,8 @@ class TeacherCoursController extends AbstractController
  
         $uploadResult = $imageUploader->upload($tempFilePath);
 
-
-        dd($uploadResult);
+/* 
+        dd($uploadResult); */
         $formData = $request->request->all();
 
 
