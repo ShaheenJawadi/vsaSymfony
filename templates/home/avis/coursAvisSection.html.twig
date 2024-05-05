@@ -65,20 +65,16 @@
 				</div>
 				<div class="avis_content">
 					<div class="top infos">
+						<div class="username">{{ avi.getIdUser().getUsername()}}</div> <!-- Accéder au nom d'utilisateur via la relation avec l'entité User -->
 						<div class="date">{{ avi.getDate().format('d/m/Y') }}</div>
+						
 						<div class="rating">
 							<div class="list_stars">
 								{% for i in 1..5 %}
 									{% if avi.getNote() >= i %}
-										{% if avi.getNote() >= i %}
-											<div class="star">
-												<i class="fa-solid fa-star"></i>
-											</div>
-										{% else %}
-											<div class="star">
-												<i class="fa-regular fa-star"></i>
-											</div>
-										{% endif %}
+										<div class="star">
+											<i class="fa-solid fa-star"></i>
+										</div>
 									{% else %}
 										<div class="star">
 											<i class="fa-regular fa-star"></i>
@@ -92,17 +88,12 @@
 					<div class="avis_p">
 						<p>{{ avi.getMessage() }}</p>
 					</div>
-
-
 				</div>
 				<div class="options">
-
-
 					<div class="dropdown dropstart">
 						<div class="drop_btn" data-bs-toggle="dropdown">
 							<i class="fa-solid fa-ellipsis-v"></i>
 						</div>
-
 						<ul class="dropdown-menu">
 							<li>
 								<div opengeneralpopup data-link="{{ path('home_avis_avis_modifier', {id: avi.getIdAvi ,courSlug:courSlug})}}">modifier</div>
@@ -116,7 +107,7 @@
 			</div>
 		{% endfor %}
 	</div>
-
+	
 
 	<div class="my_review">
 		<h4>Ajouter un Avis</h4>
