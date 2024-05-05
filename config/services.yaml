@@ -31,6 +31,11 @@ services:
     App\Repository\UsercoursRepository:
         arguments:
             $registry: '@doctrine'
+
+    App\Repository\LessonsRepository:
+        arguments:
+            $registry: '@doctrine'
+
     App\Service\OpenAIService:
         arguments:
             $client: '@http_client' # This injects the HttpClientInterface service
