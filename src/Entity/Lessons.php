@@ -6,8 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LessonsRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
- 
-#[ORM\Entity(repositoryClass: LessonsRepository::class)]
+#[ORM\Entity]
+
+//#[ORM\Entity(repositoryClass: LessonsRepository::class)]
 #[ORM\Table(name: "lessons", indexes: [new ORM\Index(name: "coursId", columns: ["coursId"])])]
 class Lessons
 {
