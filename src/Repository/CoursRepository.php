@@ -18,25 +18,48 @@ class CoursRepository extends ServiceEntityRepository
         return $this->findAll();
     }
  
-    public function findBySearchTerm($searchTerm, $limit, $offset)
+    public function findBySearchTermAndSubCategory($searchTerm, $subCategory, $limit, $offset)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.nom LIKE :searchTerm')
-            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+        $queryBuilder = $this->createQueryBuilder('c');
+
+        if ($searchTerm) {
+            $queryBuilder
+                ->andWhere('c.nom LIKE :searchTerm')
+                ->setParameter('searchTerm', '%'.$searchTerm.'%');
+        }
+
+        if ($subCategory) {
+            $queryBuilder
+                ->andWhere('c.subcategoryid  = :subCategory')
+                ->setParameter('subCategory', $subCategory);
+        }
+
+        return $queryBuilder
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
             ->getResult();
     }
 
-    public function countBySearchTerm($searchTerm)
+    public function countBySearchTermAndSubCategory($searchTerm, $subCategory)
     {
-        return $this->createQueryBuilder('c')
-            ->select('COUNT(c.id)')
-            ->andWhere('c.nom LIKE :searchTerm')
-            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)');
+
+        if ($searchTerm) {
+            $queryBuilder
+                ->andWhere('c.nom LIKE :searchTerm')
+                ->setParameter('searchTerm', '%'.$searchTerm.'%');
+        }
+
+        if ($subCategory) {
+            $queryBuilder
+                ->andWhere('c.subcategoryid  = :subCategory')
+                ->setParameter('subCategory', $subCategory);
+        }
+
+        return $queryBuilder
             ->getQuery()
             ->getSingleScalarResult();
     }
-
 }
