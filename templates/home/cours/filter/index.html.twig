@@ -2,7 +2,7 @@
 {% import 'home/components/cours/coursGrid.html.twig' as courGrid %}
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/filter_page.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/filter_page.css') }}?v={{ random() }}">
 {% endblock %}
 
 
@@ -31,21 +31,23 @@
 									<li>
 										<div>
 											<span class="cat_title">
-												<a href="#">{{ category.nom }}</a>
+												<div>{{ category.nom }}</div>
 											</span>
 										</div>
+										<ul class="souCategory">
+										
 										{% for subcategoryArray in getSubcategories(category) %}
-											<li>
+											<li >
 												<div>
-													<span class="cat_title">
-														<a href="#">{{ subcategoryArray.subcategory }}</a>
+													<span class="subCat_title">
+														<a href="{{ path('home_cours_filter_index', {'subcategory': subcategoryArray.subcategory_id}) }}">{{ subcategoryArray.subcategory }}</a>
 													</span>
 												</div>
 												{# 
 																									
 																								#}
 											</li>
-										{% endfor %}
+										{% endfor %}</ul>
 									</li>
 								{% endfor %}
 							</ul>
