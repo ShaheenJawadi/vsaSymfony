@@ -50,6 +50,8 @@ public function getSubcategories(Categorie $category): array
         // Add subcategory and category ID to the result array
         $subcategoriesWithCategoryIds[] = [
             'subcategory' => $subcategory->getNom(),
+            'subcategory_id' => $subcategory->getId(),
+
             'categoryId' => $categoryId
         ];
     }
