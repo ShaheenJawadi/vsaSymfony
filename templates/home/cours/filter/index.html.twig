@@ -1,5 +1,7 @@
 {% extends 'home/homeLayout.html.twig' %}
 {% import 'home/components/cours/coursGrid.html.twig' as courGrid %}
+{% import 'home/components/cours/coursListItem.html.twig' as courList %}
+
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('css/filter_page.css') }}?v={{ random() }}">
@@ -66,12 +68,12 @@
         </select>
 								</div>
 								<div class="display_mode">
-									<div class="single selected">
+									<a href="#" onclick="changeDisplay('grid');"  class="single  {% if displayMode == 'grid' %}selected{% endif %}">
 										<i class="fa-solid fa-grip"></i>
-									</div>
-									<div class="single">
+									</a>
+									<a href="#" onclick="changeDisplay('list');" class="single  {% if displayMode == 'list' %}selected{% endif %}">
 										<i class="fa-solid fa-list"></i>
-									</div>
+									</a>
 
 								</div>
 
@@ -84,9 +86,15 @@
 
 
 								{% for cours in data %}
-									<div class="col-md-4">
+									 {% if displayMode =="list" %}
+										{{ courList.displayCourse(cours) }}
+								 
+									 {% else %}
 										{{ courGrid.displayCourse(cours) }}
-									</div>
+										 
+									 {% endif %}
+									
+										
 								{% endfor %}
 							</div>
 
@@ -131,6 +139,12 @@
 {% block scripts %}
 	{{ parent() }}
 	<script>
+
+	 function changeDisplay(value) {
+        var urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('display_mode', value);
+        window.location.search = urlParams.toString();
+    }
     
 	 function search(value) {
         var urlParams = new URLSearchParams(window.location.search);

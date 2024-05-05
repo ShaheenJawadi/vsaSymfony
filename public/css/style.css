@@ -382,6 +382,40 @@ footer .footer_Holder .footer_social .item:hover {
 }
 
 
+/* //////////////////// */
+
+.single_cours_grid.list_view {
+    display: flex;
+}
+
+.single_cours_grid.list_view {
+    position: relative;
+}
+
+.single_cours_grid.list_view .img_holder {
+    max-width: 350px;
+    margin-bottom: 0;
+    position: unset;
+}
+
+.single_cours_grid.list_view .infos {
+    flex: 1;
+    padding-top: 15px;
+}
+
+.single_cours_grid.list_view .description {
+    display: block;
+    flex: 1;
+}
+
+.single_cours_grid.list_view .img_holder .add_cours_btn {
+    top: 5px;
+    right: 5px;
+    left: unset;
+    bottom: unset;
+}
+
+
 /* *************************Single cours************************ */
 
 
