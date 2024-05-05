@@ -42,8 +42,8 @@
 													</span>
 												</div>
 												{# 
-													
-												#}
+																									
+																								#}
 											</li>
 										{% endfor %}
 									</li>
@@ -79,10 +79,9 @@
 
 						<div class="container-fluid">
 							<div class="row">
-								 
 
 
-								{% for cours in list_cours %}
+								{% for cours in data %}
 									<div class="col-md-4">
 										{{ courGrid.displayCourse(cours) }}
 									</div>
@@ -93,24 +92,25 @@
 
 						<div class="pagination">
 
+							<nav aria-label="Page navigation">
+								<ul class="pagination">
 
-							<nav>
-								<ul class="pagination justify-content-center">
-									<li class="page-item disabled">
-										<a class="page-link">Précédent</a>
-									</li>
-									<li class="page-item active">
-										<a class="page-link" href="#">1</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">2</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">3</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">Suivant</a>
-									</li>
+									{% if currentPage > 1 %}
+										<li class="page-item">
+											<a class="page-link" href="{{ path('home_cours_filter_index', {'page': currentPage - 1}) }}">Précédent</a>
+										</li>
+									{% endif %}
+									{% for page in 1..totalPages %}
+										<li class="page-item {% if page == currentPage %}active{% endif %}">
+											<a class="page-link" href="{{ path('home_cours_filter_index', {'page': page}) }}">{{ page }}</a>
+										</li>
+									{% endfor %}
+									{% if currentPage < totalPages %}
+										<li class="page-item">
+											<a class="page-link" href="{{ path('home_cours_filter_index', {'page': currentPage + 1}) }}">Suivant</a>
+										</li>
+									{% endif %}
+
 								</ul>
 							</nav>
 						</div>
