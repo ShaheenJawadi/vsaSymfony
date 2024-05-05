@@ -59,13 +59,13 @@
 
 							{% if  getCurrentUser() is    null %}
 								<li class="nav-item">
-									<a class="nav-link active" type="button" data-bs-toggle="modal" data-bs-target="#authModel" href="#">Connexion</a>
+									<a class="nav-link active" type="button" data-bs-toggle="modal" data-bs-target="#authModel" href="#" id="openLogin">Connexion</a>
 								</li>
 								<li class="nav-item nav-link ">
 									/
 								</li>
 								<li class="nav-item">
-									<a class="nav-link " href="#">Inscription</a>
+									<a class="nav-link active" type="button" data-bs-toggle="modal" data-bs-target="#authModel" href="#" id="openReg">Inscription</a>
 								</li>
 							{% else %}
 								<li class=" profile">

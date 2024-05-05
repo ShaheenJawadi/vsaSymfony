@@ -51,6 +51,12 @@
     });
 
 
+    $(document).on('click', '#openReg', function() {
+
+        $.get('/auth/load/popup/register', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+    });
 
     $(document).on('click', '#openForgetPws', function() {
 
@@ -60,7 +66,7 @@
     });
 
 
-    $(document).on('click', '#openLoginPopup', function() {
+    $(document).on('click', '#openLoginPopup , #openLogin', function() {
 
         $.get('/auth/load/popup/login', function(response) {
             $('#authModel .modal-content').html(response);
