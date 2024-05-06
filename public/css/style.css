@@ -419,6 +419,21 @@ footer .footer_Holder .footer_social .item:hover {
 /* *************************Single cours************************ */
 
 
+/* *****************************Merch Crid ************************** */
+
+.single_cours_grid.product .bottom_part {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.single_cours_grid.product .prix {
+    color: var(--fx-primary-color);
+    font-size: 19px;
+    font-weight: 700;
+}
+
+
 /* *************************Authentification************************ */
 
 .auth_holder {
@@ -608,5 +623,9 @@ table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
 }
 
 .form-control.error {
+    border: 1px solid var(--fx-error-background);
+}
+
+form-control.error {
     border: 1px solid var(--fx-error-background);
 }
