@@ -12,7 +12,9 @@ class DonationController extends AbstractController
     public function index(Request $request ): Response
     {
        
+        $content = $this->renderView('home/components/callToAction/list.html.twig');
 
+        return new Response($content);
  
         
     }
