@@ -3,26 +3,27 @@
 
 	<div class="col-md-3">
 
-		<a class="single_cours_grid" href="{{ path('home_cours_page_index', {'slug': "dfsdsf"}) }}">
-			<div class="img_holder">
-				<img src="{{ asset('images/logo_circle.png') }}"  alt="">
-				<div class="add_cours_btn">
+		<div class="single_cours_grid product">
+			<a href="{{ path('home_cours_page_index', {'slug': "dfsdsf"}) }}" class="img_holder">
+				<img src="{{ asset('images/logo_circle.png') }}" alt="">
 
-					<i class="fa-solid fa-book"></i>
 
-				</div>
-				 
-
-			</div>
+			</a>
 			<div class="infos">
-				 
-				<span class="cours_title">title</span>
-				<div class="rating">
-				  
-				</div>
-				<div class="separator"></div>
+				<a href="{{ path('home_cours_page_index', {'slug': "dfsdsf"}) }}">
+					<span class="cours_title">title</span>
+				</a>
+
 				<div class="bottom_part">
-					sdfsdfsdf/
+					<div class="prix">
+						15Dt
+					</div>
+					<div>
+						<button class="btn_main">
+							<i class="fa-solid fa-cart-plus"></i>
+						</button>
+					</div>
+
 
 				</div>
 
@@ -30,6 +31,6 @@
 			</div>
 
 
-		</a>
+		</div>
 	</div>
 {% endmacro %}
