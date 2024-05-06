@@ -119,7 +119,11 @@
 
         $("#openCallAction").on('click', function() {
 
-            alert('qsdsq')
+            var path = $(this).data('path');
+            $.get(path, function(response) {
+                $('.drawerBody.donations').html(response);
+            });
+
         })
 
     })
