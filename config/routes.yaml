@@ -26,6 +26,12 @@ merch:
       name_prefix: "home_merch_"
 
 #################################################      
+donation:
+      resource: "routes/home/donation.yaml"
+      prefix: "/donation"
+      name_prefix: "home_donation_"
+
+#################################################      
 
 quiz:
       resource: "routes/home/quizz.yaml"

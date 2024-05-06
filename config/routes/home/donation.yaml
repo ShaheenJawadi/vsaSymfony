@@ -1,0 +1,4 @@
+display_index:
+  path: /
+  controller: App\Controller\Donation\DonationController::index
+ 
