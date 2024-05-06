@@ -122,6 +122,13 @@
             var path = $(this).data('path');
             $.get(path, function(response) {
                 $('.drawerBody.donations').html(response);
+                $(".donationProgress").each(function() {
+                    var total = $(this).data("total");
+                    var currentProgress = $(this).data("progress");
+                    var percentage = (currentProgress / total) * 100;
+                    $(this).find(".progress").css("width", percentage + "%");
+                    $(this).find(".percent").text(percentage.toFixed(2) + "%");
+                });
             });
 
         })
