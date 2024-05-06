@@ -1,0 +1,3 @@
+parameters:
+    stripe_public_key: '%env(resolve:STRIPE_PUBLIC_KEY)%'
+    stripe_secret_key: '%env(resolve:STRIPE_SECRET_KEY)%'
