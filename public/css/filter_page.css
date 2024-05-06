@@ -123,3 +123,11 @@
     background: var(--fx-primary-color);
     color: #fff;
 }
+
+
+/*  */
+
+.filter_page.merch .filter_header {
+    background-position: center;
+    min-height: 350px;
+}
