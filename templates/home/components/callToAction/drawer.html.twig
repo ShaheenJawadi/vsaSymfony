@@ -1,0 +1,24 @@
+ 
+<div class="offcanvas offcanvas-start" tabindex="-1" id="callToActionDrawer">
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title">Appel à l'action</h5>
+		<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body drawerBody">
+		
+	</div>
+
+ 
+    $(document).ready(function(){
+      // Get total and current progress from data attributes
+      var total = $(".progress-bar").data("total");
+      var currentProgress = $(".progress-bar").data("progress");
+
+      // Calculate percentage
+      var percentage = (currentProgress / total) * 100;
+
+      // Update progress bar width and text
+      $("#progress").css("width", percentage + "%");
+      $("#percentText").text(percentage.toFixed(2) + "%");
+    });
+  </script>
