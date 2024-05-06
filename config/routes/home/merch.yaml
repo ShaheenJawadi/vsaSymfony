@@ -3,5 +3,5 @@ filter_index:
   controller: App\Controller\Merch\MerchController::index
 
 page_index:
-  path: /{slug}
+  path: /{id}
   controller: App\Controller\Merch\MerchController::productPage
