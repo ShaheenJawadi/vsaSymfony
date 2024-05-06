@@ -19,4 +19,15 @@ class MerchController extends AbstractController
             
         ]);
     }
+
+    public function productPage(Request $request): Response
+    {
+    
+ 
+        return $this->render('home/merch/single/index.html.twig', [
+            
+        ]);
+    }
+    
+
 }
