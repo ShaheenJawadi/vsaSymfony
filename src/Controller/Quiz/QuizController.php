@@ -19,13 +19,13 @@ use Doctrine\Persistence\ManagerRegistry;
 class QuizController extends AbstractController
 {
     public function index(Request $request, QuizRepository $quizRepository, UserRepository $userRepository): Response
-    {$user = $userRepository->find(3); // TODO FIXME: userid
+    {$user = $userRepository->find(20); // TODO FIXME: userid
         if (!$user) {
             throw $this->createNotFoundException('No user found');
         }
 
         $userId = $user->getId();
-        $coursId=6;   // TODO FIXME: coursid
+        $coursId=2;   // TODO FIXME: coursid
         $questionIndex = $request->attributes->get('questionIndex'); 
         if ($questionIndex === null) {
             $questionIndex = 0;

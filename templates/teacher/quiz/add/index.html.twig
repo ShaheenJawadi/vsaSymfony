@@ -15,7 +15,7 @@
 
 
 	<div class="container">
-		<form ajaxform action="{{ path('teacher_quiz_create') }}" method="post">
+		<form ajaxformQuiz action="{{ path('teacher_quiz_create') }}" method="post">
 		<input type="hidden" name="coursId" value="{{coursId}}">
 		{% if errors %}
 		     	{% for error in errors %}
