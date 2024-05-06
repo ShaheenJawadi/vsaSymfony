@@ -7,10 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use phpDocumentor\Reflection\Types\Integer;
+use App\Repository\CallToActionRepository;
 
-#[ORM\Entity]
+ 
 
-//#[ORM\Entity(repositoryClass: CallActionRepository::class)]
+#[ORM\Entity(repositoryClass: CallToActionRepository::class)]
 #[ORM\Table(name: "callaction", indexes: [
   
 ])]

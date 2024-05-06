@@ -662,6 +662,7 @@ form-control.error {
     background: #dbe93f6d;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .actions_list .single_action .content {

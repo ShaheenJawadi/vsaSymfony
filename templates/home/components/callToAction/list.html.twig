@@ -1,18 +1,21 @@
 <div class="actions_list">
 	<div class="action_item">
 
+{% for action in actions_list %}
+    
+
 		<div class="single_action">
 			<div class="content">
-				qsdmlsqmldlùsqd
+				{{action.content}}
 			</div>
 
-			<div class="donationProgress" data-total="200" data-progress="100">
+			<div class="donationProgress" data-total="{{action.target}}" data-progress="{{action.given}}">
 				<div class="progress" style="width: 0%;">
 					<div class="percent">0%</div>
 				</div>
 			</div>
 
 		</div>
-    
+    {% endfor %}
 	</div>
 </div>
