@@ -6,11 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use phpDocumentor\Reflection\Types\Integer;
-
-#[ORM\Entity]
-
-//#[ORM\Entity(repositoryClass: ProductsRepository::class)]
+use App\Repository\ProductsRepository;
+ 
+#[ORM\Entity(repositoryClass: ProductsRepository::class)]
 #[ORM\Table(name: "products", indexes: [
   
 ])]
