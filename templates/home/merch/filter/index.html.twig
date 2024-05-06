@@ -1,7 +1,91 @@
 {% extends 'home/homeLayout.html.twig' %}
+{% import 'home/components/merch/productGrid.html.twig' as productGrid %}
  
 
-{% block body %}
-Merch
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/filter_page.css') }}?v={{ random() }}">
 {% endblock %}
 
+
+{% block body %}
+
+
+	<div class="filter_page">
+
+
+		<div class="filter_header" style="background-image: url({{ asset('images/filter/header.png')}})">
+			<div class="seach_bar_holder">
+				<input type="text" class="form-control search_bar" onkeydown="if (event.keyCode == 13) { event.preventDefault(); search(this.value); }">
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-12" style="padding-left: 0;">
+					 
+
+
+						<div class="container-fluid">
+							<div class="row">
+
+
+								{# {% for cours in data %} #}
+								 
+										{{ productGrid.displayProduct("prod") }}
+										{{ productGrid.displayProduct("prod") }}
+
+										{{ productGrid.displayProduct("prod") }}
+										{{ productGrid.displayProduct("prod") }}
+										{{ productGrid.displayProduct("prod") }}
+
+
+								 
+
+
+							{# 	{% endfor %} #}
+							</div>
+
+						</div>
+
+					 
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block scripts %}
+	{{ parent() }}
+	<script>
+
+		function changeDisplay(value) {
+var urlParams = new URLSearchParams(window.location.search);
+urlParams.set('display_mode', value);
+window.location.search = urlParams.toString();
+}
+
+function search(value) {
+var urlParams = new URLSearchParams(window.location.search);
+urlParams.set('search', value);
+window.location.search = urlParams.toString();
+}
+
+$(document).ready(function () {
+$('.form-select').change(function () {
+var limit = $(this).val();
+var urlParams = new URLSearchParams(window.location.search);
+urlParams.set('limit', limit);
+window.location.search = urlParams.toString();
+});
+});
+	</script>
+{% endblock %}

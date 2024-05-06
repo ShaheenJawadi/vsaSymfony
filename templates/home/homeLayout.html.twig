@@ -47,7 +47,9 @@
 							<li class="nav-item">
 								<a class="nav-link" href="{{ path('home_forum_chatbot_index') }}">ChatBot</a>
 							</li>
-
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('home_merch_filter_index') }}">Merch</a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{ path('home_avis_add_reclamation_page') }}">Reclamation</a>
 							</li>
@@ -71,143 +73,142 @@
 								<li class=" profile">
 									<a class=" dropdown-toggle" href="#" ole="button" data-bs-toggle="dropdown" aria-expanded="false">
 										<div class="profile-pic">
-											<img src="{{ getCurrentUser().image|default(asset('images/cours/person.jpg')) }}" alt="Profile Picture">                                <div class="entry">
+											<img src="{{ getCurrentUser().image|default(asset('images/cours/person.jpg')) }}" alt="Profile Picture">
+											<div
+												class="entry">{# <img src="{{ asset('images/cours/person.jpg') }}" alt="Profile Picture"> #}
+											</div>
+											<div class="username">
+												{{getCurrentUser().username}}
+											</div>
 
-											{# <img src="{{ asset('images/cours/person.jpg') }}" alt="Profile Picture"> #}
+										</a>
+										<ul class="dropdown-menu">
+
+											<li>
+												<a class="dropdown-item" href="#">
+													<i class="ic fa-solid fa-gear"></i>
+													<span>Parametre</span>
+												</a>
+											</li>
+											<li>
+												<hr class="dropdown-divider">
+											</li>
+											<li>
+												<a class="dropdown-item" href="{{ path('home_auth_logout') }}">
+													<i class=" ic fa-solid fa-right-from-bracket"></i>
+													<span>Deconnexion</span>
+												</a>
+											</li>
+										</ul>
+									</li>
+									{# 
+																									                        <a  href="{{ path('home_auth_logout') }}"  >  logout</a> #}
+								{% endif %}
+
+								<li class="separator"></li>
+
+
+								<li class="nav-item">
+									<div class="badge_my_cours">
+										<div class="icon_holder">
+											<i class="fa-solid fa-briefcase"></i>
 										</div>
-										<div class="username">
-											{{getCurrentUser().username}}
-										</div>
-
-									</a>
-									<ul class="dropdown-menu">
-
-										<li>
-											<a class="dropdown-item" href="#">
-												<i class="ic fa-solid fa-gear"></i>
-												<span>Parametre</span>
-											</a>
-										</li>
-										<li>
-											<hr class="dropdown-divider">
-										</li>
-										<li>
-											<a class="dropdown-item" href="{{ path('home_auth_logout') }}">
-												<i class=" ic fa-solid fa-right-from-bracket"></i>
-												<span>Deconnexion</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-								{# 
-																                        <a  href="{{ path('home_auth_logout') }}"  >  logout</a> #}
-							{% endif %}
-
-							<li class="separator"></li>
-
-
-							<li class="nav-item">
-								<div class="badge_my_cours">
-									<div class="icon_holder">
-										<i class="fa-solid fa-briefcase"></i>
+										<div class="my_cours_count">1</div>
 									</div>
-									<div class="my_cours_count">1</div>
-								</div>
 
 
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">
-									<Button class="btn_main">Faire un don</Button>
-								</a>
-
-							</li>
-						</ul>
-
-
-					</div>
-				</div>
-
-			</nav>
-		</section>
-		<div class="home_page"> {% block body %}{% endblock %}
-
-
-			<footer>
-				<div class="footer_Holder" style="background-image: url({{ asset('images/footer_bg.png')}})">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-3">
-								<div class="logo_holder"><img src="{{ asset('images/logo_circle.png') }}" class="footer_logo" alt=""></div>
-
-							</div>
-							<div class="col-md-3">
-								<div class="footer_list_holder">
-									<span class="title">Categories</span>
-									<ul>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-									</ul>
-
-								</div>
-
-							</div>
-
-							<div class="col-md-3">
-								<div class="footer_list_holder">
-									<span class="title">Cours</span>
-									<ul>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-										<li><a href="#">-----------------------------</a></li>
-									</ul>
-
-								</div>
-
-							</div>
-
-							<div class="col-md-3">
-								<div class="footer_social">
-									<a class="item" href="#">
-										<i class="fa-brands fa-facebook"></i>
-									</a>
-									<a class="item" href="#">
-										<i class="fa-brands fa-instagram"></i>
-									</a>
-									<a class="item" href="#">
-										<i class="fa-brands fa-x-twitter"></i>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">
+										<Button class="btn_main">Faire un don</Button>
 									</a>
 
-
-								</div>
-
-							</div>
+								</li>
+							</ul>
 
 
 						</div>
-
 					</div>
-				</div>
-			</footer>
 
-			{% include 'home/auth/popup/index.html.twig' %}
-			{% include 'home/components/global_popup.html.twig' %}
-
-
-		</div>
+				</nav>
+			</section>
+			<div class="home_page"> {% block body %}{% endblock %}
 
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+				<footer>
+					<div class="footer_Holder" style="background-image: url({{ asset('images/footer_bg.png')}})">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="logo_holder"><img src="{{ asset('images/logo_circle.png') }}" class="footer_logo" alt=""></div>
+
+								</div>
+								<div class="col-md-3">
+									<div class="footer_list_holder">
+										<span class="title">Categories</span>
+										<ul>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+										</ul>
+
+									</div>
+
+								</div>
+
+								<div class="col-md-3">
+									<div class="footer_list_holder">
+										<span class="title">Cours</span>
+										<ul>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+											<li><a href="#">-----------------------------</a></li>
+										</ul>
+
+									</div>
+
+								</div>
+
+								<div class="col-md-3">
+									<div class="footer_social">
+										<a class="item" href="#">
+											<i class="fa-brands fa-facebook"></i>
+										</a>
+										<a class="item" href="#">
+											<i class="fa-brands fa-instagram"></i>
+										</a>
+										<a class="item" href="#">
+											<i class="fa-brands fa-x-twitter"></i>
+										</a>
 
 
-		<script src="{{ asset('js/main.js') }}?v={{ random() }}"></script>
-{% block scripts %}{% endblock %}
+									</div>
 
+								</div>
+
+
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+				{% include 'home/auth/popup/index.html.twig' %}
+				{% include 'home/components/global_popup.html.twig' %}
+
+
+			</div>
+
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+			<script src="{{ asset('js/main.js') }}?v={{ random() }}"></script>
+			{% block scripts %}{% endblock %}
+		</body>
 	</body>
-
 </html>
