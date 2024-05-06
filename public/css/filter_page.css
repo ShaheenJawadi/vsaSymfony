@@ -232,7 +232,7 @@
         
         #cart-items .product-info .remove {
             position: absolute;
-            top: 1px;
+            bottom: 1px;
             right: 1px;
             background: unset;
             color: #ff0606;
@@ -242,4 +242,16 @@
         #cart-items .product-image img {
             width: 120px;
             height: 120px;
+        }
+        
+        .drawerBody .top_section {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            justify-content: space-between;
+        }
+        
+        .drawerBody .top_section .total {
+            font-size: 20px;
+            color: var(--fx-primary-color);
         }
