@@ -1,4 +1,4 @@
-{% extends 'home/homeLayout.html.twig' %}
+{% extends 'home/merch/index.html.twig' %}
 {% import 'home/components/merch/productGrid.html.twig' as productGrid %}
 
 
@@ -8,7 +8,8 @@
 {% endblock %}
 
 
-{% block body %}
+{% block merchBody %}
+
 
 
 	<div class=" singleProduct">
@@ -36,12 +37,12 @@
                             <div class="description" >
                             lqsjkdlksqdklsq kld jklsd
                             </div>
-							<div class="p_a">
+							<div class="p_a product"   data-id="1" data-name="Product 1" data-price="10">
 								<div class="prix">
 									15DT
 								</div>
 								<div>
-									<button class="btn_main">
+									<button class="btn_main add-to-cart">
 										<i class="fa-solid fa-cart-plus"></i>
 										<span>Ajouter au panier</span>
 									</button>

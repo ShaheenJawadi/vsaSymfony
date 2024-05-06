@@ -193,3 +193,10 @@
             border-radius: 50px;
             padding: 3px 8px;
         }
+        
+        .open_cart_btn {
+            position: fixed;
+            top: 150px;
+            right: 50px;
+            background: var(--fx-primary-color);
+        }
