@@ -21,6 +21,9 @@ class CallAction
     #[ORM\Column(name: "id", type: "integer")]
     private ?int $id = null;
 
+    #[ORM\Column(name: "content", type: "string", length: 255)]
+    private ?string $content = null;
+
     #[Assert\NotBlank]
     #[ORM\Column(name: "target", type: "integer")]
     private ?string $target = null;
@@ -41,6 +44,18 @@ class CallAction
     {
         return $this->id;
     }
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): static
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
 
     public function getTarget(): ?int
     {
