@@ -17,6 +17,14 @@ cours:
       prefix: "/cours"
       name_prefix: "home_cours_"
 
+
+#################################################      
+
+merch:
+      resource: "routes/home/merch.yaml"
+      prefix: "/merch"
+      name_prefix: "home_merch_"
+
 #################################################      
 
 quiz:
