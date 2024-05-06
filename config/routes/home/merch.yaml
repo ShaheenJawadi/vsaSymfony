@@ -1,0 +1,7 @@
+filter_index:
+  path: /
+  controller: App\Controller\Merch\MerchController::index
+
+page_index:
+  path: /{slug}
+  controller: App\Controller\Merch\MerchController::productPage
