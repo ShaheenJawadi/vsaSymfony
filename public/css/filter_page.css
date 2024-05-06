@@ -142,8 +142,10 @@
         }
         
         .singleProduct .product_img img {
-            height: 250px;
-            width: 250px;
+            min-width: 400px;
+            min-height: 400px;
+            max-width: 500px;
+            max-height: 500px;
         }
         
         .singleProduct .product_infos {
@@ -208,14 +210,14 @@
         
         #cart-items li {
             border-bottom: 1px solid #5b525254;
-            padding-bottom: 9px;
+            padding: 10px 0;
         }
         
         #cart-items .product-info {
             display: flex;
-            align-items: flex-start;
             gap: 5px;
             position: relative;
+            align-items: center;
         }
         
         #cart-items .product-info .prix {

@@ -312,6 +312,7 @@ footer .footer_Holder .footer_social .item:hover {
     color: #000;
     font-size: 18px;
     font-weight: 700;
+    margin-top: 8px;
 }
 
 .single_cours_grid .infos .single_data {}
