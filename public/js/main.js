@@ -25,7 +25,7 @@
                 existingItem.find(".quantity").text(quantity);
             } else {
                 var image = product.data("image");
-                $("#cart-items").append("<li data-id='" + id + "' data-name='" + name + "' data-price='" + price + "' data-quantity='" + quantity + "'><div class='product-info'><div class='product-image'><img src='" + image + "' alt='" + name + "'></div><div><h4>" + name + "</h4><p class='prix'><span>Prix:</span>" + price + " DT</p><input type='number' min='1' value='" + quantity + "' class='quantity-input'> <button class='remove'>Remove</button></div></div></li>");
+                $("#cart-items").append("<li data-id='" + id + "' data-name='" + name + "' data-price='" + price + "' data-quantity='" + quantity + "'><div class='product-info'><div class='product-image'><img src='" + image + "' alt='" + name + "'></div><div><h4>" + name + "</h4><p class='prix'><span>Prix:</span>" + price + " DT</p><input type='number' min='1' value='" + quantity + "' class='quantity-input'> <button class='remove'> <i class='fa-solid fa-trash'></i></button></div></div></li>");
             }
 
             saveCartItems();
@@ -53,7 +53,7 @@
             $("#cart-items").empty();
             for (var i = 0; i < cartItems.length; i++) {
                 var item = cartItems[i];
-                $("#cart-items").append("<li data-id='" + item.id + "' data-name='" + item.name + "' data-price='" + item.price + "' data-quantity='" + item.quantity + "'><div class='product-info'><div class='product-image'><img src='" + item.image + "' alt='" + item.name + "'></div><div><h4>" + item.name + "</h4><p class='prix'><span>Prix:</span>" + item.price + " DT</p><input type='number' min='1' value='" + item.quantity + "' class='quantity-input'> <button class='remove'>Remove</button></div></div></li>");
+                $("#cart-items").append("<li data-id='" + item.id + "' data-name='" + item.name + "' data-price='" + item.price + "' data-quantity='" + item.quantity + "'><div class='product-info'><div class='product-image'><img src='" + item.image + "' alt='" + item.name + "'></div><div><h4>" + item.name + "</h4><p class='prix'><span>Prix:</span>" + item.price + " DT</p><input type='number' min='1' value='" + item.quantity + "' class='quantity-input'> <button class='remove'> <i class='fa-solid fa-trash'></i></button></div></div></li>");
             }
         }
 
