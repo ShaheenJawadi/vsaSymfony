@@ -1,6 +1,6 @@
 {% extends 'home/merch/index.html.twig' %}
 {% import 'home/components/merch/productGrid.html.twig' as productGrid %}
- 
+
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -14,41 +14,30 @@
 	<div class="filter_page merch">
 
 
-		<div class="filter_header" style="background-image: url({{ asset('images/merch/header.png')}})">
-			 
-		</div>
+		<div class="filter_header" style="background-image: url({{ asset('images/merch/header.png')}})"></div>
 
 		<div class="content">
 			<div class="container">
 				<div class="row">
 
 					<div class="col-md-12" style="padding-left: 0;">
-					 
 
 
 						<div class="container-fluid">
 							<div class="row">
 
 
-								{# {% for cours in data %} #}
-								 
-										{{ productGrid.displayProduct("prod") }}
-										{{ productGrid.displayProduct("prod") }}
+								{% for prod in products %}
 
-										{{ productGrid.displayProduct("prod") }}
-										{{ productGrid.displayProduct("prod") }}
-										{{ productGrid.displayProduct("prod") }}
+									{{ productGrid.displayProduct(prod) }}
+ 
 
-
-								 
-
-
-							{# 	{% endfor %} #}
+								{% endfor %}
 							</div>
 
 						</div>
 
-					 
+
 					</div>
 
 				</div>
@@ -63,8 +52,5 @@
 
 {% block scripts %}
 	{{ parent() }}
-	<script>
-
- 
-	</script>
+	<script></script>
 {% endblock %}

@@ -4,19 +4,19 @@
 	<div class="col-md-3">
 
 		<div class="single_cours_grid product">
-			<a href="{{ path('home_merch_page_index', {'id': 1}) }}" class="img_holder">
-				<img src="{{ asset('images/logo_circle.png') }}" alt="">
+			<a href="{{ path('home_merch_page_index', {'id': product.id}) }}" class="img_holder">
+				<img src="{{ product.image }}" alt="">
 
 
 			</a>
 			<div class="infos">
-				<a href="{{ path('home_merch_page_index', {'id': 1}) }}">
-					<span class="cours_title">title</span>
+				<a href="{{ path('home_merch_page_index', {'id': product.id}) }}">
+					<span class="cours_title">{{ product.title }}</span>
 				</a>
 
-				<div class="bottom_part product"   data-id="1" data-name="Product 1" data-price="10" data-image="https://m.media-amazon.com/images/I/61AGnL93aML._AC_UF894,1000_QL80_.jpg">
+				<div class="bottom_part product"   data-id="{{product.id}}" data-name="{{product.title}}" data-price="{{ product.prix }}" data-image="{{ product.image }}">
 					<div class="prix">
-						15Dt
+						{{ product.prix }}DT
 					</div>
 					<div>
 						<button class="btn_main add-to-cart">
