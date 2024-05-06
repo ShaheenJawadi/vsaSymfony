@@ -65,25 +65,6 @@
 	{{ parent() }}
 	<script>
 
-		function changeDisplay(value) {
-var urlParams = new URLSearchParams(window.location.search);
-urlParams.set('display_mode', value);
-window.location.search = urlParams.toString();
-}
-
-function search(value) {
-var urlParams = new URLSearchParams(window.location.search);
-urlParams.set('search', value);
-window.location.search = urlParams.toString();
-}
-
-$(document).ready(function () {
-$('.form-select').change(function () {
-var limit = $(this).val();
-var urlParams = new URLSearchParams(window.location.search);
-urlParams.set('limit', limit);
-window.location.search = urlParams.toString();
-});
-});
+ 
 	</script>
 {% endblock %}

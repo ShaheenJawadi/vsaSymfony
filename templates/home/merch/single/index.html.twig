@@ -1,0 +1,64 @@
+{% extends 'home/homeLayout.html.twig' %}
+{% import 'home/components/merch/productGrid.html.twig' as productGrid %}
+
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/filter_page.css') }}?v={{ random() }}">
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div class=" singleProduct">
+
+
+		<div class="content">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-6" style="padding-left: 0;">
+
+
+						<div class="product_img">
+
+							<img src="{{ asset('images/logo_circle.png') }}" alt="">
+						</div>
+					</div>
+					<div class="col-md-6" style="padding-left: 0;">
+
+						<div class="product_infos">
+							<div class="title">
+								qmlsdkqmlsdkmlsq
+							</div>
+							<div class="p_a">
+								<div class="prix">
+									15DT
+								</div>
+								<div>
+									<button class="btn_main">
+										<i class="fa-solid fa-cart-plus"></i>
+										<span>Ajouter au panier</span>
+									</button>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block scripts %}
+	{{ parent() }}
+	<script></script>
+{% endblock %}
