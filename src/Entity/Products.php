@@ -47,7 +47,24 @@ class Products
     
 
 
-   
+    
+    #[ORM\OneToMany(targetEntity:CartItems::class, mappedBy:"productId")]
+    private Collection $cartItems;
+
+
+
+
+    public function __construct() {
+        $this->cartItems = new ArrayCollection();
+ 
+
+    }
+
+    public function getCartItems(): Collection
+    {
+        return $this->cartItems;
+    }
+
  
 
 
