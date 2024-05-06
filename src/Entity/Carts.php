@@ -41,6 +41,22 @@ class Carts
     private ?string $etat = null;
    
  
+    #[ORM\OneToMany(targetEntity:CartItems::class, mappedBy:"cartId")]
+    private Collection $cartItems;
+
+
+
+
+    public function __construct() {
+        $this->cartItems = new ArrayCollection();
+ 
+
+    }
+
+    public function getCartItems(): Collection
+    {
+        return $this->cartItems;
+    }
 
 
 
