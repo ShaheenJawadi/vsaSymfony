@@ -11,7 +11,7 @@ use phpDocumentor\Reflection\Types\Integer;
 #[ORM\Entity]
 
 //#[ORM\Entity(repositoryClass: DonorsRepository::class)]
-#[ORM\Table(name: "callaction", indexes: [
+#[ORM\Table(name: "donors", indexes: [
     new ORM\Index(name: "userId", columns: ["userId"]),
 ])]
 class Donors
