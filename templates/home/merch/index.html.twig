@@ -1,6 +1,6 @@
 {% extends 'home/homeLayout.html.twig' %}
 {% import 'home/components/merch/productGrid.html.twig' as productGrid %}
- 
+
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -10,29 +10,36 @@
 
 {% block body %}
 
-{% block merchBody %}
- 
-{% endblock %}
-<div class="btn btn-primary open_cart_btn" data-bs-toggle="offcanvas" href="#cartDrawer" role="button" >
- <i class="fa-solid fa-cart-shopping"></i>
-</div>
-<div class="offcanvas offcanvas-end" tabindex="-1" id="cartDrawer"  >
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title"  >Mon panier</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <ul id="cart-items"></ul>
-    
-  </div>
-</div>
+	{% block merchBody %}{% endblock %}
+	<div class="btn btn-primary open_cart_btn" data-bs-toggle="offcanvas" href="#cartDrawer" role="button">
+		<i class="fa-solid fa-cart-shopping"></i>
+	</div>
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="cartDrawer">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title">Mon panier</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body drawerBody">
+			<div class="top_section">
+				<div class="total" > 
+						<span id="total-price">0.00</span>
+					 
+				</div>
+        <div>
+        <button class="btn_main" >
+        Checkout
+        </button>
+        </div>
+
+			</div>
+			<ul id="cart-items"></ul>
+
+		</div>
+	</div>
 {% endblock %}
 
 
 {% block scripts %}
 	{{ parent() }}
-	<script>
-
- 
-	</script>
+	<script></script>
 {% endblock %}
