@@ -116,6 +116,12 @@
         });
 
 
+
+        $("#openCallAction").on('click', function() {
+
+            alert('qsdsq')
+        })
+
     })
 
 

@@ -119,9 +119,9 @@
 
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#">
+									<div class="nav-link" data-bs-toggle="offcanvas" href="#callToActionDrawer" id="openCallAction"  role="button">
 										<Button class="btn_main">Faire un don</Button>
-									</a>
+									</div>
 
 								</li>
 							</ul>
@@ -196,6 +196,8 @@
 						</div>
 					</div>
 				</footer>
+
+				{% include 'home/components/callToAction/drawer.html.twig' %}
 
 				{% include 'home/auth/popup/index.html.twig' %}
 				{% include 'home/components/global_popup.html.twig' %}
