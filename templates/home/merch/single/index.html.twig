@@ -24,22 +24,22 @@
 
 						<div class="product_img">
 
-							<img src="{{ asset('images/logo_circle.png') }}" alt="">
+							<img src="{{ product.image }}" alt="">
 						</div>
 					</div>
 					<div class="col-md-6" style="padding-left: 0;">
 
 						<div class="product_infos">
 							<div class="title">
-								qmlsdkqmlsdkmlsq
+								 {{ product.title }}
 							</div>
 
                             <div class="description" >
-                            lqsjkdlksqdklsq kld jklsd
+                           {{ product.description }}
                             </div>
-							<div class="p_a product"   data-id="1" data-name="Product 1" data-price="10" data-image="https://m.media-amazon.com/images/I/61AGnL93aML._AC_UF894,1000_QL80_.jpg">
+							<div class="p_a product"   data-id="{{product.id}}" data-name="{{product.title}}" data-price="{{ product.prix }}" data-image="{{ product.image }}">
 								<div class="prix">
-									15DT
+									{{ product.prix }} DT
 								</div>
 								<div>
 									<button class="btn_main add-to-cart">
