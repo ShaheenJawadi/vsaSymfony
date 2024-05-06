@@ -14,7 +14,7 @@ use phpDocumentor\Reflection\Types\Integer;
 #[ORM\Table(name: "carts", indexes: [
     new ORM\Index(name: "userId", columns: ["userId"]),
 ])]
-class Donors
+class Carts
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
