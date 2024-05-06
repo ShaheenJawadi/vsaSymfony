@@ -9,8 +9,18 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Service\UserSessionManager;
+
 class GoogleController extends AbstractController
 {
+
+    private $user_session;
+
+    public function __construct(UserSessionManager $user_session)
+    {
+
+        $this->user_session = $user_session;
+    }
     /**
      * Link to this controller to start the "connect" process
      *
@@ -37,23 +47,26 @@ class GoogleController extends AbstractController
      */
     public function connectCheckAction(Request $request, ClientRegistry $clientRegistry)
     {
-    // Use getUser() instead of !$this->getUser() to check if the user is authenticated
-    if ($this->getUser()) {
-        $roles = $this->getUser()->getRoles();
-
-        // Check the roles and redirect accordingly
-        if (in_array('ROLE_ADMIN', $roles)) {
-            return $this->redirectToRoute('base_admin');
-        } else
-           { return $this->redirectToRoute('home_forum_index');
         
+        // Use getUser() instead of !$this->getUser() to check if the user is authenticated
+        if ($this->getUser()) {
+            $roles = $this->getUser()->getRoles();
+            $this->user_session->setCurrentUser($this->getUser());
+            var_dump($this->getUser());
+
+            // Check the roles and redirect accordingly
+            if (in_array('ROLE_ADMIN', $roles)) {
+                return $this->redirectToRoute('base_admin');
+            } else {
+                return $this->redirectToRoute('home_forum_index');
+            }
+            
+
+            // Default redirect if none of the roles match
+            return $this->redirectToRoute('login_app');
         }
 
-        // Default redirect if none of the roles match
-        return $this->redirectToRoute('login_app');
-    }
-
-    // Handle the case where getUser() returns null or false
-    return new JsonResponse(array('status' => false, 'message' => 'User not found'));
+        // Handle the case where getUser() returns null or false
+        return new JsonResponse(array('status' => false, 'message' => 'User not found'));
     }
 }

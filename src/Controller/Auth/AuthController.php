@@ -100,13 +100,13 @@ class AuthController extends AbstractController
 
         $formData = $request->request->all();
         // Validate the reCAPTCHA response
-    $recaptchaResponse = $formData['g-recaptcha-response'];
-    $recaptcha = new \ReCaptcha\ReCaptcha('6LdvDcspAAAAAJHEwXnr7S1CaKuMcJUh4EUrZylj');
-    $resp = $recaptcha->verify($recaptchaResponse, $request->getClientIp());
+        $recaptchaResponse = $formData['g-recaptcha-response'];
+        $recaptcha = new \ReCaptcha\ReCaptcha('6LdvDcspAAAAAJHEwXnr7S1CaKuMcJUh4EUrZylj');
+        $resp = $recaptcha->verify($recaptchaResponse, $request->getClientIp());
 
-    if (!$resp->isSuccess()) {
-        return new Response('Invalid reCAPTCHA response');
-    }
+        if (!$resp->isSuccess()) {
+            return new Response('Invalid reCAPTCHA response');
+        }
 
         $userEntity = new User();
         $userEntity->setNom($formData["nom"]);
@@ -114,14 +114,14 @@ class AuthController extends AbstractController
 
         $userEntity->setUsername($formData["username"]);
         $userEntity->setEmail($formData["email"]);
-
+        $hashedPassword = password_hash($formData["password"], PASSWORD_DEFAULT);
         if ($formData["repreta_password"] == $formData["password"]) {
-            $userEntity->setPassword($formData["password"]);
+            $userEntity->setPassword($hashedPassword);
         } else {
             return new Response("Passwords don't match");
         }
 
-    
+
         $errors = $validator->validate($userEntity);
 
         if (count($errors) > 0) {
@@ -133,9 +133,9 @@ class AuthController extends AbstractController
         $entityManager = $managerRegistry->getManager();
         $entityManager->persist($userEntity);
         $entityManager->flush();
-         // Send a verification email
-   
-        return $this->redirectToRoute('home_forum_index');
+        // Send a verification email
+
+        return $this->redirectToRoute('home_index');
     }
 
 
@@ -164,19 +164,17 @@ class AuthController extends AbstractController
     {
 
         $formData = $request->request->all();
-         // Validate the reCAPTCHA response
-  
+        // Validate the reCAPTCHA response
+
 
         $username = $formData["username"];
         $pws = $formData["password"];
+        $hashedPassword = password_hash($pws, PASSWORD_DEFAULT);
 
 
         $usr = $userRepository->findOneBy(['username' => $username]);
-        if ($usr && $usr->getPassword() == $pws) {
-            // Get the Recaptcha response from the request
-            $recaptchaResponse = $request->request->get('g-recaptcha-response');
 
-            // Validate the Recaptcha response
+        if ($usr && password_verify($pws, $usr->getPassword())) {
 
 
             $this->user_session->setCurrentUser($usr);

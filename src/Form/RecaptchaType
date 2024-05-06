@@ -1,0 +1,18 @@
+<?php
+
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type; // Assuming this is the correct namespace // Assuming this is the correct namespace
+
+class RecaptchaType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('captcha', Recaptcha3Type::class, [
+            'constraints' => new Recaptcha3(),
+            'action_name' => 'homepage',
+            'locale' => 'de',
+        ]);
+    }
+}

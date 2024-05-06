@@ -1,26 +1,10 @@
-<div class="auth_holder">
-
-    <div class="auth_title">Réinitialiser le mot de passe</div>
-
-
+<form method="POST" action="https://127.0.0.1:8000/password-reset-request">
     <div class="input_holder">
-
-
         <div class="input-group flex-nowrap">
-            <span class="input-group-text">
-				<i class="fa-solid fa-at"></i>
-			</span>
-            <input type="email" class="form-control" placeholder="Email">
+            <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+            <input type="email" id="email" class="form-control" name="email" placeholder="Email" required>
         </div>
-
-
     </div>
-
-
-    <button class="btn_main">Réinitialiser</button>
-
-
-    <div class="ind" id="openLoginPopup">Retour à la page de connexion!</div>
-
-
-</div>
+    <button type="submit" class="btn_main">Réinitialiser</button>
+</form>
+<div class="ind" id="openLoginPopup">Retour à la page de connexion!</div>
