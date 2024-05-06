@@ -5,7 +5,7 @@
 
 		<a class="single_cours_grid list_view" href="{{ path('home_cours_page_index', {'slug': cours.slug}) }}">
 			<div class="img_holder">
-				<img src="{{ cours.image }}" alt="">
+				<img {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', { src: asset('images/lazy/img.jpg') } ) }}  src="{{ cours.image }}" alt="">
 				<div class="add_cours_btn">
 
 					<i class="fa-solid fa-book"></i>
