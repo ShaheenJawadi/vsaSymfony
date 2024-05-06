@@ -2,3 +2,10 @@ display_index:
   path: /
   controller: App\Controller\Donation\DonationController::index
  
+
+process_payment:
+  path: /payment
+  controller: App\Controller\Donation\DonationController::processPayment
+ 
+
+ 
