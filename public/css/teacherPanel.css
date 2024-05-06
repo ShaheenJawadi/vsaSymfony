@@ -256,3 +256,9 @@
     background: var(--fx-primary-color);
     flex: 1;
 }
+.btn_upload_hz::file-selector-button{
+    display: none;
+}
+input.btn_upload_hz{
+    width:177px;
+}
