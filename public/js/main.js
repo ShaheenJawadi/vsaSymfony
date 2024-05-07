@@ -245,6 +245,38 @@
 
     });
 
+    $(document).on('submit', "[ajaxFormQuiz]", function(e) {
+
+        e.preventDefault();
+        var $this = $(this).parent();
+        $('.form-control').removeClass('error');
+
+        $.ajax({
+            method: "POST",
+            url: $(this).prop('action'),
+            data: new FormData(this),
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                alert('success');
+            },
+            error: function(request) {
+                var response = JSON.parse(request.responseText);
+    
+                if (response.errors) {
+                    alert('Validation Failed: \n' + response.errors.join('\n'));
+                }else{
+                    alert('error')
+                }
+            }
+
+        });
+
+
+
+    });
 
     $(document).on('mouseover', '.header .nav-item.dropdown .single_item', function() {
 
