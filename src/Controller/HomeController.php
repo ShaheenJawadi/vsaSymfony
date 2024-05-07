@@ -27,4 +27,10 @@ class HomeController extends AbstractController
             'current_user'=>$user 
         ]);
     }
+
+    public function detection( ): Response
+    { 
+
+        return $this->render('home/main/detection.html.twig');
+    }
 }
