@@ -32,13 +32,39 @@
             updateTotalPrice();
         });
 
-        $(".remove").click(function() {
+
+        $("#checkout").click(function() {});
+
+
+
+
+
+
+
+
+        $.get('/auth/load/popup/login', function(response) {
+            $('#authModel .modal-content').html(response);
+        });
+        /* *********************General popup****** */
+
+        $("[openGeneralPopup]").on("click", function() {
+
+            $.get($(this).data('link'), function(response) {
+                $('#generalModel  .modal-content .general').html(response);
+                $('#generalModel').modal('show');
+            });
+        });
+
+        /* *********************End General popup****** */
+
+        $(document).on('click', '#cart-items .remove', function() {
+
             $(this).closest("li").remove();
             saveCartItems();
             updateTotalPrice();
         });
 
-        $(".quantity-input").change(function() {
+        $(document).on('click', '#cart-items .quantity-input', function() {
             var newQuantity = parseInt($(this).val());
             if (newQuantity < 1) {
                 $(this).val(1);
@@ -49,8 +75,6 @@
             saveCartItems();
             updateTotalPrice();
         });
-
-        $("#checkout").click(function() {});
 
         function displayCartItems() {
             $("#cart-items").empty();
@@ -85,27 +109,6 @@
             });
             $("#total-price").text(totalPrice.toFixed(3));
         }
-
-
-
-
-
-
-
-        $.get('/auth/load/popup/login', function(response) {
-            $('#authModel .modal-content').html(response);
-        });
-        /* *********************General popup****** */
-
-        $("[openGeneralPopup]").on("click", function() {
-
-            $.get($(this).data('link'), function(response) {
-                $('#generalModel  .modal-content .general').html(response);
-                $('#generalModel').modal('show');
-            });
-        });
-
-        /* *********************End General popup****** */
 
 
 
