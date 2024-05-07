@@ -19,7 +19,7 @@
 
 
 				<div>
-					
+					{% if  getCurrentUser() is not   null %}
 					<form action="{{ path('home_donation_process_payment') }}" class="donate_section payment_form" method="POST">
                     <div>
 						<input type="number" value="100"  name="amount" class="amount" placeholder="Entrez le montant (en Dinar Tunisien)">
@@ -29,7 +29,7 @@
 
 					</div>
 						<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_51PDTM5KrxqiMaBJzmXVBtffZMu8IHjNl13zsplNR0TX4ZtX4prUqHywUAXw37lQd3dEbDtvl6U5a2oQ3pl5S1wvs00JUCKIVUW" data-amount="" data-name="VSA" data-description="Widget" data-image="{{ asset('images/logo_circle.png') }}" data-locale="auto" data-currency="tnd"></script>
-					</form>
+					</form>{% endif %}
 				</div>
 
 			</div>
