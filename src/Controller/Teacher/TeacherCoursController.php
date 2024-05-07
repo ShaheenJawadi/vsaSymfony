@@ -65,13 +65,12 @@ class TeacherCoursController extends AbstractController
         $tempFilePath = $file->getRealPath();
  
         $uploadResult = $imageUploader->upload($tempFilePath);
-
-/* 
-        dd($uploadResult); */
+ 
         $formData = $request->request->all();
 
 
         $updateCoursId = $request->request->get('coursId');
+        $formData['image'] = $uploadResult;
 
 
         $coursEntity = $this->collectCoursData($formData);
@@ -137,8 +136,10 @@ class TeacherCoursController extends AbstractController
 
         $ressourceEntity->setCoursid($coursEntity);
         $entityManager->persist($ressourceEntity);
-        foreach ($lessonsEntityList as $lessonItem) {
+        foreach ($lessonsEntityList as $key=> $lessonItem) {
             $lessonItem->setCoursid($coursEntity);
+            $lessonItem->setClassement($key+1);
+
             $entityManager->persist($lessonItem);
         }
         $entityManager->flush();
