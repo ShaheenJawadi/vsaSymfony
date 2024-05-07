@@ -31,7 +31,7 @@ class TeacherQuizController extends AbstractController
     private $managerRegistry;
 
     private $userSession;
-    public function __construct(UserSessionManager $userSession, ManagerRegistry $managerRegistry) // Injection de dépendance du service EmailService
+    public function __construct(UserSessionManager $userSession, ManagerRegistry $managerRegistry) 
     {
         $this->userSession = $userSession;
         $this->managerRegistry = $managerRegistry;
@@ -41,8 +41,6 @@ class TeacherQuizController extends AbstractController
 
     public function index(QuizRepository $quizRepository, UserRepository $userRepository): Response
     {
-        //$user = $userRepository->find(3); //TODO FIXME: userid=18
-
         $user=$this->userSession->getCurrentUser();      
           if (!$user) {
             throw $this->createNotFoundException('No user found');
@@ -152,7 +150,7 @@ class TeacherQuizController extends AbstractController
             throw $this->createNotFoundException('No user found');
         }
         $userId = $userrr->getId(); 
-        $user = $this->managerRegistry->getRepository(User::class)->find($userId);//TODO FIXME:
+        $user = $this->managerRegistry->getRepository(User::class)->find($userId);
 
         $cour = $this->managerRegistry->getRepository(Cours::class)->find($formData['coursId']);
         $quizEntity = new Quiz();
@@ -192,7 +190,7 @@ class TeacherQuizController extends AbstractController
     }
     
   
-    public function update(Request $request, ValidatorInterface $validator, $id): Response
+    public function update(Request $request, ValidatorInterface $validator, $id, UploadImg $imageUploader): Response
 {
     $formData = $request->request->all();
 
@@ -225,6 +223,13 @@ class TeacherQuizController extends AbstractController
 
         if (!$questionEntity) {
             continue; 
+        }
+
+        $questionImages = $request->files->get('question_image', []); 
+
+        if (isset($questionImages[$questionData]) && $questionImages[$questionData] instanceof UploadedFile) {
+            $uploadedImagePath = $imageUploader->upload($questionImages[$questionData]->getRealPath());
+            $questionEntity->setImage($uploadedImagePath);
         }
 
         $questionEntity->setQuestion($questionData['question']);
