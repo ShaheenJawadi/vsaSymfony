@@ -5,7 +5,6 @@ namespace App\Controller\Quiz;
 use App\Entity\Notes;
 use App\Entity\Quiz;
 use App\Entity\User;
-use App\Repository\CoursRepository;
 use App\Repository\NotesRepository;
 use App\Repository\QuizRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,44 +21,38 @@ class QuizController extends AbstractController
 {
     private $managerRegistry;
     private $userSession;
-    private $c;
-
-
-    public function __construct(UserSessionManager $userSession, ManagerRegistry $managerRegistry) 
+    public function __construct(UserSessionManager $userSession, ManagerRegistry $managerRegistry) // Injection de dépendance du service EmailService
     {
         $this->userSession = $userSession;
         $this->managerRegistry = $managerRegistry;
-        $this->c=0;
     }
 
-    public function index(Request $request, QuizRepository $quizRepository, UserRepository $userRepository,CoursRepository $coursRep): Response
+    public function index(Request $request, QuizRepository $quizRepository, UserRepository $userRepository): Response
     {
+        //$user = $userRepository->find(3); // TODO FIXME: userid
+        //$this->userSession->clearSession();
         $user=$this->userSession->getCurrentUser();       
          if (!$user) {
             throw $this->createNotFoundException('No user found');
         }
+        //redirect to hompage
 
         $userId = $user->getId();
-        $this->c = $request->getSession()->get('c_value', 0);
-
-     $coursId=$this->c;  
-    
+        $coursId=27;   // TODO FIXME: coursid
         $questionIndex = $request->attributes->get('questionIndex'); 
         if ($questionIndex === null) {
             $questionIndex = 0;
         } else {
             $questionIndex = (int) $questionIndex; 
         } 
-    $quiz = $quizRepository->findQuizByCoursId($coursId,$userId);
-    $questionDetails = $this->fetchQuestionDetails($quizRepository,$coursId, $questionIndex,$userId);
+    $quiz = $this->getQuizByCoursId($coursId, $quizRepository,$userId);
+    $questionDetails = $this->fetchQuestionDetails($quizRepository, $coursId, $questionIndex,$userId);
 
     return $this->render('home/quiz/index.html.twig', [
         'controller_name' => 'QuizController',
         'questionDetails' => $questionDetails,
         'quizz' => $quiz,
-        'coursId'=>$coursId,
-        'userId'=>$userId
-        
+        'userId' => $userId
     ]);
 
 }
@@ -71,11 +64,12 @@ public function pdf($quizId, PdfService $pdf, QuizRepository $quizRepository, No
     }
 
     $user=$this->userSession->getCurrentUser();       
-         if (!$user) {
-            throw $this->createNotFoundException('No user found');
-        }
+    if (!$user) {
+       throw $this->createNotFoundException('No user found');
+   }
+   //redirect to hompage
 
-        $userId = $user->getId();
+   $userId = $user->getId();
     $note = $notesRepository->findOneBy(['quizid' => $quiz, 'userid' => $userId]);
 
     $html = $this->renderView('home/quiz/pdf.html.twig', [
@@ -97,7 +91,7 @@ public function pdf($quizId, PdfService $pdf, QuizRepository $quizRepository, No
 
     private function fetchQuestionDetails(QuizRepository $quizRepository, int $coursId, int $questionIndex,int $userId)
     {
-        $quizzes = $quizRepository->findQuizByCoursId($coursId,$userId);
+        $quizzes = $this->getQuizByCoursId($coursId, $quizRepository,$userId);
 
         if (empty($quizzes)) {
             return null;
@@ -121,15 +115,15 @@ public function pdf($quizId, PdfService $pdf, QuizRepository $quizRepository, No
             'totalQuestions' => count($questions),
         ];
     }
-    public function test(Request $request, int $id){
-        $this->c =$id;
-        $request->getSession()->set('c_value', $this->c);
-        return $this->redirectToRoute('home_quizz_index');
+
+    private function getQuizByCoursId(int $coursId, QuizRepository $quizRepository, int $userId)
+    {
+        
+        return $quizRepository->findQuizByCoursId($coursId,$userId);
     }
 
     public function note(Request $request, $quizId): Response
     {
-        
         $session = $request->getSession();
         $score = $session->get('quizScore', 'Not available');
     
