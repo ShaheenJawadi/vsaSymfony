@@ -38,37 +38,36 @@
             <div class="single_data ">Quiz ✅</div>
 
             <!-- ❌ -->
-            <div class="single_data ">Views:
+     {#        <div class="single_data ">Views:
                 <strong>{{ cours.views }}</strong>
-            </div>
+            </div> #}
 
             <div class="rating ">
-                <div class="list_stars ">
-                    <div class="star ">
-                        <i class="fa-solid fa-star "></i>
-                    </div>
-                    <div class="star ">
-                        <i class="fa-solid fa-star "></i>
-                    </div>
-                    <div class="star ">
-                        <i class="fa-solid fa-star "></i>
-                    </div>
-                    <div class="star ">
-                        <i class="fa-solid fa-star "></i>
-                    </div>
-                    <div class="star ">
-                        <i class="fa-regular fa-star "></i>
-                    </div>
+             	<div class="list_stars">
+						{% for i in 1..5 %}
+							{% if cours.getAverageRating() is not null and i <= cours.getAverageRating() %}
+								<div class="star">
+									<i class="fa-solid fa-star"></i>
+								</div>
+							{% else %}
+								<div class="star">
+									<i class="fa-regular fa-star"></i>
+								</div>
+							{% endif %}
+						{% endfor %}
 
-
-                </div>
-                <small>(2)</small>
+					</div>
+					<small>({{cours.getAverageRating()}})</small>
             </div>
 
 
             <div class="separator "></div>
             <div class="bottom_part ">
-                {{cours.lessons|length}} Lessons / 10 Heurs / {{ cours.niveauid.niveau }}
+                	{{cours.lessons|length}}
+					Lessons /{{cours.getLessonsDuration()}}
+					Heures /
+					{{ cours.niveauid.niveau }}
+
 
             </div>
             <div class="separator "></div>
@@ -101,7 +100,7 @@
 
                     </div>
                 </div>
-                <div class="count ">25</div>
+                <div class="count ">0</div>
 
             </div>
 
