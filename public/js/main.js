@@ -88,6 +88,10 @@
 
 
 
+
+
+
+
         $.get('/auth/load/popup/login', function(response) {
             $('#authModel .modal-content').html(response);
         });
@@ -247,5 +251,14 @@
 
         $(this).find('.subcategories').removeClass('show');
     });
+
+
+    $(document).on('change', '.amount', function() {
+        var amountInTND = parseFloat($(this).val());
+        var amountInCents = amountInTND * 100;
+        $(this).closest('form').find('[data-amount]').attr('data-amount', amountInCents);
+    });
+
+
 
 })(jQuery);
