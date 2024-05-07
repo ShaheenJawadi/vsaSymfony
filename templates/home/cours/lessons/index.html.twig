@@ -36,7 +36,7 @@
 							<a   
 							 {% if nextLesson =="quiz" %}
 
-							 href="{{ path('home_quizz_test', {'id': singleCours.id}) }}"
+							 href="{{ path('home_quizz_index') }}"
 								{% else %}
 								href="{{ path('home_cours_lessons_index', {'slug': singleCours.slug , lesson:nextLesson}) }}"
 							{% endif %} >
