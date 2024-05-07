@@ -670,3 +670,9 @@ form-control.error {
     color: #333;
     font-size: 18px;
 }
+
+.actions_list .single_action .donate_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

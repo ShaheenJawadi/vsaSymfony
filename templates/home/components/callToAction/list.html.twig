@@ -1,36 +1,38 @@
 <div class="actions_list">
 
-   <h1>Donate</h1>
-    <form action="{{ path('home_donation_process_payment') }}" method="POST">
-        <script
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_51PDTM5KrxqiMaBJzmXVBtffZMu8IHjNl13zsplNR0TX4ZtX4prUqHywUAXw37lQd3dEbDtvl6U5a2oQ3pl5S1wvs00JUCKIVUW"
-            data-amount="1000"
-            data-name="Demo Site"
-            data-description="Widget"
-            data-image="/128x128.png"
-            data-locale="auto"
-            data-currency="usd">
-        </script>
-    </form>
 
 	<div class="action_item">
 
-{% for action in actions_list %}
-    
+		{% for action in actions_list %}
 
-		<div class="single_action">
-			<div class="content">
-				{{action.content}}
-			</div>
 
-			<div class="donationProgress" data-total="{{action.target}}" data-progress="{{action.given}}">
-				<div class="progress" style="width: 0%;">
-					<div class="percent">0%</div>
+			<div class="single_action">
+				<div class="content">
+					{{action.content}}
 				</div>
-			</div>
 
-		</div>
-    {% endfor %}
+				<div class="donationProgress" data-total="{{action.target}}" data-progress="{{action.given}}">
+					<div class="progress" style="width: 0%;">
+						<div class="percent">0%</div>
+					</div>
+				</div>
+
+
+				<div>
+					
+					<form action="{{ path('home_donation_process_payment') }}" class="donate_section payment_form" method="POST">
+                    <div>
+						<input type="number" value="100"  name="amount" class="amount" placeholder="Entrez le montant (en Dinar Tunisien)">
+						<input type="hidden" value="{{action.id}}" name="action_id">
+
+
+
+					</div>
+						<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_51PDTM5KrxqiMaBJzmXVBtffZMu8IHjNl13zsplNR0TX4ZtX4prUqHywUAXw37lQd3dEbDtvl6U5a2oQ3pl5S1wvs00JUCKIVUW" data-amount="" data-name="VSA" data-description="Widget" data-image="{{ asset('images/logo_circle.png') }}" data-locale="auto" data-currency="tnd"></script>
+					</form>
+				</div>
+
+			</div>
+		{% endfor %}
 	</div>
 </div>
