@@ -676,3 +676,30 @@ form-control.error {
     align-items: center;
     justify-content: center;
 }
+
+.detection .videoContainer {
+    margin: auto;
+    width: 640px;
+    text-align: center;
+    position: relative;
+    height: 600px;
+}
+
+.detection #videoElement,
+#canvas {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 9;
+    width: 640px;
+    height: 480px;
+}
+
+.detection .labelContainer {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--fx-primary-color);
+}
