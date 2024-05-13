@@ -13,8 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Repository\QuizRepository;
 use App\Repository\UserRepository;
+use App\Service\UploadImg;
+use App\Service\UserSessionManager;
 use Doctrine\Persistence\ManagerRegistry;
+use SebastianBergmann\Environment\Console;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -26,22 +30,22 @@ class TeacherQuizController extends AbstractController
 
     private $managerRegistry;
 
-    public function __construct(ManagerRegistry $managerRegistry)
+    private $userSession;
+    public function __construct(UserSessionManager $userSession, ManagerRegistry $managerRegistry) 
     {
+        $this->userSession = $userSession;
         $this->managerRegistry = $managerRegistry;
     }
+   
 
 
     public function index(QuizRepository $quizRepository, UserRepository $userRepository): Response
     {
-        $quizId = 28;  //TODO FIXME: quizid
-        $user = $userRepository->find(3); //TODO FIXME: userid=18
-        if (!$user) {
+        $user=$this->userSession->getCurrentUser();      
+          if (!$user) {
             throw $this->createNotFoundException('No user found');
         }
-        $userId = $user->getId();
-        $quiz = $quizRepository->find($quizId);
-        
+        $userId = $user->getId();        
         $quiz_all = $quizRepository->findby(['userid'=>$userId]);
 
         
@@ -49,7 +53,6 @@ class TeacherQuizController extends AbstractController
         
         return $this->render('teacher/quiz/index.html.twig', [
             'controller_name' => 'TeacherController',
-            'quiz' => $quiz,
             'quizzes' => $quiz_all,
         ]);
     }
@@ -106,7 +109,7 @@ class TeacherQuizController extends AbstractController
     }
 
     
-    public function create(Request $request, ValidatorInterface $validator): Response
+    public function create(Request $request, ValidatorInterface $validator, UploadImg $imageUploader): Response
     {
         $formData = $request->request->all();
     
@@ -125,6 +128,7 @@ class TeacherQuizController extends AbstractController
         }
     
         $questions = (array) $request->request->get('question', []);
+
         if (empty($questions)) {
             return $this->json(['success' => false,'message' => 'Validation failed', 'errors' => ['Il faut ajouter au moins une question']], Response::HTTP_BAD_REQUEST);
         }
@@ -141,7 +145,13 @@ class TeacherQuizController extends AbstractController
             
         }
     
-        $user = $this->managerRegistry->getRepository(User::class)->find(3);// TODO FIXME:
+        $userrr=$this->userSession->getCurrentUser();
+        if (!$userrr) {
+            throw $this->createNotFoundException('No user found');
+        }
+        $userId = $userrr->getId(); 
+        $user = $this->managerRegistry->getRepository(User::class)->find($userId);
+
         $cour = $this->managerRegistry->getRepository(Cours::class)->find($formData['coursId']);
         $quizEntity = new Quiz();
         $quizEntity->setNom($formData['nom']);
@@ -151,14 +161,18 @@ class TeacherQuizController extends AbstractController
     
         $entityManager = $this->managerRegistry->getManager();
         $entityManager->persist($quizEntity);
-    
+        $questionImages = $request->files->get('question_image', []); 
         foreach ($questions as $key => $value) {
             
             $questionEntity = new QuestionS();
             $questionEntity->setQuestion($value);
             $questionEntity->setUserid($user);
             $questionEntity->setQuizid($quizEntity);
-    
+
+            if (isset($questionImages[$key]) && $questionImages[$key] instanceof UploadedFile) {
+                $uploadedImagePath = $imageUploader->upload($questionImages[$key]->getRealPath());
+                $questionEntity->setImage($uploadedImagePath);
+            }
             foreach ($suggItems[$key] as $s_key => $s_value) {
                 $suggEntity = new Suggestion();
                 $suggEntity->setQuestionid($questionEntity);
@@ -176,7 +190,7 @@ class TeacherQuizController extends AbstractController
     }
     
   
-    public function update(Request $request, ValidatorInterface $validator, $id): Response
+    public function update(Request $request, ValidatorInterface $validator, $id, UploadImg $imageUploader): Response
 {
     $formData = $request->request->all();
 
@@ -209,6 +223,13 @@ class TeacherQuizController extends AbstractController
 
         if (!$questionEntity) {
             continue; 
+        }
+
+        $questionImages = $request->files->get('question_image', []); 
+
+        if (isset($questionImages[$questionData]) && $questionImages[$questionData] instanceof UploadedFile) {
+            $uploadedImagePath = $imageUploader->upload($questionImages[$questionData]->getRealPath());
+            $questionEntity->setImage($uploadedImagePath);
         }
 
         $questionEntity->setQuestion($questionData['question']);

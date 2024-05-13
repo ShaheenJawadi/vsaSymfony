@@ -1,0 +1,76 @@
+{% extends 'home/merch/index.html.twig' %}
+{% import 'home/components/merch/productGrid.html.twig' as productGrid %}
+
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/filter_page.css') }}?v={{ random() }}">
+{% endblock %}
+
+
+{% block merchBody %}
+
+
+
+	<div class=" singleProduct">
+
+
+		<div class="content">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-6" style="padding-left: 0;">
+
+
+						<div class="product_img">
+
+							<img src="{{ product.image }}" alt="">
+						</div>
+					</div>
+					<div class="col-md-6" style="padding-left: 0;">
+
+						<div class="product_infos">
+							<div class="title">
+								 {{ product.title }}
+							</div>
+
+                            <div class="description" >
+                           {{ product.description }}
+                            </div>
+							<div class="p_a product"   data-id="{{product.id}}" data-name="{{product.title}}" data-price="{{ product.prix }}" data-image="{{ product.image }}">
+								<div class="prix">
+									{{ product.prix }} DT
+								</div>
+								<div>
+									<button class="btn_main add-to-cart">
+										<i class="fa-solid fa-cart-plus"></i>
+										<span>Ajouter au panier</span>
+									</button>
+								</div>
+							</div>
+                            <div class="tags" >
+                            <span>qsdqs</span>
+                            <span>qsdqs</span>
+                            <span>qsdqs</span>
+                            <span>qsdqs</span>
+
+                            </div>
+						</div>
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block scripts %}
+	{{ parent() }}
+	<script></script>
+{% endblock %}

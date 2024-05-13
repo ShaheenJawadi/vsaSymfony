@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({
                 score: scaledScore,
                 quizId: '{{ questionDetails.quiz.id }}',
-                userId: 18 //TODO changer userID
+                userId: {{ userId }} //TODO changer userId
             })
         })
         .then(response => response.json())
