@@ -26,19 +26,18 @@ class QuizRepository extends ServiceEntityRepository
      * @param int $coursId The ID of the cours to find quizzes for
      * @return Quiz[] Returns an array of Quiz objects
      */
-    public function findQuizByCoursId(int $coursId, int $userId): array
+    public function findQuizByCoursId(int $coursId): array
     {
         return $this->createQueryBuilder('q')
             ->leftJoin('q.questions', 'questions')
             ->leftJoin('questions.suggestions', 'suggestions')
             ->addSelect('questions', 'suggestions')
             ->andWhere('q.coursid = :coursId')
-            ->andWhere('q.userid = :userId') 
             ->setParameter('coursId', $coursId)
-            ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
     }
+
 
 
     public function getQuizById(int $idQuiz): ?Quiz
