@@ -1,3 +1,7 @@
+test:
+  path: /test/{id}
+  controller: App\Controller\Quiz\QuizController::test
+
 index:
   path: /single
   controller: App\Controller\Quiz\QuizController::index
