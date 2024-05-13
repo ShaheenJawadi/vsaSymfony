@@ -312,6 +312,7 @@ footer .footer_Holder .footer_social .item:hover {
     color: #000;
     font-size: 18px;
     font-weight: 700;
+    margin-top: 8px;
 }
 
 .single_cours_grid .infos .single_data {}
@@ -417,6 +418,21 @@ footer .footer_Holder .footer_social .item:hover {
 
 
 /* *************************Single cours************************ */
+
+
+/* *****************************Merch Crid ************************** */
+
+.single_cours_grid.product .bottom_part {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.single_cours_grid.product .prix {
+    color: var(--fx-primary-color);
+    font-size: 19px;
+    font-weight: 700;
+}
 
 
 /* *************************Authentification************************ */
@@ -609,4 +625,81 @@ table.table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
 
 .form-control.error {
     border: 1px solid var(--fx-error-background);
+}
+
+form-control.error {
+    border: 1px solid var(--fx-error-background);
+}
+
+
+/* ***********Donation************ */
+
+.actions_list .single_action .donationProgress {
+    width: 300px;
+    height: 30px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.actions_list .single_action .progress {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+}
+
+.actions_list .single_action .percent {
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.actions_list .single_action {
+    padding: 5px;
+    border: 1px solid #e1ff00b0;
+    background: #dbe93f6d;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.actions_list .single_action .content {
+    padding: 5px;
+    color: #333;
+    font-size: 18px;
+}
+
+.actions_list .single_action .donate_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detection .videoContainer {
+    margin: auto;
+    width: 640px;
+    text-align: center;
+    position: relative;
+    height: 600px;
+}
+
+.detection #videoElement,
+#canvas {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 9;
+    width: 640px;
+    height: 480px;
+}
+
+.detection .labelContainer {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--fx-primary-color);
 }

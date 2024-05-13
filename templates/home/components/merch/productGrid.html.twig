@@ -1,0 +1,36 @@
+{% macro displayProduct(product) %}
+
+
+	<div class="col-md-3">
+
+		<div class="single_cours_grid product">
+			<a href="{{ path('home_merch_page_index', {'id': product.id}) }}" class="img_holder">
+				<img {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', { src: asset('images/lazy/img.jpg') } ) }} src="{{ product.image }}" alt="">
+
+
+			</a>
+			<div class="infos">
+				<a href="{{ path('home_merch_page_index', {'id': product.id}) }}">
+					<span class="cours_title">{{ product.title }}</span>
+				</a>
+
+				<div class="bottom_part product" data-id="{{product.id}}" data-name="{{product.title}}" data-price="{{ product.prix }}" data-image="{{ product.image }}">
+					<div class="prix">
+						{{ product.prix }}DT
+					</div>
+					<div>
+						<button class="btn_main add-to-cart">
+							<i class="fa-solid fa-cart-plus"></i>
+						</button>
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+	</div>
+{% endmacro %}

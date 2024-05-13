@@ -1,3 +1,7 @@
 index:
   path: /
   controller: App\Controller\HomeController::index
+
+detection:
+  path: /detection
+  controller: App\Controller\HomeController::detection
