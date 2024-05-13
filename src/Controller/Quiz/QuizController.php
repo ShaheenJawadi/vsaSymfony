@@ -38,7 +38,7 @@ class QuizController extends AbstractController
         //redirect to hompage
 
         $userId = $user->getId();
-        $coursId=27;   // TODO FIXME: coursid
+        $coursId=21;   // TODO FIXME: coursid
         $questionIndex = $request->attributes->get('questionIndex'); 
         if ($questionIndex === null) {
             $questionIndex = 0;

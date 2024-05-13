@@ -11,7 +11,7 @@
 			<a href="{{ path('home_forum_single_publication' ,{idPub:pub.id} )}}" class="date">{{ pub.dateCreation|date('d/m/Y') }}</a>
 			
 		</div>
-		{% if user.id == pub.user.id %}
+		{% if user !=null and  user.id == pub.user.id %}
 
 			<div class="options">
 
@@ -121,11 +121,16 @@
 			{{ form_start(commentForm) }}
 				<div class="single_comment add">
 					<div class="avatar">
-						<img src="{{ user.image is not empty ? user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
+						<img src="{{ user !=null and user.image is not empty ? user.image : asset('images/cours/person.jpg') }}" alt="User Avatar">
 					</div>
 					<div class="content">
 						<div class="top">
-							<div class="username">{{user.username }}</div>
+							<div class="username">
+							
+							{% if user !=null %}
+								{{user.username }}
+							{% endif %}
+							</div>
 						</div>
 						<div class="new_comment">
 							<div class="comment">
