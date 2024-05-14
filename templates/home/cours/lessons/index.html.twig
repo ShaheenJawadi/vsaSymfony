@@ -23,26 +23,25 @@
 									<iframe src="https://www.youtube.com/embed/6_gXiBe9y9A" frameborder="0" allowfullscreen></iframe>
 								</div>
 								<div class="content">
-									qkldkqsjdljqsjd lqsjdljqlsdjl doqdiozdoiauodiuiazdlk zad
-																											                                    azmldmlazkdlmz dpaozdpaz
-																											                                    dqsdsqsdljqslkdlqksj idoazd zad
+									{{currentLesson.content}}
 
 
 								</div>
 
 							</div>
 
+							{% if nextLesson =="quiz" %}
 
-							<a   
-							 {% if nextLesson =="quiz" %}
+								<a href="{{ path('home_quizz_test', {'id': singleCours.id}) }}">
 
-							 href="{{ path('home_quizz_test', {'id': singleCours.id}) }}"
-								{% else %}
-								href="{{ path('home_cours_lessons_index', {'slug': singleCours.slug , lesson:nextLesson}) }}"
-							{% endif %} >
-							
-								<button class="btn_main">Suivant</button>
-							</a>
+									<button class="btn_main">Passer le quizz</button>
+								</a>
+							{% else %}
+								<a  href="{{ path('home_cours_lessons_index', {'slug': singleCours.slug , lesson:nextLesson}) }}">
+
+									<button class="btn_main">Suivant</button>
+								</a>
+							{% endif %}
 
 
 						</div>
@@ -55,13 +54,13 @@
 								<div class="single  {% if key+1 ==userCours.stage %}current {% elseif  key+1<userCours.stage %}done{% endif %}">
 									<div class="circle"></div>
 									<div class="title">
-										lesson {{key+1}}</div>
+										lesson
+										{{key+1}}</div>
 
 								</div>
 							{% endfor %}
 
-						
-						
+
 							<div class="single quizz">
 								<div class="circle"></div>
 								<div class="title">
