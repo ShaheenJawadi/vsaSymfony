@@ -23,8 +23,10 @@
 									<iframe src="https://www.youtube.com/embed/6_gXiBe9y9A" frameborder="0" allowfullscreen></iframe>
 								</div>
 								<div class="content">
-									{{currentLesson.content}}
-
+			
+							 
+ {{ currentLesson.content |striptags('<b>,<a>,<pre>,<small>,<strong>,<p>,<span> ')|raw }}
+ 
 
 								</div>
 
