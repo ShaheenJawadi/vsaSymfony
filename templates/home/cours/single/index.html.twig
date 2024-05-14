@@ -20,7 +20,7 @@
 							<div class="cours_content single">
 
 								<div class="thumbnail">
-									<img src="{{ asset('images/cours/coursThumb.png') }}" alt="">
+									<img  {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', { src: asset('images/cours/coursThumb.png') } ) }}  src="{{ singleCours.image }}"  alt="">
 									<div class="category_chimp">
 										{{ singleCours.subcategoryid.nom }}
 									</div>

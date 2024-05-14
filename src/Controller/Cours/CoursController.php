@@ -54,7 +54,7 @@ class CoursController extends AbstractController
     public function coursLessonsPage(string $slug, Request $request, UserRepository $userRepository,  CoursRepository $coursRepo, UsercoursRepository $usercoursRepository , LessonsRepository $lessonsRepository): Response
     {
 
-       
+        $nextLesson ="";
 
         $singleCours = $coursRepo->findOneBy(['slug' => $slug]);
         $user = $this->userSession->getCurrentUser();
